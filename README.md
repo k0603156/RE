@@ -15,3 +15,5 @@ This project was bootstrapped with [Create React App].
 #### yarn add eslint-config-airbnb
 
 #### [3][setting] Format Javascript [add] .prettierrc [module] yarn add eslint-config-prettier
+
+#### [4][module] yarn add express [delete] src/\* except index.js, App.js, serviceWorker.js[add] src/client src/server ./jsconfig.json [mod] config/paths.js package.json > script
