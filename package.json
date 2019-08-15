@@ -2,6 +2,8 @@
   "name": "traveler",
   "version": "0.1.0",
   "private": true,
+  "author": "kimyongkuk",
+  "license": "ISC",
   "dependencies": {
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
