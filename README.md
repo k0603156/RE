@@ -21,3 +21,7 @@ This project was bootstrapped with [Create React App].
 #### `[5][add] ./web.js ./nodemon.json src/server/api/posts,users [module] yarn add body-parser express-session cors --dev concurrently nodemon [mod] package.json > script, env`
 
 #### `[6][mod] package.json > repository`
+
+#### `[7][mod] README.md`
+
+#### `[8][mod, hosting] cafe24 노드호스팅이 셸도 지원안되면서 모듈을 자동으로 설치를 못하는지 모르겠는데 용량은 한것도 없이 꽉찬다. 도대체 어디에 쓰라고 만든건지 모르겠다. 돈아깝네. react는 빌드하고 express 모듈만 포함시키려고 .gitignore 수정`
