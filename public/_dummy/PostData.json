@@ -1,0 +1,35 @@
+{
+  "postData": [{
+      "id": 0,
+      "area": "Tokyo",
+      "date": "September 14, 2019 ~ September 17, 2019",
+      "title": "도쿄 가볼만한곳, 일본 도쿄여행 필수코스 BEST 7",
+      "content": "도쿄 가볼만한곳, 일본 도쿄여행 필수코스 BEST 7서울과 비슷한 대도시지만 지역별로 특징이 뚜렷하여 여행하기 즐거운 곳은 바로 일본 도쿄이다. 도쿄는 매우 큰 도시로 계획성 있게 움직이는 것은 선택이 아닌 필수다. 게다가 교통비도 매우 높은 편이라 동선을 잘 짜는 것 또한 중요하다. 아무 생각 없이 다니다 보면, 명소를 빠트리는 경우도 생기게 마련이다. 일반적으로 한국인 여행자가 주로 찾는 도쿄의 명소 혹은 거점을 골라봤다. 도쿄 자유여행 계획 할 때, 큰 동선을 위해 유용한 도쿄 가볼만한곳 7곳을 참고하자.",
+      "image": "media/paella.jpg"
+    },
+    {
+      "id": 1,
+      "area": "Shanghai",
+      "date": "September 17, 2019",
+      "title": "상해여행 코스! 상하이 3박4일 완전정복",
+      "content": "2016년 6월, 디즈니랜드가 오픈한 이후로 상하이는 더 큰 관심을 받고 있는 여행지가 되었지요. 물론 중국 여행을 위해 비자를 받아야 한다는 사실은 조금 번거롭지만 그래도 '가까운 해외여행지 리스트'에서 상하이는 빠질 수 없는 선택지가 된 것 같네요. 명나라 스타일의 정원, 예원.유럽식 건물 가득한 와이탄.상하이 랜드마크 동방명주.멋진 야경을 만들어내는 푸동.분위기 넘치는 카페 가득, 신천지.여행필수어플 VOLO 유저 seun0501 님은 친구와 함께 3 박4일 동안의 상해 여행을 즐기고 왔습니다.동양과 서양의 그 사이, 두 문화의 아름다움을 모두 갖춘듯 했던 상하이 여행을 즐기고 나니 \"I ♥ SH\"가 절로 나왔다고 하네요.상해 여행 한번쯤 꿈꾸고 계신다면 볼로에 기록된 상해여행 일정을 참고해 보면 어떨까요.순간의 소중한 추억들은 모두 볼로에 쉽게 기록할 수 있다는 사실도 기억해 주세요 / ^ ^ / ",
+      "image": "media/shanghai.jpg"
+    },
+    {
+      "id": 2,
+      "area": "Tokyo",
+      "date": "September 14, 2019",
+      "title": "This impressive paella is a perfect party dish and a fun meal tocook together with your guests. Add 1 cup of frozen peas along with the mussels, if you like.",
+      "content": "Heat oil in a (14- to 16-inch) paella pan or a large, deep skilletover medium-high heat. Add chicken, shrimp and chorizo, and cook,stirring occasionally until lightly browned, 6 to 8 minutes.Transfer shrimp to a large plate and set aside, leaving chickenand chorizo in the pan. Add pimentón, bay leaves, garlic,tomatoes, onion, salt and pepper, and cook, stirring often untilthickened and fragrant, about 10 minutes. Add saffron broth andremaining 4 1/2 cups chicken broth; bring to a boil.",
+      "image": "media/paella.jpg"
+    },
+    {
+      "id": 3,
+      "area": "Tokyo",
+      "date": "September 14, 2019",
+      "title": "[다낭&호이안] 가족과 함께 이열치열 베트남 여행",
+      "content": "여름에 동남아로 떠난 이열치열 가족여행. 성인자녀2 + 부모님 구성으로 갔으며 식사와 입장료는 4 인 기준입니다. 공항에서의 식사와 쇼핑은 예산에서 뺐습니다",
+      "image": "media/paella.jpg"
+    }
+  ]
+}
