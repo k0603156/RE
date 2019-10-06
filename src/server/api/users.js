@@ -1,13 +1,27 @@
 // api/users.js
 
-var express = require('express');
-var router = express.Router();
-
+const express = require('express');
+const {
+  getUsers
+} = require('../controller');
+const router = express.Router();
+const {
+  generateToken
+} = require('../utils');
 // Index
 router.get('/',
-  function (req, res, next) {}
+  function (req, res, next) {
+    // console.log(req.headers)
+    getUsers().then(user => res.send(req + user));
+  }
 );
-
+router.get('/generateToken',
+  function (req, res, next) {
+    // console.log(req.headers)
+    getUsers().then(user => res.send(
+      generateToken(req.headers.id)));
+  }
+);
 // Show
 router.get('/:id',
   function (req, res, next) {}
