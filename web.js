@@ -1,28 +1,30 @@
-var express = require('express');
-var bodyParser = require('body-parser');
-var session = require('express-session');
-var cors = require('cors');
-var app = express();
+require('./src/server/env');
+const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const app = express();
 
+const {
+    authenticateJwt
+} = require('./src/server/passport');
+const PORT = process.env.PORT || 8001;
 // Middlewares
+require('./src/server/passport');
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(cors());
-app.use(session({
-    secret: 'secretkey',
-    resave: false,
-    saveUninitialized: true,
-}));
 app.use(express.static('build'));
-
+app.use(authenticateJwt);
 
 // API
-app.use('/api/user/', require('./src/server/api/users'));
-app.use('/api/user/', require('./src/server/api/posts'));
+app.use('/api/users/', require('./src/server/api/users'));
+app.use('/api/posts/', require('./src/server/api/posts'));
 
-
-app.listen(8001, () => {
-    console.log('listening on port 8001!');
+app.listen({
+    port: PORT
+}, () => {
+    console.log(`listening on port ${PORT}!`);
 });
