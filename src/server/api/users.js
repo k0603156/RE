@@ -1,46 +1,84 @@
 // api/users.js
-
-const express = require('express');
+const router = require('express').Router();
 const {
-  getUsers
-} = require('../controller');
-const router = express.Router();
+  isAuthenticated
+} = require('../middlewares');
 const {
   generateToken
 } = require('../utils');
-// Index
-router.get('/',
+const {
+  User
+} = require('../models');
+
+// 회원가입
+router.post('/create',
   function (req, res, next) {
-    // console.log(req.headers)
-    getUsers().then(user => res.send(req + user));
+    const {
+      userName,
+      email,
+      password
+    } = req.body;
+
+    User.create({
+        userName,
+        email,
+        password
+      })
+      .then(
+        result => res.send(result))
+      .catch(err => {
+        console.log(err)
+      })
+  },
+  function (req, res, next) {
+    // res.redirect("/users/sign_up");
   }
 );
-router.get('/generateToken',
-  function (req, res, next) {
-    // console.log(req.headers)
-    getUsers().then(user => res.send(
-      generateToken(req.headers.id)));
+//로그인
+router.post('/confirm',
+  async function (req, res, next) {
+    const {
+      email,
+      password
+    } = req.body;
+
+    const result = await User.findOne({
+      where: {
+        email
+      }
+    });
+
+    if (result.dataValues.password === password) {
+      res.send("sucess" +
+        generateToken(email));
+    } else {
+      res.send("fail");
+    }
   }
 );
-// Show
-router.get('/:id',
+//회원정보수정
+router.put('/update', isAuthenticated,
+  function (req, res, next) {
+    const {
+      userName,
+      password,
+      checkPassword
+    } = req.body;
+    const {
+      email
+    } = req.user;
+  },
   function (req, res, next) {}
 );
-
-// Create
-router.post('/',
-  function (req, res, next) {},
-  function (req, res, next) {}
+//회원탈퇴
+router.delete('/delete', isAuthenticated,
+  function (req, res, next) {
+    console.log('delete')
+    User.destroy({
+      where: {
+        email: req.user
+      }
+    }).then(res.send("sucess")).catch(err => console.log(err))
+  }
 );
-
-// Update
-router.put('/:id',
-  function (req, res, next) {}
-);
-
-// Destroy
-router.delete('/:id',
-  function (req, res, next) {}
-);
-
 module.exports = router;

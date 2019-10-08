@@ -1,6 +1,6 @@
 require('./env');
 const jwt = require("jsonwebtoken");
 
-exports.generateToken = id => jwt.sign({
-  id
+module.exports.generateToken = email => jwt.sign({
+  email
 }, process.env.JWT_SECRET);

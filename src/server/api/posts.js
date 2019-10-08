@@ -1,11 +1,11 @@
 // api/posts.js
-
-var express = require('express');
-var router = express.Router();
+const router = require('express').Router();
 
 // Index
 router.get('/',
-  function (req, res, next) {}
+  function (req, res, next) {
+    console.log('getPost');
+  }
 );
 
 // Show
