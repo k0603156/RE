@@ -15,16 +15,14 @@ const verifyUser = async (payload, done) => {
   try {
     //payload:{email,iat=>토큰이 발급 된 시간}
     const {
-      dataValues: {
-        email
-      }
+      dataValues
     } = await User.findOne({
       where: {
         email: payload.email
       }
     });
-    console.log('email:', email);
-    return done(null, email)
+    console.log('email:', dataValues);
+    return done(null, dataValues)
   } catch (error) {
     return done(error, false)
   }

@@ -61,12 +61,22 @@ router.put('/update', isAuthenticated,
   function (req, res, next) {
     const {
       userName,
-      password,
-      checkPassword
+      password
     } = req.body;
     const {
       email
     } = req.user;
+    console.log(email)
+    User.update({
+      userName,
+      password
+    }, {
+      where: {
+        email
+      }
+    }).then(result => {
+      result && res.send("sucess");
+    }).catch(err => console.log(err))
   },
   function (req, res, next) {}
 );

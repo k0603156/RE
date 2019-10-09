@@ -1,4 +1,4 @@
-'use strict';
+
 
 const fs = require('fs');
 const path = require('path');
@@ -29,7 +29,7 @@ Object.keys(db).forEach(modelName => {
   if (db[modelName].associate) {
     db[modelName].associate(db);
   }
-});
+}); //관계설정 취합
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
