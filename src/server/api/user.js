@@ -1,6 +1,10 @@
 // api/users.js
 const router = require('express').Router();
 const {
+  randomBytes,
+  pbkdf2
+} = require('crypto');
+const {
   isAuthenticated
 } = require('../middlewares');
 const {
@@ -12,7 +16,8 @@ const {
 const {
   getUsers
 } = require('../controller/user');
-
+const CRYPTO_COUNT = 8529;
+const CRYPTO_ALG = 'sha512';
 // Profile
 router.get('/profile/:id',
   (req, res, next) => {
@@ -45,46 +50,55 @@ router.post('/create',
       email,
       password
     } = req.body;
-
-    User.create({
-        username,
-        email,
-        passkey: password,
-        salt: "testsalt"
-      })
-      .then(
-        result => {
-          console.log(result);
-          res.status(201).send("Thank you for join with us!");
-        })
-      .catch(err => {
-        console.error(err);
-        res.send("Sorry, SignIn failed");
-      })
-  },
-  function (req, res, next) {
-    // res.redirect("/users/sign_up");
+    randomBytes(64, (err, salt) => {
+      pbkdf2(password, salt.toString('base64'), CRYPTO_COUNT, 64, CRYPTO_ALG, (err, key) => {
+        User.create({
+            username,
+            email,
+            passkey: key.toString('base64'),
+            salt: salt.toString('base64')
+          })
+          .then(
+            result => {
+              console.log(result);
+              res.status(201).send("Thank you for join with us!");
+              // .redirect("/users/sign_up");
+            })
+          .catch(err => {
+            throw err;
+          });
+      }).catch(err => {
+        throw err;
+      });
+    }).catch(err => res.send("Sorry, SignIn failed"));
   }
 );
 //로그인
 router.post('/confirm',
-  async function (req, res, next) {
+  (req, res, next) => {
     const {
       email,
       password
     } = req.body;
-
-    const result = await User.findOne({
+    User.findOne({
       where: {
         email
       }
-    });
+    }).then(({
+      dataValues: {
+        salt,
+        passkey
+      }
+    }) => {
+      pbkdf2(password, salt, CRYPTO_COUNT, 64, CRYPTO_ALG, (err, key) => {
+        if (key.toString('base64') === passkey) {
+          res.send(generateToken(email));
+        } else {
+          res.send("Sorry, SignIn failed");
+        }
+      });
+    }).catch(error => console.error(error));
 
-    if (result.dataValues.passkey === password) {
-      res.send(generateToken(email));
-    } else {
-      res.send("Sorry, SignIn failed");
-    }
   }
 );
 //회원정보수정
