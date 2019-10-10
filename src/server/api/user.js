@@ -13,6 +13,30 @@ const {
   getUsers
 } = require('../controller/user');
 
+// Profile
+router.get('/profile/:id',
+  (req, res, next) => {
+    const {
+      id
+    } = req.params;
+    User.findOne({
+      where: {
+        id
+      },
+      attributes: [
+        'id', 'username', 'email'
+      ]
+    }).then(result => {
+      if (!result.isRejected && !result.isFulfilled) {
+        req.user && req.user.id &&
+          result.setDataValue('isMe', (req.user.id === result.dataValues.id));
+
+        res.status(200).json(result.dataValues);
+      }
+    }).catch(error => console.error(error));
+  }
+);
+
 // 회원가입
 router.post('/create',
   function (req, res, next) {
@@ -31,11 +55,10 @@ router.post('/create',
       .then(
         result => {
           console.log(result);
-          res.send("Thank you for join with us!");
-
+          res.status(201).send("Thank you for join with us!");
         })
       .catch(err => {
-        console.log(err);
+        console.error(err);
         res.send("Sorry, SignIn failed");
       })
   },
@@ -85,7 +108,7 @@ router.put('/update', isAuthenticated,
       }
     }).then(result => {
       if (result) res.send(`${name}. Your Profile has been changed successfully!`);
-    }).catch(err => console.log(err))
+    }).catch(err => console.error(err))
   },
   function (req, res, next) {}
 );
@@ -96,7 +119,7 @@ router.delete('/delete', isAuthenticated,
     const {
       id,
       email
-    } = req.user
+    } = req.user;
     User.destroy({
         where: {
           id,

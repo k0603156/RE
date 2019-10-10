@@ -1,31 +1,37 @@
 // api/posts.js
 const router = require('express').Router();
 
-// Index
-router.get('/',
+// Create
+router.post('/create',
   function (req, res, next) {
-    console.log('getPost');
+    const {
+      id,
+      username
+    } = req.user;
+  },
+  function (req, res, next) {}
+);
+
+// Feed
+router.get('/list',
+  function (req, res, next) {
+
   }
 );
 
-// Show
+// Post:id
 router.get('/:id',
   function (req, res, next) {}
 );
 
-// Create
-router.post('/',
-  function (req, res, next) {},
-  function (req, res, next) {}
-);
 
 // Update
-router.put('/:id',
+router.put('/update/:id',
   function (req, res, next) {}
 );
 
 // Destroy
-router.delete('/:id',
+router.delete('/delete/:id',
   function (req, res, next) {}
 );
 

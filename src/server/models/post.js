@@ -33,17 +33,6 @@ module.exports = (sequelize, DataTypes) => {
       sourceKey: 'id',
       as: 'contentOfpost'
     });
-    // models.Post.hasMany(models.Content, {
-    //   foreignKey: "postId",
-    //   sourceKey: "id"
-    // });
-    // models.Post.belongsTo(models.User, {
-    //   onDelete: 'cascade',
-    //   foreignKey: {
-    //     allowNull: false
-    //   }
-    // });
-
   };
   return Post;
 };
