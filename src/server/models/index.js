@@ -1,5 +1,3 @@
-
-
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
@@ -33,5 +31,7 @@ Object.keys(db).forEach(modelName => {
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
-
+// db.User = require('./user')(sequelize, Sequelize);
+// db.Post = require('./post')(sequelize, Sequelize);
+// db.Content = require('./content')(sequelize, Sequelize);
 module.exports = db;

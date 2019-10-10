@@ -1,31 +1,49 @@
 module.exports = (sequelize, DataTypes) => {
   const Post = sequelize.define('Post', {
-    area: DataTypes.STRING,
-    date: DataTypes.DATE,
-    title: DataTypes.STRING,
-    contents: {
-      type: DataTypes.STRING,
+    country: {
       allowNull: false,
-      get() {
-        return this.getDataValue('contents').split(';')
-      },
-      set(val) {
-        this.setDataValue('contents', val.join(';'));
-      },
+      type: DataTypes.STRING
     },
-    images: {
-      type: DataTypes.STRING,
+    fromDate: {
       allowNull: false,
-      get() {
-        return this.getDataValue('images').split(';')
-      },
-      set(val) {
-        this.setDataValue('images', val.join(';'));
-      },
+      type: DataTypes.DATEONLY
+    },
+    toDate: {
+      allowNull: false,
+      type: DataTypes.DATEONLY
+    },
+    title: {
+      allowNull: false,
+      type: DataTypes.STRING
+    },
+    mainImage: {
+      type: DataTypes.STRING
     }
-  }, {});
+  }, {
+    charset: 'utf-8',
+    collate: 'utf8_general_ci'
+  });
   Post.associate = function (models) {
-    // associations can be defined here
+    Post.belongsTo(models.User, {
+      foreignKey: 'userId',
+      targetKey: 'id'
+    });
+    Post.hasMany(models.Content, {
+      foreignKey: 'postId',
+      sourceKey: 'id',
+      as: 'contentOfpost'
+    });
+    // models.Post.hasMany(models.Content, {
+    //   foreignKey: "postId",
+    //   sourceKey: "id"
+    // });
+    // models.Post.belongsTo(models.User, {
+    //   onDelete: 'cascade',
+    //   foreignKey: {
+    //     allowNull: false
+    //   }
+    // });
+
   };
   return Post;
 };

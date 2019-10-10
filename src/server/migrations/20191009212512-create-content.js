@@ -1,26 +1,25 @@
-
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Posts', {
+    return queryInterface.createTable('Contents', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      area: {
-        type: Sequelize.STRING
-      },
-      date: {
-        type: Sequelize.DATE
+      postId: {
+        allowNull: false,
+        type: Sequelize.INTEGER
       },
       title: {
+        allowNull: false,
         type: Sequelize.STRING
       },
-      contents: {
+      note: {
+        allowNull: false,
         type: Sequelize.STRING
       },
-      image: {
+      images: {
         type: Sequelize.STRING
       },
       createdAt: {
@@ -34,6 +33,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Posts');
+    return queryInterface.dropTable('Contents');
   }
 };

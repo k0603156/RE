@@ -18,8 +18,8 @@ app.use(cors());
 app.use(authenticateJwt);
 
 // API
-app.use('/api/users/', require('./src/server/api/users'));
-app.use('/api/posts/', require('./src/server/api/posts'));
+app.use('/api/user/', require('./src/server/api/user'));
+app.use('/api/post/', require('./src/server/api/post'));
 
 app.listen({
     port: PORT

@@ -9,25 +9,34 @@ const {
 const {
   User
 } = require('../models');
+const {
+  getUsers
+} = require('../controller/user');
 
 // 회원가입
 router.post('/create',
   function (req, res, next) {
     const {
-      userName,
+      username,
       email,
       password
     } = req.body;
 
     User.create({
-        userName,
+        username,
         email,
-        password
+        passkey: password,
+        salt: "testsalt"
       })
       .then(
-        result => res.send(result))
+        result => {
+          console.log(result);
+          res.send("Thank you for join with us!");
+
+        })
       .catch(err => {
-        console.log(err)
+        console.log(err);
+        res.send("Sorry, SignIn failed");
       })
   },
   function (req, res, next) {
@@ -48,11 +57,10 @@ router.post('/confirm',
       }
     });
 
-    if (result.dataValues.password === password) {
-      res.send("sucess" +
-        generateToken(email));
+    if (result.dataValues.passkey === password) {
+      res.send(generateToken(email));
     } else {
-      res.send("fail");
+      res.send("Sorry, SignIn failed");
     }
   }
 );
@@ -60,22 +68,23 @@ router.post('/confirm',
 router.put('/update', isAuthenticated,
   function (req, res, next) {
     const {
-      userName,
+      username,
       password
     } = req.body;
     const {
-      email
+      id,
+      username: name
     } = req.user;
-    console.log(email)
     User.update({
-      userName,
+      username,
       password
     }, {
       where: {
-        email
+        id,
+        username: name
       }
     }).then(result => {
-      result && res.send("sucess");
+      if (result) res.send(`${name}. Your Profile has been changed successfully!`);
     }).catch(err => console.log(err))
   },
   function (req, res, next) {}
@@ -84,11 +93,18 @@ router.put('/update', isAuthenticated,
 router.delete('/delete', isAuthenticated,
   function (req, res, next) {
     console.log('delete')
+    const {
+      id,
+      email
+    } = req.user
     User.destroy({
-      where: {
-        email: req.user
-      }
-    }).then(res.send("sucess")).catch(err => console.log(err))
+        where: {
+          id,
+          email
+        }
+      })
+      .then(result => res.send("Thank you for being with us"))
+      .catch(err => res.send("Sorry There was a problem. Please try again"))
   }
 );
 module.exports = router;
