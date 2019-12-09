@@ -10,6 +10,11 @@
 //   PostPage, PostsPage, ProfilePage
 // }
 
-export {default as HomePage} from './Home';
-export {default as PostDetailPage} from './PostDetail';
-
+export {
+  default as HomePage
+}
+from './Home';
+export {
+  default as PostDetailPage
+}
+from './PostDetail';

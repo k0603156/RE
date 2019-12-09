@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING
     }
   }, {
-    charset: 'utf-8',
+    charset: 'utf8',
     collate: 'utf8_general_ci'
   });
   Post.associate = function (models) {

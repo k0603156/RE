@@ -21,7 +21,7 @@ const verifyUser = async (payload, done) => {
         email: payload.email
       }
     });
-    console.log('email:', dataValues);
+    // console.log('user:', dataValues);
     return done(null, dataValues)
   } catch (error) {
     return done(error, false)
@@ -32,7 +32,7 @@ const verifyUser = async (payload, done) => {
 exports.authenticateJwt = (req, res, next) => passport.authenticate("jwt", {
   sessions: false
 }, (error, user) => {
-  console.log('user:', user);
+  // console.log('user:', user);
   // console.log(req.headers)
   if (user) {
     req.user = user

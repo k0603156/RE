@@ -20,13 +20,6 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'postId',
       targetKey: 'id'
     });
-    // Content.belongsTo(models.Post, {
-    //   onDelete: "cascade",
-    //   foreignKey: {
-    //     allowNull: false
-    //   }
-    // });
-
   };
   return Content;
 };

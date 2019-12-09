@@ -51,7 +51,9 @@ router.post('/create',
       password
     } = req.body;
     randomBytes(64, (err, salt) => {
+      if (err) res.send("Sorry, SignIn failed")
       pbkdf2(password, salt.toString('base64'), CRYPTO_COUNT, 64, CRYPTO_ALG, (err, key) => {
+        if (err) res.send("Sorry, SignIn failed")
         User.create({
             username,
             email,
@@ -67,10 +69,8 @@ router.post('/create',
           .catch(err => {
             throw err;
           });
-      }).catch(err => {
-        throw err;
       });
-    }).catch(err => res.send("Sorry, SignIn failed"));
+    });
   }
 );
 //로그인
@@ -105,24 +105,28 @@ router.post('/confirm',
 router.put('/update', isAuthenticated,
   function (req, res, next) {
     const {
-      username,
+      username: newUserName,
       password
     } = req.body;
     const {
       id,
-      username: name
+      username: existUserName,
+      salt,
+      passkey
     } = req.user;
+
     User.update({
-      username,
-      password
+      username: newUserName
     }, {
       where: {
         id,
-        username: name
+        username: existUserName
       }
     }).then(result => {
-      if (result) res.send(`${name}. Your Profile has been changed successfully!`);
+      if (result[0]) res.send(`${newUserName}. Your Profile has been changed successfully!`);
     }).catch(err => console.error(err))
+
+
   },
   function (req, res, next) {}
 );

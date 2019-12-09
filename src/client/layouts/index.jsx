@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { withStyles } from '@material-ui/core/styles';
+import { connect } from 'react-redux';
 import _ from 'lodash';
 
 import PrivateLayout from './private';
 import PublicLayout from './public';
 
-import privateRoutes from './routes/privateRoutes';
-import publicRoutes from './routes/publicRoutes';
-import sessionRoutes from './routes/sessionRoutes';
+import { PrivateRoutes, PublicRoutes, SessionRoutes } from './routes';
 
-import { UserActions } from '../user/UserActions';
-import Login from '../user/Login';
+import Login from '../pages/session/Login';
 import NotFound from './public/NotFound';
 
-import { withStyles } from '@material-ui/core/styles';
+import { UserActions } from '../user/UserActions';
 
-const resetStyles = theme => ({});
+const resetStyles = theme => ({
+	'@global': theme.global,
+});
 class Template extends Component {
 	constructor(props) {
 		super(props);
@@ -33,7 +33,7 @@ class Template extends Component {
 		return (
 			<BrowserRouter>
 				<Switch>
-					{_.map(publicRoutes, (route, key) => {
+					{_.map(PublicRoutes, (route, key) => {
 						const { component, path } = route;
 						return (
 							<Route
@@ -60,7 +60,7 @@ class Template extends Component {
 						);
 					})}
 
-					{_.map(privateRoutes, (route, key) => {
+					{_.map(PrivateRoutes, (route, key) => {
 						const { component, path } = route;
 						return (
 							<Route
@@ -83,7 +83,7 @@ class Template extends Component {
 						);
 					})}
 
-					{_.map(sessionRoutes, (route, key) => {
+					{_.map(SessionRoutes, (route, key) => {
 						const { component, path } = route;
 						return (
 							<Route

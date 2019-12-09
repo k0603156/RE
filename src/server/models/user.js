@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING
     }
   }, {
-    charset: 'utf-8',
+    charset: 'utf8',
     collate: 'utf8_general_ci'
   });
   User.associate = function (models) {
@@ -27,11 +27,6 @@ module.exports = (sequelize, DataTypes) => {
       sourceKey: 'id',
       as: 'userOfpost'
     });
-
-    // models.User.hasMany(models.Post, {
-    //   foreignKey: "userId",
-    //   sourceKey: "id"
-    // })
   };
   return User;
 };

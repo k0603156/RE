@@ -3,25 +3,16 @@ import { Link } from 'react-router-dom';
 import { Container, Typography, Grid } from '@material-ui/core';
 import PostCard from 'components/postCard';
 import { withStyles } from '@material-ui/core/styles';
-import LandingImg from 'media/landing_back.jpg';
 import Axios from 'axios';
 
 const styles = theme => ({
-	'@global': {
-		body: {
-			backgroundImage: 'url(' + LandingImg + ')',
-			backgroundRepeat: 'no-repeat',
-			backgroundPosition: 'center',
-			backgroundSize: 'cover',
-		},
-	},
+	'@global': theme.globalHome,
 	card: {
 		'&:hover': {
 			transform: 'translate(0, -10px)',
 			transitionDuration: '.5s',
 		},
 	},
-	sdd: { margin: theme.ht },
 });
 
 class Home extends Component {
