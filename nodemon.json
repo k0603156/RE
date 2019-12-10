@@ -1,3 +1,0 @@
-{
-  "watch": ["./web.js", "src/server/*"]
-}
