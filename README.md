@@ -2,6 +2,8 @@
 
 ##### server => traveler 내부로이동
 
+##### server 필요없는 파일 제거
+
 #### 계획
 
 GCP
