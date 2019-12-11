@@ -2,7 +2,7 @@ GCP
 TypeScript 적용
 redux-saga
 Dockerizing
-GAE에 Mysql 설치
+GCE에 Mysql 설치
 
 gcloud설치
 프로젝트생성
