@@ -1,0 +1,4 @@
+_scripts
+app
+server/node_modules
+npm-debug.log
