@@ -1,22 +1,23 @@
-var createError = require("http-errors");
-var express = require("express");
-var path = require("path");
-var cookieParser = require("cookie-parser");
-var logger = require("morgan");
+const express = require("express");
+const cookieParser = require("cookie-parser");
+const createError = require("http-errors");
+const path = require("path");
+const logger = require("morgan");
 
-var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
+const userRouter = require("./routes/user");
+const postRouter = require("./routes/post");
 
-var app = express();
+const app = express();
 
-app.use(logger("dev"));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "build")));
+app
+  .use(logger("dev"))
+  .use(cookieParser())
+  .use(express.json())
+  .use(express.urlencoded({ extended: false }))
+  .use(express.static(path.join(__dirname, "build")));
 
-app.use("/", indexRouter);
-app.use("/users", usersRouter);
+app.use("/api/user", userRouter);
+app.use("/api/post", postRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -33,5 +34,4 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render("error");
 });
-
 module.exports = app;

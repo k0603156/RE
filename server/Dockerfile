@@ -15,6 +15,7 @@ COPY ./ /home/traveler/
 #Express포트열기 80:80번 vm과 1대1매칭됨
 EXPOSE 80
 #환경변수
+ENV NODE_ENV production
 ENV PORT 80
 #Express실행
 CMD ["node","./bin/www"]
