@@ -1,5 +1,6 @@
 #GAE DEAFULT Node.js 10에 맞춤
-From node:10
+# From node:10
+From node:12
 #update
 RUN apt-get update
 #workdir 생성, 지정

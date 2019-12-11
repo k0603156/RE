@@ -3,7 +3,7 @@ TypeScript 적용
 redux-saga
 Dockerizing
 GCE에 Mysql 설치
-
+스크립트로 clientBuild->DockerImage생성->배포
 gcloud설치
 프로젝트생성
 https://cloud.google.com/compute/docs/oslogin/setup-two-factor-authentication?hl=ko
