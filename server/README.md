@@ -41,32 +41,41 @@
 #### auth
 
 로그인
-curl -X POST localhost:8000/v1/auth/authenticate -d 'email=test@test.com&password=123123'
+
+##### curl -X POST localhost:8000/v1/auth/authenticate -d 'email=test@test.com&password=123123'
 
 OTP인증
-curl -X POST localhost:8000/v1/auth/authorize -d 'email=test@test.com&otp=px32jwp3'
+
+##### curl -X POST localhost:8000/v1/auth/authorize -d 'email=test@test.com&otp=px32jwp3'
 
 JWT토큰갱신
-curl -X POST localhost:8000/v1/auth/reauthorize -H 'Authorization: Bearer token' -d 'refresh_token=wef3r2f2wfwef'
+
+##### curl -X POST localhost:8000/v1/auth/reauthorize -H 'Authorization: Bearer token' -d 'refresh_token=wef3r2f2wfwef'
 
 refresh_token 제거
-curl -X POST localhost:8000/v1/auth/deauthorize -H 'Authorization: Bearer token' -d 'refresh_token=wef3r2f2wfwef'
+
+##### curl -X POST localhost:8000/v1/auth/deauthorize -H 'Authorization: Bearer token' -d 'refresh_token=wef3r2f2wfwef'
 
 ### user
 
 회원가입
-curl -X POST localhost:8000/v1/user -d 'email=test@test.com&password=123123&password_confirm=123123&username=kimyongkuk'
+
+##### curl -X POST localhost:8000/v1/user -d 'email=test@test.com&password=123123&password_confirm=123123&username=kimyongkuk'
 
 회원정보
-curl localhost:8000/v1/user -H 'Authorization: Bearer token'
+
+##### curl localhost:8000/v1/user -H 'Authorization: Bearer token'
 
 특정유저정보
-curl localhost:8000/v1/user?search="kimyongkuk" -H 'Authorization: Bearer token'
+
+##### curl localhost:8000/v1/user?search="kimyongkuk" -H 'Authorization: Bearer token'
 
 개인정보수정
-curl -X PATCH localhost:8000/v1/user -H 'Authorization: Bearer token' -d 'password=124124'
+
+##### curl -X PATCH localhost:8000/v1/user -H 'Authorization: Bearer token' -d 'password=124124'
 
 회원탈퇴
-curl -X DELETE localhost:8000/v1/user -H 'Authorization: Bearer token' -d 'password=124124'
+
+##### curl -X DELETE localhost:8000/v1/user -H 'Authorization: Bearer token' -d 'password=124124'
 
 ### post
