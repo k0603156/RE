@@ -1,6 +1,6 @@
 const router = require("express").Router();
 
-/* GET home page. */
+/* GET user listing. */
 router.get("/", function(req, res, next) {
   res.send("user");
 });

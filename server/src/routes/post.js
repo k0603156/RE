@@ -1,6 +1,6 @@
 const router = require("express").Router();
 
-/* GET users listing. */
+/* GET post listing. */
 router.get("/", function(req, res, next) {
   res.send("respond with a resourcssess");
 });

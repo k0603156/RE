@@ -3,10 +3,7 @@ const cookieParser = require("cookie-parser");
 const createError = require("http-errors");
 const path = require("path");
 const logger = require("morgan");
-
-const userRouter = require("./routes/user");
-const postRouter = require("./routes/post");
-
+const Router = require("./routes");
 const app = express();
 
 app
@@ -16,8 +13,7 @@ app
   .use(express.urlencoded({ extended: false }))
   .use(express.static(path.join(__dirname, "build")));
 
-app.use("/api/user", userRouter);
-app.use("/api/post", postRouter);
+Router.map(({ path, router }) => app.use(path, router));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
