@@ -38,7 +38,11 @@
 
 ## API
 
+---
+
 auth
+
+---
 
 ##### 로그인
 
@@ -48,7 +52,7 @@ auth
 
 ##### curl -X POST localhost:8000/v1/auth/authorize -d 'email=test@test.com&otp=px32jwp3'
 
-###### JWT토큰갱신
+##### JWT토큰갱신
 
 ###### curl -X POST localhost:8000/v1/auth/reauthorize -H 'Authorization: Bearer token' -d 'refresh_token=wef3r2f2wfwef'
 
@@ -59,6 +63,8 @@ auth
 ---
 
 user
+
+---
 
 ##### 회원가입
 
@@ -82,4 +88,6 @@ user
 
 ---
 
-### post
+post
+
+---
