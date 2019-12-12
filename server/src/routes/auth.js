@@ -1,4 +1,5 @@
 const router = require("express").Router();
+
 /* /api/v1/auth */
 router.post("/authenticate", function(req, res, next) {
   res.send("로그인");

@@ -1,8 +1,16 @@
 const router = require("express").Router();
 
-/* GET post listing. */
+/* /api/v1/post */
 router.get("/", function(req, res, next) {
-  res.send("respond with a resourcssess");
+  res.send("get postlist");
 });
-
+router.post("/", function(req, res, next) {
+  res.send("create post");
+});
+router.put("/", function(req, res, next) {
+  res.send("update post");
+});
+router.delete("/", function(req, res, next) {
+  res.send("delete post");
+});
 module.exports = router;
