@@ -50,7 +50,7 @@ auth
 
 ##### OTP인증
 
-##### curl -X POST localhost:8000/v1/auth/authorize -d 'email=test@test.com&otp=px32jwp3'
+###### curl -X POST localhost:8000/v1/auth/authorize -d 'email=test@test.com&otp=px32jwp3'
 
 ##### JWT토큰갱신
 
