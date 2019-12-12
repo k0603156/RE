@@ -94,6 +94,12 @@ user
 
 ###### curl -X POST localhost:8000/v1/user -d 'email=test@test.com&password=123123&password_confirm=123123&username=kimyongkuk'
 
+```
+HTTP/1.1 201 OK
+Content-Type: application/json
+{}
+```
+
 ##### 회원정보
 
 ###### curl localhost:8000/v1/user -H 'Authorization: Bearer token'
