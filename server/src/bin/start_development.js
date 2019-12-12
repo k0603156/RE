@@ -1,5 +1,5 @@
 const nodemon = require("nodemon");
-nodemon("--exec node ./bin/start_production");
+nodemon("--exec node ./src/bin/start_production");
 nodemon
   .on("start", () => {
     console.log("[nodemon] has started");

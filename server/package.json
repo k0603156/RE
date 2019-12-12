@@ -7,8 +7,8 @@
     "node": "12"
   },
   "scripts": {
-    "start": "node ./bin/start_production",
-    "dev": "node ./bin/start_development"
+    "start": "node ./src/bin/start_production",
+    "dev": "node ./src/bin/start_development"
   },
   "dependencies": {
     "cookie-parser": "^1.4.4",

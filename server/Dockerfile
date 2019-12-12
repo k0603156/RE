@@ -16,6 +16,5 @@ COPY ./ /home/traveler/
 EXPOSE 80
 #환경변수
 ENV NODE_ENV production
-ENV PORT 80
 #Express실행
 CMD ["node","./bin/www"]
