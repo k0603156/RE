@@ -1,6 +1,8 @@
-#GAE DEAFULT Node.js 10에 맞춤
-# From node:10
-From node:12
+#GAE DEAFULT Node.js 12에 맞춤
+# From node:12
+FROM node:12
+# Maintainer
+LABEL key="MAINTAINER" value="YongkukKim <syntax-err@kakao.com>" 
 #update
 RUN apt-get update
 #workdir 생성, 지정
@@ -16,5 +18,6 @@ COPY ./ /home/traveler/
 EXPOSE 80
 #환경변수
 ENV NODE_ENV production
+# ENTRYPOINT [ "./docker-entrypoint.sh" ]
 #Express실행
 CMD ["node","./bin/www"]

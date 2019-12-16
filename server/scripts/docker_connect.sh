@@ -1,0 +1,1 @@
+docker exec -it traveler-container bash

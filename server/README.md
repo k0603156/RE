@@ -104,13 +104,31 @@ Content-Type: application/json
 
 ###### curl localhost:8000/api/v1/user -H 'Authorization: Bearer token'
 
+```
+HTTP/1.1 200 OK
+Content-Type: application/json
+{}
+```
+
 ##### 특정유저정보
 
 ###### curl localhost:8000/api/v1/user?search="kimyongkuk" -H 'Authorization: Bearer token'
 
+```
+HTTP/1.1 200 OK
+Content-Type: application/json
+{}
+```
+
 ##### 개인정보수정
 
 ###### curl -X PUT localhost:8000/api/v1/user -H 'Authorization: Bearer token' -d 'password=124124'
+
+```
+HTTP/1.1 200 OK
+Content-Type: application/json
+{}
+```
 
 ##### 회원탈퇴
 
