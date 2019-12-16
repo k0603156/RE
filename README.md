@@ -66,3 +66,6 @@
     ```
         express traveler-server
     ```
+
+4.  git
+    - [O] git init
