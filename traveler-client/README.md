@@ -19,6 +19,15 @@
            현재 설정으로 지원되는 브라우저 확인
        ```
 
+4. [O] tsconfig baseUrl추가
+   ```
+       "baseUrl": "./src"
+   ```
+5. [0] 전체 구조 잡기
+
 ##### modules
 
 - prop-types
+- lodash
+- react-router-dom
+- redux, react-redux
