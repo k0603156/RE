@@ -28,6 +28,6 @@
 ##### modules
 
 - prop-types
-- lodash
-- react-router-dom
+- lodash, @types/lodash
+- react-router-dom, @types/react-router-dom
 - redux, react-redux
