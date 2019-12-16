@@ -1,3 +1,43 @@
+### GCE 인스턴스생성
+
+```
+Shell접속
+```
+
+### Git
+
+```
+$ sudo apt-get update
+$ sudo apt-get upgrade -y
+$ sudo apt-get install git
+or
+$ sudo apt-get install git-all
+$ git --version
+```
+
+### Docker 설치
+
+```
+$ sudo apt-get remove docker docker-engine docker.io containerd runc
+$ sudo apt-get update
+$ sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg-agent \
+    software-properties-common
+$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+$ sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+$ sudo apt-get update
+$ sudo apt-get install docker-ce docker-ce-cli containerd.io
+$ sudo docker run hello-world
+```
+
+https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-engine---community
+
 ## 기능명세
 
 ### USER
