@@ -7,6 +7,7 @@
    - browserslist 변경
 
      - [참고](https://github.com/browserslist/browserslist)
+     - [참고](https://gs.statcounter.com/)
 
        ```
            $ npx browserslist
@@ -17,3 +18,7 @@
 
            현재 설정으로 지원되는 브라우저 확인
        ```
+
+##### modules
+
+- prop-types
