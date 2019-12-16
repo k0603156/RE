@@ -3,12 +3,12 @@
    - [O] GCE인스턴스생성
    - [O] GIT 설치
 
-     ```
-     [참고](https://thishosting.rocks/install-git-ubuntu/)
-     First, update the system:
-     sudo apt-get update
-     sudo apt-get upgrade -y
-     ```
+     - [참고](https://thishosting.rocks/install-git-ubuntu/)
+       ```
+       First, update the system:
+       sudo apt-get update
+       sudo apt-get upgrade -y
+       ```
 
    - [O] DOCKER 설치
 
