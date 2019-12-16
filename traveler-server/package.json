@@ -1,6 +1,13 @@
 {
   "name": "traveler-server",
   "version": "0.0.0",
+  "description": "Traveler-service-server",
+  "author": {
+    "name": "YongkukKim",
+    "email": "syntax-err@kakao.com",
+    "url": "https://github.com/k0603156/"
+  },
+  "homepage": "",
   "private": true,
   "scripts": {
     "start": "node ./src/bin/www"

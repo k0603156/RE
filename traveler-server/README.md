@@ -23,4 +23,6 @@
    ```
    npx tsc --init
    ```
-8. [X]jest 설치 세팅
+8. [x] jest 설치 세팅
+
+9. [O] Dockerfile / .dockerignore 작성
