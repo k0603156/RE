@@ -1,1 +1,2 @@
-1. README.md clear
+1. [O] README.md clear
+2. [x] yarn eject
