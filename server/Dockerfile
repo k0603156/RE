@@ -20,4 +20,4 @@ EXPOSE 80
 ENV NODE_ENV production
 # ENTRYPOINT [ "./docker-entrypoint.sh" ]
 #Express실행
-CMD ["node","./bin/www"]
+CMD ["node","./src/bin/start_production"]
