@@ -6,6 +6,7 @@ LABEL key="MAINTAINER" value="YongkukKim <syntax-err@kakao.com>"
 RUN apt-get update
 #Yarn 설치
 RUN npm install --global yarn
+RUN yarn self-update
 #workdir 생성, 지정
 WORKDIR /home/traveler/
 #패키지관련파일 복사
