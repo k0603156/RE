@@ -30,4 +30,4 @@
 - prop-types
 - lodash, @types/lodash
 - react-router-dom, @types/react-router-dom
-- redux, react-redux
+- redux, react-redux, @types/react-redux

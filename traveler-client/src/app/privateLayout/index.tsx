@@ -1,7 +1,8 @@
-import React from "react";
+import React, { ReactNode } from "react";
+import { user, layout } from "types/type";
 
-const PrivateLayout: React.FC = () => {
+function PrivateLayout({ component, route, user }: layout) {
   return <div className="PrivateLayout"></div>;
-};
+}
 
 export default PrivateLayout;
