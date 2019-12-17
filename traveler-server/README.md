@@ -12,17 +12,29 @@
 5. [O] nodemon 설치
 
    ```
-   yarn add -D nodemon
+   ~~yarn add -D nodemon~~
+   ts-node-dev라는게 있길래 ts-node와 세트로 쓰기로 함
    ```
 
 6. [O] typescript 설치
    ```
-   조금 더 확인이 필요
+    yarn add -D typescript
    ```
 7. [O] tsconfig
    ```
    npx tsc --init
    ```
-8. [x] jest 설치 세팅
+8. [O] ts-node/ ts-node-dev
+   ```
+    yarn add -D ts-node ts-node-dev
+   ```
+9. [x] jest 설치 세팅
 
-9. [O] Dockerfile / .dockerignore 작성
+10. [O] Dockerfile / .dockerignore 작성
+
+##### modules
+
+express, @types/express
+ts-node,ts-node-dev,
+typescript
+body-parser
