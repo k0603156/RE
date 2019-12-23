@@ -1,7 +1,7 @@
 "use strict";
 module.exports = (sequelize, DataTypes) => {
-  const Post = sequelize.define(
-    "Post",
+  const post = sequelize.define(
+    "post",
     {
       country: {
         allowNull: false,
@@ -25,19 +25,19 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       charset: "utf8",
-      collate: "utf8_general_ci"
+      collate: "utf8_general_ci",
+      timestamps: true,
+      paranoid: true
     }
   );
-  Post.associate = function(models) {
-    Post.belongsTo(models.User, {
-      foreignKey: "userId",
-      targetKey: "id"
-    });
-    Post.hasMany(models.Content, {
-      foreignKey: "postId",
-      sourceKey: "id",
-      as: "contentOfpost"
-    });
+  post.associate = function(models) {
+    post.belongsTo(models.User);
+    post.belongsToMany(models.Hashtag, { through: "PostHashtag" });
+    // Post.hasMany(models.Content, {
+    //   foreignKey: "postId",
+    //   sourceKey: "id",
+    //   as: "contentOfpost"
+    // });
   };
-  return Post;
+  return post;
 };

@@ -1,7 +1,7 @@
 "use strict";
 module.exports = (sequelize, DataTypes) => {
-  const User = sequelize.define(
-    "User",
+  const user = sequelize.define(
+    "user",
     {
       username: {
         allowNull: false,
@@ -23,15 +23,13 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       charset: "utf8",
-      collate: "utf8_general_ci"
+      collate: "utf8_general_ci",
+      timestamps: true,
+      paranoid: true
     }
   );
-  User.associate = function(models) {
-    User.hasMany(models.Post, {
-      foreignKey: "userId",
-      sourceKey: "id",
-      as: "userOfpost"
-    });
+  user.associate = function(models) {
+    user.hasMany(models.Post);
   };
-  return User;
+  return user;
 };
