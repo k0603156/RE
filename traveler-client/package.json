@@ -1,5 +1,6 @@
 {
   "name": "traveler-client",
+  "main": "src/index.tsx",
   "version": "0.1.0",
   "description": "Traveler-service-client",
   "author": {
@@ -9,6 +10,12 @@
   },
   "homepage": "",
   "private": true,
+  "scripts": {
+    "start": "node scripts/start.js",
+    "build": "node scripts/build.js",
+    "test": "node scripts/test.js",
+    "serve": "serve -s build"
+  },
   "dependencies": {
     "@babel/core": "7.7.4",
     "@svgr/webpack": "4.3.3",
@@ -82,12 +89,6 @@
     "webpack-dev-server": "3.9.0",
     "webpack-manifest-plugin": "2.2.0",
     "workbox-webpack-plugin": "4.3.1"
-  },
-  "scripts": {
-    "start": "node scripts/start.js",
-    "build": "node scripts/build.js",
-    "test": "node scripts/test.js",
-    "serve": "serve -s build"
   },
   "eslintConfig": {
     "extends": "react-app"
