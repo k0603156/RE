@@ -1,9 +1,9 @@
-import App from "./@config/app";
+import App from "./app";
 const port = process.env.PORT || 8000;
 
 App.listen(port, () => {
   console.dir(App);
-  console.dir(process.env.NODE_ENV);
+  console.dir(process.env.NODE_PATH);
   console.log(`Express server linstening on Port ${port}!`);
 });
 // const server = http.createServer(App);

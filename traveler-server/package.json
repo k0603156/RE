@@ -11,9 +11,9 @@
   "homepage": "",
   "private": true,
   "scripts": {
-    "start": "ts-node ./src/index.ts",
-    "build": "tsc",
-    "dev": "ts-node-dev ./src/index.ts"
+    "dev": "ts-node -r tsconfig-paths/register --files ./src/index.ts",
+    "build": "webpack --config webpack.config.js",
+    "start": "node ./build/bundle.js"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
@@ -31,10 +31,16 @@
     "@types/express-session": "^1.15.16",
     "@types/jest": "^24.0.23",
     "@types/morgan": "^1.7.37",
+    "@types/node": "^12.12.21",
+    "@types/typescript": "^2.0.0",
     "jest": "^24.9.0",
+    "ts-loader": "^6.2.1",
     "ts-node": "^8.5.4",
     "ts-node-dev": "^1.0.0-pre.44",
-    "typescript": "^3.7.3"
+    "tsconfig-paths": "^3.9.0",
+    "typescript": "^3.7.3",
+    "webpack": "^4.41.4",
+    "webpack-cli": "^3.3.10"
   },
   "license": "MIT"
 }
