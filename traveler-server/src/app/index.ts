@@ -4,6 +4,7 @@ import cookieParser from "cookie-parser";
 import logger from "morgan";
 import path from "path";
 import session from "express-session";
+import { sequelize } from "@/models";
 import dotenv from "dotenv";
 
 import Routes from "@/routes";
@@ -21,6 +22,7 @@ class App {
     dotenv.config({
       path: path.resolve(__dirname, ".env")
     });
+    sequelize.sync();
   }
   private regist(): void {
     this.app.use((req, res, next) => {
