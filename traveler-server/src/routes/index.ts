@@ -1,11 +1,11 @@
 import { Application, Request, Response, NextFunction } from "express";
+import user from "./user";
+import post from "./post";
 import Err from "@/custom/err";
-// const Err = require(__dirname + "../@config/err");
-export class Routes {
+class Routes {
   public routes(app: Application): void {
-    app.route("/").get((req: Request, res: Response) => {
-      res.status(200).json({ data: "MAINssd" });
-    });
+    app.use("/api/user/", user);
+    app.use("/api/post/", post);
 
     app.use(function(req, res, next) {
       const err = new Err("Not Found", 404);
@@ -23,3 +23,4 @@ export class Routes {
     });
   }
 }
+export default new Routes().routes;

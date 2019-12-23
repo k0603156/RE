@@ -6,16 +6,16 @@ import path from "path";
 import session from "express-session";
 import dotenv from "dotenv";
 
-import { Routes } from "../routes";
+import Routes from "@/routes";
 
 class App {
   public app: express.Application;
-  public routePrv: Routes = new Routes();
+  public router = Routes;
   constructor() {
     this.app = express();
     this.init();
     this.regist();
-    this.routePrv.routes(this.app);
+    this.router(this.app);
   }
   private init(): void {
     dotenv.config({
