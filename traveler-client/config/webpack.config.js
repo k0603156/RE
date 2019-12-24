@@ -387,10 +387,11 @@ module.exports = function(webpackEnv) {
                   [
                     require.resolve("babel-plugin-styled-components"),
                     {
+                      pure: true,
                       minify: true,
                       transpileTemplateLiterals: true,
-                      displayName: false,
-                      fileName: false
+                      displayName: isEnvProduction ? false : true,
+                      fileName: isEnvProduction ? false : true
                     }
                   ]
                 ],
