@@ -5,6 +5,7 @@ import { PrivateRoutes, PublicRoutes, SessionRoutes } from "routes";
 import styled, { ThemeProvider } from "styled-components";
 import PrivateLayout from "./privateLayout";
 import PublicLayout from "./publicLayout";
+import GlobalStyles from "styles/Global";
 import Theme from "styles/Theme";
 import { user } from "types/type";
 const Wrapper = styled.div`
@@ -19,6 +20,7 @@ function App() {
   };
   return (
     <ThemeProvider theme={Theme}>
+      <GlobalStyles />
       <BrowserRouter>
         <Wrapper>
           <Switch>
