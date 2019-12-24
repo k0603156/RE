@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       country: {
         allowNull: false,
-        type: DataTypes.STRING
+        type: DataTypes.STRING(30)
       },
       fromDate: {
         allowNull: false,
@@ -17,10 +17,10 @@ module.exports = (sequelize, DataTypes) => {
       },
       title: {
         allowNull: false,
-        type: DataTypes.STRING
+        type: DataTypes.STRING(100)
       },
       mainImage: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING(200)
       }
     },
     {
@@ -31,8 +31,9 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
   post.associate = function(models) {
-    post.belongsTo(models.User);
-    post.belongsToMany(models.Hashtag, { through: "PostHashtag" });
+    post.belongsTo(models.user);
+    post.hasMany(models.content);
+    post.belongsToMany(models.hashtag, { through: "PostHashtag" });
     // Post.hasMany(models.Content, {
     //   foreignKey: "postId",
     //   sourceKey: "id",

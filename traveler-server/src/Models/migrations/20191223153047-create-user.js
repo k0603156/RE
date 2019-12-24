@@ -8,22 +8,31 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      username: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
       email: {
         allowNull: false,
         unique: true,
-        type: Sequelize.STRING
+        type: DataTypes.STRING(40)
       },
-      passkey: {
+      userName: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: DataTypes.STRING(15)
+      },
+      criptoPass: {
+        allowNull: false,
+        type: DataTypes.STRING(200)
       },
       salt: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: DataTypes.STRING(100)
+      },
+      provider: {
+        allowNull: false,
+        type: DataTypes.STRING(10),
+        defaultValue: "local"
+      },
+      snsId: {
+        allowNull: false,
+        type: DataTypes.STRING(100)
       },
       createdAt: {
         allowNull: false,

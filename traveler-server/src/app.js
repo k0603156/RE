@@ -4,6 +4,7 @@ const logger = require("morgan");
 const path = require("path");
 const dotenv = require("dotenv");
 const Routes = require("./Routes");
+const { sequelize } = require("./Models/tables");
 class App {
   app;
   router = Routes;
@@ -18,6 +19,7 @@ class App {
     dotenv.config({
       path: path.resolve(__dirname, ".env")
     });
+    sequelize.sync();
   }
   regist() {
     this.app.use(logger("dev"));

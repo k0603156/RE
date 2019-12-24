@@ -1,10 +1,12 @@
 class Err extends Error {
-  constructor(message, status) {
-    super(message);
+  status;
+  message;
+  constructor(status, message, stack) {
+    super(stack);
     this.status = status;
+    this.message = message;
     Object.setPrototypeOf(this, new.target.prototype);
     // Object.setPrototypeOf(this, Err.prototype);
   }
-  status;
 }
 module.exports = Err;

@@ -3,22 +3,31 @@ module.exports = (sequelize, DataTypes) => {
   const user = sequelize.define(
     "user",
     {
-      username: {
-        allowNull: false,
-        type: DataTypes.STRING
-      },
       email: {
         allowNull: false,
         unique: true,
-        type: DataTypes.STRING
+        type: DataTypes.STRING(40)
       },
-      passkey: {
+      userName: {
         allowNull: false,
-        type: DataTypes.STRING
+        type: DataTypes.STRING(15)
+      },
+      cryptoPass: {
+        allowNull: false,
+        type: DataTypes.STRING(200)
       },
       salt: {
         allowNull: false,
-        type: DataTypes.STRING
+        type: DataTypes.STRING(100)
+      },
+      provider: {
+        allowNull: false,
+        type: DataTypes.STRING(10),
+        defaultValue: "local"
+      },
+      snsId: {
+        allowNull: true,
+        type: DataTypes.STRING(100)
       }
     },
     {
@@ -29,7 +38,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
   user.associate = function(models) {
-    user.hasMany(models.Post);
+    user.hasMany(models.post);
   };
   return user;
 };
