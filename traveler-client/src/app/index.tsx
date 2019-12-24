@@ -1,8 +1,9 @@
 import React from "react";
 import _ from "lodash";
+import styled, { ThemeProvider } from "styled-components";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { PrivateRoutes, PublicRoutes, SessionRoutes } from "routes";
-import styled, { ThemeProvider } from "styled-components";
+import NotFound from "./publicLayout/NotFound";
 import PrivateLayout from "./privateLayout";
 import PublicLayout from "./publicLayout";
 import GlobalStyles from "styles/Global";
@@ -16,7 +17,7 @@ const Wrapper = styled.div`
 function App() {
   const user: user = {
     userName: "kimyongkuk",
-    isLogged: true
+    isLogged: false
   };
   return (
     <ThemeProvider theme={Theme}>
@@ -49,6 +50,50 @@ function App() {
                 />
               );
             })}
+            {_.map(PrivateRoutes, (route, key) => {
+              const { component, path } = route;
+              return (
+                <Route
+                  exact
+                  path={path}
+                  key={key}
+                  render={route =>
+                    user.isLogged ? (
+                      <PrivateLayout
+                        component={component}
+                        route={route}
+                        user={user}
+                      />
+                    ) : (
+                      <Redirect to={SessionRoutes.Login.path} />
+                    )
+                  }
+                />
+              );
+            })}
+
+            {_.map(SessionRoutes, (route, key) => {
+              const { component, path } = route;
+              return (
+                <Route
+                  exact
+                  path={path}
+                  key={key}
+                  render={route =>
+                    user.isLogged ? (
+                      <Redirect to={PublicRoutes.Main.path} />
+                    ) : (
+                      <PublicLayout
+                        component={component}
+                        route={route}
+                        user={user}
+                      />
+                    )
+                  }
+                />
+              );
+            })}
+            <Route component={NotFound} />
           </Switch>
         </Wrapper>
       </BrowserRouter>

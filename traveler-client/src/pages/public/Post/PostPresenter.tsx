@@ -1,7 +1,5 @@
 import React from "react";
 
-const Post: React.FC = () => {
+export default () => {
   return <div>Post</div>;
 };
-
-export default Post;

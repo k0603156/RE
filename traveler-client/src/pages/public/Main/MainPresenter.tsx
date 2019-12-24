@@ -1,7 +1,5 @@
 import React from "react";
 
-const Main: React.FC = () => {
+export default () => {
   return <div>Main</div>;
 };
-
-export default Main;
