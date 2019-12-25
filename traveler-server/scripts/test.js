@@ -22,7 +22,7 @@ sequelize
     ErrorLog("✗ TEST DB connection error. Please make sure DB is running.");
     process.exit();
   })
-  .finally(() => {
+  .finally(_ => {
     NormLog("✓ TEST start");
     jest.run(argv + " --detectOpenHandles");
   });

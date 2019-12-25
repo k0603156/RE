@@ -1,10 +1,10 @@
 const express = require("express");
-const bodyParser = require("body-parser");
 const logger = require("morgan");
 const path = require("path");
 const dotenv = require("dotenv");
 const Routes = require("./Routes");
 
+class sss extends express {}
 class App {
   app;
   router = Routes;
@@ -23,8 +23,8 @@ class App {
   }
   regist() {
     this.app.use(logger("dev"));
-    this.app.use(bodyParser.json());
-    this.app.use(bodyParser.urlencoded({ extended: false }));
+    this.app.use(express.json());
+    this.app.use(express.urlencoded({ extended: false }));
     this.app.use((req, res, next) => {
       res.header("Access-Control-Allow-Origin", "*");
       res.header(
