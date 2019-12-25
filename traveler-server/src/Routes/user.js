@@ -1,5 +1,5 @@
-const router = require("express").Router();
-const { user } = require("../Models/tables");
+const Router = require("express").Router();
+const { user: UserModel } = require("../Models/tables");
 const {
   generateRandomString,
   encryptString,
@@ -11,13 +11,13 @@ const ENCODE_TYPE = "base64";
 
 //Todo:수정필요
 
-router.get("/", (req, res, next) => {
-  res.json(req.params.id);
-});
+const getUsers = async (req, res, next) => {
+  res.status(200).json({ data: "user" });
+};
 
-router.get("/:id", async (req, res, next) => {
+const getUser = async (req, res, next) => {
   try {
-    const exUser = await user.findOne({
+    const exUser = await UserModel.findOne({
       where: { id: req.params.id, deleteAt: null },
       attributes: ["id", "userName"]
     });
@@ -25,9 +25,9 @@ router.get("/:id", async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-});
+};
 
-router.post("/", async (req, res, next) => {
+const createUser = async (req, res, next) => {
   try {
     const { userName, email, password, confirmPassword } = checkReqContain(
       req.body,
@@ -36,11 +36,11 @@ router.post("/", async (req, res, next) => {
       "password",
       "confirmPassword"
     );
-    const exUser = await user.findOne({ where: { email } });
+    const exUser = await UserModel.findOne({ where: { email } });
     if (exUser) next(createErr(400, "이미 가입된 이메일"));
     const salt = await generateRandomString(ENCRYPT_BUFF, ENCODE_TYPE);
     const cryptoPass = await encryptString(password, salt);
-    const result = await user.create({
+    const result = await UserModel.create({
       email,
       userName,
       cryptoPass,
@@ -50,9 +50,9 @@ router.post("/", async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-});
+};
 
-router.put("/", async (req, res, next) => {
+const updateUser = async (req, res, next) => {
   try {
     const { id, userName, password, confirmPassword } = checkReqContain(
       req.body,
@@ -63,7 +63,7 @@ router.put("/", async (req, res, next) => {
     );
     const salt = await generateRandomString(ENCRYPT_BUFF, ENCODE_TYPE);
     const cryptoPass = await encryptString(password, salt);
-    const sucess = user.update(
+    const sucess = UserModel.update(
       {
         userName,
         cryptoPass,
@@ -75,18 +75,23 @@ router.put("/", async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-});
-
-router.delete("/", (req, res, next) => {
+};
+const deleteUser = async (req, res, next) => {
   try {
     const { id } = checkReqContain(req.body, "id");
-    const sucess = user.destroy({
+    const sucess = UserModel.destroy({
       where: { id }
     });
     res.status(204).json(sucess);
   } catch (error) {
     next(error);
   }
-});
+};
 
-module.exports = router;
+Router.get("/", getUsers);
+Router.get("/:id", getUser);
+Router.post("/", createUser);
+Router.put("/", updateUser);
+Router.delete("/", deleteUser);
+
+module.exports = Router;

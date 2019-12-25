@@ -1,6 +1,4 @@
 "use strict";
-
-// Do this as the first thing so that any code reading it knows the right env.
 process.env.BABEL_ENV = "test";
 process.env.NODE_ENV = "test";
 process.env.PUBLIC_URL = "";
@@ -8,20 +6,23 @@ process.env.PUBLIC_URL = "";
 process.on("unhandledRejection", err => {
   throw err;
 });
-const chalk = require("chalk");
-const { log, error } = console;
+
 const jest = require("jest");
-const util = require("util");
-const exec = util.promisify(require("child_process").exec);
-const lsExample = async () => {
-  log(`${chalk.green.bgGray.bold("Sequelize TEST DB 초기화")}`);
-  const { stdout, stderr } = await exec("sequelize db:migrate:undo:all", {
-    cwd: "./src/Models"
+const { sequelize } = require("../src/Models/tables");
+const { NormLog, ErrorLog } = require("../src/Utils/log");
+
+let argv = process.argv.slice(2);
+
+NormLog("Sequelize TEST DB 초기화");
+sequelize
+  .sync({ force: true, logging: false })
+  .then(_ => NormLog("✓ TEST DB reset connection success."))
+  .catch(err => {
+    ErrorLog(err);
+    ErrorLog("✗ TEST DB connection error. Please make sure DB is running.");
+    process.exit();
+  })
+  .finally(() => {
+    NormLog("✓ TEST start");
+    jest.run(argv + " --detectOpenHandles");
   });
-  log("결과:", stdout);
-  error("에러:", stderr);
-};
-lsExample().then(_ => {
-  let argv = process.argv.slice(2);
-  jest.run(argv);
-});

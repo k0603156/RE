@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./src/app.js",
-    "dev": "nodemon ./src/app.js",
-    "test": "node scripts/test.js"
+    "start": "node ./src",
+    "dev": "nodemon node ./src",
+    "test": "babel-node scripts/test.js"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
@@ -22,6 +22,12 @@
     "sequelize": "^5.21.3"
   },
   "devDependencies": {
+    "@babel/cli": "^7.7.7",
+    "@babel/core": "^7.7.7",
+    "@babel/node": "^7.7.7",
+    "@babel/plugin-proposal-class-properties": "^7.7.4",
+    "@babel/preset-env": "^7.7.7",
+    "babel-polyfill": "^6.26.0",
     "jest": "^24.9.0",
     "supertest": "^4.0.2"
   },
@@ -37,5 +43,28 @@
     "coveragePathIgnorePatterns": [
       "/node_modules/"
     ]
+  },
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "node": "current"
+          }
+        }
+      ]
+    ],
+    "plugins": [
+      "@babel/plugin-proposal-class-properties"
+    ],
+    "include": [
+      "src/**/*"
+    ],
+    "exclude": [
+      "**/__tests__/**/*.js",
+      "**/*.test.js"
+    ],
+    "ignore": []
   }
 }

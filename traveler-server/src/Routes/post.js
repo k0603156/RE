@@ -1,13 +1,13 @@
-const router = require("express").Router();
+const Router = require("express").Router();
 
-router.get("/", (req, res, next) => {
+Router.get("/", (req, res, next) => {
   res.send("ww");
 });
 
-router.post("/", (req, res, next) => {});
+Router.post("/", (req, res, next) => {});
 
-router.put("/", (req, res, next) => {});
+Router.put("/", (req, res, next) => {});
 
-router.delete("/", (req, res, next) => {});
+Router.delete("/", (req, res, next) => {});
 
-module.exports = router;
+module.exports = Router;

@@ -4,7 +4,7 @@ const logger = require("morgan");
 const path = require("path");
 const dotenv = require("dotenv");
 const Routes = require("./Routes");
-const { sequelize } = require("./Models/tables");
+
 class App {
   app;
   router = Routes;
@@ -15,11 +15,11 @@ class App {
     this.regist();
     this.router(this.app);
   }
-  init() {
+  async init() {
     dotenv.config({
       path: path.resolve(__dirname, ".env")
     });
-    sequelize.sync();
+    this.app.set("port", this.port);
   }
   regist() {
     this.app.use(logger("dev"));
@@ -38,12 +38,6 @@ class App {
       next();
     });
   }
-  start() {
-    this.app.listen(this.port, () => {
-      console.dir(process.env.NODE_PATH);
-      console.log(`Express server linstening on Port ${this.port}!`);
-    });
-  }
 }
 
-new App().start();
+module.exports = new App().app;
