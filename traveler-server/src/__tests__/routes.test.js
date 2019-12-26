@@ -1,13 +1,13 @@
 const supertest = require("supertest");
 const http = require("http");
-const App = require("../app");
+const { app } = require("../App");
 
 describe("Demo test", () => {
   let server;
   let request;
 
   beforeAll(done => {
-    server = http.createServer(App);
+    server = http.createServer(app);
     request = supertest(server);
     server.listen(done);
   });

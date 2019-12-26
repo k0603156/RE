@@ -1,7 +1,9 @@
 const http = require("http");
-const app = require("./app");
 const { sequelize } = require("./Models/tables");
-const { NormLog, ErrorLog } = require("../src/Utils/log");
+const { NormLog, ErrorLog } = require("./Utils/log");
+const { app } = require("./App");
+
+//Todo: sequelize.sync는 적당한 부분에서 process.env 기준으로 실행해줘야겠다. 실행스크립트 or index
 sequelize
   .sync({ force: false, logging: false })
   .then(() => {
