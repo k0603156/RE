@@ -1,8 +1,7 @@
-import React, { ReactNode } from "react";
-import { user, layout } from "types/type";
+import React, { ReactElement } from "react";
 
-function PublicLayout({ component, route, user }: layout) {
-  const Component = component;
+function PublicLayout(props: any) {
+  const Component = props.component;
   return (
     <div className="PublicLayout">
       <Component />

@@ -1,8 +1,7 @@
 import React, { ReactNode } from "react";
-import { user, layout } from "types/type";
 
-function PrivateLayout({ component, route, user }: layout) {
-  const Component = component;
+function PrivateLayout(props: any) {
+  const Component = props.component;
   return (
     <div className="PrivateLayout">
       <Component />

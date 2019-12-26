@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Props } from "react";
 import _ from "lodash";
 import styled, { ThemeProvider } from "styled-components";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
@@ -8,17 +8,16 @@ import PrivateLayout from "./privateLayout";
 import PublicLayout from "./publicLayout";
 import GlobalStyles from "styles/Global";
 import Theme from "styles/Theme";
-import { user } from "types/type";
+import { connect } from "react-redux";
+import { UserState } from "store/modules/User/types";
+import { rootState } from "store/modules";
+
 const Wrapper = styled.div`
   margin: 0 auto;
   max-width: ${props => props.theme.maxWidth};
   width: 100%;
 `;
-function App() {
-  const user: user = {
-    userName: "kimyongkuk",
-    isLogged: false
-  };
+function App({ userState }: any) {
   return (
     <ThemeProvider theme={Theme}>
       <GlobalStyles />
@@ -33,18 +32,10 @@ function App() {
                   path={path}
                   key={key}
                   render={route =>
-                    user.isLogged ? (
-                      <PrivateLayout
-                        component={component}
-                        route={route}
-                        user={user}
-                      />
+                    userState.isLogged ? (
+                      <PrivateLayout component={component} />
                     ) : (
-                      <PublicLayout
-                        component={component}
-                        route={route}
-                        user={user}
-                      />
+                      <PublicLayout component={component} />
                     )
                   }
                 />
@@ -58,12 +49,8 @@ function App() {
                   path={path}
                   key={key}
                   render={route =>
-                    user.isLogged ? (
-                      <PrivateLayout
-                        component={component}
-                        route={route}
-                        user={user}
-                      />
+                    userState.isLogged ? (
+                      <PrivateLayout component={component} />
                     ) : (
                       <Redirect to={SessionRoutes.Login.path} />
                     )
@@ -80,14 +67,10 @@ function App() {
                   path={path}
                   key={key}
                   render={route =>
-                    user.isLogged ? (
+                    userState.isLogged ? (
                       <Redirect to={PublicRoutes.Main.path} />
                     ) : (
-                      <PublicLayout
-                        component={component}
-                        route={route}
-                        user={user}
-                      />
+                      <PublicLayout component={component} />
                     )
                   }
                 />
@@ -101,4 +84,7 @@ function App() {
   );
 }
 
-export default App;
+const mapStateProps = (rootState: rootState) => ({
+  userState: rootState.userReducer
+});
+export default connect(mapStateProps)(App);
