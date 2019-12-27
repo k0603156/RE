@@ -1,19 +1,25 @@
-const BOX_BORDER = "border: 1px solid #e6e6e6";
-const BORDER_RADIUS = "border-radius: 4px";
+const LAYOUT_PADDING = "padding: 250px 0 0 0";
 export default {
-  maxWidth: "935px",
-  bgColor: "#FAFAFA",
-  blackColor: "#262626",
+  rootMargin: "100px",
+  minWidth: "1240px",
+  bgColor: "#ffffff",
+  blackColor: "#000000",
   blueColor: "#3897f0",
   redColor: "#ED4956",
-  lightGreyColor: "#c7c7c7",
+  lightGreyColor: "#A0A4A8",
+  normalGreyColor: "#52575C",
   darkGreyColor: "#999",
   darkBlueColor: "#003569",
-  whiteBox: `
-    ${BORDER_RADIUS};
-    ${BOX_BORDER};
-    background-color:white;
-`,
+  headerAttr: `
+    position: absolute;
+    top: 65px;
+    font-size: 25px;
+    line-height: 30px;
+    z-index: 10;
+  `,
+  layout: `
+    ${LAYOUT_PADDING};
+  `,
 
   trendBgColor: "#F2F2F2",
   trendPink: "#BF545D",

@@ -1,11 +1,16 @@
 import React, { ReactElement } from "react";
+import styled from "styled-components";
+
+const Layout = styled.div`
+  ${props => props.theme.layout};
+`;
 
 function PublicLayout(props: any) {
   const Component = props.component;
   return (
-    <div className="PublicLayout">
+    <Layout>
       <Component />
-    </div>
+    </Layout>
   );
 }
 
