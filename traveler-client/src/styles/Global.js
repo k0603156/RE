@@ -16,7 +16,7 @@ export default createGlobalStyle`
         
     #root{   
         position: relative;
-        margin: 0 100px;
+        margin: 0 10vw;
         overflow:hidden;
         display: flex;
         height: 100vh;

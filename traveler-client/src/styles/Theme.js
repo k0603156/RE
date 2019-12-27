@@ -1,7 +1,7 @@
 const LAYOUT_PADDING = "padding: 250px 0 0 0";
 export default {
   rootMargin: "100px",
-  minWidth: "1240px",
+  minWidth: "320px",
   bgColor: "#ffffff",
   blackColor: "#000000",
   blueColor: "#3897f0",
