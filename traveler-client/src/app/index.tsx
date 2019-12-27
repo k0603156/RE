@@ -11,17 +11,19 @@ import Theme from "styles/Theme";
 import { connect } from "react-redux";
 import { UserState } from "store/modules/User/types";
 import { rootState } from "store/modules";
-
+import Header from "components/Header";
 const Wrapper = styled.div`
-  margin: 0 auto;
-  max-width: ${props => props.theme.maxWidth};
+  position: relative;
   width: 100%;
+  flex: 1;
+  overflow: auto;
 `;
 function App({ userState }: any) {
   return (
     <ThemeProvider theme={Theme}>
       <GlobalStyles />
       <BrowserRouter>
+        <Header />
         <Wrapper>
           <Switch>
             {_.map(PublicRoutes, (route, key) => {
