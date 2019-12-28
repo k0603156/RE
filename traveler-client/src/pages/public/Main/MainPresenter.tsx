@@ -49,7 +49,7 @@ const TB = styled.div`
 export default () => (
   <Container>
     <TB>
-      <Jumbo medium vertical={768}>
+      <Jumbo medium verticalFrom={"tablet"}>
         Traveler
       </Jumbo>
       <Article>
@@ -66,12 +66,12 @@ export default () => (
           <PostBox key={index} />
         ))}
       </Article>
-      <Jumbo large vertical={768}>
+      <Jumbo large verticalFrom={"tablet"}>
         고민은
       </Jumbo>
     </TB>
     <TB>
-      <Jumbo vertical={768}>당신의 열정에 맡기고</Jumbo>
+      <Jumbo verticalFrom={"tablet"}>당신의 열정에 맡기고</Jumbo>
       <Article>
         <Title>해외 여행기</Title>
         {new Array(2).fill("").map((_, index) => (

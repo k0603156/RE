@@ -19,11 +19,11 @@ const UserBox = styled.div`
   right: 0;
   min-width: 100px;
   ${props => props.theme.headerAttr}
-  ${Mx_Width.mobileL} {
+  ${Mx_Width(`{
     width: 100px;
     overflow: hidden;
     text-overflow: ellipsis;
-  }
+  }`).mobileL}
 `;
 
 const Header = (props: { headerAuth: UserState }) => {

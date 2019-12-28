@@ -1,27 +1,21 @@
 import React from "react";
 import styled, { css } from "styled-components";
+import { Mx_Width } from "styles/Device";
+
 interface IJumbo {
   large?: boolean;
   medium?: boolean;
-  vertical?: number;
+  verticalFrom?: string;
   children?: React.ReactNode;
 }
 
 const Box = styled.div`
   display: flex;
   padding: 50px 0;
-  writing-mode: ${({ vertical }: IJumbo) => vertical && "vertical-lr"};
-  ${({ vertical }: IJumbo) => {
-    return (
-      vertical &&
-      css`
-        @media only screen and (max-width: ${vertical}px) {
-          writing-mode: horizontal-tb;
-        }
-      `
-    );
-  }};
-
+  writing-mode: ${({ verticalFrom }: IJumbo) => verticalFrom && "vertical-lr"};
+  //Todo:style만 분리한 함수 필요 빈값체크가 생겨서는안됨
+  ${({ verticalFrom }: IJumbo) =>
+    verticalFrom && Mx_Width(`{writing-mode: horizontal-tb;}`)[verticalFrom]}
   height: auto;
   align-items: center;
   justify-content: center;
