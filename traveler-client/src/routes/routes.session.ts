@@ -1,7 +1,7 @@
-import { LoginPage } from "pages/session";
+import { AuthPage } from "pages/session";
 export default {
-  Login: {
-    component: LoginPage,
-    path: "/login"
+  Auth: {
+    component: AuthPage,
+    path: "/auth"
   }
 };
