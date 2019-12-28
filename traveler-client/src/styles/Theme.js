@@ -1,5 +1,14 @@
 const LAYOUT_PADDING = "padding: 250px 0 0 0";
 export default {
+  DW: {
+    mobileS: "320px",
+    mobileM: "375px",
+    mobileL: "425px",
+    tablet: "768px",
+    laptop: "1024px",
+    laptopL: "1440px",
+    desktop: "2560px"
+  },
   rootMargin: "100px",
   minWidth: "320px",
   bgColor: "#ffffff",
@@ -14,8 +23,9 @@ export default {
     position: absolute;
     top: 65px;
     font-size: 25px;
-    line-height: 30px;
+    line-height: 35px;
     z-index: 10;
+    cursor: pointer;
   `,
   layout: `
     ${LAYOUT_PADDING};

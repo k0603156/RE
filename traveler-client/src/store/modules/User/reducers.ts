@@ -1,8 +1,9 @@
-import { UserState, UserActionTypes, lOGIN_USER, LOGOUT_USER } from "./types";
+import { lOGIN_USER, LOGOUT_USER, UserActionTypes, UserState } from "./types";
+
 const initialState: UserState = {
-  isLogged: false,
+  isLogged: true,
   user: {
-    userName: "",
+    userName: "Yongkukssss",
     email: ""
   }
 };

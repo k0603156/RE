@@ -9,8 +9,8 @@ import PublicLayout from "./publicLayout";
 import GlobalStyles from "styles/Global";
 import Theme from "styles/Theme";
 import { connect } from "react-redux";
-import { UserState } from "store/modules/User/types";
 import { rootState } from "store/modules";
+import { UserState } from "store/modules/User/types";
 import Header from "components/Header";
 const Wrapper = styled.div`
   position: relative;
@@ -18,12 +18,12 @@ const Wrapper = styled.div`
   flex: 1;
   overflow: auto;
 `;
-function App({ userState }: any) {
+function App(props: { auth: UserState }) {
   return (
     <ThemeProvider theme={Theme}>
       <GlobalStyles />
       <BrowserRouter>
-        <Header />
+        <Header headerAuth={props.auth} />
         <Wrapper>
           <Switch>
             {_.map(PublicRoutes, (route, key) => {
@@ -34,7 +34,7 @@ function App({ userState }: any) {
                   path={path}
                   key={key}
                   render={route =>
-                    userState.isLogged ? (
+                    props.auth.isLogged ? (
                       <PrivateLayout component={component} />
                     ) : (
                       <PublicLayout component={component} />
@@ -51,7 +51,7 @@ function App({ userState }: any) {
                   path={path}
                   key={key}
                   render={route =>
-                    userState.isLogged ? (
+                    props.auth.isLogged ? (
                       <PrivateLayout component={component} />
                     ) : (
                       <Redirect to={SessionRoutes.Login.path} />
@@ -69,7 +69,7 @@ function App({ userState }: any) {
                   path={path}
                   key={key}
                   render={route =>
-                    userState.isLogged ? (
+                    props.auth.isLogged ? (
                       <Redirect to={PublicRoutes.Main.path} />
                     ) : (
                       <PublicLayout component={component} />
@@ -87,6 +87,6 @@ function App({ userState }: any) {
 }
 
 const mapStateProps = (rootState: rootState) => ({
-  userState: rootState.userReducer
+  auth: rootState.userReducer
 });
 export default connect(mapStateProps)(App);
