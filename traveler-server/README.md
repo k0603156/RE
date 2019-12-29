@@ -1,5 +1,15 @@
 https://docs.google.com/spreadsheets/d/19kUThYVtNJIqMl7_7TpXpOKg-yD5Gu7ke-_Utdf10H8/edit?usp=sharing
 
+##### 설명
+
+- scripts/run.js production 실행 스크립트
+- scripts/test.js test 실행 스크립트
+  - 각 파일에서 프로세스 환경변수를 세팅
+- src/index.js 는 development 실행 스크립트
+  - 여기서는 프로세스 환경변수 세팅을 하지 않기 때문에 App/model에서 설정한 포트로 실행 됨
+- 각각의 실행환경 별 스크립트에서 sequelize와 db를 sync한다. force: true일 경우 초기화를 강제한다.
+- 스크립트에서 squelize sync 할 때 config를 읽어들인다.
+
 #### 1단계
 
 - server / user, post api

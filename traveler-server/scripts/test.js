@@ -23,6 +23,6 @@ sequelize
     process.exit();
   })
   .finally(_ => {
-    NormLog("✓ TEST start");
     jest.run(argv + " --detectOpenHandles");
+    NormLog("✓ TEST start");
   });
