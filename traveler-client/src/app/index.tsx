@@ -1,4 +1,4 @@
-import React, { Props } from "react";
+import React from "react";
 import _ from "lodash";
 import styled, { ThemeProvider } from "styled-components";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
@@ -54,7 +54,7 @@ function App(props: { auth: UserState }) {
                     props.auth.isLogged ? (
                       <PrivateLayout component={component} />
                     ) : (
-                      <Redirect to={SessionRoutes.Login.path} />
+                      <Redirect to={SessionRoutes.Auth.path} />
                     )
                   }
                 />
@@ -86,7 +86,7 @@ function App(props: { auth: UserState }) {
   );
 }
 
-const mapStateProps = (rootState: rootState) => ({
-  auth: rootState.userReducer
+const mapStateProps = (rootStates: rootState) => ({
+  auth: rootStates.userReducer
 });
 export default connect(mapStateProps)(App);

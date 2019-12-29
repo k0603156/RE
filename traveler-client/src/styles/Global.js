@@ -23,7 +23,7 @@ export default createGlobalStyle`
         -ms-overflow-style: none;    
     }::-webkit-scrollbar {display:none;} 
     a {
-        color:${props => props.theme.blueColor};
+        color:${props => props.theme.blackColor};
         text-decoration:none;
     }
     input:focus{

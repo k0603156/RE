@@ -1,8 +1,8 @@
 import React from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { Mx_Width } from "styles/Device";
 
-interface IJumbo {
+interface IProps {
   large?: boolean;
   medium?: boolean;
   verticalFrom?: string;
@@ -12,17 +12,17 @@ interface IJumbo {
 const Box = styled.div`
   display: flex;
   padding: 50px 0;
-  writing-mode: ${({ verticalFrom }: IJumbo) => verticalFrom && "vertical-lr"};
+  writing-mode: ${({ verticalFrom }: IProps) => verticalFrom && "vertical-lr"};
   //Todo:style만 분리한 함수 필요 빈값체크가 생겨서는안됨
-  ${({ verticalFrom }: IJumbo) =>
+  ${({ verticalFrom }: IProps) =>
     verticalFrom && Mx_Width(`{writing-mode: horizontal-tb;}`)[verticalFrom]}
   height: auto;
   align-items: center;
   justify-content: center;
   span {
-    font-size: ${({ large, medium }: IJumbo) =>
+    font-size: ${({ large, medium }: IProps) =>
       large ? 3.8 : medium ? 2.8 : 1.8}rem;
-    line-height: ${({ large, medium }: IJumbo) =>
+    line-height: ${({ large, medium }: IProps) =>
       large ? 4.8 : medium ? 3.8 : 2.8}rem;
     letter-spacing: 10px;
     > br {
@@ -34,7 +34,7 @@ const Box = styled.div`
   }
 `;
 
-const Jumbo = (props: IJumbo) => {
+const Jumbo = (props: IProps) => {
   return (
     <Box {...props}>
       <span>{props.children}</span>

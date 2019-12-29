@@ -1,7 +1,7 @@
 import { lOGIN_USER, LOGOUT_USER, UserActionTypes, UserState } from "./types";
 
 const initialState: UserState = {
-  isLogged: true,
+  isLogged: false,
   user: {
     userName: "Yongkukssss",
     email: ""

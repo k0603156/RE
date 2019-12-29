@@ -1,6 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
-interface IBox {
+interface IProps {
   toggle: boolean;
 }
 const Item = styled.li`
@@ -9,14 +10,18 @@ const Item = styled.li`
 `;
 const Box = styled.ul`
   min-width: 100px;
-  display: ${({ toggle }: IBox) => (toggle ? "block" : "none")};
+  display: ${({ toggle }: IProps) => (toggle ? "block" : "none")};
 `;
 
 const UserMenu = (props: { toggle: boolean }) => (
   <Box {...props}>
-    <Item>글쓰기</Item>
-    <Item>정보수정</Item>
-    <Item>로그아웃</Item>
+    <Item>
+      <Link to="/user">MyPage</Link>
+    </Item>
+    <Item>
+      <Link to="/post">Posting</Link>
+    </Item>
+    <Item>Logout</Item>
   </Box>
 );
 

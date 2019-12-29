@@ -1,11 +1,11 @@
-import { PublicMain, PublicPost } from "pages/public";
+import { PublicMain, PublicBoard } from "pages/public";
 export default {
   Main: {
     component: PublicMain,
     path: "/"
   },
-  Post: {
-    component: PublicPost,
-    path: "/post"
+  Board: {
+    component: PublicBoard,
+    path: "/Board"
   }
 };
