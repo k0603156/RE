@@ -1,2 +1,8 @@
+# NodeModules
 node_modules
-src/App/.env
+
+# Config
+src/Models/config
+
+# Err log
+yarn-error.log

@@ -2,6 +2,18 @@
   "name": "traveler-server",
   "version": "0.0.0",
   "private": true,
+  "description": "Traveler-service-server",
+  "engines": {
+    "node": ">=12"
+  },
+  "bugs": {
+    "email": "syntax-err@kakao.com"
+  },
+  "author": {
+    "name": "YongkukKim",
+    "email": "syntax-err@kakao.com",
+    "url": "https://github.com/k0603156/"
+  },
   "scripts": {
     "start": "node ./src",
     "dev": "nodemon node ./src",
