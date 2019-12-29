@@ -15,7 +15,7 @@
     "url": "https://github.com/k0603156/"
   },
   "scripts": {
-    "start": "node ./src",
+    "start": "node ./scripts/run.js",
     "dev": "nodemon node ./src",
     "test": "babel-node scripts/test.js"
   },
