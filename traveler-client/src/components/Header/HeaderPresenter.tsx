@@ -35,7 +35,9 @@ interface IHeaderPresenter {
 export default ({ MouseEnter, MouseLeave, Toggle, Auth }: IHeaderPresenter) => {
   return (
     <>
-      <Title>Traveler</Title>
+      <Link to="/">
+        <Title>Traveler</Title>
+      </Link>
 
       <UserBox onMouseEnter={MouseEnter} onMouseLeave={MouseLeave}>
         {Auth.isLogged ? (
