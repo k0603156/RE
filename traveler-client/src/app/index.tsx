@@ -16,7 +16,7 @@ const Wrapper = styled.div`
   position: relative;
   width: 100%;
   flex: 1;
-  overflow: auto;
+  overflow-y: auto;
 `;
 function App(props: { auth: UserState }) {
   return (

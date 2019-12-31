@@ -1,4 +1,4 @@
-import { PublicMain, PublicBoard } from "pages/public";
+import { PublicMain, PublicBoard, PublicPost } from "pages/public";
 export default {
   Main: {
     component: PublicMain,
@@ -6,6 +6,10 @@ export default {
   },
   Board: {
     component: PublicBoard,
-    path: "/Board"
+    path: "/board/:boardName"
+  },
+  Post: {
+    component: PublicPost,
+    path: "/board/post/:boardName"
   }
 };
