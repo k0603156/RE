@@ -1,7 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { FiList } from "components/Icon/fi";
+import Icon from "components/Icon";
 import PostBox from "components/PostBox";
 import Jumbo from "components/Jumbo";
+
 const Container = styled.div`
   display: flex;
   overflow: auto;
@@ -11,6 +15,8 @@ const Container = styled.div`
   }
 `;
 const Title = styled.h3`
+  display: flex;
+  justify-content: space-between;
   font-size: 1.5rem;
   font-weight: 500;
 `;
@@ -34,7 +40,7 @@ const TB = styled.div`
   :last-child {
     position: relative; /* flexbox 스크롤버그 */
   }
-  :last-child::after {
+  /* :last-child::after {
     display: block;
     width: 11px;
     height: 1px;
@@ -43,7 +49,7 @@ const TB = styled.div`
     left: 100%;
     visibility: hidden;
     content: "";
-  }
+  } */
 `;
 
 export default () => (
@@ -73,7 +79,13 @@ export default () => (
     <TB>
       <Jumbo verticalFrom={"tablet"}>당신의 열정에 맡기고</Jumbo>
       <Article>
-        <Title>해외 여행기</Title>
+        <Title>
+          해외 여행기
+          <Link to="/board/1">
+            <FiList />
+          </Link>
+        </Title>
+
         {new Array(2).fill("").map((_, index) => (
           <PostBox key={index} />
         ))}
@@ -81,7 +93,13 @@ export default () => (
     </TB>
     <TB>
       <Article>
-        <Title>국내 여행기</Title>
+        <Title>
+          국내 여행기
+          <Link to="/board/2">
+            <FiList />
+          </Link>
+        </Title>
+
         {new Array(7).fill("").map((_, index) => (
           <PostBox key={index} />
         ))}
