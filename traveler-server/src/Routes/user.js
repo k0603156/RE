@@ -10,24 +10,24 @@ const ENCRYPT_BUFF = 64;
 const ENCODE_TYPE = "base64";
 
 //Todo:수정필요
-
-const getUsers = async (req, res, next) => {
+Router.get("/", async (req, res, next) => {
   res.status(200).json({ data: "user" });
-};
+});
 
-const getUser = async (req, res, next) => {
+Router.get("/:id", async (req, res, next) => {
   try {
     const exUser = await UserModel.findOne({
-      where: { id: req.params.id, deleteAt: null },
+      where: { id: req.params.id },
       attributes: ["id", "userName"]
     });
     res.status(200).json(exUser);
   } catch (error) {
     next(error);
   }
-};
+});
 
-const createUser = async (req, res, next) => {
+//회원가입
+Router.post("/", async (req, res, next) => {
   try {
     const { userName, email, password, confirmPassword } = checkReqContain(
       req.body,
@@ -50,9 +50,10 @@ const createUser = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-};
+});
 
-const updateUser = async (req, res, next) => {
+//회원정보 수정
+Router.put("/", async (req, res, next) => {
   try {
     const { id, userName, password, confirmPassword } = checkReqContain(
       req.body,
@@ -75,8 +76,10 @@ const updateUser = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-};
-const deleteUser = async (req, res, next) => {
+});
+
+//탈퇴
+Router.delete("/", async (req, res, next) => {
   try {
     const { id } = checkReqContain(req.body, "id");
     const sucess = UserModel.destroy({
@@ -86,12 +89,6 @@ const deleteUser = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-};
-
-Router.get("/", getUsers);
-Router.get("/:id", getUser);
-Router.post("/", createUser);
-Router.put("/", updateUser);
-Router.delete("/", deleteUser);
+});
 
 module.exports = Router;

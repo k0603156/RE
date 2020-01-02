@@ -1,10 +1,14 @@
 const { createErr } = require("../Utils");
+const authRouter = require("./auth");
 const userRouter = require("./user");
 const postRouter = require("./post");
 
+const API_ROOT = "/api/v1";
+
 module.exports = app => {
-  app.use("/api/user/", userRouter);
-  app.use("/api/post/", postRouter);
+  app.use(`${API_ROOT}/auth/`, authRouter);
+  app.use(`${API_ROOT}/user/`, userRouter);
+  app.use(`${API_ROOT}/post/`, postRouter);
 
   app.use((req, res, next) => {
     next(createErr(404, "Not Found"));

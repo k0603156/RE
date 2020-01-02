@@ -15,7 +15,7 @@ sequelize
     process.exit();
   })
   .finally(() => {
-    sequelize.close();
+    // sequelize.close();
     http.createServer(app).listen(app.get("port"), () => {
       NormLog(`✓ Express server linstening on Port ${app.get("port")}!`);
     });

@@ -1,13 +1,14 @@
 const express = require("express");
 const logger = require("morgan");
 const routes = require("../Routes");
-
+const { authenticateJwt } = require("../MiddleWares/passport");
+require("../MiddleWares/passport");
 module.exports = {
   app: express(),
   port: process.env.PORT || 8000,
-  routes,
   middleware: [
     logger("dev"),
+    authenticateJwt,
     express.json(),
     express.urlencoded({ extended: false }),
     (req, res, next) => {
@@ -22,5 +23,6 @@ module.exports = {
       );
       next();
     }
-  ]
+  ],
+  routes
 };

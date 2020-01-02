@@ -66,3 +66,12 @@ module.exports.generateToken = email =>
     },
     process.env.JWT_SECRET
   );
+
+module.exports.isAuthenticated = (req, res, next) => {
+  if (!req.user) {
+    throw new Err(401, "로그인이 필요한 요청입니다.");
+  } else {
+    next();
+  }
+  return;
+};
