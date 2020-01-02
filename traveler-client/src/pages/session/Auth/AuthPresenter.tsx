@@ -1,21 +1,17 @@
 import React from "react";
 import styled from "styled-components";
-import AuthAction from "./AuthAction";
-import Input from "components/Input";
-import { NormalButton, SimpleButton } from "components/Button";
+import AuthState from "./AuthState";
+import Input from "Components/Input";
+import { NormalButton, SimpleButton } from "Components/Button";
 
-interface IInput {
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}
 interface IProps {
-  email: IInput;
-  userName: IInput;
-  password: IInput;
-  confirmPassword: IInput;
+  email: IUseInputReturn;
+  userName: IUseInputReturn;
+  password: IUseInputReturn;
+  confirmPassword: IUseInputReturn;
   onSubmit: ((event: React.FormEvent<HTMLFormElement>) => void) | undefined;
-  action: AuthAction;
-  setAction: React.Dispatch<React.SetStateAction<AuthAction>>;
+  action: AuthState;
+  setAction: React.Dispatch<React.SetStateAction<AuthState>>;
 }
 
 const Wrapper = styled.div`
@@ -60,7 +56,7 @@ function AuthPresenter({
   return (
     <Wrapper>
       <Form>
-        {action === AuthAction.ACTION_LOGIN && (
+        {action === AuthState.STATE_LOGIN && (
           <>
             <form onSubmit={onSubmit}>
               <Input
@@ -82,12 +78,12 @@ function AuthPresenter({
             <SimpleButton
               text={"Sign Up"}
               onClick={() => {
-                setAction(AuthAction.ACTION_SIGNUP);
+                setAction(AuthState.STATE_SIGNUP);
               }}
             ></SimpleButton>
           </>
         )}
-        {action === AuthAction.ACTION_SIGNUP && (
+        {action === AuthState.STATE_SIGNUP && (
           <>
             <form onSubmit={onSubmit}>
               <Input
@@ -131,7 +127,7 @@ function AuthPresenter({
             <SimpleButton
               text={"Sign in"}
               onClick={() => {
-                setAction(AuthAction.ACTION_LOGIN);
+                setAction(AuthState.STATE_LOGIN);
               }}
             ></SimpleButton>
           </>

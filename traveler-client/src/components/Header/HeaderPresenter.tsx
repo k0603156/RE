@@ -1,8 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { Mx_Width } from "styles/Device";
-import { UserState } from "store/modules/User/types";
+import { Mx_Width } from "Styles/Device";
 import UMenu from "../UserMenu";
 
 const Title = styled.div`
@@ -26,24 +25,25 @@ const UserBox = styled.div`
     text-overflow: ellipsis;
   }`).mobileL}
 `;
-interface IHeaderPresenter {
-  MouseEnter: () => void;
-  MouseLeave: () => void;
-  Toggle: boolean;
-  Auth: UserState;
-}
-export default ({ MouseEnter, MouseLeave, Toggle, Auth }: IHeaderPresenter) => {
+
+export default (props: {
+  onMouseEnter: () => void;
+  onMouseLeave: () => void;
+  toggle: boolean;
+  auth: IAuthState;
+}) => {
+  const { auth, toggle, onMouseEnter, onMouseLeave } = props;
   return (
     <>
       <Link to="/">
         <Title>Traveler</Title>
       </Link>
 
-      <UserBox onMouseEnter={MouseEnter} onMouseLeave={MouseLeave}>
-        {Auth.isLogged ? (
+      <UserBox onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+        {auth.isLogged ? (
           <>
-            {Auth.user.userName}
-            <UMenu toggle={Toggle} />
+            {auth.user.userName}
+            <UMenu toggle={toggle} />
           </>
         ) : (
           <Link to="/auth">Join</Link>

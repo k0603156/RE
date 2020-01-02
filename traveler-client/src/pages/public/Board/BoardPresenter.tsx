@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import PostBox from "components/PostBox";
-import Pagination from "components/Pagination";
+import PostBox from "Components/PostBox";
+import Pagination from "Components/Pagination";
 
 interface IPost {
   title: string;
@@ -18,9 +18,9 @@ const BoardTitle = styled.h3``;
 const BoardList = styled.ul``;
 
 interface Inf {
-  handlePage: any;
-  lengthPage: any;
-  currentPage: any;
+  handlePage: (event: React.MouseEvent<HTMLLIElement, MouseEvent>) => void;
+  lengthPage: number;
+  currentPage: number;
 }
 export default ({ handlePage, lengthPage, currentPage }: Inf) => {
   return (

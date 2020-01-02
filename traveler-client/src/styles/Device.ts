@@ -19,5 +19,6 @@ const Mx_Width = (style?: string) =>
     ] = `@media only screen and (max-width: ${Device_Size[cur]}px) ${style}`;
     return acc;
   }, {});
+
 export default Device_Size;
 export { Mx_Width };

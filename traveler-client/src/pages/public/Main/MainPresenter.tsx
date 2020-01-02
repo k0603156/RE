@@ -1,10 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { FiList } from "components/Icon/fi";
-import Icon from "components/Icon";
-import PostBox from "components/PostBox";
-import Jumbo from "components/Jumbo";
+import { FiList } from "Components/Icon/fi";
+import PostBox from "Components/PostBox";
+import Jumbo from "Components/Jumbo";
 
 const Container = styled.div`
   display: flex;

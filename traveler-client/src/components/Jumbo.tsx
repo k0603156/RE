@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Mx_Width } from "styles/Device";
+import { Mx_Width } from "Styles/Device";
 
 interface IProps {
   large?: boolean;

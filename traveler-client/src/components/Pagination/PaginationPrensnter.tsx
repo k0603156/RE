@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { IPagination } from "./Pagination";
 
 const PaginationUl = styled.ul`
   display: flex;
@@ -26,11 +25,14 @@ const PageMax = styled.span`
   padding: 5px;
 `;
 
-export default ({ handlePage, lengthPage, currentPage }: IPagination) => {
-  const check = (num: number): boolean => {
-    return Math.sign(num) == -1 ? false : true;
-  };
-
+export default (props: {
+  handlePage:
+    | ((event: React.MouseEvent<HTMLLIElement, MouseEvent>) => void)
+    | undefined;
+  lengthPage: number;
+  currentPage: number;
+}) => {
+  const { handlePage, lengthPage, currentPage } = props;
   const Arr = Array.from(Array(lengthPage), (_, index) => index + 1).map(
     (_, index) => (
       <PaginationLi key={index} data-page={_} onClick={handlePage}>
@@ -38,19 +40,18 @@ export default ({ handlePage, lengthPage, currentPage }: IPagination) => {
       </PaginationLi>
     )
   );
+  const check = (n: number): boolean => {
+    return Math.sign(n) === -1 ? false : true;
+  };
+
+  const From = () => {
+    const from = currentPage === lengthPage ? currentPage - 3 : currentPage - 2;
+    return check(from) ? from : 0;
+  };
+  const To = () => (currentPage < 2 ? currentPage + 3 : currentPage + 2);
 
   //TODO:수정필요
-  const d = Arr.slice(
-    (() => {
-      const s = currentPage == lengthPage ? currentPage - 3 : currentPage - 2;
-      return check(
-        currentPage == lengthPage ? currentPage - 3 : currentPage - 2
-      )
-        ? s
-        : 0;
-    })(),
-    currentPage < 2 ? currentPage++ + 2 : currentPage++ + 1
-  );
+  const d = Arr.slice(From(), To());
   return (
     <PaginationUl>
       {d} <PageInput placeholder="page" onKeyUp={e => console.dir(e.keyCode)} />

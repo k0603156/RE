@@ -1,16 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-interface IProps {
-  toggle: boolean;
-}
+
 const Item = styled.li`
   margin: 10px 0;
   text-align: right;
 `;
 const Box = styled.ul`
   min-width: 100px;
-  display: ${({ toggle }: IProps) => (toggle ? "block" : "none")};
+  display: ${(props: { toggle: boolean }) => (props.toggle ? "block" : "none")};
 `;
 
 const UserMenu = (props: { toggle: boolean }) => (
