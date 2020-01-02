@@ -9,6 +9,7 @@ const {
 
 //로그인 토큰발행
 Router.post("/authenticate", async (req, res, next) => {
+  console.log("Asd", req.body);
   try {
     const { email, password } = checkReqContain(req.body, "email", "password");
     const exUser = await UserModel.findOne({
@@ -16,6 +17,7 @@ Router.post("/authenticate", async (req, res, next) => {
         email
       }
     });
+
     const { salt, cryptoPass } = await exUser.dataValues;
     const loginPassword = await encryptString(password, salt);
     if (loginPassword == cryptoPass) {
