@@ -6,6 +6,10 @@ const { randomBytes, scrypt } = require("crypto");
 
 //Todo:수정필요
 
+function CFL(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 module.exports.checkReqContain = (data, ...checkList) => {
   return checkList.reduce((obj, key) => {
     if (
@@ -16,7 +20,7 @@ module.exports.checkReqContain = (data, ...checkList) => {
     ) {
       throw new Err(400, `${key} 요청 된 값을 확인해주세요`);
     } else {
-      obj[key] = data[key];
+      obj["res" + CFL(key)] = data[key];
       return obj;
     }
   }, {});
@@ -24,11 +28,6 @@ module.exports.checkReqContain = (data, ...checkList) => {
 // Object.entries(obj).map(([key, value]) => {
 //   return key, value;
 // }, {});
-module.exports.createErr = (
-  status = 500,
-  message = "Internal Err",
-  stack = null
-) => new Err(status, message, stack);
 
 module.exports.generateRandomString = (buffSize = 64, encodeType = "base64") =>
   promisify(randomBytes)(buffSize)
@@ -66,3 +65,12 @@ module.exports.generateToken = email =>
     },
     process.env.JWT_SECRET
   );
+
+module.exports.isAuthenticated = (req, res, next) => {
+  if (!req.user) {
+    throw new Err(401, "로그인이 필요한 요청입니다.");
+  } else {
+    next();
+  }
+  return;
+};

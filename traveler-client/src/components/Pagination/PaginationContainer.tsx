@@ -1,12 +1,14 @@
 import React from "react";
-import { IPagination } from "./Pagination";
 import PaginationPrensnter from "./PaginationPrensnter";
 
-const PaginationContainer = ({
-  handlePage,
-  lengthPage,
-  currentPage
-}: IPagination) => {
+const PaginationContainer = (props: {
+  handlePage:
+    | ((event: React.MouseEvent<HTMLLIElement, MouseEvent>) => void)
+    | undefined;
+  lengthPage: number;
+  currentPage: number;
+}) => {
+  const { handlePage, lengthPage, currentPage } = props;
   return (
     <PaginationPrensnter
       handlePage={handlePage}

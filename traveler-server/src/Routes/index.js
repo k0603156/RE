@@ -1,23 +1,33 @@
-const { createErr } = require("../Utils");
+const authRouter = require("./auth");
 const userRouter = require("./user");
 const postRouter = require("./post");
 
+const API_ROOT = "/api/v1";
+
 module.exports = app => {
-  app.use("/api/user/", userRouter);
-  app.use("/api/post/", postRouter);
+  app.use(`${API_ROOT}/auth/`, authRouter);
+  app.use(`${API_ROOT}/user/`, userRouter);
+  app.use(`${API_ROOT}/post/`, postRouter);
 
   app.use((req, res, next) => {
-    next(createErr(404, "Not Found"));
+    const error = new Error("Not Found");
+    error.status = 404;
+    next(error);
   });
 
   app.use((err, req, res, next) => {
     //Todo:에러처리를 어떤식으로 해야할까
     const error = req.app.get("env") === "development" ? err : {};
-    res.status(error.status || 500);
-    res.send(error.message);
+    error.status = err.status || 500;
+    if (error.status < 500) {
+      res.status(error.status).json({
+        error: error.message
+      });
+    }
   });
 
   process.on("uncaughtException", err => {
+    console.log("ErrUncaught");
     console.error(err);
   });
 };

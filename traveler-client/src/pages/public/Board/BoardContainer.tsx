@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from "react";
+import React from "react";
 import BoardPresenter from "./BoardPresenter";
 import { withRouter } from "react-router-dom";
 const BoardContainer = withRouter(
@@ -7,22 +7,20 @@ const BoardContainer = withRouter(
       params: { boardName }
     }
   }) => {
-    const POST_LENGTH = 100;
-    const POST_PER_PAGE = 10;
-    const [currentPage, setCurrentPage]: [
-      number,
-      React.Dispatch<React.SetStateAction<number>>
-    ] = React.useState<number>(1);
+    const POST_LENGTH: number = 100;
+    const POST_PER_PAGE: number = 10;
+    const LENGTH_PAGE: number = POST_LENGTH / POST_PER_PAGE;
+    const [currentPage, setCurrentPage] = React.useState<number>(1);
 
     const handlePage = (e: any) => {
       e.persist();
-      setCurrentPage(e.currentTarget.dataset.page);
+      setCurrentPage(parseInt(e.currentTarget.dataset.page));
     };
 
     return (
       <BoardPresenter
         handlePage={handlePage}
-        lengthPage={POST_LENGTH / POST_PER_PAGE}
+        lengthPage={LENGTH_PAGE}
         currentPage={currentPage}
       />
     );

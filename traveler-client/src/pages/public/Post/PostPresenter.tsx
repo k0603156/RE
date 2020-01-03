@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import Content from "components/Content";
+import Content from "Components/Content";
+
 const Title = styled.h3``;
 const Date = styled.div``;
 const SubTitle = styled.div``;

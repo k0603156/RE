@@ -1,5 +1,5 @@
 const passport = require("passport");
-const { User } = require("../Models/tables");
+const { user: UserModel } = require("../Models/tables");
 const { Strategy, ExtractJwt } = require("passport-jwt");
 const jwtOptions = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -9,7 +9,7 @@ const jwtOptions = {
 const verifyUser = async (payload, done) => {
   try {
     //payload:{email,iat=>토큰이 발급 된 시간}
-    const { dataValues } = await User.findOne({
+    const { dataValues } = await UserModel.findOne({
       where: {
         email: payload.email
       }
@@ -28,13 +28,14 @@ exports.authenticateJwt = (req, res, next) =>
       sessions: false
     },
     (error, user) => {
-      // console.log('user:', user);
-      // console.log(req.headers)
+      console.log("user:", user);
+      // console.log(req.headers);
       if (user) {
         req.user = user;
       }
       next();
     }
   )(req, res, next);
+
 passport.use(new Strategy(jwtOptions, verifyUser));
 passport.initialize();

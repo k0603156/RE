@@ -1,4 +1,4 @@
-import { AuthPage } from "pages/session";
+import { AuthPage } from "Pages/session";
 export default {
   Auth: {
     component: AuthPage,

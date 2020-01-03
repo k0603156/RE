@@ -1,10 +1,6 @@
 import { useState } from "react";
-interface IProps {
-  value: any;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  setValue: React.Dispatch<any>;
-}
-export default (defaultValue: any): IProps => {
+
+export default (defaultValue: any): IUseInputReturn => {
   const [value, setValue] = useState(defaultValue);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -15,7 +11,6 @@ export default (defaultValue: any): IProps => {
   };
   return {
     value,
-    onChange,
-    setValue
+    onChange
   };
 };

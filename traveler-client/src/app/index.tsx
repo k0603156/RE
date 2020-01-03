@@ -1,29 +1,27 @@
 import React from "react";
 import _ from "lodash";
 import styled, { ThemeProvider } from "styled-components";
+import GlobalStyles from "Styles/Global";
+import Theme from "Styles/Theme";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
-import { PrivateRoutes, PublicRoutes, SessionRoutes } from "routes";
+import { PrivateRoutes, PublicRoutes, SessionRoutes } from "Routes";
 import NotFound from "./publicLayout/NotFound";
 import PrivateLayout from "./privateLayout";
 import PublicLayout from "./publicLayout";
-import GlobalStyles from "styles/Global";
-import Theme from "styles/Theme";
 import { connect } from "react-redux";
-import { rootState } from "store/modules";
-import { UserState } from "store/modules/User/types";
-import Header from "components/Header";
+import Header from "Components/Header";
 const Wrapper = styled.div`
   position: relative;
   width: 100%;
   flex: 1;
   overflow-y: auto;
 `;
-function App(props: { auth: UserState }) {
+function App(props: { auth: IAuthState }) {
   return (
     <ThemeProvider theme={Theme}>
       <GlobalStyles />
       <BrowserRouter>
-        <Header headerAuth={props.auth} />
+        <Header auth={props.auth} />
         <Wrapper>
           <Switch>
             {_.map(PublicRoutes, (route, key) => {
@@ -86,7 +84,6 @@ function App(props: { auth: UserState }) {
   );
 }
 
-const mapStateProps = (rootStates: rootState) => ({
-  auth: rootStates.userReducer
-});
-export default connect(mapStateProps)(App);
+export default connect(({ auth }: RootStateType) => ({
+  auth
+}))(App);

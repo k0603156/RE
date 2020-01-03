@@ -1,4 +1,4 @@
-import { PublicMain, PublicBoard, PublicPost } from "pages/public";
+import { PublicMain, PublicBoard, PublicPost } from "Pages/public";
 export default {
   Main: {
     component: PublicMain,
