@@ -9,21 +9,33 @@ const {
 
 //로그인 토큰발행
 Router.post("/authenticate", async (req, res, next) => {
-  console.log("Asd", req.body);
   try {
-    const { email, password } = checkReqContain(req.body, "email", "password");
-    const exUser = await UserModel.findOne({
+    const { resEmail, resPassword } = checkReqContain(
+      req.body,
+      "email",
+      "password"
+    );
+    const resUser = await UserModel.findOne({
       where: {
-        email
+        email: resEmail
       }
     });
+    if (resUser && resUser.dataValues) {
+      const { email, userName, salt, cryptoPass } = resUser.dataValues;
 
-    const { salt, cryptoPass } = await exUser.dataValues;
-    const loginPassword = await encryptString(password, salt);
-    if (loginPassword == cryptoPass) {
-      res.send(generateToken(email));
+      const loginPassword = await encryptString(resPassword, salt);
+
+      if (loginPassword === cryptoPass) {
+        res.status(200).json({ email, userName, token: generateToken(email) });
+      } else {
+        const error = new Error("로그인실패");
+        error.status = 400;
+        throw error;
+      }
     } else {
-      res.send("Sorry, SignIn failed");
+      const error = new Error("로그인실패");
+      error.status = 400;
+      throw error;
     }
   } catch (error) {
     next(error);
@@ -48,6 +60,7 @@ Router.post("/reauthorize", (req, res, next) => {
 
 Router.post("/deauthorize", (req, res, next) => {
   try {
+    const { resEmail } = checkReqContain(req.body, "email");
     res.status(200).send("로그아웃");
   } catch (error) {
     next(error);

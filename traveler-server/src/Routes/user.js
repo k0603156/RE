@@ -3,7 +3,6 @@ const { user: UserModel } = require("../Models/tables");
 const {
   generateRandomString,
   encryptString,
-  createErr,
   checkReqContain
 } = require("../Utils");
 const ENCRYPT_BUFF = 64;
@@ -37,7 +36,11 @@ Router.post("/", async (req, res, next) => {
       "confirmPassword"
     );
     const exUser = await UserModel.findOne({ where: { email } });
-    if (exUser) next(createErr(400, "이미 가입된 이메일"));
+    if (exUser) {
+      const error = new Error("이미 가입된 이메일");
+      error.status = 400;
+      next(error);
+    }
     const salt = await generateRandomString(ENCRYPT_BUFF, ENCODE_TYPE);
     const cryptoPass = await encryptString(password, salt);
     const result = await UserModel.create({

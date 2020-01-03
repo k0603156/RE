@@ -1,3 +1,9 @@
+module.exports.createErr = (
+  status = 500,
+  message = "Internal Err",
+  stack = null
+) => new Err(status, message, stack);
+
 class Err extends Error {
   status;
   message;
