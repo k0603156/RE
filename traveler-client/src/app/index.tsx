@@ -84,6 +84,6 @@ function App(props: { auth: IAuthState }) {
   );
 }
 
-export default connect((state: RootStateType) => ({
-  auth: state.authReducer
+export default connect(({ auth }: RootStateType) => ({
+  auth
 }))(App);

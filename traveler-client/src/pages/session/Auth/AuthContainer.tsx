@@ -27,7 +27,7 @@ const AuthContainer = (props: {
     e.preventDefault();
     switch (action) {
       case AuthState.STATE_LOGIN:
-        props.login(userName.value, email.value);
+        props.login(email.value, password.value);
         console.log("로그인");
         break;
       case AuthState.STATE_SIGNUP:
@@ -57,8 +57,9 @@ const AuthContainer = (props: {
 };
 
 export default connect(
-  (state: RootStateType) => ({
-    auth: state.authReducer
+  ({ auth, loading }: RootStateType) => ({
+    auth,
+    loadingAuth: loading["auth/AUTHENTICATE"]
   }),
   { login, check_otp, change_token, logout }
 )(AuthContainer);

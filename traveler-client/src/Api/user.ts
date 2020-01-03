@@ -1,5 +1,5 @@
 import Axios from "axios";
-const API_ROOT = "/api/v1/user";
+const API_ROOT = "http://localhost:8000/api/v1/user";
 
 const req = (
   method: "get" | "post" | "put" | "delete",
@@ -11,10 +11,16 @@ const req = (
     confirmPassword?: string;
   }
 ) => {
+  const token = localStorage.getItem("token");
   return Axios({
     method,
     url: API_ROOT + url,
-    data
+    data,
+    headers: {
+      common: {
+        Authorization: token ? `Bearer ${token}` : null
+      }
+    }
   });
 };
 
