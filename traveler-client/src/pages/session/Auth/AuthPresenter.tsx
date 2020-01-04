@@ -3,7 +3,6 @@ import styled from "styled-components";
 import AuthState from "./AuthState";
 import Input from "Components/Input";
 import { NormalButton, SimpleButton } from "Components/Button";
-
 interface IProps {
   email: IUseInputReturn;
   userName: IUseInputReturn;

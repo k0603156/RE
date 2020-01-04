@@ -10,6 +10,7 @@ import PrivateLayout from "./privateLayout";
 import PublicLayout from "./publicLayout";
 import { connect } from "react-redux";
 import Header from "Components/Header";
+
 const Wrapper = styled.div`
   position: relative;
   width: 100%;

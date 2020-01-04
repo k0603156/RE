@@ -11,7 +11,7 @@ const req = (
     confirmPassword?: string;
   }
 ) => {
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
   return Axios({
     method,
     url: API_ROOT + url,
@@ -33,18 +33,13 @@ export default {
     return req("get", "/");
   },
 
-  create_user(
-    userName: string,
-    email: string,
-    password: string,
-    confirmPassword: string
-  ) {
-    return req("post", "/", {
-      userName,
-      email,
-      password,
-      confirmPassword
-    });
+  create_user(payload: {
+    userName: string;
+    email: string;
+    password: string;
+    confirmPassword: string;
+  }) {
+    return req("post", "/", payload);
   },
 
   update_user(

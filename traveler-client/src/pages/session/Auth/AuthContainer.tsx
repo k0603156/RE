@@ -3,20 +3,10 @@ import AuthPresenter from "./AuthPresenter";
 import useInput from "Hooks/useInput";
 import AuthState from "./AuthState";
 import { connect } from "react-redux";
-import {
-  login,
-  check_otp,
-  change_token,
-  logout
-} from "Store/modules/Auth/actions";
+import { login } from "Store/modules/Auth/actions";
+import { User } from "Api";
 
-const AuthContainer = (props: {
-  auth: IAuthState;
-  login: ActionLoginType;
-  check_otp: ActionCheckOTPType;
-  change_token: ActionChangeTokenType;
-  logout: ActionLogoutType;
-}) => {
+const AuthContainer = (props: { auth: IAuthState; login: ActionLoginType }) => {
   const [action, setAction] = useState<AuthState>(AuthState.STATE_LOGIN);
   const userName = useInput("");
   const email = useInput("");
@@ -31,10 +21,24 @@ const AuthContainer = (props: {
         console.log("로그인");
         break;
       case AuthState.STATE_SIGNUP:
-        if (password !== confirmPassword) {
+        if (password.value !== confirmPassword.value) {
           console.log("비밀번호 확인란이 같지 않습니다.");
           break;
         }
+        User.create_user({
+          userName: userName.value,
+          email: email.value,
+          password: password.value,
+          confirmPassword: confirmPassword.value
+        }).then(_ => {
+          if (_.status === 201) {
+            userName.setValue("");
+            email.setValue("");
+            password.setValue("");
+            confirmPassword.setValue("");
+            setAction(AuthState.STATE_LOGIN);
+          }
+        });
         console.log("Signup");
         break;
       case AuthState.STATE_CONFIRM:
@@ -61,5 +65,5 @@ export default connect(
     auth,
     loadingAuth: loading["auth/AUTHENTICATE"]
   }),
-  { login, check_otp, change_token, logout }
+  { login }
 )(AuthContainer);

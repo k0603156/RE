@@ -9,7 +9,7 @@ const req = (
     password?: string;
   }
 ) => {
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
   return Axios({
     method,
     url: API_ROOT + url,

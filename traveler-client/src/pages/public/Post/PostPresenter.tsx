@@ -3,18 +3,24 @@ import styled from "styled-components";
 import Content from "Components/Content";
 
 const Title = styled.h3``;
-const Date = styled.div``;
+const Country = styled.div``;
+const FromDate = styled.div``;
+const ToDate = styled.div``;
 const SubTitle = styled.div``;
+const MainImage = styled.div``;
 
 export default () => {
   return (
     <div>
       <Title>laoreet</Title>
-      <Date>Dec 4, 2019 9:14 AM</Date>
+      <Country>Korea, Republic of</Country>
+      <FromDate>From:Dec 4, 2019 9:14 AM</FromDate>
+      <ToDate>To:Dec 4, 2019 9:14 AM</ToDate>
       <SubTitle>
         Lorem ipsum dolor sit amet, adhuc nulla definiebas mei ad, ei doming
         aperiam delicata est.
       </SubTitle>
+      <MainImage>mainImage</MainImage>
       <Content /> <Content /> <Content /> <Content />
     </div>
   );

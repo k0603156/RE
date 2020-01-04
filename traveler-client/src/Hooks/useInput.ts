@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default (defaultValue: any): IUseInputReturn => {
+const useInput = (defaultValue: any): IUseInputReturn => {
   const [value, setValue] = useState(defaultValue);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -11,6 +11,8 @@ export default (defaultValue: any): IUseInputReturn => {
   };
   return {
     value,
-    onChange
+    onChange,
+    setValue
   };
 };
+export default useInput;

@@ -1,6 +1,7 @@
 import React from "react";
+import jest from "jest";
 import { mount, shallow, render } from "enzyme";
-import Button from "../components/Button";
+import { SimpleButton } from "../components/Button";
 
 const clickFn = jest.fn();
 
@@ -8,7 +9,7 @@ describe("<Button />", () => {
   let button: any = null;
 
   it("renders correctly", () => {
-    button = mount(<Button />);
+    button = mount(<SimpleButton />);
   });
 
   it("matches snapshot", () => {

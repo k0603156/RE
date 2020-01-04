@@ -1,41 +1,24 @@
 import {
-  lOGIN_AUTH,
   lOGIN_AUTH_SUCCESS,
-  CHECK_OTP_AUTH,
   CHECK_OTP_AUTH_SUCCESS,
-  CHANGE_TOKEN_AUTH,
   CHANGE_TOKEN_AUTH_SUCCESS,
-  LOGOUT_AUTH,
   LOGOUT_AUTH_SUCCESS
 } from "./types";
-import { Auth } from "Api";
+
 import { createReducer } from "typesafe-actions";
-import { takeEvery } from "redux-saga/effects";
-import createRequestSaga from "../../lib/createRequestSaga";
-
-const loginSaga = createRequestSaga(lOGIN_AUTH, Auth.authenticate);
-const checkOTPSaga = createRequestSaga(CHECK_OTP_AUTH, Auth.authorize);
-const changeTokenSaga = createRequestSaga(CHANGE_TOKEN_AUTH, Auth.reauthorize);
-const logoutSaga = createRequestSaga(LOGOUT_AUTH, Auth.deauthorize);
-
-export function* authSaga(): Generator {
-  yield takeEvery(lOGIN_AUTH, loginSaga);
-  yield takeEvery(CHECK_OTP_AUTH, checkOTPSaga);
-  yield takeEvery(CHANGE_TOKEN_AUTH, changeTokenSaga);
-  yield takeEvery(LOGOUT_AUTH, logoutSaga);
-}
 
 const InitAuth = {
-  isLogged: false,
+  isLogged: sessionStorage.getItem("token") ? true : false,
   user: {
-    userName: "",
+    userName: sessionStorage.getItem("userName") || "",
     email: ""
   }
 };
 
 const AuthReducer = createReducer(InitAuth, {
   [lOGIN_AUTH_SUCCESS]: (state, action) => {
-    localStorage.setItem("token", action.payload.token);
+    sessionStorage.setItem("token", action.payload.token);
+    sessionStorage.setItem("userName", action.payload.userName);
     return {
       isLogged: true,
       user: {
@@ -59,7 +42,8 @@ const AuthReducer = createReducer(InitAuth, {
     }
   }),
   [LOGOUT_AUTH_SUCCESS]: (state, action) => {
-    localStorage.removeItem("token");
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("userName");
     return {
       isLogged: false,
       user: {
