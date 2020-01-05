@@ -19,10 +19,10 @@ const UserMenu = (props: {
 }) => (
   <Box {...props}>
     <Item>
-      <Link to="/user">MyPage</Link>
+      <Link to={`/user/${props.auth.user.userName}`}>MyPage</Link>
     </Item>
     <Item>
-      <Link to="/post">Posting</Link>
+      <Link to="/write">Posting</Link>
     </Item>
     <Item onClick={() => props.logout(props.auth.user.email)}>Logout</Item>
   </Box>

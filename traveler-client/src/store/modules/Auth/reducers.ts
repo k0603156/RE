@@ -7,18 +7,19 @@ import {
 
 import { createReducer } from "typesafe-actions";
 
-const InitAuth = {
-  isLogged: sessionStorage.getItem("token") ? true : false,
+const initialState = {
+  isLogged: !!localStorage.getItem("token"),
   user: {
-    userName: sessionStorage.getItem("userName") || "",
-    email: ""
+    userName: localStorage.getItem("userName") || "",
+    email: localStorage.getItem("email") || ""
   }
 };
 
-const AuthReducer = createReducer(InitAuth, {
+const AuthReducer = createReducer(initialState, {
   [lOGIN_AUTH_SUCCESS]: (state, action) => {
-    sessionStorage.setItem("token", action.payload.token);
-    sessionStorage.setItem("userName", action.payload.userName);
+    localStorage.setItem("token", action.payload.token);
+    localStorage.setItem("userName", action.payload.userName);
+    localStorage.setItem("email", action.payload.email);
     return {
       isLogged: true,
       user: {
@@ -42,8 +43,9 @@ const AuthReducer = createReducer(InitAuth, {
     }
   }),
   [LOGOUT_AUTH_SUCCESS]: (state, action) => {
-    sessionStorage.removeItem("token");
-    sessionStorage.removeItem("userName");
+    localStorage.removeItem("token");
+    localStorage.removeItem("userName");
+    localStorage.removeItem("email");
     return {
       isLogged: false,
       user: {

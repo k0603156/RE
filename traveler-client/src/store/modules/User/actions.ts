@@ -1,19 +1,11 @@
-import { CREATE_USER, USER_ACTION_TYPES } from "./types";
+import { GET_USER, USER_ACTION_TYPES } from "./types";
 
 //Action Creator
-export function create_user(
-  userName: string,
-  email: string,
-  password: string,
-  confirmPassword: string
-): USER_ACTION_TYPES {
+export function get_user(userName: string): USER_ACTION_TYPES {
   return {
-    type: CREATE_USER,
+    type: GET_USER,
     payload: {
-      userName,
-      email,
-      password,
-      confirmPassword
+      userName
     }
   };
 }

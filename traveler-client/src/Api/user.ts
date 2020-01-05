@@ -25,8 +25,8 @@ const req = (
 };
 
 export default {
-  get_user(userName: string) {
-    return req("get", `/${userName}`);
+  get_user(payload: { userName: string }) {
+    return req("get", `/${payload.userName}`);
   },
 
   get_users() {

@@ -6,7 +6,11 @@ import { connect } from "react-redux";
 import { login } from "Store/modules/Auth/actions";
 import { User } from "Api";
 
-const AuthContainer = (props: { auth: IAuthState; login: ActionLoginType }) => {
+const AuthContainer = (props: {
+  auth: IAuthState;
+  loadingAuth: any;
+  login: ActionLoginType;
+}) => {
   const [action, setAction] = useState<AuthState>(AuthState.STATE_LOGIN);
   const userName = useInput("");
   const email = useInput("");

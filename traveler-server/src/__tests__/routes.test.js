@@ -14,10 +14,23 @@ describe("Demo test", () => {
   afterAll(done => {
     server.close(done);
   });
-  it("should create a new post", async () => {
-    const res = await request.get("/api/user/");
+  it("test sample", async () => {
+    const res = await request.get("/api/v1/post");
     expect(res.statusCode).toEqual(200);
     // expect(res.body).toHaveProperty("data");
+  });
+  it("test sample2", async () => {
+    const res = await request
+      .post("/api/v1/user")
+      .send({
+        userName: "john",
+        email: "test@test.com",
+        password: "test123",
+        confirmPassword: "test123"
+      })
+      .set("Accept", "application/json");
+    expect(res.statusCode).toEqual(201);
+    expect(res.body).toHaveProperty("userName");
   });
 });
 

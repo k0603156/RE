@@ -14,7 +14,7 @@ const verifyUser = async (payload, done) => {
         email: payload.email
       }
     });
-    // console.log('user:', dataValues);
+    console.log("user:", dataValues);
     return done(null, dataValues);
   } catch (error) {
     return done(error, false);
@@ -28,7 +28,6 @@ exports.authenticateJwt = (req, res, next) =>
       sessions: false
     },
     (error, user) => {
-      console.log("user:", user);
       // console.log(req.headers);
       if (user) {
         req.user = user;

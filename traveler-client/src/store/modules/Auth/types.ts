@@ -14,7 +14,7 @@ export const LOGOUT_AUTH = "auth/DEAUTHORIZE";
 export const LOGOUT_AUTH_SUCCESS = "auth/DEAUTHORIZE_SUCCESS";
 export const LOGOUT_AUTH_FAILURE = "auth/DEAUTHORIZE_FAILURE";
 
-interface login_action {
+export interface login_action {
   type: typeof lOGIN_AUTH;
   payload: { email: string; password: string };
 }

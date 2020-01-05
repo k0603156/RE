@@ -3,11 +3,12 @@ import styled from "styled-components";
 
 interface IProps {
   className?: any;
-  placeholder: string;
+  id?: string;
+  placeholder?: string;
   required?: boolean;
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  type?: "password" | "text" | "url" | "email";
+  type?: "password" | "text" | "url" | "email" | "date";
   pattern?: string;
   autoFocus?: boolean;
   minLength?: number;
@@ -22,12 +23,22 @@ const InputBox = styled.input.attrs(props => ({
   border: 1px solid black;
   border-radius: 7px;
   height: 35px;
+  width: 100%;
   font-size: 12px;
   padding: 0px 15px;
+  margin: 5px 0;
+  &[type="date"]::-webkit-inner-spin-button {
+    display: none;
+    -webkit-appearance: none;
+  }
+  &[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+  }
 `;
 
 const Input = ({
   className,
+  id,
   placeholder,
   required = true,
   value,
@@ -41,6 +52,7 @@ const Input = ({
 }: IProps) => (
   <InputBox
     className={className}
+    id={id}
     placeholder={placeholder}
     required={required}
     value={value}

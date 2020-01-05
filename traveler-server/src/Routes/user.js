@@ -1,10 +1,6 @@
 const Router = require("express").Router();
 const { user: UserModel } = require("../Models/tables");
-const {
-  generateRandomString,
-  encryptString,
-  checkReqContain
-} = require("../Utils");
+const { generateRandomString, encryptString, checkProps } = require("../Utils");
 const ENCRYPT_BUFF = 64;
 const ENCODE_TYPE = "base64";
 
@@ -13,12 +9,13 @@ Router.get("/", async (req, res, next) => {
   res.status(200).json({ data: "user" });
 });
 
-Router.get("/:id", async (req, res, next) => {
+Router.get("/:userName", async (req, res, next) => {
   try {
     const exUser = await UserModel.findOne({
-      where: { id: req.params.id },
+      where: { userName: req.params.userName },
       attributes: ["id", "userName"]
     });
+    console.log(exUser);
     res.status(200).json(exUser);
   } catch (error) {
     next(error);
@@ -28,28 +25,45 @@ Router.get("/:id", async (req, res, next) => {
 //회원가입
 Router.post("/", async (req, res, next) => {
   try {
-    const { userName, email, password, confirmPassword } = checkReqContain(
+    const {
+      userName: reqUserName,
+      email: reqEmail,
+      password: reqPassword,
+      confirmPassword: reqConfirmPassword
+    } = checkProps(
       req.body,
       "userName",
       "email",
       "password",
       "confirmPassword"
     );
-    const exUser = await UserModel.findOne({ where: { email } });
+    console.log(req.body);
+    if (reqPassword !== reqConfirmPassword) {
+      const error = new Error("비밀번호 체크값이 같지 않음");
+      error.status = 400;
+      next(error);
+    }
+    const exUser = await UserModel.findOne({ where: { email: reqEmail } });
     if (exUser) {
       const error = new Error("이미 가입된 이메일");
       error.status = 400;
       next(error);
     }
     const salt = await generateRandomString(ENCRYPT_BUFF, ENCODE_TYPE);
-    const cryptoPass = await encryptString(password, salt);
+    const cryptoPass = await encryptString(reqPassword, salt);
     const result = await UserModel.create({
-      email,
-      userName,
+      userName: reqUserName,
+      email: reqEmail,
       cryptoPass,
       salt
     });
-    res.status(201).json(result);
+    if (result) {
+      res.status(201).json({
+        success: true
+      });
+    } else {
+      throw new Error("가입실패");
+    }
   } catch (error) {
     next(error);
   }
@@ -58,22 +72,22 @@ Router.post("/", async (req, res, next) => {
 //회원정보 수정
 Router.put("/", async (req, res, next) => {
   try {
-    const { id, userName, password, confirmPassword } = checkReqContain(
-      req.body,
-      "id",
-      "userName",
-      "password",
-      "confirmPassword"
-    );
+    const {
+      id: reqId,
+      userName: reqUserName,
+      password: reqPassword,
+      confirmPassword: reqConfirmPassword
+    } = checkProps(req.body, "id", "userName", "password", "confirmPassword");
+
     const salt = await generateRandomString(ENCRYPT_BUFF, ENCODE_TYPE);
-    const cryptoPass = await encryptString(password, salt);
+    const cryptoPass = await encryptString(reqPassword, salt);
     const sucess = UserModel.update(
       {
-        userName,
+        reqUserName,
         cryptoPass,
         salt
       },
-      { where: { id } }
+      { where: { id: reqId } }
     );
     res.status(200).json(sucess);
   } catch (error) {
@@ -84,9 +98,9 @@ Router.put("/", async (req, res, next) => {
 //탈퇴
 Router.delete("/", async (req, res, next) => {
   try {
-    const { id } = checkReqContain(req.body, "id");
+    const { id: reqId } = checkProps(req.body, "id");
     const sucess = UserModel.destroy({
-      where: { id }
+      where: { reqId }
     });
     res.status(204).json(sucess);
   } catch (error) {

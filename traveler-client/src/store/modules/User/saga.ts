@@ -1,11 +1,24 @@
-import { CREATE_USER } from "./types";
+import { GET_USER, GET_USER_SUCCESS, get_user_action } from "./types";
 import { User } from "Api";
-import { takeEvery } from "redux-saga/effects";
-import createRequestSaga from "../../lib/createRequestSaga";
+import { requestFailure } from "../Error";
+import { startLoading, finishLoading } from "../Loading";
+import { takeEvery, put, call } from "redux-saga/effects";
 
-const createUserSaga = createRequestSaga(CREATE_USER, User.create_user);
+export function* getUserSaga(data: get_user_action): Generator {
+  const payload = {
+    userName: data.payload.userName
+  };
+  yield put(startLoading(data.type)); // 로딩 시작
+  try {
+    const response: any = yield call(User.get_user, payload);
+    yield put({ type: GET_USER_SUCCESS, payload: response.data });
+  } catch (error) {
+    yield put(requestFailure(error));
+  }
+  yield put(finishLoading(data.type)); // 로딩 끝
+}
 
 function* userSaga(): Generator {
-  yield takeEvery(CREATE_USER, createUserSaga);
+  yield takeEvery(GET_USER, getUserSaga);
 }
 export default userSaga;

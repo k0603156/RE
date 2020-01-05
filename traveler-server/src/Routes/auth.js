@@ -1,7 +1,7 @@
 const Router = require("express").Router();
 const { user: UserModel } = require("../Models/tables");
 const {
-  checkReqContain,
+  checkProps,
   encryptString,
   generateToken,
   isAuthenticated
@@ -10,20 +10,20 @@ const {
 //로그인 토큰발행
 Router.post("/authenticate", async (req, res, next) => {
   try {
-    const { resEmail, resPassword } = checkReqContain(
+    const { email: reqEmail, password: reqPassword } = checkProps(
       req.body,
       "email",
       "password"
     );
     const resUser = await UserModel.findOne({
       where: {
-        email: resEmail
+        email: reqEmail
       }
     });
     if (resUser && resUser.dataValues) {
       const { email, userName, salt, cryptoPass } = resUser.dataValues;
 
-      const loginPassword = await encryptString(resPassword, salt);
+      const loginPassword = await encryptString(reqPassword, salt);
 
       if (loginPassword === cryptoPass) {
         res.status(200).json({ email, userName, token: generateToken(email) });
@@ -60,7 +60,7 @@ Router.post("/reauthorize", (req, res, next) => {
 
 Router.post("/deauthorize", (req, res, next) => {
   try {
-    const { resEmail } = checkReqContain(req.body, "email");
+    // const { email: resEmail } = checkProps(req.body, "email");
     res.status(200).send("로그아웃");
   } catch (error) {
     next(error);

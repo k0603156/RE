@@ -72,7 +72,11 @@ auth
 ```
 HTTP/1.1 200 OK
 Content-Type: application/json
-{}
+{email,userName,token}
+
+HTTP/1.1 400 Bad Request
+Content-Type: application/json
+{error}
 ```
 
 ##### OTP인증
@@ -82,7 +86,7 @@ Content-Type: application/json
 ```
 HTTP/1.1 200 OK
 Content-Type: application/json
-{}
+{email,userName,token}
 ```
 
 ##### JWT토큰갱신
@@ -92,7 +96,7 @@ Content-Type: application/json
 ```
 HTTP/1.1 200 OK
 Content-Type: application/json
-{}
+{token,refresh_token}
 ```
 
 ##### refresh_token 제거

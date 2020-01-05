@@ -2,12 +2,14 @@ const http = require("http");
 const { sequelize } = require("./Models/tables");
 const { NormLog, ErrorLog } = require("./Utils/log");
 const { app } = require("./App");
-
+const option = { force: true, logging: false };
 //Todo: sequelize.sync는 적당한 부분에서 process.env 기준으로 실행해줘야겠다. 실행스크립트 or index
 sequelize
-  .sync({ force: false, logging: false })
+  .sync(option)
   .then(() => {
-    NormLog("✓ DB connection success.");
+    option.force
+      ? NormLog("✓ DB connection CLEAR success.")
+      : NormLog("✓ DB connection success.");
   })
   .catch(err => {
     ErrorLog(err);

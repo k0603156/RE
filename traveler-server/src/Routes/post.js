@@ -4,7 +4,9 @@ Router.get("/", (req, res, next) => {
   res.send("ww");
 });
 
-Router.post("/", (req, res, next) => {});
+Router.post("/", (req, res, next) => {
+  res.status(201).send("ww");
+});
 
 Router.put("/", (req, res, next) => {});
 

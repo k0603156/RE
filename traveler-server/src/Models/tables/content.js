@@ -7,9 +7,16 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         type: DataTypes.STRING(100)
       },
+      date: {
+        allowNull: false,
+        type: DataTypes.DATEONLY
+      },
       body: {
         allowNull: false,
         type: DataTypes.STRING(100)
+      },
+      image: {
+        type: DataTypes.STRING(200)
       }
     },
     {

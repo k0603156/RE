@@ -5,7 +5,7 @@ export default function createRequestSaga(type: any, request: any) {
   const SUCCESS = `${type}_SUCCESS`;
   const FAILURE = `${type}_FAILURE`;
   return function*(action: any) {
-    yield put(startLoading()(type)); // 로딩 시작
+    yield put(startLoading(type)); // 로딩 시작
     try {
       const response = yield call(request, action.payload);
       yield put({
@@ -19,6 +19,6 @@ export default function createRequestSaga(type: any, request: any) {
         error: true
       });
     }
-    yield put(finishLoading()(type)); // 로딩 끝
+    yield put(finishLoading(type)); // 로딩 끝
   };
 }

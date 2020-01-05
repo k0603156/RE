@@ -1,11 +1,15 @@
-import { CREATE_USER_SUCCESS } from "./types";
+import { GET_USER_SUCCESS } from "./types";
+
 import { createReducer } from "typesafe-actions";
 
-const InitUser = {};
+const initialState = { id: "", userName: "" };
 
-const AuthReducer = createReducer(InitUser, {
-  [CREATE_USER_SUCCESS]: (state, action) => {
-    return {};
+const UserReducer = createReducer(initialState, {
+  [GET_USER_SUCCESS]: (state, action) => {
+    return {
+      id: action.payload.id,
+      userName: action.payload.userName
+    };
   }
 });
-export default AuthReducer;
+export default UserReducer;

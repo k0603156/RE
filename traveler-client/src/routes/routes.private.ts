@@ -1,4 +1,4 @@
-import { PrivateAdmin, PrivateWrite } from "Pages/private";
+import { PrivateAdmin, PrivateWrite, PrivateUser } from "Pages/private";
 
 export default {
   Admin: {
@@ -8,5 +8,9 @@ export default {
   Post: {
     component: PrivateWrite,
     path: "/write"
+  },
+  User: {
+    component: PrivateUser,
+    path: "/user/:userName"
   }
 };
