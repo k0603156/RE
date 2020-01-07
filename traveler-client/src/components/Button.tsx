@@ -33,6 +33,7 @@ const NormalBtn = styled.button`
   text-align: center;
   padding: 7px 0px;
   font-size: 14px;
+  margin: 5px 0;
   cursor: pointer;
 `;
 

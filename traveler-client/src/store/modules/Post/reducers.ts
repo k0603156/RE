@@ -1,5 +1,10 @@
 import { createReducer } from "typesafe-actions";
-import { ADD_CONTENT, REMOVE_CONTENT } from "./types";
+import {
+  SET_CONTENT,
+  ADD_CONTENT,
+  REMOVE_CONTENT,
+  SET_CONTENT_HEADER
+} from "./types";
 import {
   CREATE_POST_SUCCESS,
   GET_POST_SUCCESS,
@@ -14,7 +19,6 @@ const content = {
   toDate: "",
   image: ""
 };
-
 const initialState = {
   header: {
     title: "",
@@ -24,13 +28,46 @@ const initialState = {
     subTitle: "",
     image: ""
   },
-  contents: [content]
+  contentArr: [{ ...content }]
 };
 
 const PostReducer = createReducer(initialState, {
+  // 콘텐츠작성
+  [SET_CONTENT_HEADER]: (state, action: any) => {
+    return {
+      ...state,
+      header: {
+        ...state.header,
+        [action.payload.entry]: action.payload.data
+      }
+    };
+  },
+  // 콘텐츠작성
+  [SET_CONTENT]: (state, action) => {
+    console.log(action);
+    const newcontentArr = state.contentArr.map((content: any, index: any) => {
+      if (index === action.payload.contentIndex) {
+        content[action.payload.entry] = action.payload.data;
+      }
+      return content;
+    });
+    return {
+      ...state,
+      contentArr: [...newcontentArr]
+    };
+  },
   // 콘텐츠개수증가
   [ADD_CONTENT]: (state, action) => {
-    return { ...state };
+    if (state.contentArr.length < 5) {
+      return {
+        ...state,
+        contentArr: [...state.contentArr, { ...content }]
+      };
+    } else {
+      return {
+        ...state
+      };
+    }
   },
   //콘텐츠개수감소
   [REMOVE_CONTENT]: (state, action) => {

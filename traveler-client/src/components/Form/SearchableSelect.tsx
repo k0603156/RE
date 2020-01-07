@@ -71,16 +71,16 @@ const SearchableSelect = ({
   const [searchValue, setSearchValue] = useState("");
   const [toggle, setToggle] = useState(false);
 
-  // useEffect(() => {
-  //   window.addEventListener("click", (event: any) => {
-  //     !box.current.contains(event.target) && setToggle(false);
-  //   });
-  //   return () => {
-  //     window.removeEventListener("click", (event: any) => {
-  //       !box.current.contains(event.target) && setToggle(false);
-  //     });
-  //   };
-  // }, []);
+  /* useEffect(() => {
+    window.addEventListener("click", (event: any) => {
+      !box.current.contains(event.target) && setToggle(false);
+    });
+    return () => {
+      window.removeEventListener("click", (event: any) => {
+        !box.current.contains(event.target) && setToggle(false);
+      });
+    };
+  }, []);*/
 
   const inputClick = () => {
     setToggle(true);

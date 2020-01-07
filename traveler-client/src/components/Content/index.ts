@@ -1,2 +1,3 @@
-import ContentComponent from "./ContentContainer";
-export default ContentComponent;
+import ContentBody from "./Body";
+import ContentHeader from "./Header";
+export { ContentBody, ContentHeader };

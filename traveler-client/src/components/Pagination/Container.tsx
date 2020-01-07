@@ -1,7 +1,7 @@
 import React from "react";
-import PaginationPrensnter from "./PaginationPrensnter";
+import Presenter from "./Presenter";
 
-const PaginationContainer = (props: {
+const Container = (props: {
   handlePage:
     | ((event: React.MouseEvent<HTMLLIElement, MouseEvent>) => void)
     | undefined;
@@ -10,7 +10,7 @@ const PaginationContainer = (props: {
 }) => {
   const { handlePage, lengthPage, currentPage } = props;
   return (
-    <PaginationPrensnter
+    <Presenter
       handlePage={handlePage}
       lengthPage={lengthPage}
       currentPage={currentPage}
@@ -18,4 +18,4 @@ const PaginationContainer = (props: {
   );
 };
 
-export default PaginationContainer;
+export default Container;

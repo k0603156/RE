@@ -1,2 +1,2 @@
-import PaginationContainer from "./PaginationContainer";
-export default PaginationContainer;
+import Component from "./Container";
+export default Component;

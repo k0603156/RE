@@ -1,3 +1,5 @@
+//콘텐츠 헤더작성
+export const SET_CONTENT_HEADER = "post/SET_CONTENT_HEADER";
 //콘텐츠작성
 export const SET_CONTENT = "post/SET_CONTENT";
 //콘텐츠개수증가
@@ -21,10 +23,22 @@ export const DELETE_POST = "post/DELETE_POST";
 export const DELETE_POST_SUCCESS = "post/DELETE_POST_SUCCESS";
 export const DELETE_POST_FAILURE = "post/DELETE_POST_FAILURE";
 
+//콘텐츠헤더작성
+export interface set_content_header_action {
+  type: typeof SET_CONTENT_HEADER;
+  payload: {
+    entry: "title" | "country" | "fromDate" | "toDate" | "subTitle" | "image";
+    data: string;
+  };
+}
 //콘텐츠작성
 export interface set_content_action {
   type: typeof SET_CONTENT;
-  payload: {};
+  payload: {
+    contentIndex: number;
+    entry: "title" | "date" | "body" | "toDate" | "image";
+    data: string;
+  };
 }
 
 //콘텐츠개수증가
@@ -69,6 +83,7 @@ export interface delete_post_action {
   };
 }
 export type POST_ACTION_TYPES =
+  | set_content_header_action
   | set_content_action
   | add_content_action
   | remove_action

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import HeaderPresenter from "./HeaderPresenter";
+import Presenter from "./Presenter";
 
-const HeaderContainer = (props: { auth: IAuthState }) => {
+const Container = (props: { auth: IAuthState }) => {
   const { auth } = props;
   const [value, setValue] = useState(false);
   const MouseEnter = () => {
@@ -11,7 +11,7 @@ const HeaderContainer = (props: { auth: IAuthState }) => {
     setValue(false);
   };
   return (
-    <HeaderPresenter
+    <Presenter
       onMouseEnter={MouseEnter}
       onMouseLeave={MouseLeave}
       toggle={value}
@@ -20,4 +20,4 @@ const HeaderContainer = (props: { auth: IAuthState }) => {
   );
 };
 
-export default HeaderContainer;
+export default Container;

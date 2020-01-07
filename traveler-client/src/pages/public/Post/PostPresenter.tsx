@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Content from "Components/Content";
+import { ContentBody } from "Components/Content";
 
 const Title = styled.h3``;
 const Country = styled.div``;

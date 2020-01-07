@@ -1,4 +1,5 @@
 import {
+  SET_CONTENT,
   CREATE_POST,
   CREATE_POST_SUCCESS,
   GET_POST,
@@ -10,7 +11,8 @@ import {
   create_post_action,
   get_post_action,
   update_post_action,
-  delete_post_action
+  delete_post_action,
+  set_content_action
 } from "./types";
 import { Post } from "Api";
 import { requestFailure } from "../Error";

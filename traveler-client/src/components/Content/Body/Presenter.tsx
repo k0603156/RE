@@ -8,24 +8,33 @@ const Input = styled.input`
 `;
 export default (props: {
   data: {
-    title: IUseInputReturn<string>;
-    date: IUseInputReturn<string>;
-    body: IUseInputReturn<string>;
-    toDate: IUseInputReturn<string>;
-    image: IUseInputReturn<string>;
+    title: any;
+    date: any;
+    body: any;
+    toDate: any;
+    image: any;
   };
+  nthDate: number;
+  onChange: any;
 }) => {
   const contentEntries = Object.entries(props.data).map(([key, entry]) => {
+    console.dir(props.data);
     return (
-      <label key={key} htmlFor={key}>
+      <label key={key} htmlFor={key + props.nthDate}>
         {key}
-        <Input value={entry.value} onChange={entry.onChange} />
+        <Input
+          id={key + props.nthDate}
+          data-entry={key}
+          value={entry}
+          onChange={props.onChange}
+          autoComplete={"off"}
+        />
       </label>
     );
   });
   return (
     <ContentBox>
-      <h4>n일차</h4>
+      <h4>{props.nthDate + 1}일차</h4>
       {contentEntries}
     </ContentBox>
   );

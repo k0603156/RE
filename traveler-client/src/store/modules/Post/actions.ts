@@ -1,4 +1,5 @@
 import {
+  SET_CONTENT_HEADER,
   SET_CONTENT,
   ADD_CONTENT,
   REMOVE_CONTENT,
@@ -10,17 +11,31 @@ import {
 } from "./types";
 
 //** CREATE ACTION **//
-
+// 헤더작성
+export function set_content_header(
+  entry: "title" | "country" | "fromDate" | "toDate" | "subTitle" | "image",
+  data: string
+): POST_ACTION_TYPES {
+  return {
+    type: SET_CONTENT_HEADER,
+    payload: {
+      entry,
+      data
+    }
+  };
+}
 // 콘텐츠작성
 export function set_content(
-  entry: string,
-  contentIndex: number
+  contentIndex: number,
+  entry: "title" | "date" | "body" | "toDate" | "image",
+  data: string
 ): POST_ACTION_TYPES {
   return {
     type: SET_CONTENT,
     payload: {
+      contentIndex,
       entry,
-      contentIndex
+      data
     }
   };
 }
