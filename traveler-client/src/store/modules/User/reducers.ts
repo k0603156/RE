@@ -1,14 +1,33 @@
-import { GET_USER_SUCCESS } from "./types";
+import {
+  GET_USER_SUCCESS,
+  CREATE_USER_SUCCESS,
+  UPDATE_USER_SUCCESS,
+  DELETE_USER_SUCCESS
+} from "./types";
 
 import { createReducer } from "typesafe-actions";
 
-const initialState = { id: "", userName: "" };
+const initialState = { userName: "" };
 
 const UserReducer = createReducer(initialState, {
   [GET_USER_SUCCESS]: (state, action) => {
     return {
-      id: action.payload.id,
       userName: action.payload.userName
+    };
+  },
+  [CREATE_USER_SUCCESS]: (state, action) => {
+    return {
+      ...state
+    };
+  },
+  [UPDATE_USER_SUCCESS]: (state, action) => {
+    return {
+      ...state
+    };
+  },
+  [DELETE_USER_SUCCESS]: (state, action) => {
+    return {
+      ...state
     };
   }
 });

@@ -4,7 +4,7 @@ type StoreType = Store<RootStateType>;
 
 interface IAuthState {
   isLogged: boolean;
-  user: {
+  me: {
     userName: string;
     email: string;
   };
@@ -22,5 +22,6 @@ type ActionCreateUserType = (
   userName: string,
   email: string,
   password: string,
-  confirmPassword: string
+  confirmPassword: string,
+  callback: () => void
 ) => USER_ACTION_TYPES;

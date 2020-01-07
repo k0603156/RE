@@ -4,10 +4,10 @@ import AuthState from "./AuthState";
 import Input from "Components/Form/Input";
 import { NormalButton, SimpleButton } from "Components/Button";
 interface IProps {
-  email: IUseInputReturn;
-  userName: IUseInputReturn;
-  password: IUseInputReturn;
-  confirmPassword: IUseInputReturn;
+  email: IUseInputReturn<string>;
+  userName: IUseInputReturn<string>;
+  password: IUseInputReturn<string>;
+  confirmPassword: IUseInputReturn<string>;
   onSubmit: ((event: React.FormEvent<HTMLFormElement>) => void) | undefined;
   action: AuthState;
   setAction: React.Dispatch<React.SetStateAction<AuthState>>;

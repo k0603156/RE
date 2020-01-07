@@ -13,11 +13,13 @@ Router.get("/:userName", async (req, res, next) => {
   try {
     const exUser = await UserModel.findOne({
       where: { userName: req.params.userName },
-      attributes: ["id", "userName"]
+      attributes: ["userName"]
     });
     console.log(exUser);
     res.status(200).json(exUser);
   } catch (error) {
+    error.message = "찾을 수 없는 사용자입니다.";
+    error.status = 400;
     next(error);
   }
 });
@@ -41,13 +43,13 @@ Router.post("/", async (req, res, next) => {
     if (reqPassword !== reqConfirmPassword) {
       const error = new Error("비밀번호 체크값이 같지 않음");
       error.status = 400;
-      next(error);
+      throw error;
     }
     const exUser = await UserModel.findOne({ where: { email: reqEmail } });
     if (exUser) {
       const error = new Error("이미 가입된 이메일");
       error.status = 400;
-      next(error);
+      throw error;
     }
     const salt = await generateRandomString(ENCRYPT_BUFF, ENCODE_TYPE);
     const cryptoPass = await encryptString(reqPassword, salt);

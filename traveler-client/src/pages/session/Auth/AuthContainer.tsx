@@ -1,21 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import AuthPresenter from "./AuthPresenter";
 import useInput from "Hooks/useInput";
 import AuthState from "./AuthState";
 import { connect } from "react-redux";
 import { login } from "Store/modules/Auth/actions";
-import { User } from "Api";
+import { create_user } from "Store/modules/User/actions";
 
 const AuthContainer = (props: {
   auth: IAuthState;
   loadingAuth: any;
+  loadingCreateUser: any;
   login: ActionLoginType;
+  create_user: ActionCreateUserType;
 }) => {
   const [action, setAction] = useState<AuthState>(AuthState.STATE_LOGIN);
-  const userName = useInput("");
-  const email = useInput("");
-  const password = useInput("");
-  const confirmPassword = useInput("");
+  const userName = useInput<string>("");
+  const email = useInput<string>("");
+  const password = useInput<string>("");
+  const confirmPassword = useInput<string>("");
 
   const onSubmit = async (e: any) => {
     e.preventDefault();
@@ -29,20 +31,19 @@ const AuthContainer = (props: {
           console.log("비밀번호 확인란이 같지 않습니다.");
           break;
         }
-        User.create_user({
-          userName: userName.value,
-          email: email.value,
-          password: password.value,
-          confirmPassword: confirmPassword.value
-        }).then(_ => {
-          if (_.status === 201) {
+        props.create_user(
+          userName.value,
+          email.value,
+          password.value,
+          confirmPassword.value,
+          () => {
             userName.setValue("");
             email.setValue("");
             password.setValue("");
             confirmPassword.setValue("");
             setAction(AuthState.STATE_LOGIN);
           }
-        });
+        );
         console.log("Signup");
         break;
       case AuthState.STATE_CONFIRM:
@@ -67,7 +68,8 @@ const AuthContainer = (props: {
 export default connect(
   ({ auth, loading }: RootStateType) => ({
     auth,
-    loadingAuth: loading["auth/AUTHENTICATE"]
+    loadingAuth: loading["auth/AUTHENTICATE"],
+    loadingCreateUser: loading["user/CREATE_USERE"]
   }),
-  { login }
+  { login, create_user }
 )(AuthContainer);

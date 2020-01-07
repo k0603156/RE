@@ -42,7 +42,7 @@ export default (props: {
       <UserBox onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
         {auth.isLogged ? (
           <>
-            {auth.user.userName}
+            {auth.me.userName}
             <UMenu toggle={toggle} />
           </>
         ) : (

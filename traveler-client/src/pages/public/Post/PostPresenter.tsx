@@ -21,7 +21,6 @@ export default () => {
         aperiam delicata est.
       </SubTitle>
       <MainImage>mainImage</MainImage>
-      <Content /> <Content /> <Content /> <Content />
     </div>
   );
 };

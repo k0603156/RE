@@ -1,24 +1,21 @@
-import { GET_USER, GET_USER_SUCCESS, get_user_action } from "./types";
+import { GET_USER, CREATE_USER, UPDATE_USER, DELETE_USER } from "./types";
 import { User } from "Api";
-import { requestFailure } from "../Error";
-import { startLoading, finishLoading } from "../Loading";
-import { takeEvery, put, call } from "redux-saga/effects";
+import { takeLatest } from "redux-saga/effects";
+import createRequestSaga from "Store/lib/createRequestSaga";
 
-export function* getUserSaga(data: get_user_action): Generator {
-  const payload = {
-    userName: data.payload.userName
-  };
-  yield put(startLoading(data.type)); // 로딩 시작
-  try {
-    const response: any = yield call(User.get_user, payload);
-    yield put({ type: GET_USER_SUCCESS, payload: response.data });
-  } catch (error) {
-    yield put(requestFailure(error));
-  }
-  yield put(finishLoading(data.type)); // 로딩 끝
-}
+//사용자 정보 요청
+const getUserSaga = createRequestSaga(GET_USER, User.get_user);
+//사용자 생성 요청
+const createUserSaga = createRequestSaga(CREATE_USER, User.create_user);
+// 사용자 정보수정 요청
+const updateUserSaga = createRequestSaga(UPDATE_USER, User.update_user);
+// 사용자 탈퇴 요청
+const deleteUserSaga = createRequestSaga(DELETE_USER, User.delete_user);
 
 function* userSaga(): Generator {
-  yield takeEvery(GET_USER, getUserSaga);
+  yield takeLatest(GET_USER, getUserSaga);
+  yield takeLatest(CREATE_USER, createUserSaga);
+  yield takeLatest(UPDATE_USER, updateUserSaga);
+  yield takeLatest(DELETE_USER, deleteUserSaga);
 }
 export default userSaga;

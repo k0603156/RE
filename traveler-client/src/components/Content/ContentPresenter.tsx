@@ -3,17 +3,30 @@ import styled from "styled-components";
 const ContentBox = styled.div`
   margin: 20px 0;
 `;
-const Title = styled.div``;
-const Date = styled.div``;
-const Body = styled.div``;
-const Image = styled.div``;
-export default () => {
+const Input = styled.input`
+  width: 100%;
+`;
+export default (props: {
+  data: {
+    title: IUseInputReturn<string>;
+    date: IUseInputReturn<string>;
+    body: IUseInputReturn<string>;
+    toDate: IUseInputReturn<string>;
+    image: IUseInputReturn<string>;
+  };
+}) => {
+  const contentEntries = Object.entries(props.data).map(([key, entry]) => {
+    return (
+      <label key={key} htmlFor={key}>
+        {key}
+        <Input value={entry.value} onChange={entry.onChange} />
+      </label>
+    );
+  });
   return (
     <ContentBox>
-      <Title>1일차</Title>
-      <Date>Dec 4, 2019 9:14 AM</Date>
-      <Body> 내용 </Body>
-      <Image>image</Image>
+      <h4>n일차</h4>
+      {contentEntries}
     </ContentBox>
   );
 };

@@ -1,9 +1,12 @@
 import Axios from "axios";
+// Api url
 const API_ROOT = "http://localhost:8000/api/v1/user";
 
 const req = (
+  // 사용가능 HTTP 메서드
   method: "get" | "post" | "put" | "delete",
   url: string,
+  // payload 타입
   data?: {
     userName?: string;
     email?: string;

@@ -1,5 +1,5 @@
-interface IUseInputReturn {
-  value: any;
+interface IUseInputReturn<T> {
+  value: T;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  setValue: React.Dispatch<any>;
+  setValue: React.Dispatch<T>;
 }

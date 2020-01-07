@@ -16,17 +16,20 @@ const UserMenu = (props: {
   toggle: boolean;
   auth: IAuthState;
   logout: ActionLogoutType;
-}) => (
-  <Box {...props}>
-    <Item>
-      <Link to={`/user/${props.auth.user.userName}`}>MyPage</Link>
-    </Item>
-    <Item>
-      <Link to="/write">Posting</Link>
-    </Item>
-    <Item onClick={() => props.logout(props.auth.user.email)}>Logout</Item>
-  </Box>
-);
+}) => {
+  const { userName, email } = props.auth.me;
+  return (
+    <Box {...props}>
+      <Item>
+        <Link to={`/user/${userName}`}>MyPage</Link>
+      </Item>
+      <Item>
+        <Link to="/write">Posting</Link>
+      </Item>
+      <Item onClick={() => props.logout(email)}>Logout</Item>
+    </Box>
+  );
+};
 export default connect(
   ({ auth }: RootStateType) => ({
     auth

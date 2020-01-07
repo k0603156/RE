@@ -1,9 +1,7 @@
 import React from "react";
-import jest from "jest";
 import { mount, shallow, render } from "enzyme";
 import { SimpleButton } from "../components/Button";
 
-const clickFn = jest.fn();
 
 describe("<Button />", () => {
   let button: any = null;
