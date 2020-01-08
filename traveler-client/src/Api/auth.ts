@@ -13,6 +13,7 @@ const req = (
   }
 ) => {
   const token = sessionStorage.getItem("token");
+
   return Axios({
     method,
     url: API_ROOT + url,

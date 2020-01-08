@@ -1,5 +1,5 @@
 import {
-  lOGIN_AUTH,
+  LOGIN_AUTH,
   CHECK_OTP_AUTH,
   CHANGE_TOKEN_AUTH,
   LOGOUT_AUTH,
@@ -10,7 +10,7 @@ import {
 // 로그인 요청
 export function login(email: string, password: string): AUTH_ACTION_TYPES {
   return {
-    type: lOGIN_AUTH,
+    type: LOGIN_AUTH,
     payload: {
       email,
       password

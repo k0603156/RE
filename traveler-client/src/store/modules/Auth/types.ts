@@ -1,7 +1,7 @@
 // 로그인 요청
-export const lOGIN_AUTH = "auth/AUTHENTICATE";
-export const lOGIN_AUTH_SUCCESS = "auth/AUTHENTICATE_SUCCESS";
-export const lOGIN_AUTH_FAILURE = "auth/AUTHENTICATE_FAILURE";
+export const LOGIN_AUTH = "auth/AUTHENTICATE";
+export const LOGIN_AUTH_SUCCESS = "auth/AUTHENTICATE_SUCCESS";
+export const LOGIN_AUTH_FAILURE = "auth/AUTHENTICATE_FAILURE";
 // OTP 확인 요청
 export const CHECK_OTP_AUTH = "auth/AUTHORIZE";
 export const CHECK_OTP_AUTH_SUCCESS = "auth/AUTHORIZE_SUCCESS";
@@ -17,7 +17,7 @@ export const LOGOUT_AUTH_FAILURE = "auth/DEAUTHORIZE_FAILURE";
 
 // 로그인 요청
 export interface login_action {
-  type: typeof lOGIN_AUTH;
+  type: typeof LOGIN_AUTH;
   payload: { email: string; password: string };
 }
 // OTP 확인 요청
@@ -30,7 +30,7 @@ interface change_token_action {
   type: typeof CHANGE_TOKEN_AUTH;
 }
 // 로그아웃 요청
-interface logout_action {
+export interface logout_action {
   type: typeof LOGOUT_AUTH;
   payload: { email: string };
 }

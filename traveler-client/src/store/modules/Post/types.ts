@@ -4,6 +4,8 @@ export const SET_CONTENT_HEADER = "post/SET_CONTENT_HEADER";
 export const SET_CONTENT = "post/SET_CONTENT";
 //콘텐츠개수증가
 export const ADD_CONTENT = "post/ADD_CONTENT";
+export const ADD_CONTENT_SUCCESS = "post/ADD_CONTENT_SUCCESS";
+export const ADD_CONTENT_FAILURE = "post/ADD_CONTENT_FAILURE";
 //콘텐츠개수감소
 export const REMOVE_CONTENT = "post/REMOVE_CONTENT";
 //포스트 생성요청
@@ -28,7 +30,7 @@ export interface set_content_header_action {
   type: typeof SET_CONTENT_HEADER;
   payload: {
     entry: "title" | "country" | "fromDate" | "toDate" | "subTitle" | "image";
-    data: string;
+    data: string | number;
   };
 }
 //콘텐츠작성
@@ -36,7 +38,7 @@ export interface set_content_action {
   type: typeof SET_CONTENT;
   payload: {
     contentIndex: number;
-    entry: "title" | "date" | "body" | "toDate" | "image";
+    entry: "title" | "date" | "body" | "image";
     data: string;
   };
 }

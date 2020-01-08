@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import PostBox from "Components/PostBox";
-import Pagination from "Components/Pagination";
+import { Pagination, PostBox } from "Components/organisms";
 
 interface IPost {
   title: string;

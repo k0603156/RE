@@ -15,8 +15,8 @@ const error = createReducer(initialState, {
     const response = action.payload.response;
     console.log(action);
     return {
-      status: response.status,
-      statusText: response.statusText,
+      status: "",
+      statusText: "",
       message: response.data.error
     };
   },

@@ -1,9 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { FiList } from "Components/Icon/fi";
-import PostBox from "Components/PostBox";
-import Jumbo from "Components/Jumbo";
+import { FiList } from "Components/molecules/Icon/fi";
+import { PostBox, Jumbo } from "Components/organisms";
 
 const Container = styled.div`
   display: flex;

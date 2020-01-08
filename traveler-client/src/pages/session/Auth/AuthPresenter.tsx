@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import AuthState from "./AuthState";
-import Input from "Components/Form/Input";
-import { NormalButton, SimpleButton } from "Components/Button";
+import { Input } from "Components/atoms";
+import { Button } from "Components/atoms";
 interface IProps {
   email: IUseInputReturn<string>;
   userName: IUseInputReturn<string>;
@@ -71,15 +71,18 @@ function AuthPresenter({
                 type="password"
                 pattern={"[A-Za-z0-9]*"}
               />
-              <NormalButton text={"Sign In"} type={"submit"}></NormalButton>
+              <Button type={"submit"} style={"wide"}>
+                Sign In
+              </Button>
             </form>
             Don't have an account?
-            <SimpleButton
-              text={"Sign Up"}
+            <Button
               onClick={() => {
                 setAction(AuthState.STATE_SIGNUP);
               }}
-            ></SimpleButton>
+            >
+              Sign Up
+            </Button>
           </>
         )}
         {action === AuthState.STATE_SIGNUP && (
@@ -120,15 +123,18 @@ function AuthPresenter({
                 maxLength={20}
                 title="특수문자를 제외한 8~20글자"
               />
-              <NormalButton text={"Sign up"} type={"submit"}></NormalButton>
+              <Button type={"submit"} style={"wide"}>
+                Sign up
+              </Button>
             </form>
             Did you have an account?
-            <SimpleButton
-              text={"Sign in"}
+            <Button
               onClick={() => {
                 setAction(AuthState.STATE_LOGIN);
               }}
-            ></SimpleButton>
+            >
+              Sign in
+            </Button>
           </>
         )}
       </Form>

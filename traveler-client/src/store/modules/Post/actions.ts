@@ -14,7 +14,7 @@ import {
 // 헤더작성
 export function set_content_header(
   entry: "title" | "country" | "fromDate" | "toDate" | "subTitle" | "image",
-  data: string
+  data: string | number
 ): POST_ACTION_TYPES {
   return {
     type: SET_CONTENT_HEADER,
@@ -27,7 +27,7 @@ export function set_content_header(
 // 콘텐츠작성
 export function set_content(
   contentIndex: number,
-  entry: "title" | "date" | "body" | "toDate" | "image",
+  entry: "title" | "date" | "body" | "image",
   data: string
 ): POST_ACTION_TYPES {
   return {

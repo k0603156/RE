@@ -4,6 +4,7 @@ type StoreType = Store<RootStateType>;
 
 interface IAuthState {
   isLogged: boolean;
+  isAdmin: boolean;
   me: {
     userName: string;
     email: string;
