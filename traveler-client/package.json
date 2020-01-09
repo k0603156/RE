@@ -3,7 +3,6 @@
   "main": "src/index.tsx",
   "version": "0.1.0",
   "description": "Traveler-service-client",
-  "proxy": "http://localhost:8000",
   "author": {
     "name": "YongkukKim",
     "email": "k0603156@gmail.com",

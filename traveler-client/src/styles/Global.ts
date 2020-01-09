@@ -8,7 +8,7 @@ export default createGlobalStyle`
         box-sizing:border-box;
     }
     body {  
-        min-width: ${props => props.theme.minWidth};
+        min-width: ${(props: any) => props.theme.minWidth};
         background-color:${props => props.theme.bgColor};}
         color:${props => props.theme.blackColor};
         font-size:15px;

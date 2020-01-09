@@ -1,19 +1,19 @@
 import React from "react";
 import _ from "lodash";
-import styled, { ThemeProvider } from "styled-components";
-import GlobalStyles from "Styles/Global";
-import Theme from "Styles/Theme";
+import { connect } from "react-redux";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import styled, { ThemeProvider } from "styled-components";
+import Theme from "Styles/Theme";
+import GlobalStyles from "Styles/Global";
+import PrivateLayout from "./privateLayout";
+import PublicLayout from "./publicLayout";
+import NotFound from "./publicLayout/NotFound";
 import {
   PrivateRoutes,
   PublicRoutes,
   SessionRoutes,
   AdminRoutes
 } from "Routes";
-import NotFound from "./publicLayout/NotFound";
-import PrivateLayout from "./privateLayout";
-import PublicLayout from "./publicLayout";
-import { connect } from "react-redux";
 import { Header } from "Components/organisms";
 
 const Wrapper = styled.div`

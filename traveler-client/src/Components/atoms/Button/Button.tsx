@@ -1,18 +1,16 @@
 import React from "react";
 import styled from "styled-components";
-interface ISimpleProps {
+interface ISimpleProps extends React.HTMLAttributes<HTMLButtonElement> {
   className?: any;
   children: any;
-  onClick?:
-    | ((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void)
-    | undefined;
-  type?: "button" | "submit" | "reset" | undefined;
-  style?: "default" | "wide";
+  type?: "button" | "submit" | "reset";
+  custom?: "default" | "wide";
 }
 const SimpleBtn = styled.button`
   outline: 0;
   border: 0;
   color: ${props => props.theme.blackColor};
+  background-color: #fff;
   padding: 0px 7px;
   font-size: 14px;
   font-weight: 600;
@@ -35,21 +33,20 @@ const WideBtn = styled(SimpleBtn)`
 const Button = ({
   className,
   children,
-  onClick,
-  type,
-  style
+  type = "button",
+  custom,
+  ...others
 }: ISimpleProps) => {
-  switch (style) {
+  switch (custom) {
     case "wide":
       return (
-        <WideBtn className={className} onClick={onClick} type={type}>
+        <WideBtn className={className} type={type} {...others}>
           {children}
         </WideBtn>
       );
-      break;
     default:
       return (
-        <SimpleBtn className={className} onClick={onClick} type={type}>
+        <SimpleBtn className={className} type={type} {...others}>
           {children}
         </SimpleBtn>
       );

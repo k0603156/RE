@@ -1,6 +1,6 @@
 const supertest = require("supertest");
 const http = require("http");
-const { app } = require("../App");
+const app = require("../App");
 
 describe("Demo test", () => {
   let server;

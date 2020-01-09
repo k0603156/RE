@@ -44,7 +44,7 @@ Router.post("/authenticate", async (req, res, next) => {
 
 Router.post("/authorize", isAuthenticated, (req, res, next) => {
   try {
-    res.status(200).send("OTP인증");
+    res.status(200).json({ success: "ok" });
   } catch (error) {
     next(error);
   }
@@ -52,7 +52,7 @@ Router.post("/authorize", isAuthenticated, (req, res, next) => {
 
 Router.post("/reauthorize", (req, res, next) => {
   try {
-    res.status(200).send("JWT토큰갱신");
+    res.status(200).json({ success: "ok" });
   } catch (error) {
     next(error);
   }
@@ -61,7 +61,7 @@ Router.post("/reauthorize", (req, res, next) => {
 Router.post("/deauthorize", (req, res, next) => {
   try {
     // const { email: resEmail } = checkProps(req.body, "email");
-    res.status(200).send("로그아웃");
+    res.status(200).json({ success: "ok" });
   } catch (error) {
     next(error);
   }

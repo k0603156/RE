@@ -8,8 +8,9 @@ process.on("unhandledRejection", err => {
 });
 
 const jest = require("jest");
-const { sequelize } = require("../src/Models/tables");
-const { NormLog, ErrorLog } = require("../src/Utils/log");
+const { appSrc } = require("../config/paths");
+const { sequelize } = require(appSrc + "/Models/tables");
+const { NormLog, ErrorLog } = require(appSrc + "/Utils/log");
 
 let argv = process.argv.slice(2);
 

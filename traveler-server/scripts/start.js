@@ -2,16 +2,17 @@
 //TODO:작성 중
 process.env.BABEL_ENV = "production";
 process.env.NODE_ENV = "production";
-process.env.PORT = "3000";
+process.env.PORT = "80";
 process.env.PUBLIC_URL = "";
 
 process.on("unhandledRejection", err => {
   throw err;
 });
+const { appSrc } = require("../config/paths");
 const http = require("http");
-const { app } = require("../src/App");
-const { sequelize } = require("../src/Models/tables");
-const { NormLog, ErrorLog } = require("../src/Utils/log");
+const { sequelize } = require(appSrc + "/Models/tables");
+const { NormLog, ErrorLog } = require(appSrc + "/Utils/log");
+const app = require(appSrc + "/App");
 
 NormLog("Sequelize PRODUCTION DB INIT");
 sequelize

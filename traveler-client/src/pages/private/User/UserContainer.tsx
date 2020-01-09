@@ -8,7 +8,7 @@ const UserContainer = withRouter((props: any) => {
   const userName = props.match.params.userName;
   useEffect(() => {
     props.get_user(userName);
-  }, [userName]);
+  }, []);
   return <UserPresenter user={props.user} />;
 });
 export default connect(

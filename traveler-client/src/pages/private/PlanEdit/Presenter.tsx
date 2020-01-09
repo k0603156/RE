@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+// import styled from "styled-components";
 import { ContentHeader, ContentBody } from "Components/organisms";
 import { Button } from "Components/atoms";
 
@@ -38,10 +38,10 @@ export default (props: {
             }
           />
         ))}
-        <Button type={"submit"} style={"wide"}>
+        <Button type={"submit"} custom={"wide"}>
           포스팅
         </Button>
-        <Button type={"button"} onClick={() => add_content()} style={"wide"}>
+        <Button type={"button"} onClick={() => add_content()} custom={"wide"}>
           일정 추가
         </Button>
       </form>

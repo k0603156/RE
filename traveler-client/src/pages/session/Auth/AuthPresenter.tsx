@@ -71,15 +71,14 @@ function AuthPresenter({
                 type="password"
                 pattern={"[A-Za-z0-9]*"}
               />
-              <Button type={"submit"} style={"wide"}>
+              <Button type={"submit"} custom={"wide"}>
                 Sign In
               </Button>
             </form>
             Don't have an account?
             <Button
-              onClick={() => {
-                setAction(AuthState.STATE_SIGNUP);
-              }}
+              type="button"
+              onClick={e => setAction(AuthState.STATE_SIGNUP)}
             >
               Sign Up
             </Button>
@@ -123,7 +122,7 @@ function AuthPresenter({
                 maxLength={20}
                 title="특수문자를 제외한 8~20글자"
               />
-              <Button type={"submit"} style={"wide"}>
+              <Button type={"submit"} custom={"wide"}>
                 Sign up
               </Button>
             </form>

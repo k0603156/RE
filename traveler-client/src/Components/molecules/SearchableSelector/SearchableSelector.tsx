@@ -71,14 +71,13 @@ const SearchableSelect = ({
   const [searchValue, setSearchValue] = useState("");
   const [toggle, setToggle] = useState<boolean>(false);
 
+  const outSideClick = (event: any) => {
+    box.current && !box.current.contains(event.target) && setToggle(false);
+  };
   useEffect(() => {
-    window.addEventListener("click", (event: any) => {
-      box.current && !box.current.contains(event.target) && setToggle(false);
-    });
+    window.addEventListener("click", outSideClick);
     return () => {
-      window.removeEventListener("click", (event: any) => {
-        box.current && !box.current.contains(event.target) && setToggle(false);
-      });
+      window.removeEventListener("click", outSideClick);
     };
   }, []);
 

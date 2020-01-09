@@ -1,20 +1,16 @@
 import React from "react";
 import styled from "styled-components";
 
-interface IProps {
+interface IProps extends React.HTMLAttributes<HTMLInputElement> {
   className?: any;
-  id?: string;
-  placeholder?: string;
   required?: boolean;
   entry?: string;
   value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   type?: "password" | "text" | "url" | "email" | "date";
   pattern?: string;
   autoFocus?: boolean;
   minLength?: number;
   maxLength?: number;
-  title?: string;
 }
 const InputBox = styled.input`
   border: 1px solid black;
@@ -45,8 +41,7 @@ const Input = ({
   pattern,
   autoFocus = false,
   minLength,
-  maxLength,
-  title
+  maxLength
 }: IProps) => (
   <InputBox
     className={className}
@@ -61,7 +56,6 @@ const Input = ({
     autoFocus={autoFocus}
     minLength={minLength}
     maxLength={maxLength}
-    title={title}
     autoComplete={"off"}
   />
 );

@@ -2,7 +2,7 @@
 node_modules
 
 # Config
-src/Models/config
+config/.env
 
 # Err log
 yarn-error.log
