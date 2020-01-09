@@ -1,5 +1,5 @@
 import rootReducer, { rootSaga } from "./modules";
-import { createStore, applyMiddleware, compose } from "redux";
+import { createStore, applyMiddleware, compose, Middleware } from "redux";
 import { createLogger } from "redux-logger";
 import { composeWithDevTools } from "redux-devtools-extension";
 import createSagaMiddleware from "redux-saga";
@@ -7,15 +7,14 @@ import createSagaMiddleware from "redux-saga";
 export default function configStore() {
   const LOGGER = createLogger();
   const sagaMiddleware = createSagaMiddleware();
-  const prodMiddleWares = [sagaMiddleware];
-  const devMiddleWares = [LOGGER, sagaMiddleware];
-
+  const MiddleWares: Middleware[] = [sagaMiddleware];
+  process.env.NODE_ENV !== "production" && MiddleWares.push(LOGGER);
   const store =
     process.env.NODE_ENV === "production"
-      ? createStore(rootReducer, compose(applyMiddleware(...prodMiddleWares)))
+      ? createStore(rootReducer, compose(applyMiddleware(...MiddleWares)))
       : createStore(
           rootReducer,
-          composeWithDevTools(applyMiddleware(...devMiddleWares))
+          composeWithDevTools(applyMiddleware(...MiddleWares))
         );
   sagaMiddleware.run(rootSaga);
   return store;
