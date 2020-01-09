@@ -11,7 +11,8 @@ WORKDIR /home/service/
 RUN apt-get update 
 
 #Yarn 설치
-RUN npm install --global yarn 
+# RUN npm install --global yarn 
+# node:12에 yarn이 설치 되어있는 듯 하다
 
 #패키지관련파일 복사
 COPY package.json /home/service/package.json
@@ -24,7 +25,9 @@ COPY ./docker-entrypoint.sh     /home/service/docker-entrypoint.sh
 RUN yarn
 
 #파일 이동
-COPY ./ /home/traveler/
+COPY ./config/ /home/service/config/
+COPY ./scripts/ /home/service/scripts/
+COPY ./src/ /home/service/src/
 
 # EXPOSE 80
 ENTRYPOINT ["/bin/bash","./docker-entrypoint.sh" ]

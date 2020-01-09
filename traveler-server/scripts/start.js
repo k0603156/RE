@@ -12,7 +12,7 @@ const { appSrc } = require("../config/paths");
 const http = require("http");
 const { sequelize } = require(appSrc + "/Models/tables");
 const { NormLog, ErrorLog } = require(appSrc + "/Utils/log");
-const app = require(appSrc + "/App");
+const app = require(appSrc + "/app");
 
 NormLog("Sequelize PRODUCTION DB INIT");
 sequelize
@@ -21,7 +21,9 @@ sequelize
   .then(_ => sequelize.close())
   .catch(err => {
     ErrorLog(err);
-    ErrorLog("✗ TEST DB connection error. Please make sure DB is running.");
+    ErrorLog(
+      "✗ PRODUCTION DB connection error. Please make sure DB is running."
+    );
     process.exit();
   })
   .finally(_ => {

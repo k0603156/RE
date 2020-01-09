@@ -9,12 +9,12 @@ const { authenticateJwt } = require("./MiddleWares/passport");
 const PORT = process.env.PORT || 8000;
 const STATIC_PATH = path.resolve(__dirname, "./build/");
 const STATIC_ENTRY_POINT = path.resolve(__dirname, "./build/index.html");
-
+const corsMW = process.env.NODE_ENV !== "production" && cors();
 const middleWares = [
   logger("dev"),
   express.json(),
   express.urlencoded({ extended: false }),
-  process.env.NODE_ENV !== "production" && cors(),
+  corsMW,
   authenticateJwt
 ];
 

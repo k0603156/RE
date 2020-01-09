@@ -1,6 +1,10 @@
 import Axios from "axios";
 // Api url
-const API_ROOT = "http://localhost:8000/api/v1/user";
+const API_ROOT =
+  process.env.NODE_ENV === "production"
+    ? "http://35.213.18.30/api/v1/"
+    : "http://localhost:8000/api/v1/";
+const ROUTE = "user";
 
 const req = (
   // 사용가능 HTTP 메서드
@@ -17,7 +21,7 @@ const req = (
   const token = sessionStorage.getItem("token");
   return Axios({
     method,
-    url: API_ROOT + url,
+    url: API_ROOT + ROUTE + url,
     data,
     headers: {
       common: {
