@@ -4,7 +4,6 @@ const API_ROOT =
   process.env.NODE_ENV === "production"
     ? "http://35.213.18.30/api/v1/"
     : "http://localhost:8000/api/v1/";
-console.log(process.env.API_ROOT);
 const ROUTE = "auth";
 const req = (
   // 사용가능 HTTP 메서드
