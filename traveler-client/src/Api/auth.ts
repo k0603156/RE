@@ -1,9 +1,9 @@
 import Axios from "axios";
 // Api url
 const API_ROOT =
-  process.env.NODE_ENV === "production"
-    ? "http://35.213.18.30/api/v1/"
-    : "http://localhost:8000/api/v1/";
+  process.env.NODE_ENV !== "production"
+    ? "http://localhost:8000/api/v1/"
+    : "http://35.213.18.30/api/v1/";
 const ROUTE = "auth";
 const req = (
   // 사용가능 HTTP 메서드
