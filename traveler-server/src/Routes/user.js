@@ -39,7 +39,7 @@ Router.post("/", async (req, res, next) => {
       "password",
       "confirmPassword"
     );
-    console.log(req.body);
+    console.log(reqUserName, reqEmail, reqPassword, reqConfirmPassword);
     if (reqPassword !== reqConfirmPassword) {
       console.log("비밀번호 체크값이 같지 않음");
       const error = new Error("비밀번호 체크값이 같지 않음");
