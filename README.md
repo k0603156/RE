@@ -1,11 +1,55 @@
-1.  GCP
+###### Frontend
 
-    - [O] GCE인스턴스생성
+```
+React
+Webpack + Babel
+TypeScript
 
-      ```
-      ubuntu 18.04
-      check http
-      ```
+STATE
+>redux + redux-saga
+
+STYLE
+>styled-components
+
+Test
+>jest
+>enzyme
+```
+
+###### Backend
+
+```
+Express
+
+DATABASE
+>Sequelize + MySql
+
+AUTH
+>passport + JWT
+
+Test
+>jest
+>supertest
+```
+
+###### Platform + Devops + others
+
+```
+Google Cloud Plaform
+>ComputedEngine
+>CloudeSQL
+
+Docker
+```
+
+###### Version Control
+
+```
+git github
+https://github.com/k0603156/Traveler
+```
+
+1.  GCP ComputedEngine 인스턴스 생성 후
 
     - [O] GIT 설치
 
@@ -30,6 +74,8 @@
 
             $ sudo apt-get update
 
+            https로 저장소에 접근하기위한 패키지 설치
+
             $ sudo apt-get install \
             apt-transport-https \
             ca-certificates \
@@ -37,7 +83,13 @@
             gnupg-agent \
             software-properties-common
 
+            Docker 공식 GPG 키
+
             $ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+            $ sudo apt-key fingerprint 0EBFCD88
+
+            레포지토리 추가
 
             $ sudo add-apt-repository \
             "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
@@ -51,21 +103,12 @@
             $ docker
             ```
 
-2.  client
+            https://cloud.google.com/compute/docs/containers/?hl=ko
 
-    - [O] ReactProject (typescript) 생성
+            .env같은파일은 안보일 수있으니 ls -a
+            touch .env
+            vi .env
 
-    ```
-        npx create-react-app traveler-client --template typescript
-    ```
-
-3.  server
-
-    - [O] ExpressProject 생성
-
-    ```
-        express traveler-server
-    ```
-
-4.  git
-    - [O] git init
+            .sh 스크립트로 도커 컨테이너 생성시
+            스크립트파일 실행권한 추가
+            chmod +x filename
