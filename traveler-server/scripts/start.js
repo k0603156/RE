@@ -16,7 +16,7 @@ const app = require(appSrc + "/app");
 
 NormLog("Sequelize PRODUCTION DB INIT");
 sequelize
-  .sync({ force: true, logging: true }) //force:false
+  .sync({ force: true, logging: false }) //force:false
   .then(_ => NormLog("✓ PRODUCTION DB connection success."))
   .catch(err => {
     ErrorLog(err);

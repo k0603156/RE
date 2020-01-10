@@ -1,5 +1,4 @@
-const dotenv = require("dotenv");
-const Err = require("./err");
+const { ValidationError } = require("./Error");
 const jwt = require("jsonwebtoken");
 const { promisify } = require("util");
 const { randomBytes, scrypt } = require("crypto");
@@ -14,7 +13,7 @@ module.exports.checkProps = (data, ...checkList) => {
       data[key] === undefined ||
       data[key] === ""
     ) {
-      throw new Err(400, `${key} 요청 된 값을 확인해주세요`);
+      throw new ValidationError(`요청 된 값을 확인해주세요`);
     } else {
       obj[key] = data[key];
       return obj;

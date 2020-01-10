@@ -1,4 +1,5 @@
 const Router = require("express").Router();
+const { NotFoundError } = require("../Utils/Error");
 const { user: UserModel } = require("../Models/tables");
 const { generateRandomString, encryptString, checkProps } = require("../Utils");
 const ENCRYPT_BUFF = 64;
@@ -16,10 +17,11 @@ Router.get("/:userName", async (req, res, next) => {
       attributes: ["userName"]
     });
     console.log(exUser);
+    if (!exUser) {
+      throw new NotFoundError("해당 사용자를 찾을 수 없습니다.");
+    }
     res.status(200).json(exUser);
   } catch (error) {
-    error.message = "찾을 수 없는 사용자입니다.";
-    error.status = 400;
     next(error);
   }
 });

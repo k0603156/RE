@@ -1,4 +1,5 @@
 const Router = require("express").Router();
+const { AuthenticationError } = require("../Utils/Error");
 const { user: UserModel } = require("../Models/tables");
 const {
   checkProps,
@@ -22,20 +23,14 @@ Router.post("/authenticate", async (req, res, next) => {
     });
     if (resUser && resUser.dataValues) {
       const { email, userName, salt, cryptoPass } = resUser.dataValues;
-
       const loginPassword = await encryptString(reqPassword, salt);
-
       if (loginPassword === cryptoPass) {
         res.status(200).json({ email, userName, token: generateToken(email) });
       } else {
-        const error = new Error("로그인실패");
-        error.status = 400;
-        throw error;
+        throw new AuthenticationError("로그인실패");
       }
     } else {
-      const error = new Error("로그인실패");
-      error.status = 400;
-      throw error;
+      throw new AuthenticationError("로그인실패");
     }
   } catch (error) {
     next(error);

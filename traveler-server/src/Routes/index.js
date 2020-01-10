@@ -1,7 +1,7 @@
+const ErrorHandler = require("../Utils/ErrorHandler");
 const authRouter = require("./auth");
 const userRouter = require("./user");
 const postRouter = require("./post");
-
 const API_ROOT = "/api/v1";
 
 module.exports = app => {
@@ -14,18 +14,16 @@ module.exports = app => {
   //   next(error);
   // });
 
-  app.use((err, req, res, next) => {
-    //Todo:에러처리를 어떤식으로 해야할까
-    const error = req.app.get("env") === "development" ? err : {};
-    error.status = err.status || 500;
-    if (error.status < 500) {
-      res.status(error.status).json({
-        error: error.message
-      });
-    }
-  });
+  /**
+   * @errorHandling
+   */
+  app.use(...ErrorHandler);
 
+  /**
+   * @uncaughtException
+   */
   process.on("uncaughtException", err => {
+    //TODO: 기록=>프로세스 종료
     console.log("ErrUncaught");
     console.error(err);
   });
