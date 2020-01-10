@@ -18,7 +18,6 @@ NormLog("Sequelize PRODUCTION DB INIT");
 sequelize
   .sync({ force: true, logging: true }) //force:false
   .then(_ => NormLog("✓ PRODUCTION DB connection success."))
-  .then(_ => sequelize.close())
   .catch(err => {
     ErrorLog(err);
     ErrorLog(

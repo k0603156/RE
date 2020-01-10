@@ -26,44 +26,48 @@ Router.get("/:userName", async (req, res, next) => {
 
 //회원가입
 Router.post("/", async (req, res, next) => {
-  const {
-    userName: reqUserName,
-    email: reqEmail,
-    password: reqPassword,
-    confirmPassword: reqConfirmPassword
-  } = checkProps(req.body, "userName", "email", "password", "confirmPassword");
-  console.log(reqUserName, reqEmail, reqPassword, reqConfirmPassword);
-  if (reqPassword !== reqConfirmPassword) {
-    console.log("비밀번호 체크값이 같지 않음");
-    const error = new Error("비밀번호 체크값이 같지 않음");
-    error.status = 400;
-    throw error;
-  }
-  UserModel.findOne({ where: { email: reqEmail } })
-    .then(_ => console.log(_))
-    .catch(err => console.log(err));
-  const exUser = await UserModel.findOne({ where: { email: reqEmail } });
-  if (exUser) {
-    console.log("이미 가입된 이메일");
-    const error = new Error("이미 가입된 이메일");
-    error.status = 400;
-    throw error;
-  }
-  const salt = await generateRandomString(ENCRYPT_BUFF, ENCODE_TYPE);
-  const cryptoPass = await encryptString(reqPassword, salt);
-  const result = await UserModel.create({
-    userName: reqUserName,
-    email: reqEmail,
-    cryptoPass,
-    salt
-  });
-  if (result) {
-    res.status(201).json({
-      success: true
+  try {
+    const {
+      userName: reqUserName,
+      email: reqEmail,
+      password: reqPassword,
+      confirmPassword: reqConfirmPassword
+    } = checkProps(
+      req.body,
+      "userName",
+      "email",
+      "password",
+      "confirmPassword"
+    );
+    console.log(req.body);
+    if (reqPassword !== reqConfirmPassword) {
+      const error = new Error("비밀번호 체크값이 같지 않음");
+      error.status = 400;
+      throw error;
+    }
+    const exUser = await UserModel.findOne({ where: { email: reqEmail } });
+    if (exUser) {
+      const error = new Error("이미 가입된 이메일");
+      error.status = 400;
+      throw error;
+    }
+    const salt = await generateRandomString(ENCRYPT_BUFF, ENCODE_TYPE);
+    const cryptoPass = await encryptString(reqPassword, salt);
+    const result = await UserModel.create({
+      userName: reqUserName,
+      email: reqEmail,
+      cryptoPass,
+      salt
     });
-  } else {
-    console.log("가입실패");
-    throw new Error("가입실패");
+    if (result) {
+      res.status(201).json({
+        success: true
+      });
+    } else {
+      throw new Error("가입실패");
+    }
+  } catch (error) {
+    next(error);
   }
 });
 
