@@ -1,10 +1,10 @@
 import { call, put } from "redux-saga/effects";
 import { startLoading, finishLoading } from "../modules/Loading";
-import { requestFailure, clearError } from "Store/modules/Error";
+import { createError, clearError } from "Store/modules/Error";
 
 export default function createRequestSaga(type: any, request: any) {
-  const SUCCESS = `${type}_SUCCESS`;
-  const FAILURE = `${type}_FAILURE`;
+  const SUCCESS = String(type).replace("REQUEST", "SUCCESS");
+  const FAILURE = String(type).replace("REQUEST", "FAILURE");
   return function*(action: any) {
     yield put(startLoading(type)); // 로딩 시작
     try {
@@ -21,7 +21,7 @@ export default function createRequestSaga(type: any, request: any) {
         payload: error,
         error: true
       });
-      yield put(requestFailure(error));
+      yield put(createError(FAILURE, error));
     } finally {
       yield put(finishLoading(type)); // 로딩 끝
     }

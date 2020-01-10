@@ -4,17 +4,17 @@ import { ContentHeader, ContentBody } from "Components/organisms";
 import { Button } from "Components/atoms";
 
 export default (props: {
-  post: any;
-  set_content_header: any;
-  set_content_body: any;
-  add_content: any;
+  plan: any;
+  input_content_header: any;
+  input_content_body: any;
+  increase_content: any;
   onSubmit: any;
 }) => {
   const {
-    post,
-    set_content_header,
-    set_content_body,
-    add_content,
+    plan,
+    input_content_header,
+    input_content_body,
+    increase_content,
     onSubmit
   } = props;
 
@@ -22,26 +22,30 @@ export default (props: {
     <div>
       <form onSubmit={onSubmit}>
         <ContentHeader
-          data={post}
+          data={plan}
           onChange={(e: any) => {
-            set_content_header(e.target.dataset.entry, e.target.value);
+            input_content_header(e.target.dataset.entry, e.target.value);
           }}
         />
 
-        {post.contentArr.map((data: any, index: number) => (
+        {plan.contentArr.map((data: any, index: number) => (
           <ContentBody
             key={index}
             nthDate={index}
             data={data}
             onChange={(e: any) =>
-              set_content_body(index, e.target.dataset.entry, e.target.value)
+              input_content_body(index, e.target.dataset.entry, e.target.value)
             }
           />
         ))}
         <Button type={"submit"} custom={"wide"}>
           포스팅
         </Button>
-        <Button type={"button"} onClick={() => add_content()} custom={"wide"}>
+        <Button
+          type={"button"}
+          onClick={() => increase_content()}
+          custom={"wide"}
+        >
           일정 추가
         </Button>
       </form>

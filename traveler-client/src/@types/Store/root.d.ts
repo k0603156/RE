@@ -26,3 +26,5 @@ type ActionCreateUserType = (
   confirmPassword: string,
   callback: () => void
 ) => USER_ACTION_TYPES;
+
+type AxiosPromiseType = AxiosPromise<any>;

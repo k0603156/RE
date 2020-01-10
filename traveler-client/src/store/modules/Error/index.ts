@@ -1,32 +1,34 @@
 import { createAction, createReducer } from "typesafe-actions";
-const ERROR = "error/ERROR";
+const CREATE_ERROR = "error/CREATE_ERROR";
 const CLEAR_ERROR = "error/CLEAR_ERROR";
 
-export const requestFailure = createAction(ERROR, errorType => errorType)();
+export const createError = createAction(CREATE_ERROR, (Type, Error) => {
+  return { Type, Error };
+})();
 export const clearError = createAction(CLEAR_ERROR)();
 const initialState = {
+  type: "",
   status: "",
-  statusText: "",
   message: ""
 };
 
-const error = createReducer(initialState, {
-  [ERROR]: (state: any, action: any) => {
-    const response = action.payload.response;
-    console.log(action);
+const errorReducer = createReducer(initialState, {
+  [CREATE_ERROR]: (state: any, action: any) => {
     return {
-      status: "",
-      statusText: "",
-      message: response.data.error
+      type: action.payload.Type,
+      status: action.payload.Error.response?.status || "localErr",
+      message:
+        action.payload.Error.response?.data.message ||
+        action.payload.Error.message
     };
   },
   [CLEAR_ERROR]: (state: any, action: any) => {
     return {
+      type: "",
       status: "",
-      statusText: "",
       message: ""
     };
   }
 });
 
-export default error;
+export default errorReducer;

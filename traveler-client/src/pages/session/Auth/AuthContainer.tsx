@@ -24,7 +24,6 @@ const AuthContainer = (props: {
     switch (action) {
       case AuthState.STATE_LOGIN:
         props.login(email.value, password.value);
-        console.log("로그인");
         break;
       case AuthState.STATE_SIGNUP:
         if (password.value !== confirmPassword.value) {
@@ -44,10 +43,8 @@ const AuthContainer = (props: {
             setAction(AuthState.STATE_LOGIN);
           }
         );
-        console.log("Signup");
         break;
       case AuthState.STATE_CONFIRM:
-        console.log("Confirm");
         break;
     }
   };

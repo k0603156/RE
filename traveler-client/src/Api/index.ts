@@ -1,5 +1,5 @@
 import Auth from "./auth";
 import User from "./user";
-import Post from "./post";
+import Plan from "./plan";
 
-export { Auth, User, Post };
+export { Auth, User, Plan };
