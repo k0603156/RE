@@ -39,6 +39,9 @@ Router.post("/", async (req, res, next) => {
     error.status = 400;
     throw error;
   }
+  UserModel.findOne({ where: { email: reqEmail } })
+    .then(_ => console.log(_))
+    .catch(err => console.log(err));
   const exUser = await UserModel.findOne({ where: { email: reqEmail } });
   if (exUser) {
     console.log("이미 가입된 이메일");
