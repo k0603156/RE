@@ -41,12 +41,14 @@ Router.post("/", async (req, res, next) => {
     );
     console.log(req.body);
     if (reqPassword !== reqConfirmPassword) {
+      console.log("비밀번호 체크값이 같지 않음");
       const error = new Error("비밀번호 체크값이 같지 않음");
       error.status = 400;
       throw error;
     }
     const exUser = await UserModel.findOne({ where: { email: reqEmail } });
     if (exUser) {
+      console.log("이미 가입된 이메일");
       const error = new Error("이미 가입된 이메일");
       error.status = 400;
       throw error;
@@ -64,6 +66,7 @@ Router.post("/", async (req, res, next) => {
         success: true
       });
     } else {
+      console.log("가입실패");
       throw new Error("가입실패");
     }
   } catch (error) {
