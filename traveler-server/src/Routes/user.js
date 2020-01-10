@@ -26,51 +26,41 @@ Router.get("/:userName", async (req, res, next) => {
 
 //회원가입
 Router.post("/", async (req, res, next) => {
-  try {
-    const {
-      userName: reqUserName,
-      email: reqEmail,
-      password: reqPassword,
-      confirmPassword: reqConfirmPassword
-    } = checkProps(
-      req.body,
-      "userName",
-      "email",
-      "password",
-      "confirmPassword"
-    );
-    console.log(reqUserName, reqEmail, reqPassword, reqConfirmPassword);
-    if (reqPassword !== reqConfirmPassword) {
-      console.log("비밀번호 체크값이 같지 않음");
-      const error = new Error("비밀번호 체크값이 같지 않음");
-      error.status = 400;
-      throw error;
-    }
-    const exUser = await UserModel.findOne({ where: { email: reqEmail } });
-    if (exUser) {
-      console.log("이미 가입된 이메일");
-      const error = new Error("이미 가입된 이메일");
-      error.status = 400;
-      throw error;
-    }
-    const salt = await generateRandomString(ENCRYPT_BUFF, ENCODE_TYPE);
-    const cryptoPass = await encryptString(reqPassword, salt);
-    const result = await UserModel.create({
-      userName: reqUserName,
-      email: reqEmail,
-      cryptoPass,
-      salt
+  const {
+    userName: reqUserName,
+    email: reqEmail,
+    password: reqPassword,
+    confirmPassword: reqConfirmPassword
+  } = checkProps(req.body, "userName", "email", "password", "confirmPassword");
+  console.log(reqUserName, reqEmail, reqPassword, reqConfirmPassword);
+  if (reqPassword !== reqConfirmPassword) {
+    console.log("비밀번호 체크값이 같지 않음");
+    const error = new Error("비밀번호 체크값이 같지 않음");
+    error.status = 400;
+    throw error;
+  }
+  const exUser = await UserModel.findOne({ where: { email: reqEmail } });
+  if (exUser) {
+    console.log("이미 가입된 이메일");
+    const error = new Error("이미 가입된 이메일");
+    error.status = 400;
+    throw error;
+  }
+  const salt = await generateRandomString(ENCRYPT_BUFF, ENCODE_TYPE);
+  const cryptoPass = await encryptString(reqPassword, salt);
+  const result = await UserModel.create({
+    userName: reqUserName,
+    email: reqEmail,
+    cryptoPass,
+    salt
+  });
+  if (result) {
+    res.status(201).json({
+      success: true
     });
-    if (result) {
-      res.status(201).json({
-        success: true
-      });
-    } else {
-      console.log("가입실패");
-      throw new Error("가입실패");
-    }
-  } catch (error) {
-    next(error);
+  } else {
+    console.log("가입실패");
+    throw new Error("가입실패");
   }
 });
 
