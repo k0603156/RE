@@ -13,7 +13,7 @@ import {
 import { Auth } from "Api";
 import { createError } from "../Error";
 import { startLoading, finishLoading } from "../Loading";
-import { takeLatest, put, call } from "redux-saga/effects";
+import { all, fork, takeLatest, put, call } from "redux-saga/effects";
 import createRequestSaga from "../../lib/createRequestSaga";
 
 // 로그인 요청
@@ -66,10 +66,21 @@ const changeTokenSaga = createRequestSaga(
   Auth.reauthorize
 );
 
-function* authSaga(): Generator {
+function* login() {
   yield takeLatest(LOGIN_AUTH_REQUEST, loginSaga);
+}
+function* checkOTP() {
   yield takeLatest(CHECK_OTP_AUTH_REQUEST, checkOTPSaga);
+}
+function* changeToken() {
   yield takeLatest(CHANGE_TOKEN_AUTH_REQUEST, changeTokenSaga);
+}
+function* logout() {
   yield takeLatest(LOGOUT_AUTH_REQUEST, logoutSaga);
 }
+
+function* authSaga(): Generator {
+  yield all([fork(login), fork(checkOTP), fork(changeToken), fork(logout)]);
+}
+
 export default authSaga;

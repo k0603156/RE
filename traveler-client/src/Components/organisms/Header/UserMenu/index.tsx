@@ -19,25 +19,17 @@ const UserMenu = (props: {
   auth: any;
   logout: ActionLogoutType;
 }) => {
-  const { userName, email } = props.auth.me;
   return (
     <Box {...props}>
-      {Object.entries(PrivateRoutes).map(([page, value]) => {
-        if (value.path === "/user/:userName") {
-          value.path = `/user/${userName}`;
-        }
-        return (
-          <Item key={value.path}>
-            <Link to={value.path}>{page}</Link>
-          </Item>
-        );
-      })}
+      <Item>
+        <Link to={`/user/${props.auth.me.userName}`}> Profile</Link>
+      </Item>
       {props.auth.isAdmin && (
         <Item>
           <Link to={"/adm"}>Admin</Link>
         </Item>
       )}
-      <Item onClick={() => props.logout(email)}>Logout</Item>
+      <Item onClick={() => props.logout(props.auth.me.email)}>Logout</Item>
     </Box>
   );
 };

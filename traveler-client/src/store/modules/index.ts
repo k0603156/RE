@@ -8,7 +8,7 @@ import planSaga from "./Plan/saga";
 import loading from "./Loading";
 import Error from "./Error";
 
-import { all } from "redux-saga/effects";
+import { all, fork } from "redux-saga/effects";
 
 const rootReducer: any = combineReducers<RootStateType>({
   auth,
@@ -19,5 +19,5 @@ const rootReducer: any = combineReducers<RootStateType>({
 });
 export default rootReducer;
 export function* rootSaga() {
-  yield all([authSaga(), userSaga(), planSaga()]);
+  yield all([fork(authSaga), fork(userSaga), fork(planSaga)]);
 }

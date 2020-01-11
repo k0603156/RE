@@ -1,7 +1,7 @@
 // 사용자 정보 요청
-export const GET_USER_REQUEST = "user/GET_USER_REQUEST";
-export const GET_USER_SUCCESS = "user/GET_USER_SUCCESS";
-export const GET_USER_FAILURE = "user/GET_USER_FAILURE";
+export const SELECT_USER_REQUEST = "user/SELECT_USER_REQUEST";
+export const SELECT_USER_SUCCESS = "user/SELECT_USER_SUCCESS";
+export const SELECT_USER_FAILURE = "user/SELECT_USER_FAILURE";
 // 사용자 가입
 export const CREATE_USER_REQUEST = "user/CREATE_USER_REQUEST";
 export const CREATE_USER_SUCCESS = "user/CREATE_USER_SUCCESS";
@@ -16,8 +16,8 @@ export const DELETE_USER_SUCCESS = "user/DELETE_USER_SUCCESS";
 export const DELETE_USER_FAILURE = "user/DELETE_USER_FAILURE";
 
 // 사용자 정보 요청
-export interface get_user_action {
-  type: typeof GET_USER_REQUEST;
+export interface select_user_action {
+  type: typeof SELECT_USER_REQUEST;
   payload: {
     userName: string;
   };
@@ -50,7 +50,7 @@ export interface delete_user_action {
   };
 }
 export type USER_ACTION_TYPES =
-  | get_user_action
+  | select_user_action
   | create_user_action
   | update_user_action
   | delete_user_action;

@@ -1,5 +1,5 @@
 import {
-  GET_USER_SUCCESS,
+  SELECT_USER_SUCCESS,
   CREATE_USER_SUCCESS,
   UPDATE_USER_SUCCESS,
   DELETE_USER_SUCCESS
@@ -10,7 +10,7 @@ import { createReducer } from "typesafe-actions";
 const initialState = { userName: "" };
 
 const UserReducer = createReducer(initialState, {
-  [GET_USER_SUCCESS]: (state, action) => {
+  [SELECT_USER_SUCCESS]: (state, action) => {
     return {
       userName: action.payload.userName
     };

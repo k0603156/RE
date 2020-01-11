@@ -1,5 +1,5 @@
 import {
-  GET_USER_REQUEST,
+  SELECT_USER_REQUEST,
   CREATE_USER_REQUEST,
   UPDATE_USER_REQUEST,
   DELETE_USER_REQUEST,
@@ -8,9 +8,9 @@ import {
 
 //** CREATE ACTION **//
 // 사용자 정보 확인
-export function get_user(userName: string): USER_ACTION_TYPES {
+export function select_user(userName: string): USER_ACTION_TYPES {
   return {
-    type: GET_USER_REQUEST,
+    type: SELECT_USER_REQUEST,
     payload: {
       userName
     }

@@ -1,4 +1,4 @@
-import { takeLatest, put, call, select } from "redux-saga/effects";
+import { all, fork, takeLatest, put, call, select } from "redux-saga/effects";
 import { startLoading, finishLoading } from "../Loading";
 import { createError } from "../Error";
 import { Plan } from "Api";
@@ -83,12 +83,32 @@ const updatePlanSaga = requestPlanSaga(UPDATE_PLAN_REQUEST, Plan.update_plan);
 //포스트 삭제
 const deletePlanSaga = requestPlanSaga(DELETE_PLAN_REQUEST, Plan.delete_plan);
 
-function* PlanSaga() {
+function* increaseContent() {
   yield takeLatest(INCREASE_CONTENT_MUTATE, increaseContentSaga);
+}
+function* decreaseContent() {
   yield takeLatest(DECREASE_CONTENT_MUTATE, decreaseContentSaga);
+}
+function* createPlan() {
   yield takeLatest(CREATE_PLAN_REQUEST, createPlanSaga);
+}
+function* selectPlan() {
   yield takeLatest(SELECT_PLAN_REQUEST, selectPlanSaga);
+}
+function* updatePlan() {
   yield takeLatest(UPDATE_PLAN_REQUEST, updatePlanSaga);
+}
+function* deletePlan() {
   yield takeLatest(DELETE_PLAN_REQUEST, deletePlanSaga);
 }
-export default PlanSaga;
+function* planSaga() {
+  yield all([
+    fork(increaseContent),
+    fork(decreaseContent),
+    fork(createPlan),
+    fork(selectPlan),
+    fork(updatePlan),
+    fork(deletePlan)
+  ]);
+}
+export default planSaga;

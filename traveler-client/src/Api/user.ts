@@ -32,11 +32,12 @@ const req = (
 };
 
 export default {
-  get_user(payload: { userName: string }) {
+  select_user(payload: { userName: string }) {
+    console.log(payload);
     return req("get", `/${payload.userName}`);
   },
 
-  get_users() {
+  select_users() {
     return req("get", "/");
   },
 
