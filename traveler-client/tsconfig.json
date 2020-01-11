@@ -24,13 +24,13 @@
     "isolatedModules": true,
     "noEmit": true,
     "typeRoots": ["node_modules/@types", "src/@types"],
-    "types": ["node", "lodash", "jest"]
+    "types": ["node", "jest", "lodash"]
   },
   "include": ["src/**/*"],
   "exclude": [
+    "node_modules",
     "build",
     "config",
-    "node_modules",
     "scripts",
     "**/setupTests.ts",
     "**/*.spec.tsx",

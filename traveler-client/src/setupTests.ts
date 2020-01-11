@@ -7,6 +7,7 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",*/
 import { configure } from "enzyme";
+import jest from "jest";
 import Adapter from "enzyme-adapter-react-16";
 
 configure({ adapter: new Adapter() });
