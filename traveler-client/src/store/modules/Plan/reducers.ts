@@ -32,7 +32,7 @@ const initialState = {
 };
 
 const PlanReducer = createReducer(initialState, {
-  // 콘텐츠작성
+  // 플랜헤더작성
   [INPUT_CONTENT_HEADER_MUTATE]: (state, action: any) => {
     return {
       ...state,
@@ -42,7 +42,7 @@ const PlanReducer = createReducer(initialState, {
       }
     };
   },
-  // 콘텐츠작성
+  // 플랜콘텐츠작성
   [INPUT_CONTENT_BODY_MUTATE]: (state, action) => {
     const newcontentArr = state.contentArr.map((content: any, index: any) => {
       if (index === action.payload.contentIndex) {

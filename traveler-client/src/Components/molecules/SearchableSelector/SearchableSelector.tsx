@@ -14,6 +14,7 @@ interface IProps {
   options: Array<option>;
 }
 const Box = styled.div`
+  position: relative;
   margin: 5px 0;
 `;
 const SelectedInput = styled.input`
@@ -96,7 +97,7 @@ const SearchableSelect = ({
     .map(option => (
       <Option
         key={option.key}
-        data-entry={entry}
+        data-entity={entry}
         value={option.key}
         onClick={optionClick}
       >

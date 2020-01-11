@@ -4,7 +4,7 @@ import styled from "styled-components";
 interface IProps extends React.HTMLAttributes<HTMLInputElement> {
   className?: any;
   required?: boolean;
-  entry?: string;
+  entity?: string;
   value: string;
   type?: "password" | "text" | "url" | "email" | "date";
   pattern?: string;
@@ -34,7 +34,7 @@ const Input = ({
   id,
   placeholder,
   required = true,
-  entry,
+  entity,
   value,
   onChange,
   type = "text",
@@ -42,22 +42,25 @@ const Input = ({
   autoFocus = false,
   minLength,
   maxLength
-}: IProps) => (
-  <InputBox
-    className={className}
-    id={id}
-    placeholder={placeholder}
-    required={required}
-    data-entry={entry}
-    value={value}
-    onChange={onChange}
-    type={type}
-    pattern={pattern}
-    autoFocus={autoFocus}
-    minLength={minLength}
-    maxLength={maxLength}
-    autoComplete={"off"}
-  />
-);
+}: IProps) => {
+  const onchange = onChange;
+  return (
+    <InputBox
+      className={className}
+      id={id}
+      placeholder={placeholder}
+      required={required}
+      data-entity={entity}
+      value={value}
+      onChange={onchange}
+      type={type}
+      pattern={pattern}
+      autoFocus={autoFocus}
+      minLength={minLength}
+      maxLength={maxLength}
+      autoComplete={"off"}
+    />
+  );
+};
 
 export default Input;

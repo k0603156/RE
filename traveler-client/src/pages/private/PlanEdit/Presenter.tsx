@@ -24,7 +24,7 @@ export default (props: {
         <ContentHeader
           data={plan}
           onChange={(e: any) => {
-            input_content_header(e.target.dataset.entry, e.target.value);
+            input_content_header(e.target.dataset.entity, e.target.value);
           }}
         />
 
@@ -34,7 +34,7 @@ export default (props: {
             nthDate={index}
             data={data}
             onChange={(e: any) =>
-              input_content_body(index, e.target.dataset.entry, e.target.value)
+              input_content_body(index, e.target.dataset.entity, e.target.value)
             }
           />
         ))}

@@ -1,8 +1,8 @@
-import React, { Fragment } from "react";
+import React from "react";
 import styled from "styled-components";
-import { Input } from "Components/atoms";
+import { TextArea, Box, Input } from "Components/atoms";
 
-const Box = styled.div`
+const BodyBox = styled(Box)`
   margin-top: 25px;
   label {
     margin-top: 12px;
@@ -30,32 +30,36 @@ export default (props: {
   };
   onChange: any;
 }) => {
-  const labelSet: any = {
-    title: { label: "제목", type: "text" },
-    date: { label: "날짜", type: "date" },
-    body: { label: "본문", type: "text" },
-    image: { label: "이미지", type: "text" }
-  };
-  const contentEntries = Object.entries(props.data).map(([key, value]) => {
-    return (
-      <Fragment key={key}>
-        <label htmlFor={key + props.nthDate}>{labelSet[key].label} </label>
-        <Input
-          id={key + props.nthDate}
-          entry={key}
-          value={value}
-          onChange={props.onChange}
-          type={labelSet[key].type}
-        />
-      </Fragment>
-    );
-  });
+  const formData = props.data;
   return (
-    <Box>
+    <BodyBox>
       <DateCount>
         <span>Day+{props.nthDate + 1}</span>
       </DateCount>
-      {contentEntries}
-    </Box>
+      <label htmlFor="contentTitle">title</label>
+      <Input
+        id={"contentTitle"}
+        entity={"title"}
+        value={formData.title}
+        onChange={props.onChange}
+        type={"text"}
+      />
+      <label htmlFor="contentDate">date</label>
+      <Input
+        id={"contentDate"}
+        entity={"date"}
+        value={formData.date}
+        onChange={props.onChange}
+        type={"date"}
+      />
+      <label htmlFor="contentBody">Body</label>
+      <TextArea
+        id={"contentBody"}
+        entity={"body"}
+        value={formData.body}
+        setChange={props.onChange}
+        textMax={100}
+      />
+    </BodyBox>
   );
 };
