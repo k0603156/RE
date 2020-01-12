@@ -9,8 +9,9 @@ interface IProps {
   className?: any;
   id?: string;
   entry?: any;
-  value: string;
-  setValue: any;
+  value?: string;
+  defaultValue?: string;
+  onChange: (e: any) => any;
   options: Array<option>;
 }
 const Box = styled.div`
@@ -64,13 +65,15 @@ const SearchableSelect = ({
   id,
   entry,
   value,
-  setValue,
+  defaultValue,
+  onChange,
   options
 }: IProps) => {
   const box = useRef(document.createElement("div"));
   const searchInput = useRef(document.createElement("input"));
-  const [searchValue, setSearchValue] = useState("");
   const [toggle, setToggle] = useState<boolean>(false);
+  const [searchForm, setSearchForm] = useState("");
+  const [selectedOption, setSelectedOption] = useState(defaultValue);
 
   const outSideClick = (event: any) => {
     box.current && !box.current.contains(event.target) && setToggle(false);
@@ -82,39 +85,50 @@ const SearchableSelect = ({
     };
   }, []);
 
-  const inputClick = () => {
+  const onFormClick = () => {
     setToggle(true);
     setTimeout(() => {
       searchInput.current.focus();
     }, 500);
   };
-  const optionClick = (e: any) => {
+
+  const onSearchFormChange = (event: React.ChangeEvent<HTMLInputElement>) =>
+    setSearchForm(event.target.value);
+
+  const onOptionClick = (e: any) => {
+    const event = {
+      ...e
+    };
+    setSelectedOption(event.target.dataset.displayValue);
+    onChange(event);
     setToggle(false);
-    setValue(e);
   };
-  const optionArray = options
-    .filter(option => option.name.includes(searchValue))
+
+  const searchedArray = options
+    .filter(option => option.name.includes(searchForm))
     .map(option => (
       <Option
         key={option.key}
-        data-entity={entry}
         value={option.key}
-        onClick={optionClick}
+        data-entity={entry}
+        data-display-value={option.value}
+        onClick={onOptionClick}
       >
         {option.name}
       </Option>
     ));
+
   return (
     <Box className={className} id={id} ref={box}>
-      <SelectedInput value={value} onClick={inputClick} readOnly />
+      <SelectedInput onClick={onFormClick} value={selectedOption} readOnly />
       <SearchableWrap className={toggle ? "open" : "close"}>
         <SearchableInput
-          placeholder={"Search"}
           ref={searchInput}
-          value={searchValue}
-          onChange={e => setSearchValue(e.target.value)}
+          placeholder={"검색"}
+          value={searchForm}
+          onChange={onSearchFormChange}
         />
-        <OptionList>{optionArray}</OptionList>
+        <OptionList>{searchedArray}</OptionList>
       </SearchableWrap>
     </Box>
   );

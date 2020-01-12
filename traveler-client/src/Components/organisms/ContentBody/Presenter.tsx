@@ -30,34 +30,33 @@ export default (props: {
   };
   onChange: any;
 }) => {
-  const formData = props.data;
   return (
     <BodyBox>
       <DateCount>
         <span>Day+{props.nthDate + 1}</span>
       </DateCount>
-      <label htmlFor="contentTitle">title</label>
+      <label htmlFor={`contentTitle+${props.nthDate}`}>title</label>
       <Input
-        id={"contentTitle"}
+        id={`contentTitle+${props.nthDate}`}
+        defaultValue={props.data.title}
         entity={"title"}
-        value={formData.title}
         onChange={props.onChange}
         type={"text"}
       />
-      <label htmlFor="contentDate">date</label>
+      <label htmlFor={`contentDate+${props.nthDate}`}>date</label>
       <Input
-        id={"contentDate"}
+        id={`contentDate+${props.nthDate}`}
+        defaultValue={props.data.date}
         entity={"date"}
-        value={formData.date}
         onChange={props.onChange}
         type={"date"}
       />
-      <label htmlFor="contentBody">Body</label>
+      <label htmlFor={`contentBody+${props.nthDate}`}>Body</label>
       <TextArea
-        id={"contentBody"}
+        id={`contentBody+${props.nthDate}`}
+        defaultValue={props.data.body}
         entity={"body"}
-        value={formData.body}
-        setChange={props.onChange}
+        onChange={props.onChange}
         textMax={100}
       />
     </BodyBox>

@@ -1,4 +1,5 @@
 import React from "react";
+import _ from "lodash";
 // import styled from "styled-components";
 import { ContentHeader, ContentBody } from "Components/organisms";
 import { Button } from "Components/atoms";
@@ -23,9 +24,12 @@ export default (props: {
       <form onSubmit={onSubmit}>
         <ContentHeader
           data={plan}
-          onChange={(e: any) => {
-            input_content_header(e.target.dataset.entity, e.target.value);
-          }}
+          onChange={_.debounce((event: any) => {
+            input_content_header(
+              event.currentTarget.dataset.entity,
+              event.currentTarget.value
+            );
+          }, 200)}
         />
 
         {plan.contentArr.map((data: any, index: number) => (
@@ -33,9 +37,15 @@ export default (props: {
             key={index}
             nthDate={index}
             data={data}
-            onChange={(e: any) =>
-              input_content_body(index, e.target.dataset.entity, e.target.value)
-            }
+            onChange={_.debounce(
+              (event: any) =>
+                input_content_body(
+                  index,
+                  event.currentTarget.dataset.entity,
+                  event.currentTarget.value
+                ),
+              200
+            )}
           />
         ))}
         <Button type={"submit"} custom={"wide"}>
