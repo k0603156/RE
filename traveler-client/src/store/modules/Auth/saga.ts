@@ -1,17 +1,17 @@
 import {
   LOGIN_AUTH_REQUEST,
-  LOGIN_AUTH_SUCCESS,
   CHECK_OTP_AUTH_REQUEST,
   CHANGE_TOKEN_AUTH_REQUEST,
   LOGOUT_AUTH_REQUEST,
+  LOGIN_AUTH_SUCCESS,
   LOGOUT_AUTH_SUCCESS,
-  login_action,
-  logout_action,
   LOGIN_AUTH_FAILURE,
-  LOGOUT_AUTH_FAILURE
+  LOGOUT_AUTH_FAILURE,
+  login_action,
+  logout_action
 } from "./types";
 import { Auth } from "Api";
-import { createError } from "../Error";
+import { createMSG } from "../Msg";
 import { startLoading, finishLoading } from "../Loading";
 import { all, fork, takeLatest, put, call } from "redux-saga/effects";
 import createRequestSaga from "../../lib/createRequestSaga";
@@ -30,8 +30,11 @@ export function* loginSaga(data: login_action): Generator {
     localStorage.setItem("token", response.data.token);
     localStorage.setItem("userName", response.data.userName);
     localStorage.setItem("email", response.data.email);
+    yield put(
+      createMSG(LOGIN_AUTH_FAILURE, "ALERT", { message: "로그인되었습니다." })
+    );
   } catch (error) {
-    yield put(createError(LOGIN_AUTH_FAILURE, error));
+    yield put(createMSG(LOGIN_AUTH_FAILURE, "ERROR", error));
     localStorage.removeItem("token");
     localStorage.removeItem("userName");
     localStorage.removeItem("email");
@@ -53,7 +56,7 @@ export function* logoutSaga(data: logout_action): Generator {
       localStorage.removeItem("email");
     }
   } catch (error) {
-    yield put(createError(LOGOUT_AUTH_FAILURE, error));
+    yield put(createMSG(LOGOUT_AUTH_FAILURE, "ERROR", error));
   }
   yield put(finishLoading(data.type));
 }
@@ -78,7 +81,6 @@ function* changeToken() {
 function* logout() {
   yield takeLatest(LOGOUT_AUTH_REQUEST, logoutSaga);
 }
-
 function* authSaga(): Generator {
   yield all([fork(login), fork(checkOTP), fork(changeToken), fork(logout)]);
 }

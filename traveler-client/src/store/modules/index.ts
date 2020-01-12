@@ -6,7 +6,7 @@ import userSaga from "./User/saga";
 import plan from "./Plan/reducers";
 import planSaga from "./Plan/saga";
 import loading from "./Loading";
-import Error from "./Error";
+import msg, { msgSaga } from "./Msg";
 
 import { all, fork } from "redux-saga/effects";
 
@@ -15,9 +15,9 @@ const rootReducer: any = combineReducers<RootStateType>({
   user,
   plan,
   loading,
-  Error
+  msg
 });
 export default rootReducer;
 export function* rootSaga() {
-  yield all([fork(authSaga), fork(userSaga), fork(planSaga)]);
+  yield all([fork(authSaga), fork(userSaga), fork(planSaga), fork(msgSaga)]);
 }

@@ -1,41 +1,45 @@
 import React from "react";
-// import styled from "styled-components";
+import _ from "lodash";
+import styled from "styled-components";
 import { ContentHeader, ContentBody } from "Components/organisms";
 import { Button } from "Components/atoms";
 
 export default (props: {
   plan: any;
-  input_content_header: any;
-  input_content_body: any;
-  increase_content: any;
+  input_plan: any;
+  input_story: any;
+  increase_story: any;
   onSubmit: any;
 }) => {
-  const {
-    plan,
-    input_content_header,
-    input_content_body,
-    increase_content,
-    onSubmit
-  } = props;
+  const { plan, input_plan, input_story, increase_story, onSubmit } = props;
 
   return (
     <div>
       <form onSubmit={onSubmit}>
         <ContentHeader
           data={plan}
-          onChange={(e: any) => {
-            input_content_header(e.target.dataset.entity, e.target.value);
-          }}
+          onChange={_.debounce((event: any) => {
+            input_plan(
+              event.currentTarget.dataset.entity,
+              event.currentTarget.value
+            );
+          }, 50)}
         />
 
-        {plan.contentArr.map((data: any, index: number) => (
+        {plan.storyArr.map((data: any, index: number) => (
           <ContentBody
             key={index}
             nthDate={index}
             data={data}
-            onChange={(e: any) =>
-              input_content_body(index, e.target.dataset.entity, e.target.value)
-            }
+            onChange={_.debounce(
+              (event: any) =>
+                input_story(
+                  index,
+                  event.currentTarget.dataset.entity,
+                  event.currentTarget.value
+                ),
+              50
+            )}
           />
         ))}
         <Button type={"submit"} custom={"wide"}>
@@ -43,7 +47,7 @@ export default (props: {
         </Button>
         <Button
           type={"button"}
-          onClick={() => increase_content()}
+          onClick={() => increase_story()}
           custom={"wide"}
         >
           일정 추가

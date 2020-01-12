@@ -1,8 +1,8 @@
 import {
-  INPUT_CONTENT_HEADER_MUTATE,
-  INPUT_CONTENT_BODY_MUTATE,
-  INCREASE_CONTENT_MUTATE,
-  DECREASE_CONTENT_MUTATE,
+  INPUT_PLAN_MUTATE,
+  INPUT_STORY_MUTATE,
+  INCREASE_STORY_MUTATE,
+  DECREASE_STORY_MUTATE,
   CREATE_PLAN_REQUEST,
   SELECT_PLAN_REQUEST,
   UPDATE_PLAN_REQUEST,
@@ -12,12 +12,12 @@ import {
 
 //** CREATE ACTION **//
 // 헤더작성
-export function input_content_header(
+export function input_plan(
   entry: "title" | "country" | "fromDate" | "toDate" | "subTitle" | "image",
   data: string | number
 ): PLAN_ACTION_TYPES {
   return {
-    type: INPUT_CONTENT_HEADER_MUTATE,
+    type: INPUT_PLAN_MUTATE,
     payload: {
       entry,
       data
@@ -25,13 +25,13 @@ export function input_content_header(
   };
 }
 // 콘텐츠작성
-export function input_content_body(
+export function input_story(
   contentIndex: number,
   entry: "title" | "date" | "body" | "image",
   data: string
 ): PLAN_ACTION_TYPES {
   return {
-    type: INPUT_CONTENT_BODY_MUTATE,
+    type: INPUT_STORY_MUTATE,
     payload: {
       contentIndex,
       entry,
@@ -40,26 +40,26 @@ export function input_content_body(
   };
 }
 // 콘텐츠개수증가
-export function increase_content(): PLAN_ACTION_TYPES {
+export function increase_story(): PLAN_ACTION_TYPES {
   return {
-    type: INCREASE_CONTENT_MUTATE,
+    type: INCREASE_STORY_MUTATE,
     payload: {}
   };
 }
 //콘텐츠개수감소
-export function decrease_content(contentIndex: number): PLAN_ACTION_TYPES {
+export function decrease_story(contentIndex: number): PLAN_ACTION_TYPES {
   return {
-    type: DECREASE_CONTENT_MUTATE,
+    type: DECREASE_STORY_MUTATE,
     payload: {
       contentIndex
     }
   };
 }
 //포스트 생성요청
-export function create_plan(plan: any, contentArr: any): PLAN_ACTION_TYPES {
+export function create_plan(plan: any): PLAN_ACTION_TYPES {
   return {
     type: CREATE_PLAN_REQUEST,
-    payload: { plan, contentArr }
+    payload: { plan }
   };
 }
 //포스트 읽기요청
@@ -73,11 +73,11 @@ export function select_plan(planIndex: number): PLAN_ACTION_TYPES {
 export function update_plan(
   planIndex: number,
   plan: any,
-  contentArr: any
+  storyArr: any
 ): PLAN_ACTION_TYPES {
   return {
     type: UPDATE_PLAN_REQUEST,
-    payload: { planIndex, plan, contentArr }
+    payload: { planIndex, plan, storyArr }
   };
 }
 //포스트 삭제요청

@@ -25,40 +25,40 @@ export default (props: {
   data: {
     title: string;
     date: string;
-    body: string;
+    content: string;
     image: string;
   };
   onChange: any;
 }) => {
-  const formData = props.data;
   return (
     <BodyBox>
       <DateCount>
         <span>Day+{props.nthDate + 1}</span>
       </DateCount>
-      <label htmlFor="contentTitle">title</label>
+      <label htmlFor={`storyTitle+${props.nthDate}`}>title</label>
       <Input
-        id={"contentTitle"}
+        id={`stroyTitle+${props.nthDate}`}
+        defaultValue={props.data.title}
         entity={"title"}
-        value={formData.title}
         onChange={props.onChange}
         type={"text"}
+        maxLength={100}
       />
-      <label htmlFor="contentDate">date</label>
+      <label htmlFor={`stroyDate+${props.nthDate}`}>date</label>
       <Input
-        id={"contentDate"}
+        id={`stroyDate+${props.nthDate}`}
+        defaultValue={props.data.date}
         entity={"date"}
-        value={formData.date}
         onChange={props.onChange}
         type={"date"}
       />
-      <label htmlFor="contentBody">Body</label>
+      <label htmlFor={`stroyContent+${props.nthDate}`}>content</label>
       <TextArea
-        id={"contentBody"}
-        entity={"body"}
-        value={formData.body}
-        setChange={props.onChange}
-        textMax={100}
+        id={`stroyContent+${props.nthDate}`}
+        defaultValue={props.data.content}
+        entity={"content"}
+        onChange={props.onChange}
+        maxLength={100}
       />
     </BodyBox>
   );
