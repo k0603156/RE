@@ -10,6 +10,13 @@ interface IAuthState {
     email: string;
   };
 }
+interface IMsgState {
+  isAlert: boolean;
+  msgType: string;
+  actionType: any;
+  status: any;
+  message: any;
+}
 
 type ActionLoginType = (email: string, password: string) => AUTH_ACTION_TYPES;
 

@@ -1,6 +1,6 @@
-import React, { useMemo } from "react";
+import React from "react";
 import styled from "styled-components";
-import { Box, Input, TextArea } from "Components/atoms";
+import { Box, Input, TextArea, FileLoad } from "Components/atoms";
 import { SearchableSelector } from "Components/molecules";
 import CountryData from "data/country";
 
@@ -30,6 +30,7 @@ export default (props: {
         defaultValue={props.data.title}
         onChange={props.onChange}
         type={"text"}
+        maxLength={100}
       />
       <label htmlFor="headerfromDate">fromDate</label>
       <Input
@@ -55,14 +56,20 @@ export default (props: {
         onChange={props.onChange}
         options={CountryData}
       />
-
       <label htmlFor="headermainBody">mainBody</label>
       <TextArea
         id={"headermainBody"}
         entity={"mainBody"}
         defaultValue={props.data.mainBody}
         onChange={props.onChange}
-        textMax={100}
+        maxLength={100}
+      />
+      <label htmlFor="headertoDate">image</label>
+      <FileLoad
+        id={"headerimage"}
+        entity={"image"}
+        defaultValue={props.data.image}
+        onChange={props.onChange}
       />
     </Box>
   );

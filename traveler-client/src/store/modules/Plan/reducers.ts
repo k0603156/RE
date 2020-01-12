@@ -1,25 +1,25 @@
 import { createReducer } from "typesafe-actions";
 import {
-  INPUT_CONTENT_BODY_MUTATE,
-  INPUT_CONTENT_HEADER_MUTATE,
-  DECREASE_CONTENT_MUTATE
+  INPUT_PLAN_MUTATE,
+  INPUT_STORY_MUTATE,
+  DECREASE_STORY_MUTATE
 } from "./types";
 import {
-  INCREASE_CONTENT_SUCCESS,
+  INCREASE_STORY_SUCCESS,
   CREATE_PLAN_SUCCESS,
   SELECT_PLAN_SUCCESS,
   UPDATE_PLAN_SUCCESS,
   DELETE_PLAN_SUCCESS
 } from "./types";
 
-const content = {
+const story = {
   title: "",
   date: "",
-  body: "",
+  content: "",
   image: ""
 };
+
 const initialState = {
-  contentMaximum: 5,
   header: {
     title: "",
     country: 0,
@@ -28,12 +28,12 @@ const initialState = {
     mainBody: "",
     image: ""
   },
-  contentArr: [{ ...content }]
+  storyArr: [{ ...story }]
 };
 
 const PlanReducer = createReducer(initialState, {
   // 플랜헤더작성
-  [INPUT_CONTENT_HEADER_MUTATE]: (state, action: any) => {
+  [INPUT_PLAN_MUTATE]: (state, action: any) => {
     return {
       ...state,
       header: {
@@ -43,8 +43,8 @@ const PlanReducer = createReducer(initialState, {
     };
   },
   // 플랜콘텐츠작성
-  [INPUT_CONTENT_BODY_MUTATE]: (state, action) => {
-    const newcontentArr = state.contentArr.map((content: any, index: any) => {
+  [INPUT_STORY_MUTATE]: (state, action) => {
+    const newstoryArr = state.storyArr.map((content: any, index: any) => {
       if (index === action.payload.contentIndex) {
         content[action.payload.entry] = action.payload.data;
       }
@@ -52,31 +52,31 @@ const PlanReducer = createReducer(initialState, {
     });
     return {
       ...state,
-      contentArr: [...newcontentArr]
+      storyArr: [...newstoryArr]
     };
   },
   // 콘텐츠개수증가
-  [INCREASE_CONTENT_SUCCESS]: (state, action) => {
+  [INCREASE_STORY_SUCCESS]: (state, action) => {
     return {
       ...state,
-      contentArr: [...state.contentArr, { ...content }]
+      storyArr: [...state.storyArr, { ...story }]
     };
   },
   //콘텐츠개수감소
   // contentIndex start from 0
-  [DECREASE_CONTENT_MUTATE]: (state, action) => {
+  [DECREASE_STORY_MUTATE]: (state, action) => {
     const contentIndex = action.payload.contentIndex;
     return {
       ...state,
-      contentArr: [
-        ...state.contentArr.slice(0, contentIndex),
-        ...state.contentArr.slice(contentIndex + 1, state.contentMaximum)
+      storyArr: [
+        ...state.storyArr.slice(0, contentIndex),
+        ...state.storyArr.slice(contentIndex + 1, state.storyArr.length)
       ]
     };
   },
   //포스트 생성요청
   [CREATE_PLAN_SUCCESS]: (state, action) => {
-    return { ...state };
+    return { header: { ...initialState.header }, storyArr: [{ ...story }] };
   },
   //포스트 읽기요청
   [SELECT_PLAN_SUCCESS]: (state, action) => {

@@ -1,6 +1,6 @@
 const Router = require("express").Router();
-const { NotFoundError } = require("../Utils/Error");
 const { user: UserModel } = require("../Models/tables");
+const { NotFoundError } = require("../Utils/Error");
 const { generateRandomString, encryptString, checkProps } = require("../Utils");
 const ENCRYPT_BUFF = 64;
 const ENCODE_TYPE = "base64";

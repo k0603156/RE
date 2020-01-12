@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
   hashtag.associate = function(models) {
-    hashtag.belongsToMany(models.post, { through: "PostHashtag" });
+    hashtag.belongsToMany(models.plan, { through: "PlanHashtag" });
   };
   return hashtag;
 };

@@ -19,7 +19,7 @@ const AuthContainer = (props: {
   const password = useInput<string>("");
   const confirmPassword = useInput<string>("");
 
-  const onSubmit = async (e: any) => {
+  const onSubmit = (e: any) => {
     e.preventDefault();
     switch (action) {
       case AuthState.STATE_LOGIN:

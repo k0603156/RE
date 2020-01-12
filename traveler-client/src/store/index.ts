@@ -4,9 +4,13 @@ import { createLogger } from "redux-logger";
 import { composeWithDevTools } from "redux-devtools-extension";
 import createSagaMiddleware from "redux-saga";
 
-export default function configStore() {
+export default function configStore(history: any) {
   const LOGGER = createLogger();
-  const sagaMiddleware = createSagaMiddleware();
+  const sagaMiddleware = createSagaMiddleware({
+    context: {
+      history
+    }
+  });
   const MiddleWares: Middleware[] = [sagaMiddleware];
   process.env.NODE_ENV !== "production" && MiddleWares.push(LOGGER);
   const store =

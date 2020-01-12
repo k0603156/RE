@@ -25,7 +25,7 @@ export default (props: {
   data: {
     title: string;
     date: string;
-    body: string;
+    content: string;
     image: string;
   };
   onChange: any;
@@ -35,29 +35,30 @@ export default (props: {
       <DateCount>
         <span>Day+{props.nthDate + 1}</span>
       </DateCount>
-      <label htmlFor={`contentTitle+${props.nthDate}`}>title</label>
+      <label htmlFor={`storyTitle+${props.nthDate}`}>title</label>
       <Input
-        id={`contentTitle+${props.nthDate}`}
+        id={`stroyTitle+${props.nthDate}`}
         defaultValue={props.data.title}
         entity={"title"}
         onChange={props.onChange}
         type={"text"}
+        maxLength={100}
       />
-      <label htmlFor={`contentDate+${props.nthDate}`}>date</label>
+      <label htmlFor={`stroyDate+${props.nthDate}`}>date</label>
       <Input
-        id={`contentDate+${props.nthDate}`}
+        id={`stroyDate+${props.nthDate}`}
         defaultValue={props.data.date}
         entity={"date"}
         onChange={props.onChange}
         type={"date"}
       />
-      <label htmlFor={`contentBody+${props.nthDate}`}>Body</label>
+      <label htmlFor={`stroyContent+${props.nthDate}`}>content</label>
       <TextArea
-        id={`contentBody+${props.nthDate}`}
-        defaultValue={props.data.body}
-        entity={"body"}
+        id={`stroyContent+${props.nthDate}`}
+        defaultValue={props.data.content}
+        entity={"content"}
         onChange={props.onChange}
-        textMax={100}
+        maxLength={100}
       />
     </BodyBox>
   );

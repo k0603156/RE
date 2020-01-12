@@ -1,13 +1,13 @@
 const ErrorHandler = require("../Utils/ErrorHandler");
 const authRouter = require("./auth");
 const userRouter = require("./user");
-const postRouter = require("./post");
+const planRouter = require("./plan");
 const API_ROOT = "/api/v1";
 
 module.exports = app => {
   app.use(`${API_ROOT}/auth/`, authRouter);
   app.use(`${API_ROOT}/user/`, userRouter);
-  app.use(`${API_ROOT}/post/`, postRouter);
+  app.use(`${API_ROOT}/plan/`, planRouter);
   // app.use((req, res, next) => {
   //   const error = new Error("Not Found");
   //   error.status = 404;

@@ -1,7 +1,7 @@
 "use strict";
 module.exports = (sequelize, DataTypes) => {
-  const post = sequelize.define(
-    "post",
+  const plan = sequelize.define(
+    "plan",
     {
       title: {
         allowNull: false,
@@ -13,13 +13,15 @@ module.exports = (sequelize, DataTypes) => {
       },
       fromDate: {
         allowNull: false,
-        type: DataTypes.DATEONLY
+        type: DataTypes.DATE,
+        defaultValue: sequelize.fn("NOW")
       },
       toDate: {
         allowNull: false,
-        type: DataTypes.DATEONLY
+        type: DataTypes.DATE,
+        defaultValue: sequelize.fn("NOW")
       },
-      subTitle: {
+      mainBody: {
         allowNull: false,
         type: DataTypes.STRING(100)
       },
@@ -34,15 +36,15 @@ module.exports = (sequelize, DataTypes) => {
       paranoid: true
     }
   );
-  post.associate = function(models) {
-    post.belongsTo(models.user);
-    post.hasMany(models.content);
-    post.belongsToMany(models.hashtag, { through: "PostHashtag" });
+  plan.associate = function(models) {
+    plan.belongsTo(models.user);
+    plan.hasMany(models.story);
+    plan.belongsToMany(models.hashtag, { through: "PlanHashtag" });
     // Post.hasMany(models.Content, {
     //   foreignKey: "postId",
     //   sourceKey: "id",
     //   as: "contentOfpost"
     // });
   };
-  return post;
+  return plan;
 };

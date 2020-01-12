@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 interface IProps extends React.HTMLAttributes<HTMLTextAreaElement> {
   entity?: string;
-  textMax: number;
+  maxLength: number;
   value?: string;
   defaultValue?: string;
   onChange: (e: any) => any;
@@ -29,7 +29,7 @@ const TextCounter = styled.div`
 `;
 const BoxTextArea = ({
   entity,
-  textMax,
+  maxLength,
   onChange,
   value,
   defaultValue,
@@ -41,30 +41,27 @@ const BoxTextArea = ({
     const event = {
       ...e
     };
-    if (event.currentTarget.value.length < textMax + 1) {
+    if (event.currentTarget.value.length < maxLength + 1) {
       setCount(event.currentTarget.value.length);
       onChange(event);
     }
   };
-  const color = count < textMax ? "black" : "red";
+  const color = count < maxLength ? "black" : "red";
   return (
     <div>
       <TextArea
         data-entity={entity}
-        ref={ta => {
-          if (ta && ta.value.length > textMax) {
-            ta.setRangeText(ta.value.slice(0, textMax));
-          }
-        }}
         {...others}
         onChange={Change}
         value={value}
         defaultValue={defaultValue}
-        maxLength={textMax}
+        maxLength={maxLength}
       />
-      <TextCounter color={color}>
-        <span>{count}</span>/{textMax}
-      </TextCounter>
+      {maxLength && (
+        <TextCounter color={color}>
+          <span>{count}</span>/{maxLength}
+        </TextCounter>
+      )}
     </div>
   );
 };
