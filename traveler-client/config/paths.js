@@ -69,7 +69,7 @@ const resolveModule = (resolveFn, filePath) => {
 module.exports = {
   dotenv: resolveApp(".env"),
   appPath: resolveApp("."),
-  appBuild: resolveApp("../traveler-server/src/build"),
+  appBuild: resolveApp("build"), //클라이언트 빌드=> 경로
   appPublic: resolveApp("src/public"),
   appHtml: resolveApp("src/public/index.html"),
   appIndexJs: resolveModule(resolveApp, "src/client/index"),
@@ -84,7 +84,7 @@ module.exports = {
   publicUrl: getPublicUrl(resolveApp("package.json")),
   servedPath: getServedPath(resolveApp("package.json")),
   ssrIndexJs: resolveModule(resolveApp, "src/server/index.server"), // 서버 사이드 렌더링 엔트리
-  ssrBuild: resolveApp("dist") // 웹팩 처리 후 저장 경로
+  ssrBuild: resolveApp("dist") // 클라이언트서버 빌드=> 저장 경로
 };
 
 module.exports.moduleFileExtensions = moduleFileExtensions;
