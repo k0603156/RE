@@ -3,7 +3,8 @@
     "baseUrl": "./src",
     "paths": {
       "@Client/*": ["client/*"],
-      "@Server/*": ["server/*"]
+      "@Server/*": ["server/*"],
+      "@Store/*": ["store/*"]
     },
     "target": "es5",
     "jsx": "react",

@@ -5,7 +5,7 @@ import {
   input_story,
   increase_story,
   create_plan
-} from "@Client/Store/modules/Plan/actions";
+} from "@Store/modules/Plan/actions";
 import Presenter from "./Presenter";
 
 const Container = (props: {

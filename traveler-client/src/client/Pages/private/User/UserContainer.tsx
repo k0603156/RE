@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import UserPresenter from "./UserPresenter";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { select_user } from "@Client/Store/modules/User/actions";
+import { select_user } from "@Store/modules/User/actions";
 
 const UserContainer = withRouter((props: any) => {
   const searchUserName = props.match.params.searchUserName;

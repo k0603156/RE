@@ -3,8 +3,8 @@ import AuthPresenter from "./AuthPresenter";
 import useInput from "@Client/Hooks/useInput";
 import AuthState from "./AuthState";
 import { connect } from "react-redux";
-import { login } from "@Client/Store/modules/Auth/actions";
-import { create_user } from "@Client/Store/modules/User/actions";
+import { login } from "@Store/modules/Auth/actions";
+import { create_user } from "@Store/modules/User/actions";
 
 const AuthContainer = (props: {
   auth: IAuthState;

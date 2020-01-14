@@ -5,7 +5,7 @@ import {
   DELETE_USER_REQUEST
 } from "./types";
 import { all, fork, takeLatest } from "redux-saga/effects";
-import createRequestSaga from "@Client/Store/lib/createRequestSaga";
+import createRequestSaga from "@Store/lib/createRequestSaga";
 import { User } from "@Client/Api";
 
 //사용자 정보 요청

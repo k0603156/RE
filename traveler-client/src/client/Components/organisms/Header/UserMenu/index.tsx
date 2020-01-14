@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import { logout } from "@Client/Store/modules/Auth/actions";
+import { logout } from "@Store/modules/Auth/actions";
 import PrivateRoutes from "@Client/Routes/routes.private";
 
 const Item = styled.li`

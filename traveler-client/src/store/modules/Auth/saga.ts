@@ -14,7 +14,7 @@ import { Auth } from "@Client/Api";
 import { createMSG } from "../Msg";
 import { startLoading, finishLoading } from "../Loading";
 import { all, fork, takeLatest, put, call } from "redux-saga/effects";
-import createRequestSaga from "../../lib/createRequestSaga";
+import createRequestSaga from "@Store/lib/createRequestSaga";
 
 // 로그인 요청
 export function* loginSaga(data: login_action): Generator {
