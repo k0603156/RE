@@ -1,3 +1,16 @@
+###### Structure
+
+###### Definition
+
+`여행지 포스팅 앱`
+`Traveler Client + SSR Server`
+
+###### Preview
+
+<img width="100%" src="https://user-images.githubusercontent.com/16025776/72452345-bec5a200-3800-11ea-9c45-1eb2bfa9cef4.jpg">
+
+##### Document
+
 1. [O] README.md clear
 2. [O] yarn eject
 3. [O] package.json 수정
