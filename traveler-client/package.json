@@ -12,11 +12,11 @@
   "private": true,
   "scripts": {
     "test:client": "node scripts/test.js",
-    "dev:client": "node scripts/dev.js",
-    "serve:client": "serve -s build",
-    "build:client": "node scripts/build.js",
-    "start:server": "node dist/server.js",
-    "build:server": "node scripts/build.server.js"
+    "build:dev:client": "node scripts/build.dev.client.js",
+    "build:dev:server": "node scripts/build.dev.server.js",
+    "build:prod:client": "node scripts/build.prod.client.js",
+    "build:prod:server": "node scripts/build.prod.server.js",
+    "start:server": "node dist/server.js"
   },
   "dependencies": {
     "@babel/core": "7.7.4",

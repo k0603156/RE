@@ -7,12 +7,20 @@ import {
 
 import { createReducer } from "typesafe-actions";
 
+// const initialState: IAuthState = {
+//   isLogged: !!localStorage.getItem("token"),
+//   isAdmin: true,
+//   me: {
+//     userName: localStorage.getItem("userName") || "",
+//     email: localStorage.getItem("email") || ""
+//   }
+// };
 const initialState: IAuthState = {
-  isLogged: !!localStorage.getItem("token"),
+  isLogged: false,
   isAdmin: true,
   me: {
-    userName: localStorage.getItem("userName") || "",
-    email: localStorage.getItem("email") || ""
+    userName: "",
+    email: ""
   }
 };
 

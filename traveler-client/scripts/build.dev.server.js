@@ -1,5 +1,5 @@
-process.env.BABEL_ENV = "production";
-process.env.NODE_ENV = "production";
+process.env.BABEL_ENV = "development";
+process.env.NODE_ENV = "development";
 
 process.on("unhandledRejection", err => {
   throw err;
@@ -12,7 +12,7 @@ const config = require("../config/webpack.config.server");
 const paths = require("../config/paths");
 
 function build() {
-  console.log("Creating server build..." + process.env.NODE_ENV + __dirname);
+  console.log("Creating server build..." + process.env.NODE_ENV);
   fs.emptyDirSync(paths.ssrBuild);
   let compiler = webpack(config);
   return new Promise((resolve, reject) => {
