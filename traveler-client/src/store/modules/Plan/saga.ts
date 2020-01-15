@@ -9,7 +9,7 @@ import {
 } from "redux-saga/effects";
 import { startLoading, finishLoading } from "../Loading";
 import { createMSG } from "../Msg";
-import { Plan } from "Api";
+import { Plan } from "@Client/Api";
 import {
   INCREASE_STORY_MUTATE,
   DECREASE_STORY_MUTATE,

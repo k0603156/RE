@@ -10,11 +10,11 @@ import {
   login_action,
   logout_action
 } from "./types";
-import { Auth } from "Api";
+import { Auth } from "@Client/Api";
 import { createMSG } from "../Msg";
 import { startLoading, finishLoading } from "../Loading";
 import { all, fork, takeLatest, put, call } from "redux-saga/effects";
-import createRequestSaga from "../../lib/createRequestSaga";
+import createRequestSaga from "@Store/lib/createRequestSaga";
 
 // 로그인 요청
 export function* loginSaga(data: login_action): Generator {
@@ -27,17 +27,17 @@ export function* loginSaga(data: login_action): Generator {
     const response: any = yield call(Auth.authenticate, payload);
 
     yield put({ type: LOGIN_AUTH_SUCCESS, payload: response.data });
-    localStorage.setItem("token", response.data.token);
-    localStorage.setItem("userName", response.data.userName);
-    localStorage.setItem("email", response.data.email);
+    // localStorage.setItem("token", response.data.token);
+    // localStorage.setItem("userName", response.data.userName);
+    // localStorage.setItem("email", response.data.email);
     yield put(
       createMSG(LOGIN_AUTH_FAILURE, "ALERT", { message: "로그인되었습니다." })
     );
   } catch (error) {
     yield put(createMSG(LOGIN_AUTH_FAILURE, "ERROR", error));
-    localStorage.removeItem("token");
-    localStorage.removeItem("userName");
-    localStorage.removeItem("email");
+    // localStorage.removeItem("token");
+    // localStorage.removeItem("userName");
+    // localStorage.removeItem("email");
   }
   yield put(finishLoading(data.type));
 }
@@ -51,9 +51,9 @@ export function* logoutSaga(data: logout_action): Generator {
     const response: any = yield call(Auth.deauthorize, payload);
     if (response.status === 200) {
       yield put({ type: LOGOUT_AUTH_SUCCESS, payload: response.data });
-      localStorage.removeItem("token");
-      localStorage.removeItem("userName");
-      localStorage.removeItem("email");
+      // localStorage.removeItem("token");
+      // localStorage.removeItem("userName");
+      // localStorage.removeItem("email");
     }
   } catch (error) {
     yield put(createMSG(LOGOUT_AUTH_FAILURE, "ERROR", error));

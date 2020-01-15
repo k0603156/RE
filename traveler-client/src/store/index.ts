@@ -5,6 +5,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import createSagaMiddleware from "redux-saga";
 
 export default function configStore(history: any) {
+  const PRELOADED_STATE = (window as any).__PRELOADED_REDUX_STATE__;
   const LOGGER = createLogger();
   const sagaMiddleware = createSagaMiddleware({
     context: {
@@ -18,6 +19,7 @@ export default function configStore(history: any) {
       ? createStore(rootReducer, compose(applyMiddleware(...MiddleWares)))
       : createStore(
           rootReducer,
+          PRELOADED_STATE,
           composeWithDevTools(applyMiddleware(...MiddleWares))
         );
   sagaMiddleware.run(rootSaga);

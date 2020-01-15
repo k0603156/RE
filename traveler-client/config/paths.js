@@ -69,10 +69,10 @@ const resolveModule = (resolveFn, filePath) => {
 module.exports = {
   dotenv: resolveApp(".env"),
   appPath: resolveApp("."),
-  appBuild: resolveApp("../traveler-server/src/build"),
-  appPublic: resolveApp("public"),
-  appHtml: resolveApp("public/index.html"),
-  appIndexJs: resolveModule(resolveApp, "src/index"),
+  appBuild: resolveApp("build"), //클라이언트 빌드=> 경로
+  appPublic: resolveApp("src/public"),
+  appHtml: resolveApp("src/public/index.html"),
+  appIndexJs: resolveModule(resolveApp, "src/client/index"),
   appPackageJson: resolveApp("package.json"),
   appSrc: resolveApp("src"),
   appTsConfig: resolveApp("tsconfig.json"),
@@ -82,7 +82,9 @@ module.exports = {
   proxySetup: resolveApp("src/setupProxy.js"),
   appNodeModules: resolveApp("node_modules"),
   publicUrl: getPublicUrl(resolveApp("package.json")),
-  servedPath: getServedPath(resolveApp("package.json"))
+  servedPath: getServedPath(resolveApp("package.json")),
+  ssrIndexJs: resolveModule(resolveApp, "src/server/index"), // 서버 사이드 렌더링 엔트리
+  ssrBuild: resolveApp("dist") // 클라이언트서버 빌드=> 저장 경로
 };
 
 module.exports.moduleFileExtensions = moduleFileExtensions;

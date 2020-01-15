@@ -4,9 +4,9 @@ import {
   UPDATE_USER_REQUEST,
   DELETE_USER_REQUEST
 } from "./types";
-import { User } from "Api";
 import { all, fork, takeLatest } from "redux-saga/effects";
-import createRequestSaga from "Store/lib/createRequestSaga";
+import createRequestSaga from "@Store/lib/createRequestSaga";
+import { User } from "@Client/Api";
 
 //사용자 정보 요청
 const selectUserSaga = createRequestSaga(SELECT_USER_REQUEST, User.select_user);
