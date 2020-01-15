@@ -1,3 +1,13 @@
+#### ProjectName
+
+`Traveler`
+
+#### Collaborators
+
+`2019.12.24 시작 kimyongkuk`
+
+`2020.01.16 참여 JinHwanJung`
+
 ###### Structure
 
 <img width="100%" src="https://user-images.githubusercontent.com/16025776/72450836-570e5780-37fe-11ea-98af-7822d1ddc76f.jpg">
@@ -5,6 +15,8 @@
 ###### Definition
 
 `여행지 포스팅 앱`
+`여행을 다니며 하루하루 그날 일정을 기록`
+`혹은 계획하기 위한 앱을 1차 목표로 함`
 
 ###### Frontend
 
@@ -45,7 +57,7 @@ Test
 ```
 Google Cloud Plaform
 >ComputedEngine
->CloudeSQL
+>CloudSQL
 
 Docker
 ```
