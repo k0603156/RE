@@ -2,6 +2,10 @@
 
 <img width="100%" src="https://user-images.githubusercontent.com/16025776/72450836-570e5780-37fe-11ea-98af-7822d1ddc76f.jpg">
 
+###### Definition
+
+`여행지 포스팅 앱`
+
 ###### Frontend
 
 ```
@@ -52,6 +56,8 @@ Docker
 git github
 https://github.com/k0603156/Traveler
 ```
+
+##### Document
 
 1.  GCP ComputedEngine 인스턴스 생성 후
 
