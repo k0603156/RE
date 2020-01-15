@@ -1,63 +1,49 @@
-https://docs.google.com/spreadsheets/d/19kUThYVtNJIqMl7_7TpXpOKg-yD5Gu7ke-_Utdf10H8/edit?usp=sharing
+###### Structure
 
-##### 설명
+###### Definition
 
-- scripts/run.js production 실행 스크립트
-- scripts/test.js test 실행 스크립트
-  - 각 파일에서 프로세스 환경변수를 세팅
-- src/index.js 는 development 실행 스크립트
-  - 여기서는 프로세스 환경변수 세팅을 하지 않기 때문에 App/model에서 설정한 포트로 실행 됨
-- 각각의 실행환경 별 스크립트에서 sequelize와 db를 sync한다. force: true일 경우 초기화를 강제한다.
-- 스크립트에서 squelize sync 할 때 config를 읽어들인다.
+`여행지 포스팅 앱`
+`Traveler API Server`
 
-#### 1단계
+#### API
 
-- server / user, post api
-- client / 로그인,로그아웃,수정 포스팅,삭제,수정, 리스트
-- react dist를 server/dist로
-- 도커라이징
-- db도 일단 컨테이너로 올려서 volume으로 관리
-- GCP에 배포
+##### USER
 
-## 기능명세
+###### 회원가입 POST
 
-### USER
+###### 로그인 POST
 
-#### 회원가입 POST
+###### 회원정보 GET
 
-#### 로그인 POST
+###### 특정유저검색 GET
 
-#### 회원정보 GET
+###### 개인정보수정 PUT
 
-#### 특정유저검색 GET
+###### 회원탈퇴 DELETE
 
-#### 개인정보수정 PUT
+##### PLAN
 
-#### 회원탈퇴 DELETE
+###### 여행계획작성 POST
 
-### POST
+###### 여행계획수정 PUT
 
-#### 게시글작성 POST
+###### 여행계획리스트 GET
 
-#### 게시글수정 PUT
+###### 여행계획검색 GET
 
-#### 게시글리스트 GET
+###### 여행계획삭제 DELETE
 
-#### 게시글검색 GET
+##### COMMENT
 
-#### 게시글삭제 DELETE
+###### 코멘트작성 POST
 
-### COMMENT
+###### 코멘트수정 PUT
 
-#### 코멘트작성 POST
+###### 코멘트리스트 GET
 
-#### 코멘트수정 PUT
+###### 코멘트삭제 DELETE
 
-#### 코멘트리스트 GET
-
-#### 코멘트삭제 DELETE
-
-## API
+##### DETAIL
 
 ---
 
@@ -165,6 +151,29 @@ HTTP/1.1 204 No Content
 
 ---
 
-post
+plan
 
 ---
+
+##### Document
+
+https://docs.google.com/spreadsheets/d/19kUThYVtNJIqMl7_7TpXpOKg-yD5Gu7ke-_Utdf10H8/edit?usp=sharing
+
+##### 설명
+
+- scripts/run.js production 실행 스크립트
+- scripts/test.js test 실행 스크립트
+  - 각 파일에서 프로세스 환경변수를 세팅
+- src/index.js 는 development 실행 스크립트
+  - 여기서는 프로세스 환경변수 세팅을 하지 않기 때문에 App/model에서 설정한 포트로 실행 됨
+- 각각의 실행환경 별 스크립트에서 sequelize와 db를 sync한다. force: true일 경우 초기화를 강제한다.
+- 스크립트에서 squelize sync 할 때 config를 읽어들인다.
+
+#### 1단계
+
+- server / user, post api
+- client / 로그인,로그아웃,수정 포스팅,삭제,수정, 리스트
+- react dist를 server/dist로
+- 도커라이징
+- db도 일단 컨테이너로 올려서 volume으로 관리
+- GCP에 배포
