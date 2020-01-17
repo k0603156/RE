@@ -5,7 +5,7 @@
   "description": "Traveler-service-client",
   "author": {
     "name": "YongkukKim",
-    "email": "k0603156@gmail.com",
+    "email": "syntax-err@kakao.com",
     "url": "https://github.com/k0603156/"
   },
   "homepage": "",
@@ -16,7 +16,8 @@
     "build:dev:server": "node scripts/build.dev.server.js",
     "build:prod:client": "node scripts/build.prod.client.js",
     "build:prod:server": "node scripts/build.prod.server.js",
-    "start:server": "node dist/server.js"
+    "start:server": "node dist/server.js",
+    "dev": "node scripts/dev.js"
   },
   "dependencies": {
     "@babel/core": "7.7.4",

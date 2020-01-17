@@ -78,7 +78,7 @@ module.exports = {
           {
             test: cssRegex,
             exclude: cssModuleRegex,
-            //  exportOnlyLocals: true 옵션을 설정해야 실제 css 파일을 생성하지 않습니다.
+            //  exportOnlyLocals: true 옵션을 설정해야 실제 css 파일을 생성하지 않습니다./locals
             loader: require.resolve("css-loader"),
             options: {
               exportOnlyLocals: true

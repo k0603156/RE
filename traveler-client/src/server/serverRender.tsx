@@ -15,7 +15,7 @@ const serverRender = async (req: any, res: any, next: any) => {
   const context = {};
 
   const preloadContext = { done: false, promises: [] };
-  const jsx = (
+  const html = (
     <PreloadContext.Provider value={preloadContext}>
       <Provider store={store}>
         <StaticRouter location={req.url} context={context}>
@@ -25,7 +25,7 @@ const serverRender = async (req: any, res: any, next: any) => {
     </PreloadContext.Provider>
   );
 
-  ReactDOMServer.renderToStaticMarkup(jsx);
+  ReactDOMServer.renderToStaticMarkup(html);
   store.dispatch(END);
   try {
     await sagaPromise;
@@ -35,7 +35,7 @@ const serverRender = async (req: any, res: any, next: any) => {
   }
   preloadContext.done = true;
 
-  const root = ReactDOMServer.renderToString(jsx);
+  const root = ReactDOMServer.renderToString(html);
   const preReduxState = createPreloadRedux(store);
 
   res.send(createPage(root, preReduxState));
