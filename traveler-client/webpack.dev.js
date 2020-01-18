@@ -5,7 +5,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 module.exports = {
   mode: "development",
 
-  entry: paths.TravelerIndexTs,
+  entry: paths.TravelerClientIndexTs,
 
   devServer: {
     historyApiFallback: true,
@@ -25,7 +25,7 @@ module.exports = {
   },
 
   resolve: {
-    extensions: [".js", "jsx", ".ts", ".tsx"]
+    extensions: paths.moduleFileExtensions
   },
 
   plugins: [
