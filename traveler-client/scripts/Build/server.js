@@ -13,7 +13,7 @@ const webpack = require("webpack");
 
 const paths = require("../../config/paths");
 const webpackClientConfig = require(paths.TravelerConfig + "/webpack.config")(
-  "client"
+  "server"
 );
 
 function build() {

@@ -1,18 +1,22 @@
-const webpack = require("webpack");
+const nodeExternals = require("webpack-node-externals");
 const path = require("path");
-const paths = require("./config/paths");
-
-const hotMiddlewareScript = `webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true`;
+const paths = require("./paths");
 
 module.exports = {
   mode: process.env.NODE_ENV === "production" ? "production" : "development",
 
-  entry: [hotMiddlewareScript, paths.TravelerClientIndexTs],
+  target: "node",
+
+  node: false, // it enables '__dirname' in files. If is not, '__dirname' always return '/'.
+
+  entry: {
+    server: paths.TravelerSSRIndexTs
+  },
 
   output: {
     path: paths.TravelerBuild,
     filename: "[name].js",
-    publicPath: "/"
+    chunkFilename: "[name].js"
   },
 
   module: {
@@ -28,5 +32,5 @@ module.exports = {
     extensions: [...paths.moduleFileExtensions]
   },
 
-  plugins: [new webpack.HotModuleReplacementPlugin()]
+  externals: [nodeExternals()]
 };
