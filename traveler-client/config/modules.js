@@ -17,8 +17,7 @@ function getWebpackAliases(options = {}) {
       src: paths.TravelerSrc
     };
   }
-  ///경로 지정
-  //tsconfig.baseurl === ./src
+
   if (path.relative(paths.TravelerPath, baseUrlResolved) === "src") {
     return {
       "@Ssr": path.resolve(__dirname, "../src/SSR/"),
