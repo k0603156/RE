@@ -19,7 +19,10 @@ const resolveModule = (resolveFn, filePath) => {
 
 module.exports = {
   TravelerPath: resolveApp("."),
+  TravelerSrc: resolveApp("src"),
+  TravelerNodeModules: resolveApp("node_modules"),
   TravelerPackageJson: resolveApp("package.json"),
+  TravelerTsConfig: resolveApp("tsconfig.json"),
   TravelerConfig: resolveApp("config"),
   TravelerPublic: resolveApp("src/PUBLIC"),
   TravelerHtml: resolveApp("src/PUBLIC/index.html"),

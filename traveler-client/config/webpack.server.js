@@ -26,9 +26,5 @@ module.exports = {
     ]
   },
 
-  resolve: {
-    extensions: [...paths.moduleFileExtensions]
-  },
-
   externals: [nodeExternals()]
 };

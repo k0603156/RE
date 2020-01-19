@@ -22,9 +22,5 @@ module.exports = {
     ]
   },
 
-  resolve: {
-    extensions: [...paths.moduleFileExtensions]
-  },
-
   plugins: [new webpack.HotModuleReplacementPlugin()]
 };
