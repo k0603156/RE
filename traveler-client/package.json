@@ -62,5 +62,12 @@
       "last 1 safari version"
     ]
   },
+  "babel": {
+    "presets": [
+      "@babel/preset-react",
+      "@babel/preset-env",
+      "@babel/preset-typescript"
+    ]
+  },
   "license": "ISC"
 }
