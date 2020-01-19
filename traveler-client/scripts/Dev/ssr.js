@@ -1,7 +1,7 @@
 "use strict";
-process.env.BABEL_ENV = "production";
-process.env.NODE_ENV = "production";
-process.env.GENERATE_SOURCEMAP = "false";
+process.env.BABEL_ENV = "development";
+process.env.NODE_ENV = "development";
+process.env.GENERATE_SOURCEMAP = "true";
 
 process.on("unhandledRejection", err => {
   throw err;
@@ -15,11 +15,13 @@ const paths = require("../../config/paths");
 const webpackClientConfig = require(paths.TravelerConfig + "/webpack.config")(
   "client"
 );
+const webpackServerConfig = require(paths.TravelerConfig + "/webpack.config")(
+  "server"
+);
 
-console.log(chalk.yellow(`Build Client ${process.env.NODE_ENV}...`));
-
+console.log(chalk.yellow(`Build Client&Server ${process.env.NODE_ENV}...`));
 function build() {
-  const compiler = webpack(webpackClientConfig);
+  const compiler = webpack([webpackClientConfig, webpackServerConfig]);
 
   return new Promise((resolve, reject) => {
     compiler.run((err, stats) => {

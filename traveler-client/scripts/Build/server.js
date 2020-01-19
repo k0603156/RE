@@ -12,12 +12,14 @@ const checkRequiredFiles = require("react-dev-utils/checkRequiredFiles");
 const webpack = require("webpack");
 
 const paths = require("../../config/paths");
-const webpackClientConfig = require(paths.TravelerConfig + "/webpack.config")(
+const webpackServerConfig = require(paths.TravelerConfig + "/webpack.config")(
   "server"
 );
 
+console.log(chalk.yellow(`Build Server ${process.env.NODE_ENV}...`));
+
 function build() {
-  const compiler = webpack(webpackClientConfig);
+  const compiler = webpack(webpackServerConfig);
 
   return new Promise((resolve, reject) => {
     compiler.run((err, stats) => {
@@ -27,4 +29,6 @@ function build() {
     });
   });
 }
-build();
+build().then(_ => {
+  console.log(chalk.yellow(`Sucess!`));
+});

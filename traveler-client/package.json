@@ -44,11 +44,23 @@
     "webpack-node-externals": "^1.7.2"
   },
   "scripts": {
-    "start:wds": "node scripts/Start/webpackDevserver.js",
-    "start": "yarn build:dev && node ./dist/server.js",
-    "build:dev": "rm -rf dist/ && cross-env NODE_ENV=development yarn build:client && cross-env NODE_ENV=development yarn build:server",
+    "dev:devserver": "node scripts/Dev/wds.js",
+    "dev:ssr": "node scripts/Dev/ssr.js && node ./dist/server.js",
     "build:client": "node scripts/Build/client.js",
-    "build:server": "node scripts/Build/server.js"
+    "build:server": "node scripts/Build/server.js",
+    "start": "yarn build:client &&  yarn build:server && node ./dist/server.js"
+  },
+  "browserslist": {
+    "production": [
+      ">0.25%",
+      "not ie 11",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   },
   "license": "ISC"
 }

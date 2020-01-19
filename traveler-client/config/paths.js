@@ -18,6 +18,7 @@ const resolveModule = (resolveFn, filePath) => {
 };
 
 module.exports = {
+  TravelerPath: resolveApp("."),
   TravelerPackageJson: resolveApp("package.json"),
   TravelerConfig: resolveApp("config"),
   TravelerPublic: resolveApp("src/PUBLIC"),
