@@ -3,8 +3,6 @@ const path = require("path");
 const paths = require("./paths");
 
 module.exports = {
-  mode: process.env.NODE_ENV === "production" ? "production" : "development",
-
   target: "node",
 
   node: false, // it enables '__dirname' in files. If is not, '__dirname' always return '/'.

@@ -5,8 +5,6 @@ const paths = require("./paths");
 const hotMiddlewareScript = `webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true`;
 
 module.exports = {
-  mode: process.env.NODE_ENV === "production" ? "production" : "development",
-
   entry: [hotMiddlewareScript, paths.TravelerClientIndexTs],
 
   output: {
