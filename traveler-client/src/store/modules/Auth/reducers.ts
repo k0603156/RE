@@ -7,22 +7,22 @@ import {
 
 import { createReducer } from "typesafe-actions";
 
-// const initialState: IAuthState = {
-//   isLogged: !!localStorage.getItem("token"),
-//   isAdmin: true,
-//   me: {
-//     userName: localStorage.getItem("userName") || "",
-//     email: localStorage.getItem("email") || ""
-//   }
-// };
 const initialState: IAuthState = {
-  isLogged: false,
+  isLogged: !!localStorage.getItem("token"),
   isAdmin: true,
   me: {
-    userName: "",
-    email: ""
+    userName: localStorage.getItem("userName") || "",
+    email: localStorage.getItem("email") || ""
   }
 };
+// const initialState: IAuthState = {
+//   isLogged: false,
+//   isAdmin: true,
+//   me: {
+//     userName: "",
+//     email: ""
+//   }
+// };
 
 const AuthReducer = createReducer(initialState, {
   // 로그인 성공

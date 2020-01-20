@@ -44,11 +44,14 @@ const PlanReducer = createReducer(initialState, {
   },
   // 플랜콘텐츠작성
   [INPUT_STORY_MUTATE]: (state, action) => {
-    const newstoryArr = state.storyArr.map((content: any, index: any) => {
-      if (index === action.payload.contentIndex) {
-        content[action.payload.entry] = action.payload.data;
+    const idx = action.payload.contentIndex;
+    const entry = action.payload.entry;
+    const data = action.payload.data;
+    const newstoryArr = state.storyArr.map((story: any, index: any) => {
+      if (index === idx) {
+        story[entry] = data;
       }
-      return content;
+      return story;
     });
     return {
       ...state,

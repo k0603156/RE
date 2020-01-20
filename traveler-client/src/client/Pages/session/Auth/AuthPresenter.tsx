@@ -71,9 +71,7 @@ function AuthPresenter({
                 type="password"
                 pattern={"[A-Za-z0-9]*"}
               />
-              <Button type={"submit"} custom={"wide"}>
-                Sign In
-              </Button>
+              <Button type={"submit"}>Sign In</Button>
             </form>
             Don't have an account?
             <Button
@@ -122,9 +120,7 @@ function AuthPresenter({
                 maxLength={20}
                 title="특수문자를 제외한 8~20글자"
               />
-              <Button type={"submit"} custom={"wide"}>
-                Sign up
-              </Button>
+              <Button type={"submit"}>Sign up</Button>
             </form>
             Did you have an account?
             <Button
