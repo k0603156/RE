@@ -18,7 +18,7 @@ const req = (
     confirmPassword?: string;
   }
 ) => {
-  const token = sessionStorage.getItem("token");
+  const token = localStorage.getItem("token");
   return Axios({
     method,
     url: API_ROOT + ROUTE + url,

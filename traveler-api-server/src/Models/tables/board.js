@@ -15,8 +15,10 @@ module.exports = (sequelize, DataTypes) => {
       paranoid: true
     }
   );
+
   board.associate = function(models) {
     board.hasMany(models.plan);
   };
+
   return board;
 };

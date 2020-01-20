@@ -1,10 +1,12 @@
 const ErrorHandler = require("../Utils/ErrorHandler");
+const { authenticateJwt } = require("../MiddleWares/passport");
 const authRouter = require("./auth");
 const userRouter = require("./user");
 const planRouter = require("./plan");
 const API_ROOT = "/api/v1";
 
 module.exports = app => {
+  app.use(authenticateJwt);
   app.use(`${API_ROOT}/auth/`, authRouter);
   app.use(`${API_ROOT}/user/`, userRouter);
   app.use(`${API_ROOT}/plan/`, planRouter);

@@ -14,27 +14,25 @@ const verifyUser = async (payload, done) => {
         email: payload.email
       }
     });
-    console.log("user:", dataValues);
     return done(null, dataValues);
   } catch (error) {
     return done(error, false);
   }
 };
 
-exports.authenticateJwt = (req, res, next) =>
+exports.authenticateJwt = (req, res, next) => {
   passport.authenticate(
     "jwt",
     {
       sessions: false
     },
     (error, user) => {
-      // console.log(req.headers);
       if (user) {
         req.user = user;
       }
       next();
     }
   )(req, res, next);
-
+};
 passport.use(new Strategy(jwtOptions, verifyUser));
 passport.initialize();

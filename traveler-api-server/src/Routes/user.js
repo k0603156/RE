@@ -16,7 +16,6 @@ Router.get("/:userName", async (req, res, next) => {
       where: { userName: req.params.userName },
       attributes: ["userName"]
     });
-    console.log(exUser);
     if (!exUser) {
       throw new NotFoundError("해당 사용자를 찾을 수 없습니다.");
     }
@@ -41,7 +40,6 @@ Router.post("/", async (req, res, next) => {
       "password",
       "confirmPassword"
     );
-    console.log(req.body);
     if (reqPassword !== reqConfirmPassword) {
       const error = new Error("비밀번호 체크값이 같지 않음");
       error.status = 400;
