@@ -5,8 +5,8 @@ import CountryData from "@Client/data/country";
 
 export default (props: {
   plan: any;
-  input_plan: (event: React.ChangeEvent<any>) => void;
-  input_story: (event: React.ChangeEvent<any>) => void;
+  input_plan_header: (event: React.ChangeEvent<any>) => void;
+  input_plan_story: (event: React.ChangeEvent<any>) => void;
   increase_story: () => void;
   onSubmit: (event: React.ChangeEvent<any>) => void;
 }) => {
@@ -19,7 +19,7 @@ export default (props: {
             id={"ht"}
             name={"title"}
             defaultValue={props.plan.header.title}
-            onChange={props.input_plan}
+            onChange={props.input_plan_header}
             type={"text"}
             maxLength={100}
           />
@@ -28,7 +28,7 @@ export default (props: {
             id={"hfd"}
             name={"fromDate"}
             defaultValue={props.plan.header.fromDate}
-            onChange={props.input_plan}
+            onChange={props.input_plan_header}
             type={"date"}
           />
           <label htmlFor="htd">toDate</label>
@@ -36,7 +36,7 @@ export default (props: {
             id={"htd"}
             name={"toDate"}
             defaultValue={props.plan.header.toDate}
-            onChange={props.input_plan}
+            onChange={props.input_plan_header}
             type={"date"}
           />
           <label htmlFor="hc">country</label>
@@ -44,7 +44,7 @@ export default (props: {
             id={"hc"}
             entry={"country"}
             defaultValue={CountryData[Number(props.plan.header.country)].value}
-            onChange={props.input_plan}
+            onChange={props.input_plan_header}
             options={CountryData}
           />
           <label htmlFor="hmb">mainBody</label>
@@ -52,7 +52,7 @@ export default (props: {
             id={"hmb"}
             name={"mainBody"}
             defaultValue={props.plan.header.mainBody}
-            onChange={props.input_plan}
+            onChange={props.input_plan_header}
             maxLength={100}
           />
         </Box>
@@ -67,7 +67,7 @@ export default (props: {
               defaultValue={data.title}
               name={"title"}
               data-idx={index}
-              onChange={props.input_story}
+              onChange={props.input_plan_story}
               type={"text"}
               maxLength={100}
             />
@@ -77,7 +77,7 @@ export default (props: {
               defaultValue={data.date}
               name={"date"}
               data-idx={index}
-              onChange={props.input_story}
+              onChange={props.input_plan_story}
               type={"date"}
             />
             <label htmlFor={`sc+${index}`}>content</label>
@@ -86,7 +86,7 @@ export default (props: {
               defaultValue={data.content}
               name={"content"}
               data-idx={index}
-              onChange={props.input_story}
+              onChange={props.input_plan_story}
               maxLength={100}
             />
           </Box>

@@ -38,13 +38,9 @@ module.exports = (sequelize, DataTypes) => {
   );
   plan.associate = function(models) {
     plan.belongsTo(models.user);
+    plan.belongsTo(models.board);
     plan.hasMany(models.story);
     plan.belongsToMany(models.hashtag, { through: "PlanHashtag" });
-    // Post.hasMany(models.Content, {
-    //   foreignKey: "postId",
-    //   sourceKey: "id",
-    //   as: "contentOfpost"
-    // });
   };
   return plan;
 };

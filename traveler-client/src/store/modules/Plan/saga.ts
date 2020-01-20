@@ -11,56 +11,60 @@ import { startLoading, finishLoading } from "../Loading";
 import { createMSG } from "../Msg";
 import { Plan } from "@Client/Api";
 import {
-  INCREASE_STORY_MUTATE,
-  DECREASE_STORY_MUTATE,
+  INCREASE_PLAN_STORY_MUTATE,
+  DECREASE_PLAN_STORY_MUTATE,
   CREATE_PLAN_REQUEST,
   SELECT_PLAN_REQUEST,
   UPDATE_PLAN_REQUEST,
   DELETE_PLAN_REQUEST,
-  INCREASE_STORY_SUCCESS,
-  INCREASE_STORY_FAILURE,
-  DECREASE_STORY_SUCCESS,
-  DECREASE_STORY_FAILURE,
+  INCREASE_PLAN_STORY_SUCCESS,
+  INCREASE_PLAN_STORY_FAILURE,
+  DECREASE_PLAN_STORY_SUCCESS,
+  DECREASE_PLAN_STORY_FAILURE,
   CREATE_PLAN_SUCCESS,
-  increase_story_mutate,
-  decrease_story_mutate
+  increase_plan_story_mutate,
+  decrease_plan_story_mutate
 } from "./types";
 
 const storyMaximum = 5;
 
 //컨텐츠 증가
-export function* increaseStorySaga(data: increase_story_mutate): Generator {
+export function* increaseStorySaga(
+  data: increase_plan_story_mutate
+): Generator {
   yield put(startLoading(data.type));
   try {
     const [storyCount]: any = yield select(state => [
       state.plan.storyArr.length
     ]);
     if (storyCount && storyCount < storyMaximum) {
-      yield put({ type: INCREASE_STORY_SUCCESS, payload: {} });
+      yield put({ type: INCREASE_PLAN_STORY_SUCCESS, payload: {} });
     } else {
       throw new Error("일정을 더 이상 추가할 수 없습니다.");
     }
   } catch (error) {
     console.dir(error);
-    yield put(createMSG(INCREASE_STORY_FAILURE, "ERROR", error));
+    yield put(createMSG(INCREASE_PLAN_STORY_FAILURE, "ERROR", error));
   } finally {
     yield put(finishLoading(data.type));
   }
 }
 //컨텐츠 감소
-export function* decreaseStorySaga(data: decrease_story_mutate): Generator {
+export function* decreaseStorySaga(
+  data: decrease_plan_story_mutate
+): Generator {
   yield put(startLoading(data.type));
   try {
     const contentsCount: any = yield select(
       state => state.plan.contentArr.length
     );
     if (contentsCount && contentsCount > 1) {
-      yield put({ type: DECREASE_STORY_SUCCESS, payload: {} });
+      yield put({ type: DECREASE_PLAN_STORY_SUCCESS, payload: {} });
     } else {
       throw new Error("최소 1개의 일정을 작성해야 합니다.");
     }
   } catch (error) {
-    yield put(createMSG(DECREASE_STORY_FAILURE, "ERROR", error));
+    yield put(createMSG(DECREASE_PLAN_STORY_FAILURE, "ERROR", error));
   } finally {
     yield put(finishLoading(data.type));
   }
@@ -99,10 +103,10 @@ const updatePlanSaga = requestPlanSaga(UPDATE_PLAN_REQUEST, Plan.update_plan);
 const deletePlanSaga = requestPlanSaga(DELETE_PLAN_REQUEST, Plan.delete_plan);
 
 function* increaseStory() {
-  yield takeLatest(INCREASE_STORY_MUTATE, increaseStorySaga);
+  yield takeLatest(INCREASE_PLAN_STORY_MUTATE, increaseStorySaga);
 }
 function* decreaseStory() {
-  yield takeLatest(DECREASE_STORY_MUTATE, decreaseStorySaga);
+  yield takeLatest(DECREASE_PLAN_STORY_MUTATE, decreaseStorySaga);
 }
 function* createPlan() {
   yield takeLatest(CREATE_PLAN_REQUEST, createPlanSaga);

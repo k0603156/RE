@@ -2,8 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 import { debounce } from "lodash";
 import {
-  input_plan,
-  input_story,
+  input_plan_header,
+  input_plan_story,
   increase_story,
   decrease_story,
   create_plan
@@ -12,8 +12,8 @@ import Presenter from "./Presenter";
 
 const Container = (props: {
   plan: any;
-  input_plan: any;
-  input_story: any;
+  input_plan_header: any;
+  input_plan_story: any;
   increase_story: any;
   decrease_story: any;
   create_plan: any;
@@ -24,16 +24,16 @@ const Container = (props: {
     50
   );
 
-  function inputPlan(event: React.ChangeEvent<any>) {
+  function inputPlanHeader(event: React.ChangeEvent<any>) {
     _debounce(
-      props.input_plan,
+      props.input_plan_header,
       event.currentTarget.name,
       event.currentTarget.value
     );
   }
-  function inputStory(event: React.ChangeEvent<any>) {
+  function inputPlanStory(event: React.ChangeEvent<any>) {
     _debounce(
-      props.input_story,
+      props.input_plan_story,
       Number(event.currentTarget.dataset.idx),
       event.currentTarget.name,
       event.currentTarget.value
@@ -54,8 +54,8 @@ const Container = (props: {
   return (
     <Presenter
       plan={props.plan}
-      input_plan={inputPlan}
-      input_story={inputStory}
+      input_plan_header={inputPlanHeader}
+      input_plan_story={inputPlanStory}
       increase_story={increaseStory}
       onSubmit={onSubmit}
     />
@@ -66,5 +66,11 @@ export default connect(
   ({ plan, loading }: RootStateType) => ({
     plan
   }),
-  { input_plan, input_story, increase_story, decrease_story, create_plan }
+  {
+    input_plan_header,
+    input_plan_story,
+    increase_story,
+    decrease_story,
+    create_plan
+  }
 )(Container);

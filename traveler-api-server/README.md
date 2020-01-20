@@ -7,6 +7,8 @@
 
 #### API
 
+<img width="100%" src="https://user-images.githubusercontent.com/16025776/72713055-ac0bee00-3baf-11ea-9e77-a62c08c1ce5f.jpg">
+
 ##### USER
 
 ###### 회원가입 POST

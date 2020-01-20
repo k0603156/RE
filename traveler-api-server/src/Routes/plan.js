@@ -2,7 +2,7 @@ const Router = require("express").Router();
 const Models = require("../Models/tables");
 
 Router.get("/", (req, res, next) => {
-  res.send("ww");
+  res.send("GET PLAN");
 });
 
 Router.post("/", async (req, res, next) => {

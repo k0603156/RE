@@ -1,11 +1,11 @@
 import { createReducer } from "typesafe-actions";
 import {
-  INPUT_PLAN_MUTATE,
-  INPUT_STORY_MUTATE,
-  DECREASE_STORY_MUTATE
+  INPUT_PLAN_HEADER_MUTATE,
+  INPUT_PLAN_STORY_MUTATE,
+  INCREASE_PLAN_STORY_MUTATE,
+  DECREASE_PLAN_STORY_MUTATE
 } from "./types";
 import {
-  INCREASE_STORY_SUCCESS,
   CREATE_PLAN_SUCCESS,
   SELECT_PLAN_SUCCESS,
   UPDATE_PLAN_SUCCESS,
@@ -33,7 +33,7 @@ const initialState = {
 
 const PlanReducer = createReducer(initialState, {
   // 플랜헤더작성
-  [INPUT_PLAN_MUTATE]: (state, action: any) => {
+  [INPUT_PLAN_HEADER_MUTATE]: (state, action: any) => {
     return {
       ...state,
       header: {
@@ -43,7 +43,7 @@ const PlanReducer = createReducer(initialState, {
     };
   },
   // 플랜콘텐츠작성
-  [INPUT_STORY_MUTATE]: (state, action) => {
+  [INPUT_PLAN_STORY_MUTATE]: (state, action) => {
     const idx = action.payload.contentIndex;
     const entry = action.payload.entry;
     const data = action.payload.data;
@@ -59,7 +59,7 @@ const PlanReducer = createReducer(initialState, {
     };
   },
   // 콘텐츠개수증가
-  [INCREASE_STORY_SUCCESS]: (state, action) => {
+  [INCREASE_PLAN_STORY_MUTATE]: (state, action) => {
     return {
       ...state,
       storyArr: [...state.storyArr, { ...story }]
@@ -67,7 +67,7 @@ const PlanReducer = createReducer(initialState, {
   },
   //콘텐츠개수감소
   // contentIndex start from 0
-  [DECREASE_STORY_MUTATE]: (state, action) => {
+  [DECREASE_PLAN_STORY_MUTATE]: (state, action) => {
     const contentIndex = action.payload.contentIndex;
     return {
       ...state,

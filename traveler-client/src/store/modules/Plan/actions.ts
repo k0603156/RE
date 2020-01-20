@@ -1,8 +1,8 @@
 import {
-  INPUT_PLAN_MUTATE,
-  INPUT_STORY_MUTATE,
-  INCREASE_STORY_MUTATE,
-  DECREASE_STORY_MUTATE,
+  INPUT_PLAN_HEADER_MUTATE,
+  INPUT_PLAN_STORY_MUTATE,
+  INCREASE_PLAN_STORY_MUTATE,
+  DECREASE_PLAN_STORY_MUTATE,
   CREATE_PLAN_REQUEST,
   SELECT_PLAN_REQUEST,
   UPDATE_PLAN_REQUEST,
@@ -12,12 +12,12 @@ import {
 
 //** CREATE ACTION **//
 // 헤더작성
-export function input_plan(
+export function input_plan_header(
   entry: "title" | "country" | "fromDate" | "toDate" | "subTitle" | "image",
   data: string | number
 ): PLAN_ACTION_TYPES {
   return {
-    type: INPUT_PLAN_MUTATE,
+    type: INPUT_PLAN_HEADER_MUTATE,
     payload: {
       entry,
       data
@@ -25,13 +25,13 @@ export function input_plan(
   };
 }
 // 콘텐츠작성
-export function input_story(
+export function input_plan_story(
   contentIndex: number,
   entry: "title" | "date" | "body" | "image",
   data: string
 ): PLAN_ACTION_TYPES {
   return {
-    type: INPUT_STORY_MUTATE,
+    type: INPUT_PLAN_STORY_MUTATE,
     payload: {
       contentIndex,
       entry,
@@ -42,14 +42,14 @@ export function input_story(
 // 콘텐츠개수증가
 export function increase_story(): PLAN_ACTION_TYPES {
   return {
-    type: INCREASE_STORY_MUTATE,
+    type: INCREASE_PLAN_STORY_MUTATE,
     payload: {}
   };
 }
 //콘텐츠개수감소
 export function decrease_story(contentIndex: number): PLAN_ACTION_TYPES {
   return {
-    type: DECREASE_STORY_MUTATE,
+    type: DECREASE_PLAN_STORY_MUTATE,
     payload: {
       contentIndex
     }
