@@ -38,9 +38,10 @@
    ```
 5. [0] 전체 구조 잡기
 
-##### modules
+##### Dependencies
 
-- prop-types
-- lodash, @types/lodash
-- react-router-dom, @types/react-router-dom
-- redux, react-redux, @types/react-redux
+- react-router-dom
+- redux, react-redux, redux-saga
+- axios
+- lodash
+- styled-components
