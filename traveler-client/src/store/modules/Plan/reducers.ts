@@ -9,7 +9,8 @@ import {
   CREATE_PLAN_SUCCESS,
   SELECT_PLAN_SUCCESS,
   UPDATE_PLAN_SUCCESS,
-  DELETE_PLAN_SUCCESS
+  DELETE_PLAN_SUCCESS,
+  INCREASE_PLAN_STORY_SUCCESS
 } from "./types";
 
 const story = {
@@ -59,7 +60,7 @@ const PlanReducer = createReducer(initialState, {
     };
   },
   // 콘텐츠개수증가
-  [INCREASE_PLAN_STORY_MUTATE]: (state, action) => {
+  [INCREASE_PLAN_STORY_SUCCESS]: (state, action) => {
     return {
       ...state,
       storyArr: [...state.storyArr, { ...story }]
