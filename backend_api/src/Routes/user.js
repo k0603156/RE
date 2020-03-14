@@ -1,15 +1,20 @@
 const Router = require("express").Router();
 const UserService = require("../Services/userService");
-const { checkProps } = require("../Utils");
 
 Router.get("/", async (req, res, next) => {
-  res.status(200).json({ data: "user" });
+  res.status(200).json({
+    success: true,
+    data: "user"
+  });
 });
 
 Router.get("/:userName", async (req, res, next) => {
   try {
-    const result = await UserService.getUser(req);
-    res.status(200).json(result);
+    const result = await UserService.findUser(req);
+    res.status(200).json({
+      success: true,
+      result
+    });
   } catch (error) {
     next(error);
   }
@@ -18,24 +23,10 @@ Router.get("/:userName", async (req, res, next) => {
 //회원가입
 Router.post("/", async (req, res, next) => {
   try {
-    const { userName, email, password, confirmPassword } = checkProps(
-      req.body,
-      "userName",
-      "email",
-      "password",
-      "confirmPassword"
-    );
-    const result = await UserService.signup(
-      userName,
-      email,
-      password,
-      confirmPassword
-    );
-
-    result &&
-      res.status(201).json({
-        success: true
-      });
+    const result = await UserService.signup(req);
+    res.status(201).json({
+      success: true
+    });
   } catch (error) {
     next(error);
   }
@@ -44,20 +35,11 @@ Router.post("/", async (req, res, next) => {
 //회원정보 수정
 Router.put("/", async (req, res, next) => {
   try {
-    const { id, userName, password, confirmPassword } = checkProps(
-      req.body,
-      "id",
-      "userName",
-      "password",
-      "confirmPassword"
-    );
-    const result = await UserService.updateUser(
-      id,
-      userName,
-      password,
-      confirmPassword
-    );
-    res.status(200).json(result);
+    const result = await UserService.updateUser(req);
+    res.status(200).json({
+      success: true,
+      result
+    });
   } catch (error) {
     next(error);
   }
@@ -67,7 +49,10 @@ Router.put("/", async (req, res, next) => {
 Router.delete("/", async (req, res, next) => {
   try {
     const result = await UserService.deleteUser(req);
-    res.status(204).json(result);
+    res.status(204).json({
+      success: true,
+      result
+    });
   } catch (error) {
     next(error);
   }
