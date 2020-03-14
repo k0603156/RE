@@ -1,5 +1,5 @@
-import Auth from "./auth";
-import User from "./user";
-import Plan from "./plan";
+import auth from "./auth";
+import user from "./user";
+import post from "./post";
 
-export { Auth, User, Plan };
+export default { auth, user, post };
