@@ -4,7 +4,7 @@ const UserService = require("../Services/userService");
 Router.get("/", async (req, res, next) => {
   res.status(200).json({
     success: true,
-    data: "user"
+    result: "user"
   });
 });
 

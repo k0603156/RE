@@ -1,6 +1,7 @@
 import React from "react";
 import { Input, Box, Button, TextArea, Badge } from "@Client/Components/atoms";
 import { SearchableSelector } from "@Client/Components/molecules";
+import { Editor } from "@Client/Components/organisms";
 import CountryData from "@Client/data/country";
 
 export default (props: {
@@ -12,6 +13,7 @@ export default (props: {
 }) => {
   return (
     <div>
+      <Editor />
       <form onSubmit={props.onSubmit}>
         <Box>
           <label htmlFor="ht">제목</label>

@@ -11,8 +11,9 @@ const initialState = { userName: "" };
 
 const UserReducer = createReducer(initialState, {
   [SELECT_USER_SUCCESS]: (state, action) => {
+    console.log(action.payload.result);
     return {
-      userName: action.payload.userName
+      userName: action.payload.result.userName
     };
   },
   [CREATE_USER_SUCCESS]: (state, action) => {
