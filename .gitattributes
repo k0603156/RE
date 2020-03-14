@@ -1,2 +1,2 @@
-traveler-client/config/* linguist-vendored
-traveler-client/scripts/* linguist-vendored
+frontend/config/* linguist-vendored
+frontend/scripts/* linguist-vendored
