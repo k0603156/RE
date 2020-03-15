@@ -5,7 +5,7 @@ const app = require("../App");
 describe("test", () => {
   let server;
   let request;
-
+  let token;
   beforeAll(done => {
     server = http.createServer(app);
     request = supertest(server);
@@ -17,27 +17,47 @@ describe("test", () => {
   it("회원가입 테스트", async () => {
     const res = await request
       .post("/api/v1/user")
+      .set("Accept", "application/json")
       .send({
         userName: "john",
         email: "test@test.com",
         password: "test123",
         confirmPassword: "test123"
       })
-      .set("Accept", "application/json");
-    expect(res.statusCode).toEqual(201);
+      .expect(201);
     expect(res.body).toHaveProperty("success");
     expect(res.body.success).toEqual(true);
   });
 
   it("로그인 테스트", async () => {
-    const res = await request.post("/api/v1/auth/authenticate").send({
-      email: "test@test.com",
-      password: "test123"
-    });
-    expect(res.statusCode).toEqual(200);
+    const res = await request
+      .post("/api/v1/auth/authenticate")
+      .send({
+        email: "test@test.com",
+        password: "test123"
+      })
+      .expect(200);
     expect(res.body).toHaveProperty("email");
     expect(res.body).toHaveProperty("userName");
     expect(res.body).toHaveProperty("token");
+
+    token = res.body.token;
+  });
+
+  it("글작성 테스트", async () => {
+    const res = await request
+      .post("/api/v1/post")
+      .set("Authorization", "bearer " + token)
+      .send({
+        title: "test post title",
+        content: [
+          {
+            type: "paragraph",
+            children: [{ text: "test post paragraph" }]
+          }
+        ]
+      })
+      .expect(201);
   });
 });
 
