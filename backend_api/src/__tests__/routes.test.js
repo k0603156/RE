@@ -2,7 +2,7 @@ const supertest = require("supertest");
 const http = require("http");
 const app = require("../App");
 
-describe("Demo test", () => {
+describe("test", () => {
   let server;
   let request;
 
@@ -14,12 +14,7 @@ describe("Demo test", () => {
   afterAll(done => {
     server.close(done);
   });
-  it("test sample", async () => {
-    const res = await request.get("/api/v1/post");
-    expect(res.statusCode).toEqual(200);
-    // expect(res.body).toHaveProperty("data");
-  });
-  it("test sample2", async () => {
+  it("회원가입 테스트", async () => {
     const res = await request
       .post("/api/v1/user")
       .send({
@@ -30,7 +25,19 @@ describe("Demo test", () => {
       })
       .set("Accept", "application/json");
     expect(res.statusCode).toEqual(201);
+    expect(res.body).toHaveProperty("success");
+    expect(res.body.success).toEqual(true);
+  });
+
+  it("로그인 테스트", async () => {
+    const res = await request.post("/api/v1/auth/authenticate").send({
+      email: "test@test.com",
+      password: "test123"
+    });
+    expect(res.statusCode).toEqual(200);
+    expect(res.body).toHaveProperty("email");
     expect(res.body).toHaveProperty("userName");
+    expect(res.body).toHaveProperty("token");
   });
 });
 

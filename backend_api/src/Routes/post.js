@@ -10,6 +10,7 @@ Router.post("/", async (req, res, next) => {
     const result = await Models.post.create(
       {
         userId: req.user.id,
+        title: req.body.title,
         content: [...req.body.content]
       }
       // { include: [Models.story] }
