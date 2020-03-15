@@ -4,6 +4,7 @@ const Models = require("../Models/tables");
 Router.get("/", (req, res, next) => {
   res.send("GET PLAN");
 });
+
 Router.post("/", async (req, res, next) => {
   try {
     const result = await Models.plan.create(
