@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   board.associate = function(models) {
-    board.hasMany(models.plan);
+    // board.hasMany(models.plan);
   };
 
   return board;

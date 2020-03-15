@@ -2,18 +2,17 @@ const Router = require("express").Router();
 const Models = require("../Models/tables");
 
 Router.get("/", (req, res, next) => {
-  res.send("GET PLAN");
+  res.send("Get Post");
 });
 
 Router.post("/", async (req, res, next) => {
   try {
-    const result = await Models.plan.create(
+    const result = await Models.post.create(
       {
-        ...req.body.plan.header,
         userId: req.user.id,
-        stories: [...req.body.plan.storyArr]
-      },
-      { include: [Models.story] }
+        content: [...req.body.content]
+      }
+      // { include: [Models.story] }
     );
 
     result && res.status(201).json({ success: true });

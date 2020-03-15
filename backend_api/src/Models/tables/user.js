@@ -38,7 +38,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
   user.associate = function(models) {
-    user.hasMany(models.plan);
+    user.hasMany(models.post);
   };
   return user;
 };

@@ -4,7 +4,7 @@ const { sequelize } = require(appSrc + "/Models/tables");
 const { board } = require(appSrc + "/Models/tables");
 const { NormLog, ErrorLog } = require(appSrc + "/Utils/log");
 const app = require(appSrc + "/app");
-const option = { force: false, logging: false };
+const option = { force: true, logging: false };
 
 //Todo: sequelize.sync는 적당한 부분에서 process.env 기준으로 실행해줘야겠다. 실행스크립트 or index
 sequelize

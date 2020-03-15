@@ -30,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
   story.associate = models => {
-    story.belongsTo(models.plan);
+    // story.belongsTo(models.plan);
   };
   return story;
 };
