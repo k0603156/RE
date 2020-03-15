@@ -10,7 +10,7 @@ import {
   login_action,
   logout_action
 } from "./types";
-import { Auth } from "@Client/Api";
+import Api from "@Client/Api";
 import { createMSG } from "../Msg";
 import { startLoading, finishLoading } from "../Loading";
 import { all, fork, takeLatest, put, call } from "redux-saga/effects";
@@ -24,7 +24,7 @@ export function* loginSaga(data: login_action): Generator {
     password: data.payload.password
   };
   try {
-    const response: any = yield call(Auth.authenticate, payload);
+    const response: any = yield call(Api.auth.authenticate, payload);
 
     yield put({ type: LOGIN_AUTH_SUCCESS, payload: response.data });
     localStorage.setItem("token", response.data.token);
@@ -48,7 +48,7 @@ export function* logoutSaga(data: logout_action): Generator {
     email: data.payload.email
   };
   try {
-    const response: any = yield call(Auth.deauthorize, payload);
+    const response: any = yield call(Api.auth.deauthorize, payload);
     if (response.status === 200) {
       yield put({ type: LOGOUT_AUTH_SUCCESS, payload: response.data });
       localStorage.removeItem("token");
@@ -62,11 +62,14 @@ export function* logoutSaga(data: logout_action): Generator {
 }
 
 // OTP 체크 요청
-const checkOTPSaga = createRequestSaga(CHECK_OTP_AUTH_REQUEST, Auth.authorize);
+const checkOTPSaga = createRequestSaga(
+  CHECK_OTP_AUTH_REQUEST,
+  Api.auth.authorize
+);
 // 토큰 재발행 요청
 const changeTokenSaga = createRequestSaga(
   CHANGE_TOKEN_AUTH_REQUEST,
-  Auth.reauthorize
+  Api.auth.reauthorize
 );
 
 function* login() {

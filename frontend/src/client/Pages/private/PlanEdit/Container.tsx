@@ -1,16 +1,17 @@
 import React from "react";
+import { Node } from "slate";
 import { connect } from "react-redux";
 import { debounce } from "lodash";
-import { create_plan } from "@Store/modules/Post/actions";
+import {
+  postFillinAction,
+  postCreateAction
+} from "@Store/modules/Post/actions";
 import Presenter from "./Presenter";
 
 const Container = (props: {
-  plan: any;
-  input_plan_header: any;
-  input_plan_story: any;
-  increase_story: any;
-  decrease_story: any;
-  create_plan: any;
+  post: RootStateType["post"];
+  postFillinAction: any;
+  postCreateAction: any;
 }) => {
   const _debounce = debounce(
     (f: (...any: (string | number)[]) => void, ...arr: (string | number)[]) =>
@@ -19,28 +20,28 @@ const Container = (props: {
   );
 
   function inputPlanStory(event: React.ChangeEvent<any>) {
-    _debounce(
-      props.input_plan_story,
-      Number(event.currentTarget.dataset.idx),
-      event.currentTarget.name,
-      event.currentTarget.value
-    );
+    _debounce(event.currentTarget.name, event.currentTarget.value);
   }
 
   const onSubmit = (event: React.ChangeEvent<any>) => {
     event.preventDefault();
-    props.create_plan(props.plan);
-    console.log("submit");
+    props.postCreateAction();
   };
-
-  return <Presenter onSubmit={onSubmit} />;
+  const onChange = (value: Array<Node>) => {
+    props.postFillinAction(value);
+  };
+  return (
+    <Presenter
+      onSubmit={onSubmit}
+      onChange={onChange}
+      value={props.post.content}
+    />
+  );
 };
 
 export default connect(
-  ({ plan, loading }: RootStateType) => ({
-    plan
+  ({ post, loading }: RootStateType) => ({
+    post
   }),
-  {
-    create_plan
-  }
+  { postFillinAction, postCreateAction }
 )(Container);

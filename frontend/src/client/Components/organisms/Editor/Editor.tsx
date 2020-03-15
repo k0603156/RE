@@ -4,18 +4,21 @@ import { Slate, Editable, withReact } from "slate-react";
 import styled from "styled-components";
 import { Mx_Width } from "@Client/Styles/Device";
 
-interface IProps {}
+interface IProps {
+  onChange: (value: Node[]) => void;
+  value: Array<Node>;
+}
 
 const Editor = (props: IProps) => {
   const editor = useMemo(() => withReact(createEditor()), []);
-  const [value, setValue] = useState<Array<Node>>([
+  const [values, setValue] = useState<Array<Node>>([
     {
       type: "paragraph",
       children: [{ text: "A line of text in a paragraph." }]
     }
   ]);
   return (
-    <Slate editor={editor} value={value} onChange={value => setValue(value)}>
+    <Slate editor={editor} value={props.value} onChange={props.onChange}>
       <Editable
         onKeyDown={event => {
           console.log(event.key);

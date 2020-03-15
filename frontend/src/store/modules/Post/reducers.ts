@@ -6,15 +6,21 @@ import {
   POST_DELETE_SUCCESS,
   POST_UPDATE_SUCCESS
 } from "./types";
+import { Node } from "slate";
 
-const initialState = {
-  content: []
+const initialState: { content: Array<Node> } = {
+  content: [
+    {
+      type: "paragraph",
+      children: [{ text: "test" }]
+    }
+  ]
 };
 
 export default createReducer(initialState, {
   // 게시글 작성 액션
   [POST_FILLIN_CONDUCT]: (state, action) => {
-    return { ...state };
+    return { ...state, content: action.payload.content };
   },
   //게시글 읽기 성공
   [POST_BROWSE_SUCCESS]: (state, action) => {

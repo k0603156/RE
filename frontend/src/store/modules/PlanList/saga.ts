@@ -9,7 +9,7 @@ import {
 } from "redux-saga/effects";
 import { startLoading, finishLoading } from "../Loading";
 import { createMSG } from "../Msg";
-import { Plan } from "@Client/Api"; //TODO PLANLIST API작성
+import Api from "@Client/Api"; //TODO PLANLIST API작성
 import { SELECT_PLAN_LIST_REQUEST } from "./types";
 
 function requestPlanListSaga(type: any, request: AxiosPromiseType) {
@@ -33,7 +33,7 @@ function requestPlanListSaga(type: any, request: AxiosPromiseType) {
 //포스트 리스트 읽기
 const selectPlanListSaga = requestPlanListSaga(
   SELECT_PLAN_LIST_REQUEST,
-  Plan.select_plan
+  Api.post.post_browse
 );
 
 function* selectPlanList() {
