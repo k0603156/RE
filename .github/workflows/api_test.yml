@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    name: Build
+    name: API_TEST
     runs-on: ubuntu-16.04
 
     strategy:
@@ -35,7 +35,7 @@ jobs:
       - name: Install dependencies
         working-directory: ./backend_api
         run: yarn
-
-      - name: Build UI
-        working-directory: ./backend_api
-        run: yarn test
+      # - name: Test Api
+      #   working-directory: ./backend_api
+      #   run: yarn test
+      #   mysql 컨테이너, 워크플로우에서 쓸 계정 정보파일이 필요 할 듯하다
