@@ -1,0 +1,41 @@
+name: api_server_test
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-16.04
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Cache node modules
+        uses: actions/cache@v1
+        id: yarn-cache
+        with:
+          path: ./backend_api/node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: ${{ runner.os }}-yarn-
+
+      - name: Install dependencies
+        working-directory: ./backend_Api
+        run: yarn
+
+      - name: Build UI
+        working-directory: ./backend_Api
+        run: yarn test
