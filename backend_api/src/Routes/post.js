@@ -1,8 +1,17 @@
 const Router = require("express").Router();
 const Models = require("../Models/tables");
 
-Router.get("/", (req, res, next) => {
-  res.send("Get Post");
+Router.get("/:pid", async (req, res, next) => {
+  try {
+    const result = await Models.post.findOne({
+      where: { id: req.params.pid },
+      attributes: ["id", "title", "content", "updatedAt", "userId"]
+    });
+
+    result && res.status(200).json({ success: true, response: result });
+  } catch (error) {
+    next(error);
+  }
 });
 
 Router.post("/", async (req, res, next) => {
@@ -15,8 +24,13 @@ Router.post("/", async (req, res, next) => {
       }
       // { include: [Models.story] }
     );
-
-    result && res.status(201).json({ success: true });
+    result &&
+      res.status(201).json({
+        success: true,
+        response: {
+          id: result.dataValues.id
+        }
+      });
   } catch (error) {
     next(error);
   }

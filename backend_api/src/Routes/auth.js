@@ -25,7 +25,10 @@ Router.post("/authenticate", async (req, res, next) => {
       const { email, userName, salt, cryptoPass } = resUser.dataValues;
       const loginPassword = await encryptString(reqPassword, salt);
       if (loginPassword === cryptoPass) {
-        res.status(200).json({ email, userName, token: generateToken(email) });
+        res.status(200).json({
+          success: true,
+          response: { email, userName, token: generateToken(email) }
+        });
       } else {
         throw new AuthenticationError("로그인실패");
       }

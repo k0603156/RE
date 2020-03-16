@@ -4,7 +4,7 @@ const UserService = require("../Services/userService");
 Router.get("/", async (req, res, next) => {
   res.status(200).json({
     success: true,
-    result: "user"
+    response: "user"
   });
 });
 
@@ -13,7 +13,7 @@ Router.get("/:userName", async (req, res, next) => {
     const result = await UserService.findUser(req);
     res.status(200).json({
       success: true,
-      result
+      response: result
     });
   } catch (error) {
     next(error);
@@ -38,7 +38,7 @@ Router.put("/", async (req, res, next) => {
     const result = await UserService.updateUser(req);
     res.status(200).json({
       success: true,
-      result
+      response: result
     });
   } catch (error) {
     next(error);
@@ -51,7 +51,7 @@ Router.delete("/", async (req, res, next) => {
     const result = await UserService.deleteUser(req);
     res.status(204).json({
       success: true,
-      result
+      response: result
     });
   } catch (error) {
     next(error);
