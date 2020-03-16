@@ -75,7 +75,49 @@ describe("test", () => {
     expect(res.body.response).toHaveProperty("title");
     expect(res.body.response).toHaveProperty("content");
     expect(res.body.response).toHaveProperty("updatedAt");
-    expect(res.body.response).toHaveProperty("userId");
+    expect(res.body.response).toHaveProperty("user");
+    expect(res.body.response.user).toHaveProperty("userName");
+    expect(res.body.response.user.userName).toEqual("john");
+  });
+
+  it("글수정 테스트", async () => {
+    const res = await request
+      .patch("/api/v1/post")
+      .set("Authorization", "bearer " + token)
+      .send({
+        pid,
+        title: "updated test post title",
+        content: [
+          {
+            type: "paragraph",
+            children: [{ text: "updated test post paragraph" }]
+          }
+        ]
+      })
+      .expect(201);
+    expect(res.body.success).toEqual(true);
+  });
+
+  it("글읽기 테스트2", async () => {
+    const res = await request
+      .get(`/api/v1/post/${pid}`)
+      .set("Authorization", "bearer " + token)
+      .expect(200);
+    expect(res.body.success).toEqual(true);
+    expect(res.body.response).toHaveProperty("id");
+    expect(res.body.response).toHaveProperty("title");
+    expect(res.body.response.title).toEqual("updated test post title");
+    expect(res.body.response).toHaveProperty("content");
+    expect(res.body.response.content).toEqual([
+      {
+        type: "paragraph",
+        children: [{ text: "updated test post paragraph" }]
+      }
+    ]);
+    expect(res.body.response).toHaveProperty("updatedAt");
+    expect(res.body.response).toHaveProperty("user");
+    expect(res.body.response.user).toHaveProperty("userName");
+    expect(res.body.response.user.userName).toEqual("john");
   });
 });
 
