@@ -13,7 +13,10 @@ Router.get("/:pid", async (req, res, next) => {
       where: { id: req.params.pid },
       attributes: ["id", "title", "content", "updatedAt"]
     });
-    result && res.status(200).json({ success: true, response: result });
+    console.log(result);
+    result
+      ? res.status(200).json({ success: true, response: result })
+      : res.status(404).json({ success: false });
   } catch (error) {
     next(error);
   }
@@ -61,6 +64,18 @@ Router.patch("/", async (req, res, next) => {
   }
 });
 
-Router.delete("/", (req, res, next) => {});
+Router.delete("/", async (req, res, next) => {
+  try {
+    const result = await Models.post.destroy({
+      where: { id: req.body.pid }
+    });
+    result &&
+      res.status(204).json({
+        success: true
+      });
+  } catch (error) {
+    next(error);
+  }
+});
 
 module.exports = Router;

@@ -119,6 +119,25 @@ describe("test", () => {
     expect(res.body.response.user).toHaveProperty("userName");
     expect(res.body.response.user.userName).toEqual("john");
   });
+
+  it("글삭제 테스트", async () => {
+    const res = await request
+      .delete(`/api/v1/post`)
+      .set("Authorization", "bearer " + token)
+      .send({
+        pid
+      })
+      .expect(204);
+    // expect(res.body.success).toEqual(true);
+  });
+
+  it("글읽기 테스트3", async () => {
+    const res = await request
+      .get(`/api/v1/post/${pid}`)
+      .set("Authorization", "bearer " + token)
+      .expect(404);
+    // expect(res.body.success).toEqual(false);
+  });
 });
 
 // const request = require("supertest");
