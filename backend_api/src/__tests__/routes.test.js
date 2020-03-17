@@ -2,11 +2,12 @@ const supertest = require("supertest");
 const http = require("http");
 const app = require("../App");
 
-describe("test", () => {
+describe("user flow test", () => {
   let server;
   let request;
   let token;
   let pid;
+  let page = 1;
   beforeAll(done => {
     server = http.createServer(app);
     request = supertest(server);
@@ -15,7 +16,7 @@ describe("test", () => {
   afterAll(done => {
     server.close(done);
   });
-  it("회원가입 테스트", async () => {
+  it("회원가입", async () => {
     const res = await request
       .post("/api/v1/user")
       .set("Accept", "application/json")
@@ -30,7 +31,7 @@ describe("test", () => {
     expect(res.body.success).toEqual(true);
   });
 
-  it("로그인 테스트", async () => {
+  it("로그인", async () => {
     const res = await request
       .post("/api/v1/auth/authenticate")
       .send({
@@ -46,7 +47,7 @@ describe("test", () => {
     token = res.body.response.token;
   });
 
-  it("글작성 테스트", async () => {
+  it("글작성", async () => {
     const res = await request
       .post("/api/v1/post")
       .set("Authorization", "bearer " + token)
@@ -65,7 +66,33 @@ describe("test", () => {
     pid = res.body.response.id;
   });
 
-  it("글읽기 테스트", async () => {
+  it("글작성", async () => {
+    const res = await request
+      .post("/api/v1/post")
+      .set("Authorization", "bearer " + token)
+      .send({
+        title: "test post title2",
+        content: [
+          {
+            type: "paragraph",
+            children: [{ text: "test post paragraph2" }]
+          }
+        ]
+      })
+      .expect(201);
+    expect(res.body.success).toEqual(true);
+    expect(res.body.response).toHaveProperty("id");
+  });
+
+  it("글리스트 불러오기", async () => {
+    const res = await request
+      .get(`/api/v1/post/list/${page}`)
+      .set("Authorization", "bearer " + token)
+      .expect(200);
+    expect(Array.isArray(res.body.response)).toEqual(true);
+  });
+
+  it("글읽기", async () => {
     const res = await request
       .get(`/api/v1/post/${pid}`)
       .set("Authorization", "bearer " + token)
@@ -80,7 +107,7 @@ describe("test", () => {
     expect(res.body.response.user.userName).toEqual("john");
   });
 
-  it("글수정 테스트", async () => {
+  it("글수정", async () => {
     const res = await request
       .patch("/api/v1/post")
       .set("Authorization", "bearer " + token)
@@ -98,7 +125,7 @@ describe("test", () => {
     expect(res.body.success).toEqual(true);
   });
 
-  it("글읽기 테스트2", async () => {
+  it("글읽기_수정후", async () => {
     const res = await request
       .get(`/api/v1/post/${pid}`)
       .set("Authorization", "bearer " + token)
@@ -120,23 +147,23 @@ describe("test", () => {
     expect(res.body.response.user.userName).toEqual("john");
   });
 
-  it("글삭제 테스트", async () => {
+  it("글삭제", async () => {
     const res = await request
       .delete(`/api/v1/post`)
       .set("Authorization", "bearer " + token)
       .send({
         pid
       })
-      .expect(204);
-    // expect(res.body.success).toEqual(true);
+      .expect(200);
+    expect(res.body.success).toEqual(true);
   });
 
-  it("글읽기 테스트3", async () => {
+  it("글읽기_삭제후", async () => {
     const res = await request
       .get(`/api/v1/post/${pid}`)
       .set("Authorization", "bearer " + token)
       .expect(404);
-    // expect(res.body.success).toEqual(false);
+    expect(res.body.success).toEqual(false);
   });
 });
 

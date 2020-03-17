@@ -58,8 +58,11 @@ function handleAuthorizationError(error, req, res, next) {
 function handleNotFoundError(error, req, res, next) {
   if (error instanceof NotFoundError) {
     res.status(404).json({
-      type: "NotFoundError",
-      message: error.message
+      success: false,
+      response: {
+        type: "NotFoundError",
+        message: error.message
+      }
     });
   }
 }
@@ -69,8 +72,11 @@ function handleNotFoundError(error, req, res, next) {
 function handleBaseError(error, req, res, next) {
   if (error instanceof BaseError) {
     res.status(400).json({
-      type: "BaseError",
-      message: error.message
+      success: false,
+      response: {
+        type: "BaseError",
+        message: error.message
+      }
     });
   }
 }
