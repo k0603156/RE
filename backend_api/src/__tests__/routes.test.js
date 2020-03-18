@@ -8,6 +8,7 @@ describe("user flow test", () => {
   let token;
   let pid;
   let page = 1;
+  let username;
   beforeAll(done => {
     server = http.createServer(app);
     request = supertest(server);
@@ -45,6 +46,7 @@ describe("user flow test", () => {
     expect(res.body.response).toHaveProperty("token");
 
     token = res.body.response.token;
+    username = res.body.response.userName;
   });
 
   it("글작성", async () => {
@@ -82,6 +84,34 @@ describe("user flow test", () => {
       .expect(201);
     expect(res.body.success).toEqual(true);
     expect(res.body.response).toHaveProperty("id");
+  });
+  it("글작성", async () => {
+    const res = await request
+      .post("/api/v1/post")
+      .set("Authorization", "bearer " + token)
+      .send({
+        title: "test post title3",
+        content: [
+          {
+            type: "paragraph",
+            children: [{ text: "test post paragraph3" }]
+          }
+        ]
+      })
+      .expect(201);
+    expect(res.body.success).toEqual(true);
+    expect(res.body.response).toHaveProperty("id");
+  });
+  it("회원정보 불러오기", async () => {
+    const res = await request
+      .get(`/api/v1/user/${username}`)
+      .set("Authorization", "bearer " + token)
+      .expect(200);
+    expect(res.body.success).toEqual(true);
+    expect(res.body.response).toHaveProperty("id");
+    expect(res.body.response).toHaveProperty("userName");
+    expect(res.body.response).toHaveProperty("posts");
+    expect(Array.isArray(res.body.response.posts)).toEqual(true);
   });
 
   it("글리스트 불러오기", async () => {

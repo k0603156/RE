@@ -19,7 +19,6 @@ Router.get("/:pid", async (req, res, next) => {
     } else {
       throw new NotFoundError("해당글이 없습니다.");
     }
-    // : res.status(404).json({ success: false });
   } catch (error) {
     next(error);
   }

@@ -1,5 +1,6 @@
 const Router = require("express").Router();
 const UserService = require("../Services/userService");
+const { post } = require("../Models/tables");
 
 Router.get("/", async (req, res, next) => {
   res.status(200).json({
@@ -11,9 +12,27 @@ Router.get("/", async (req, res, next) => {
 Router.get("/:userName", async (req, res, next) => {
   try {
     const result = await UserService.findUser(req);
+
+    const existPost = await post.findAll({
+      where: { userId: result.dataValues.id },
+      attributes: ["title"]
+    });
+    console.log({
+      success: true,
+      response: {
+        id: result.dataValues.id,
+        userName: result.dataValues.userName,
+        posts: existPost
+      }
+    });
+
     res.status(200).json({
       success: true,
-      response: result
+      response: {
+        id: result.dataValues.id,
+        userName: result.dataValues.userName,
+        posts: existPost
+      }
     });
   } catch (error) {
     next(error);

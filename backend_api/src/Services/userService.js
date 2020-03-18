@@ -8,8 +8,9 @@ const ENCODE_TYPE = "base64";
 module.exports.findUser = async req => {
   const existUser = await user.findOne({
     where: { userName: req.params.userName },
-    attributes: ["userName"]
+    attributes: ["id", "userName"]
   });
+
   if (!existUser) {
     throw new NotFoundError("해당 사용자를 찾을 수 없습니다.");
   }
