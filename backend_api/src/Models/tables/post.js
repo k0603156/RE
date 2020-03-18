@@ -28,7 +28,10 @@ module.exports = (sequelize, DataTypes) => {
     post.belongsTo(models.user);
     // post.belongsTo(models.board);
     // post.hasMany(models.story);
-    // post.belongsToMany(models.hashtag, { through: "PlanHashtag" });
+    post.belongsToMany(models.hashtag, {
+      through: "PostHashtag",
+      timestamps: false
+    });
   };
   return post;
 };

@@ -7,16 +7,11 @@
 
 #### API
 
-`여행서비스 연습용에서 문서 수정중`
-<img width="30%" src="https://user-images.githubusercontent.com/16025776/72713055-ac0bee00-3baf-11ea-9e77-a62c08c1ce5f.jpg">
+<img width="30%" src="https://user-images.githubusercontent.com/16025776/77004850-246e1000-69a3-11ea-9749-dddff8ccb4b9.jpg">
 
 `api는 테스트 코드를 참고`
 
 ##### Document
-
-https://docs.google.com/spreadsheets/d/19kUThYVtNJIqMl7_7TpXpOKg-yD5Gu7ke-_Utdf10H8/edit?usp=sharing
-
-##### 설명
 
 - scripts/run.js production 실행 스크립트
 - scripts/test.js test 실행 스크립트

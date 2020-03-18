@@ -3,17 +3,19 @@ module.exports = (sequelize, DataTypes) => {
   const hashtag = sequelize.define(
     "hashtag",
     {
-      title: DataTypes.STRING(30)
+      name: DataTypes.STRING(30)
     },
     {
       charset: "utf8",
       collate: "utf8_general_ci",
-      timestamps: true,
-      paranoid: true
+      timestamps: false
     }
   );
   hashtag.associate = function(models) {
-    // hashtag.belongsToMany(models.plan, { through: "PlanHashtag" });
+    hashtag.belongsToMany(models.post, {
+      through: "PostHashtag",
+      timestamps: false
+    });
   };
   return hashtag;
 };
