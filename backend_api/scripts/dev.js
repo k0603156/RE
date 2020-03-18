@@ -1,3 +1,6 @@
+process.env.BABEL_ENV = "development";
+process.env.NODE_ENV = "development";
+
 const { appSrc } = require("../config/paths");
 const http = require("http");
 const { sequelize } = require(appSrc + "/Models/tables");
