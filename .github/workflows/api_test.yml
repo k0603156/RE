@@ -37,7 +37,7 @@ jobs:
         run: yarn
 
       - name: Setup MySql
-      - uses: mirromutth/mysql-action@v1.1
+        uses: mirromutth/mysql-action@v1.1
         with:
           host port: 3306
           character set server: "utf8"
