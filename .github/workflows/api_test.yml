@@ -19,6 +19,9 @@ jobs:
     steps:
       - uses: actions/checkout@master
 
+      - name: Shutdown Ubuntu MySQL (SUDO)
+        run: sudo service mysql stop
+
       - name: Setup MySql
         uses: mirromutth/mysql-action@v1.1
         with:
