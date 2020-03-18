@@ -14,7 +14,7 @@ const { NormLog, ErrorLog } = require(appSrc + "/Utils/log");
 
 let argv = process.argv.slice(2);
 
-NormLog("Sequelize TEST DB 초기화");
+NormLog("Sequelize TEST DB Initialize");
 sequelize
   .sync({ force: true, logging: false })
   .then(_ => NormLog("✓ TEST DB reset connection success."))

@@ -1,5 +1,4 @@
 "use strict";
-//TODO:작성 중
 process.env.BABEL_ENV = "production";
 process.env.NODE_ENV = "production";
 process.env.PORT = "80";
@@ -14,7 +13,7 @@ const { sequelize } = require(appSrc + "/Models/tables");
 const { NormLog, ErrorLog } = require(appSrc + "/Utils/log");
 const app = require(appSrc + "/app");
 
-NormLog("Sequelize PRODUCTION DB INIT");
+NormLog("Sequelize PRODUCTION DB Initialize");
 sequelize
   .sync({ force: true, logging: false }) //force:false
   .then(_ => NormLog("✓ PRODUCTION DB connection success."))
