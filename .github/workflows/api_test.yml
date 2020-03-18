@@ -19,6 +19,17 @@ jobs:
     steps:
       - uses: actions/checkout@master
 
+      - name: Setup MySql
+        uses: mirromutth/mysql-action@v1.1
+        with:
+          host port: 3306
+          character set server: "utf8"
+          collation server: "utf8_general_ci"
+          mysql version: "8.0"
+          mysql database: "symphonia_test"
+          mysql user: "dev"
+          mysql password: ${{ secrets.DatabasePassword }}
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
@@ -36,17 +47,6 @@ jobs:
         working-directory: ./backend_api
         run: yarn
 
-      - name: Setup MySql
-      - uses: mirromutth/mysql-action@v1.1
-        with:
-          host port: 3306
-          character set server: "utf8"
-          collation server: "utf8_general_ci"
-          mysql version: "8.0"
-          mysql database: "symphonia_test"
-          mysql user: "dev"
-          mysql password: ${{ secrets.DatabasePassword }}
-      # - name: Test Api
-      #   working-directory: ./backend_api
-      #   run: yarn test
-      #   mysql 컨테이너, 워크플로우에서 쓸 계정 정보파일이 필요 할 듯하다
+      - name: Test Api
+        working-directory: ./backend_api
+        run: yarn test
