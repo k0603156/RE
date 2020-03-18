@@ -1,37 +1,19 @@
 const Router = require("express").Router();
 const UserService = require("../Services/userService");
-const { post } = require("../Models/tables");
-
-Router.get("/", async (req, res, next) => {
-  res.status(200).json({
-    success: true,
-    response: "user"
-  });
-});
+const PostService = require("../Services/postService");
 
 Router.get("/:userName", async (req, res, next) => {
   try {
     const result = await UserService.findUser(req);
-
-    const existPost = await post.findAll({
-      where: { userId: result.dataValues.id },
-      attributes: ["title"]
-    });
-    console.log({
-      success: true,
-      response: {
-        id: result.dataValues.id,
-        userName: result.dataValues.userName,
-        posts: existPost
-      }
-    });
-
+    const resultPost = await PostService.getPostListByUser(
+      result.dataValues.id
+    );
     res.status(200).json({
       success: true,
       response: {
         id: result.dataValues.id,
         userName: result.dataValues.userName,
-        posts: existPost
+        posts: resultPost
       }
     });
   } catch (error) {
