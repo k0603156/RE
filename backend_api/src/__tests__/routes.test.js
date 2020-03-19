@@ -60,7 +60,8 @@ describe("user flow test", () => {
             type: "paragraph",
             children: [{ text: "test post paragraph" }]
           }
-        ]
+        ],
+        hashtags: [{ name: "tag1" }, { name: "tag2" }]
       })
       .expect(201);
     expect(res.body.success).toEqual(true);
@@ -79,7 +80,8 @@ describe("user flow test", () => {
             type: "paragraph",
             children: [{ text: "test post paragraph2" }]
           }
-        ]
+        ],
+        hashtags: [{ name: "tag3" }, { name: "tag4" }]
       })
       .expect(201);
     expect(res.body.success).toEqual(true);
@@ -96,7 +98,8 @@ describe("user flow test", () => {
             type: "paragraph",
             children: [{ text: "test post paragraph3" }]
           }
-        ]
+        ],
+        hashtags: [{ name: "tag2" }, { name: "tag5" }]
       })
       .expect(201);
     expect(res.body.success).toEqual(true);

@@ -27,8 +27,4 @@ module.exports = {
     port: 3306,
     dialect: process.env.DB_DIALECT
   }
-  // "production": {
-  //   "use_env_variable": "DATABASE_URL",
-  //   "dialect": "postgres"
-  // }
 };

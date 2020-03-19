@@ -3,7 +3,11 @@ module.exports = (sequelize, DataTypes) => {
   const hashtag = sequelize.define(
     "hashtag",
     {
-      name: DataTypes.STRING(30)
+      name: {
+        type: DataTypes.STRING(30),
+        unique: true,
+        allowNull: false
+      }
     },
     {
       charset: "utf8",
