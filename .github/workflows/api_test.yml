@@ -22,7 +22,7 @@ jobs:
       - name: Setup MySql
         run: |
           sudo systemctl start mysql
-          mysql -uroot -proot < databases/sh/init.sql
+          mysql -uroot -proot < database/sh/init.sql
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
