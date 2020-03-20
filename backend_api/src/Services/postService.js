@@ -40,38 +40,43 @@ module.exports.getPostList = async req => {
 };
 
 module.exports.createPost = async req => {
-  const existTags = await Models.hashtag.findAll({
-    where: {
-      name: { [Op.in]: [...req.body.hashtags.map(_ => _.name)] }
-    },
-    attributes: ["id", "name"]
-  });
+  return await Models.sequelize.transaction(async transaction => {
+    const existTags = await Models.hashtag.findAll({
+      where: {
+        name: { [Op.in]: [...req.body.hashtags.map(_ => _.name)] }
+      },
+      attributes: ["id", "name"],
+      transaction
+    });
 
-  const result = await Models.post.create(
-    {
-      userId: req.user.id,
-      title: req.body.title,
-      content: [...req.body.content],
-      hashtags: existTags.map(_ => _.dataValues.name).length
-        ? req.body.hashtags.filter(_ => {
-            const ss = existTags.map(_ => _.dataValues.name);
-            return !ss.includes(_.name);
-          })
-        : req.body.hashtags
-    },
-    {
-      include: [
-        {
-          model: Models.hashtag
-        }
-      ]
+    const existTagsArr = attr => existTags.map(_ => _.dataValues[attr]);
+
+    const createdPost = await Models.post.create(
+      {
+        userId: req.user.id,
+        title: req.body.title,
+        content: [...req.body.content],
+        hashtags: existTagsArr("name").length
+          ? req.body.hashtags.filter(
+              _ => !existTagsArr("name").includes(_.name)
+            )
+          : req.body.hashtags
+      },
+      {
+        include: [
+          {
+            model: Models.hashtag
+          }
+        ],
+        transaction
+      }
+    );
+
+    if (existTags.length) {
+      await createdPost.addHashtag(existTagsArr("id"), { transaction });
     }
-  );
-
-  if (existTags.length) {
-    result.addHashtag(existTags.map(({ dataValues }) => dataValues.id));
-  }
-  return result;
+    return createdPost;
+  });
 };
 
 module.exports.updatePost = async req => {
