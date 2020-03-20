@@ -2,17 +2,45 @@ const Models = require("../Models/tables");
 const { Op } = require("sequelize");
 
 module.exports.getPostListByHashtag = async req => {
-  const result = await Models.hashtag.findOne({
-    where: { name: req.params.hashtag },
-    attributes: ["name"],
+  const offset = 5 * (req.params.page - 1);
+  const result = await Models.post.findAll({
     include: [
       {
-        model: Models.post,
-        attributes: ["title"]
+        model: Models.hashtag,
+        as: "hashtags",
+        separate: false,
+        attributes: ["name"],
+        duplicating: false
+      },
+      {
+        model: Models.user,
+        attributes: ["userName"]
       }
-    ]
+    ],
+    attributes: ["id", "title", "updatedAt"],
+    where: { "$hashtags.name$": req.params.hashtag },
+    offset,
+    limit: 5
   });
-  console.log(result);
+  // const result = await Models.hashtag.findOne({
+  //   where: { name: req.params.hashtag },
+  //   attributes: ["name", "postId"],
+  //   include: [
+  //     {
+  //       model: Models.post,
+  //       attributes: ["id", "hashtagId", "title"],
+  //       offset,
+  //       limit: 5,
+  //       include: [
+  //         {
+  //           model: Models.user,
+  //           attributes: ["userName"]
+  //         }
+  //       ]
+  //     }
+  //   ]
+  // });
+
   return result;
 };
 

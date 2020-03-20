@@ -2,7 +2,7 @@ const Router = require("express").Router();
 const PostService = require("../Services/postService");
 const { NotFoundError } = require("../Utils/Error");
 
-Router.get("/byhashtag/:hashtag", async (req, res, next) => {
+Router.get("/byhashtag/:hashtag/:page", async (req, res, next) => {
   try {
     const result = await PostService.getPostListByHashtag(req);
     if (result) {

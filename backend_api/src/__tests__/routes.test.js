@@ -109,6 +109,84 @@ describe("user flow test", () => {
     expect(res.body.success).toEqual(true);
     expect(res.body.response).toHaveProperty("id");
   });
+  it("글작성", async () => {
+    console.log("글작성");
+    const res = await request
+      .post("/api/v1/post")
+      .set("Authorization", "bearer " + store.getToken())
+      .send({
+        title: "test post title3",
+        content: [
+          {
+            type: "paragraph",
+            children: [{ text: "test post paragraph3" }]
+          }
+        ],
+        hashtags: [{ name: "tag2" }, { name: "tag5" }]
+      })
+      .expect(201);
+    expect(res.body.success).toEqual(true);
+    expect(res.body.response).toHaveProperty("id");
+  });
+
+  it("글작성", async () => {
+    console.log("글작성");
+    const res = await request
+      .post("/api/v1/post")
+      .set("Authorization", "bearer " + store.getToken())
+      .send({
+        title: "test post title4",
+        content: [
+          {
+            type: "paragraph",
+            children: [{ text: "test post paragraph4" }]
+          }
+        ],
+        hashtags: [{ name: "tag2" }, { name: "tag5" }]
+      })
+      .expect(201);
+    expect(res.body.success).toEqual(true);
+    expect(res.body.response).toHaveProperty("id");
+  });
+
+  it("글작성", async () => {
+    console.log("글작성");
+    const res = await request
+      .post("/api/v1/post")
+      .set("Authorization", "bearer " + store.getToken())
+      .send({
+        title: "test post title5",
+        content: [
+          {
+            type: "paragraph",
+            children: [{ text: "test post paragraph5" }]
+          }
+        ],
+        hashtags: [{ name: "tag2" }, { name: "tag5" }]
+      })
+      .expect(201);
+    expect(res.body.success).toEqual(true);
+    expect(res.body.response).toHaveProperty("id");
+  });
+  it("글작성", async () => {
+    console.log("글작성");
+    const res = await request
+      .post("/api/v1/post")
+      .set("Authorization", "bearer " + store.getToken())
+      .send({
+        title: "test post title6",
+        content: [
+          {
+            type: "paragraph",
+            children: [{ text: "test post paragraph6" }]
+          }
+        ],
+        hashtags: [{ name: "tag2" }, { name: "tag5" }]
+      })
+      .expect(201);
+    expect(res.body.success).toEqual(true);
+    expect(res.body.response).toHaveProperty("id");
+  });
   it("회원정보 불러오기", async () => {
     console.log("회원정보 불러오기");
     const res = await request
@@ -125,12 +203,14 @@ describe("user flow test", () => {
   it("해시태그로 글 검색", async () => {
     console.log("해시태그로 글 검색");
     const res = await request
-      .get(`/api/v1/post/byhashtag/${store.getHashtag()}`)
+      .get(`/api/v1/post/byhashtag/${store.getHashtag()}/${store.getPage()}`)
       .set("Authorization", "bearer " + store.getToken())
       .expect(200);
     expect(res.body.success).toEqual(true);
-    expect(res.body.response).toHaveProperty("posts");
-    expect(Array.isArray(res.body.response.posts)).toEqual(true);
+    expect(Array.isArray(res.body.response)).toEqual(true);
+    expect(res.body.response.length <= 5).toEqual(true);
+    expect(res.body.response[0]).toHaveProperty("title");
+    expect(res.body.response[0]).toHaveProperty("user");
   });
 
   it("글리스트 불러오기", async () => {
@@ -216,7 +296,7 @@ describe("user flow test", () => {
   it("글읽기_삭제후", async () => {
     console.log("글읽기_삭제후");
     const res = await request
-      .get(`/api/v1/post/${store.getPid}`)
+      .get(`/api/v1/post/${store.getPid()}`)
       .set("Authorization", "bearer " + store.getToken())
       .expect(404);
     expect(res.body.success).toEqual(false);
