@@ -38,7 +38,6 @@ module.exports.getPostList = async req => {
   });
   return result;
 };
-[{ name: "tag2" }];
 
 module.exports.createPost = async req => {
   const existTags = await Models.hashtag.findAll({
