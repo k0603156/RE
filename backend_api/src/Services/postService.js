@@ -38,28 +38,27 @@ module.exports.getPostList = async req => {
   });
   return result;
 };
+[{ name: "tag2" }];
 
 module.exports.createPost = async req => {
-  const result2 = await Models.hashtag.findAll({
+  const existTags = await Models.hashtag.findAll({
     where: {
       name: { [Op.in]: [...req.body.hashtags.map(_ => _.name)] }
     },
-    attributes: ["name"]
+    attributes: ["id", "name"]
   });
-  const existTags = result2.map(_ => _.dataValues);
-  //! 수정
-  console.log(
-    [...req.body.hashtags].filter(_ => {
-      return existTags.map(existTag => existTag.name != _.name) ? true : false;
-    })
-  );
 
   const result = await Models.post.create(
     {
       userId: req.user.id,
       title: req.body.title,
       content: [...req.body.content],
-      hashtags: [...req.body.hashtags].filter(_ => _ != existTag.dataValues)
+      hashtags: existTags.map(_ => _.dataValues.name).length
+        ? req.body.hashtags.filter(_ => {
+            const ss = existTags.map(_ => _.dataValues.name);
+            return !ss.includes(_.name);
+          })
+        : req.body.hashtags
     },
     {
       include: [
@@ -70,11 +69,9 @@ module.exports.createPost = async req => {
     }
   );
 
-  // await result.addHashtag([...req.body.hashtags]);
-  // const bi = [...req.body.hashtags].map(_ => result2_.name);
-  // const result2 = await Models.hashtag.bulkInsert();
-  // const tagIds = await Promise.all(uniqueTags.map(tag => Tag.getId(tag)));
-
+  if (existTags.length) {
+    result.addHashtag(existTags.map(({ dataValues }) => dataValues.id));
+  }
   return result;
 };
 
