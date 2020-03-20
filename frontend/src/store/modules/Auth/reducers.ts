@@ -9,10 +9,10 @@ import { createReducer } from "typesafe-actions";
 
 const initialState: IAuthState = {
   isLogged: !!localStorage.getItem("token"),
-  isAdmin: true,
+  isAdmin: false,
   me: {
-    userName: localStorage.getItem("userName") || "",
-    email: localStorage.getItem("email") || ""
+    email: localStorage.getItem("email") || "",
+    userName: localStorage.getItem("userName") || ""
   }
 };
 // const initialState: IAuthState = {
@@ -27,12 +27,14 @@ const initialState: IAuthState = {
 const AuthReducer = createReducer(initialState, {
   // 로그인 성공
   [LOGIN_AUTH_SUCCESS]: (state, action) => {
+    console.log(action);
+    const { email, userName } = action.payload.response;
     return {
       isLogged: true,
       isAdmin: true,
       me: {
-        userName: action.payload.userName,
-        email: action.payload.email
+        email,
+        userName
       }
     };
   },

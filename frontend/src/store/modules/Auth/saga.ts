@@ -27,9 +27,9 @@ export function* loginSaga(data: login_action): Generator {
     const response: any = yield call(Api.auth.authenticate, payload);
 
     yield put({ type: LOGIN_AUTH_SUCCESS, payload: response.data });
-    localStorage.setItem("token", response.data.token);
-    localStorage.setItem("userName", response.data.userName);
-    localStorage.setItem("email", response.data.email);
+    localStorage.setItem("token", response.data.response.token);
+    localStorage.setItem("userName", response.data.response.userName);
+    localStorage.setItem("email", response.data.response.email);
     yield put(
       createMSG(LOGIN_AUTH_FAILURE, "ALERT", { message: "로그인되었습니다." })
     );

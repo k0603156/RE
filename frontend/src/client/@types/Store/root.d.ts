@@ -6,8 +6,8 @@ interface IAuthState {
   isLogged: boolean;
   isAdmin: boolean;
   me: {
-    userName: string;
     email: string;
+    userName: string;
   };
 }
 interface IMsgState {
