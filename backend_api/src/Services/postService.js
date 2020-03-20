@@ -1,6 +1,21 @@
 const Models = require("../Models/tables");
 const { Op } = require("sequelize");
 
+module.exports.getPostListByHashtag = async req => {
+  const result = await Models.hashtag.findOne({
+    where: { name: req.params.hashtag },
+    attributes: ["name"],
+    include: [
+      {
+        model: Models.post,
+        attributes: ["title"]
+      }
+    ]
+  });
+  console.log(result);
+  return result;
+};
+
 module.exports.getPostListByUser = async userId => {
   const result = await Models.post.findAll({
     where: { userId },

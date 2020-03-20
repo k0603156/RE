@@ -1,23 +1,23 @@
 const supertest = require("supertest");
 const http = require("http");
 const app = require("../app");
-
+const store = require("./store");
 describe("user flow test", () => {
   let server;
   let request;
-  let token;
-  let pid;
-  let page = 1;
-  let username;
+
   beforeAll(done => {
     server = http.createServer(app);
     request = supertest(server);
     server.listen(done);
+    store.setPage(1);
+    store.setHashtag("tag2");
   });
   afterAll(done => {
     server.close(done);
   });
   it("회원가입", async () => {
+    console.log("회원가입");
     const res = await request
       .post("/api/v1/user")
       .set("Accept", "application/json")
@@ -33,6 +33,7 @@ describe("user flow test", () => {
   });
 
   it("로그인", async () => {
+    console.log("로그인");
     const res = await request
       .post("/api/v1/auth/authenticate")
       .send({
@@ -45,14 +46,15 @@ describe("user flow test", () => {
     expect(res.body.response).toHaveProperty("userName");
     expect(res.body.response).toHaveProperty("token");
 
-    token = res.body.response.token;
-    username = res.body.response.userName;
+    store.setToken(res.body.response.token);
+    store.setUsername(res.body.response.userName);
   });
 
   it("글작성", async () => {
+    console.log("글작성");
     const res = await request
       .post("/api/v1/post")
-      .set("Authorization", "bearer " + token)
+      .set("Authorization", "bearer " + store.getToken())
       .send({
         title: "test post title",
         content: [
@@ -66,13 +68,14 @@ describe("user flow test", () => {
       .expect(201);
     expect(res.body.success).toEqual(true);
     expect(res.body.response).toHaveProperty("id");
-    pid = res.body.response.id;
+    store.setPid(res.body.response.id);
   });
 
   it("글작성", async () => {
+    console.log("글작성");
     const res = await request
       .post("/api/v1/post")
-      .set("Authorization", "bearer " + token)
+      .set("Authorization", "bearer " + store.getToken())
       .send({
         title: "test post title2",
         content: [
@@ -88,9 +91,10 @@ describe("user flow test", () => {
     expect(res.body.response).toHaveProperty("id");
   });
   it("글작성", async () => {
+    console.log("글작성");
     const res = await request
       .post("/api/v1/post")
-      .set("Authorization", "bearer " + token)
+      .set("Authorization", "bearer " + store.getToken())
       .send({
         title: "test post title3",
         content: [
@@ -106,9 +110,10 @@ describe("user flow test", () => {
     expect(res.body.response).toHaveProperty("id");
   });
   it("회원정보 불러오기", async () => {
+    console.log("회원정보 불러오기");
     const res = await request
-      .get(`/api/v1/user/${username}`)
-      .set("Authorization", "bearer " + token)
+      .get(`/api/v1/user/${store.getUsername()}`)
+      .set("Authorization", "bearer " + store.getToken())
       .expect(200);
     expect(res.body.success).toEqual(true);
     expect(res.body.response).toHaveProperty("id");
@@ -117,18 +122,32 @@ describe("user flow test", () => {
     expect(Array.isArray(res.body.response.posts)).toEqual(true);
   });
 
-  it("글리스트 불러오기", async () => {
+  it("해시태그로 글 검색", async () => {
+    console.log("해시태그로 글 검색");
     const res = await request
-      .get(`/api/v1/post/list/${page}`)
-      .set("Authorization", "bearer " + token)
+      .get(`/api/v1/post/byhashtag/${store.getHashtag()}`)
+      .set("Authorization", "bearer " + store.getToken())
+      .expect(200);
+    expect(res.body.success).toEqual(true);
+    expect(res.body.response).toHaveProperty("posts");
+    expect(Array.isArray(res.body.response.posts)).toEqual(true);
+  });
+
+  it("글리스트 불러오기", async () => {
+    console.log("글리스트 불러오기");
+
+    const res = await request
+      .get(`/api/v1/post/list/${store.getPage()}`)
+      .set("Authorization", "bearer " + store.getToken())
       .expect(200);
     expect(Array.isArray(res.body.response)).toEqual(true);
   });
 
   it("글읽기", async () => {
+    console.log("글읽기");
     const res = await request
-      .get(`/api/v1/post/${pid}`)
-      .set("Authorization", "bearer " + token)
+      .get(`/api/v1/post/${store.getPid()}`)
+      .set("Authorization", "bearer " + store.getToken())
       .expect(200);
     expect(res.body.success).toEqual(true);
     expect(res.body.response).toHaveProperty("id");
@@ -141,11 +160,12 @@ describe("user flow test", () => {
   });
 
   it("글수정", async () => {
+    console.log("글수정");
     const res = await request
       .patch("/api/v1/post")
-      .set("Authorization", "bearer " + token)
+      .set("Authorization", "bearer " + store.getToken())
       .send({
-        pid,
+        pid: store.getPid(),
         title: "updated test post title",
         content: [
           {
@@ -159,9 +179,10 @@ describe("user flow test", () => {
   });
 
   it("글읽기_수정후", async () => {
+    console.log("글읽기_수정후");
     const res = await request
-      .get(`/api/v1/post/${pid}`)
-      .set("Authorization", "bearer " + token)
+      .get(`/api/v1/post/${store.getPid()}`)
+      .set("Authorization", "bearer " + store.getToken())
       .expect(200);
     expect(res.body.success).toEqual(true);
     expect(res.body.response).toHaveProperty("id");
@@ -181,20 +202,22 @@ describe("user flow test", () => {
   });
 
   it("글삭제", async () => {
+    console.log("글삭제");
     const res = await request
       .delete(`/api/v1/post`)
-      .set("Authorization", "bearer " + token)
+      .set("Authorization", "bearer " + store.getToken())
       .send({
-        pid
+        pid: store.getPid()
       })
       .expect(200);
     expect(res.body.success).toEqual(true);
   });
 
   it("글읽기_삭제후", async () => {
+    console.log("글읽기_삭제후");
     const res = await request
-      .get(`/api/v1/post/${pid}`)
-      .set("Authorization", "bearer " + token)
+      .get(`/api/v1/post/${store.getPid}`)
+      .set("Authorization", "bearer " + store.getToken())
       .expect(404);
     expect(res.body.success).toEqual(false);
   });
