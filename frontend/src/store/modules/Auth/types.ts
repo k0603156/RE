@@ -1,42 +1,32 @@
 // 로그인 요청
-export const LOGIN_AUTH_REQUEST = "auth/AUTHENTICATE_REQUEST";
-export const LOGIN_AUTH_SUCCESS = "auth/AUTHENTICATE_SUCCESS";
-export const LOGIN_AUTH_FAILURE = "auth/AUTHENTICATE_FAILURE";
-// OTP 확인 요청
-export const CHECK_OTP_AUTH_REQUEST = "auth/AUTHORIZE_REQUEST";
-export const CHECK_OTP_AUTH_SUCCESS = "auth/AUTHORIZE_SUCCESS";
-export const CHECK_OTP_AUTH_FAILURE = "auth/AUTHORIZE_FAILURE";
+export const AUTH_LOGIN_REQUEST = "auth/AUTH_LOGIN_REQUEST";
+export const AUTH_LOGIN_SUCCESS = "auth/AUTH_LOGIN_SUCCESS";
+export const AUTH_LOGIN_FAILURE = "auth/AUTH_LOGIN_FAILURE";
 // 토큰 재발행 요청
-export const CHANGE_TOKEN_AUTH_REQUEST = "auth/REAUTHORIZE_REQUEST";
-export const CHANGE_TOKEN_AUTH_SUCCESS = "auth/REAUTHORIZE_SUCCESS";
-export const CHANGE_TOKEN_AUTH_FAILURE = "auth/REAUTHORIZE_FAILURE";
+export const AUTH_TOKENREFRESH_REQUEST = "auth/AUTH_TOKENREFRESH_REQUEST";
+export const AUTH_TOKENREFRESH_SUCCESS = "auth/AUTH_TOKENREFRESH_SUCCESS";
+export const AUTH_TOKENREFRESH_FAILURE = "auth/AUTH_TOKENREFRESH_FAILURE";
 // 로그아웃 요청
-export const LOGOUT_AUTH_REQUEST = "auth/DEAUTHORIZE_REQUEST";
-export const LOGOUT_AUTH_SUCCESS = "auth/DEAUTHORIZE_SUCCESS";
-export const LOGOUT_AUTH_FAILURE = "auth/DEAUTHORIZE_FAILURE";
+export const AUTH_LOGOUT_REQUEST = "auth/AUTH_LOGOUT_REQUEST";
+export const AUTH_LOGOUT_SUCCESS = "auth/AUTH_LOGOUT_SUCCESS";
+export const AUTH_LOGOUT_FAILURE = "auth/AUTH_LOGOUT_FAILURE";
 
 // 로그인 요청
-export interface login_action {
-  type: typeof LOGIN_AUTH_REQUEST;
+export interface IAuthLoginRequest {
+  type: typeof AUTH_LOGIN_REQUEST;
   payload: { email: string; password: string };
 }
-// OTP 확인 요청
-interface check_otp_action {
-  type: typeof CHECK_OTP_AUTH_REQUEST;
-  payload: { otp: string };
-}
 // 토큰 재발행 요청
-interface change_token_action {
-  type: typeof CHANGE_TOKEN_AUTH_REQUEST;
+export interface IAuthTokenrefreshRequest {
+  type: typeof AUTH_TOKENREFRESH_REQUEST;
 }
 // 로그아웃 요청
-export interface logout_action {
-  type: typeof LOGOUT_AUTH_REQUEST;
+export interface IAuthLogoutRequest {
+  type: typeof AUTH_LOGOUT_REQUEST;
   payload: { email: string };
 }
 
-export type AUTH_ACTION_TYPES =
-  | login_action
-  | check_otp_action
-  | change_token_action
-  | logout_action;
+export type IAuthAction =
+  | IAuthLoginRequest
+  | IAuthTokenrefreshRequest
+  | IAuthLogoutRequest;
