@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import AuthPresenter from "./AuthPresenter";
 import useInput from "@Client/Hooks/useInput";
 import AuthState from "./AuthState";
 import { connect } from "react-redux";
-import { login } from "@Store/modules/Auth/actions";
+import { authLoginAction } from "@Store/modules/Auth/actions";
 import { create_user } from "@Store/modules/User/actions";
+import { RootStateType } from "store/modules";
 
 const AuthContainer = (props: {
-  auth: IAuthState;
+  auth: RootStateType["auth"];
   loadingAuth: any;
   loadingCreateUser: any;
-  login: ActionLoginType;
+  authLoginAction: typeof authLoginAction;
   create_user: ActionCreateUserType;
 }) => {
   const [action, setAction] = useState<AuthState>(AuthState.STATE_LOGIN);
@@ -23,7 +24,7 @@ const AuthContainer = (props: {
     e.preventDefault();
     switch (action) {
       case AuthState.STATE_LOGIN:
-        props.login(email.value, password.value);
+        props.authLoginAction(email.value, password.value);
         break;
       case AuthState.STATE_SIGNUP:
         if (password.value !== confirmPassword.value) {
@@ -66,7 +67,7 @@ export default connect(
   ({ auth, loading }: RootStateType) => ({
     auth,
     loadingAuth: loading["auth/AUTHENTICATE"],
-    loadingCreateUser: loading["user/CREATE_USERE"]
+    loadingCreateUser: loading["user/CREATE_USER"]
   }),
-  { login, create_user }
+  { authLoginAction, create_user }
 )(AuthContainer);

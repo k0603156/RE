@@ -7,6 +7,7 @@ import {
   postCreateAction
 } from "@Store/modules/Post/actions";
 import Presenter from "./Presenter";
+import { RootStateType } from "@Store/modules";
 
 const Container = (props: {
   post: RootStateType["post"];

@@ -3,6 +3,7 @@ import UserPresenter from "./UserPresenter";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { select_user } from "@Store/modules/User/actions";
+import { RootStateType } from "@Store/modules";
 
 const UserContainer = withRouter((props: any) => {
   const searchUserName = props.match.params.searchUserName;
@@ -18,5 +19,3 @@ export default connect(
   }),
   { select_user }
 )(UserContainer);
-
-// export default UserContainer;

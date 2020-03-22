@@ -2,8 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import { logout } from "@Store/modules/Auth/actions";
+import { authLogoutAction } from "@Store/modules/Auth/actions";
 import PrivateRoutes from "@Client/Routes/routes.private";
+import { RootStateType } from "store/modules";
 
 const Item = styled.li`
   margin: 10px 0;
@@ -16,8 +17,8 @@ const Box = styled.ul`
 
 const UserMenu = (props: {
   toggle: boolean;
-  auth: any;
-  logout: ActionLogoutType;
+  auth: RootStateType["auth"];
+  authLogoutAction: typeof authLogoutAction;
 }) => {
   return (
     <Box {...props}>
@@ -32,7 +33,9 @@ const UserMenu = (props: {
           <Link to={"/adm"}>Admin</Link>
         </Item>
       )}
-      <Item onClick={() => props.logout(props.auth.me.email)}>Logout</Item>
+      <Item onClick={() => props.authLogoutAction(props.auth.me.email)}>
+        Logout
+      </Item>
     </Box>
   );
 };
@@ -40,5 +43,5 @@ export default connect(
   ({ auth }: RootStateType) => ({
     auth
   }),
-  { logout }
+  { authLogoutAction }
 )(UserMenu);

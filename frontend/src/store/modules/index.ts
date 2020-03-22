@@ -10,6 +10,8 @@ import msg, { msgSaga } from "./Msg";
 
 import { all, fork } from "redux-saga/effects";
 
+export type RootStateType = ReturnType<typeof rootReducer>;
+
 const rootReducer: any = combineReducers<RootStateType>({
   auth,
   user,
