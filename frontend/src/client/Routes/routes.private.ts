@@ -1,12 +1,12 @@
-import { PrivatePlanEdit, PrivateUser } from "@Client/Pages/private";
+import { PrivatePostEdit, PrivateUser } from "@Client/Pages/private";
 
 export default {
   User: {
     component: PrivateUser,
     path: "/user/:searchUserName"
   },
-  PlanEdit: {
-    component: PrivatePlanEdit,
-    path: "/planEdit"
+  PostEdit: {
+    component: PrivatePostEdit,
+    path: "/postedit"
   }
 };

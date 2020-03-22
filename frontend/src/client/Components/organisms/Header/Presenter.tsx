@@ -38,7 +38,7 @@ export default (props: {
   return (
     <>
       <Title>
-        <Link to="/">Traveler</Link>
+        <Link to="/">Symphonia</Link>
       </Title>
 
       <UserBox onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>

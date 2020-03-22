@@ -26,7 +26,7 @@ const UserMenu = (props: {
         <Link to={`/user/${props.auth.me.userName}`}> Profile</Link>
       </Item>
       <Item>
-        <Link to={`/PlanEdit`}> PlanEdit</Link>
+        <Link to={`/postedit`}> PostEdit</Link>
       </Item>
       {props.auth.isAdmin && (
         <Item>

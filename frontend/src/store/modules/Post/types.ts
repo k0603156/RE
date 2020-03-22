@@ -1,3 +1,5 @@
+import { Node } from "slate";
+
 export const POST_FILLIN_CONDUCT = "post/POST_FILLIN_CONDUCT";
 
 export const POST_BROWSE_REQUEST = "post/POST_BROWSE_REQUEST";
@@ -20,7 +22,8 @@ export const POST_UPDATE_FAILURE = "post/POST_UPDATE_FAILURE";
 export interface IPostFillinConduct {
   type: typeof POST_FILLIN_CONDUCT;
   payload: {
-    content: Array<Node>;
+    name: string;
+    data: Array<Node> | string;
   };
 }
 //게시글 읽기 요청
@@ -33,6 +36,7 @@ export interface IPostBrowseRequest {
 //게시글 생성 요청
 export interface IPostCreateRequest {
   type: typeof POST_CREATE_REQUEST;
+  payload: IPostState;
 }
 //게시글 삭제 요청
 export interface IPostDeleteRequest {
@@ -49,3 +53,9 @@ export type TPostAction =
   | IPostCreateRequest
   | IPostDeleteRequest
   | IPostUpdateRequest;
+
+export interface IPostState {
+  title: string;
+  content: Array<Node>;
+  hashtags: Array<{ name: string }>;
+}

@@ -11,8 +11,8 @@ import { RootStateType } from "@Store/modules";
 
 const Container = (props: {
   post: RootStateType["post"];
-  postFillinAction: any;
-  postCreateAction: any;
+  postFillinAction: typeof postFillinAction;
+  postCreateAction: typeof postCreateAction;
 }) => {
   const _debounce = debounce(
     (f: (...any: (string | number)[]) => void, ...arr: (string | number)[]) =>
@@ -20,23 +20,15 @@ const Container = (props: {
     50
   );
 
-  function inputPlanStory(event: React.ChangeEvent<any>) {
-    _debounce(event.currentTarget.name, event.currentTarget.value);
-  }
-
   const onSubmit = (event: React.ChangeEvent<any>) => {
     event.preventDefault();
-    props.postCreateAction();
+    props.postCreateAction(props.post);
   };
-  const onChange = (value: Array<Node>) => {
-    props.postFillinAction(value);
+  const onChange = (name: string, value: string | Array<Node>) => {
+    props.postFillinAction(name, value);
   };
   return (
-    <Presenter
-      onSubmit={onSubmit}
-      onChange={onChange}
-      value={props.post.content}
-    />
+    <Presenter onSubmit={onSubmit} onChange={onChange} value={props.post} />
   );
 };
 

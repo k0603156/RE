@@ -16,12 +16,13 @@ const BoardBox = styled.div``;
 const BoardTitle = styled.h3``;
 const BoardList = styled.ul``;
 
-interface Inf {
+interface IProps {
   handlePage: (event: React.MouseEvent<HTMLLIElement, MouseEvent>) => void;
   lengthPage: number;
   currentPage: number;
+  postList: any;
 }
-export default ({ handlePage, lengthPage, currentPage }: Inf) => {
+export default ({ handlePage, lengthPage, currentPage }: IProps) => {
   return (
     <BoardBox>
       <BoardTitle></BoardTitle>

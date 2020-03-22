@@ -38,20 +38,16 @@ function createSaga(type: string, request: AxiosPromiseType) {
   };
 }
 
-const redirectSaga = (url: string) => {
+const postRedirectSaga = (url: string) => {
   return function* RedirectPageSaga() {
     const history = yield getContext("history");
     history.push(url);
   };
 };
 
-//게시글 읽기
 const postBrowseSaga = createSaga(POST_BROWSE_REQUEST, Api.post.post_browse);
-//게시글 생성
 const postCreateSaga = createSaga(POST_CREATE_REQUEST, Api.post.post_create);
-//게시글 삭제
 const postDeleteSaga = createSaga(POST_DELETE_REQUEST, Api.post.post_delete);
-//게시글 수정
 const postUpdateSaga = createSaga(POST_UPDATE_REQUEST, Api.post.post_update);
 
 function* postBrowse() {
@@ -63,7 +59,7 @@ function* postCreate() {
 }
 
 function* postCreateSuccess() {
-  yield takeLatest(POST_CREATE_SUCCESS, redirectSaga("/"));
+  yield takeLatest(POST_CREATE_SUCCESS, postRedirectSaga("/"));
 }
 
 function* postDelete() {
