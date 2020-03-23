@@ -1,5 +1,3 @@
-type RootStateType = ReturnType<typeof rootReducer>;
-
 type StoreType = Store<RootStateType>;
 
 interface IAuthState {
@@ -17,14 +15,6 @@ interface IMsgState {
   status: any;
   message: any;
 }
-
-type ActionLoginType = (email: string, password: string) => AUTH_ACTION_TYPES;
-
-type ActionCheckOTPType = (otp: string) => AUTH_ACTION_TYPES;
-
-type ActionChangeTokenType = () => AUTH_ACTION_TYPES;
-
-type ActionLogoutType = (email: string) => AUTH_ACTION_TYPES;
 
 type ActionCreateUserType = (
   userName: string,

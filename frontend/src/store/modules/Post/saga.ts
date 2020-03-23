@@ -14,8 +14,8 @@ import {
   POST_DELETE_REQUEST,
   POST_UPDATE_REQUEST
 } from "./types";
-import { startLoading, finishLoading } from "../Loading";
-import { createMSG } from "../Msg";
+import { loadingStart, loadingFinish } from "../Loading";
+import { msgCreate } from "../Msg";
 import Api from "@Client/Api";
 
 function createSaga(type: string, request: AxiosPromiseType) {
@@ -23,7 +23,7 @@ function createSaga(type: string, request: AxiosPromiseType) {
   const FAILURE = type.replace("REQUEST", "FAILURE");
 
   return function*(action: any) {
-    yield put(startLoading(type));
+    yield put(loadingStart(type));
     try {
       const response = yield call(request, action.payload);
       yield put({
@@ -31,27 +31,23 @@ function createSaga(type: string, request: AxiosPromiseType) {
         payload: response.data
       });
     } catch (error) {
-      yield put(createMSG(FAILURE, "ERROR", error));
+      yield put(msgCreate(FAILURE, "ERROR", error));
     } finally {
-      yield put(finishLoading(type));
+      yield put(loadingFinish(type));
     }
   };
 }
 
-const redirectSaga = (url: string) => {
+const postRedirectSaga = (url: string) => {
   return function* RedirectPageSaga() {
     const history = yield getContext("history");
     history.push(url);
   };
 };
 
-//게시글 읽기
 const postBrowseSaga = createSaga(POST_BROWSE_REQUEST, Api.post.post_browse);
-//게시글 생성
 const postCreateSaga = createSaga(POST_CREATE_REQUEST, Api.post.post_create);
-//게시글 삭제
 const postDeleteSaga = createSaga(POST_DELETE_REQUEST, Api.post.post_delete);
-//게시글 수정
 const postUpdateSaga = createSaga(POST_UPDATE_REQUEST, Api.post.post_update);
 
 function* postBrowse() {
@@ -63,7 +59,7 @@ function* postCreate() {
 }
 
 function* postCreateSuccess() {
-  yield takeLatest(POST_CREATE_SUCCESS, redirectSaga("/"));
+  yield takeLatest(POST_CREATE_SUCCESS, postRedirectSaga("/"));
 }
 
 function* postDelete() {

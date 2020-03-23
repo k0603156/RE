@@ -1,18 +1,21 @@
 import Axios from "axios";
+import { IPostState } from "@Store/modules/Post/types";
+import { Node } from "slate";
 // Api url
 const API_ROOT =
   process.env.NODE_ENV !== "production"
     ? "http://localhost:8000/api/v1/"
     : "http://35.213.18.30/api/v1/";
-const ROUTE = "plan";
+const ROUTE = "post";
 
 const req = (
   method: "get" | "post" | "put" | "delete",
   url: string,
-  data?: {
-    pid?: number;
-    contents?: Array<any>;
-  }
+  data?:
+    | {
+        pid?: number;
+      }
+    | IPostState
 ) => {
   const token = localStorage.getItem("token");
   return Axios({
@@ -32,9 +35,13 @@ export default {
   post_browse(payload: { pid: number }) {
     return req("get", `/${payload.pid}`);
   },
+  //게시글 리스트 요청
+  post_browse_list(payload: { page: number }) {
+    return req("get", `/list/${payload.page}`);
+  },
   //게시글 생성 요청
-  post_create(payload: { contents: Array<any> }) {
-    return req("post", "/", payload);
+  post_create(payload: IPostState) {
+    return req("post", "", payload);
   },
   //게시글 삭제 요청
   post_delete(payload: { pid: number }) {

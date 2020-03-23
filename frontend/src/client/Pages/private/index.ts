@@ -1,2 +1,2 @@
-export { default as PrivatePlanEdit } from "./PlanEdit";
+export { default as PrivatePostEdit } from "./PostEdit";
 export { default as PrivateUser } from "./User";

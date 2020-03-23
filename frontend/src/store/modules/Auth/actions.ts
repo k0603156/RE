@@ -1,39 +1,31 @@
 import {
-  LOGIN_AUTH_REQUEST,
-  CHECK_OTP_AUTH_REQUEST,
-  CHANGE_TOKEN_AUTH_REQUEST,
-  LOGOUT_AUTH_REQUEST,
-  AUTH_ACTION_TYPES
+  AUTH_LOGIN_REQUEST,
+  AUTH_TOKENREFRESH_REQUEST,
+  AUTH_LOGOUT_REQUEST,
+  IAuthAction
 } from "./types";
 
 //** CREATE ACTION **//
 // 로그인 요청
-export function login(email: string, password: string): AUTH_ACTION_TYPES {
+export function authLoginAction(email: string, password: string): IAuthAction {
   return {
-    type: LOGIN_AUTH_REQUEST,
+    type: AUTH_LOGIN_REQUEST,
     payload: {
       email,
       password
     }
   };
 }
-// OTP 확인 요청
-export function check_otp(otp: string): AUTH_ACTION_TYPES {
-  return {
-    type: CHECK_OTP_AUTH_REQUEST,
-    payload: { otp }
-  };
-}
 // 토큰 재발행 요청
-export function change_token(): AUTH_ACTION_TYPES {
+export function authTokenrefreshAction(): IAuthAction {
   return {
-    type: CHANGE_TOKEN_AUTH_REQUEST
+    type: AUTH_TOKENREFRESH_REQUEST
   };
 }
 // 로그아웃 요청
-export function logout(email: string): AUTH_ACTION_TYPES {
+export function authLogoutAction(email: string): IAuthAction {
   return {
-    type: LOGOUT_AUTH_REQUEST,
+    type: AUTH_LOGOUT_REQUEST,
     payload: { email }
   };
 }

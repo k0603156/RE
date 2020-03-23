@@ -1,17 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import AuthPresenter from "./AuthPresenter";
 import useInput from "@Client/Hooks/useInput";
 import AuthState from "./AuthState";
 import { connect } from "react-redux";
-import { login } from "@Store/modules/Auth/actions";
-import { create_user } from "@Store/modules/User/actions";
+import { authLoginAction } from "@Store/modules/Auth/actions";
+import { userCreateAction } from "@Store/modules/User/actions";
+import { RootStateType } from "store/modules";
 
 const AuthContainer = (props: {
-  auth: IAuthState;
-  loadingAuth: any;
-  loadingCreateUser: any;
-  login: ActionLoginType;
-  create_user: ActionCreateUserType;
+  auth: RootStateType["auth"];
+  loadingAuth: RootStateType["loading"];
+  loadingCreateUser: RootStateType["loading"];
+  authLoginAction: typeof authLoginAction;
+  userCreateAction: typeof userCreateAction;
 }) => {
   const [action, setAction] = useState<AuthState>(AuthState.STATE_LOGIN);
   const userName = useInput<string>("");
@@ -23,14 +24,14 @@ const AuthContainer = (props: {
     e.preventDefault();
     switch (action) {
       case AuthState.STATE_LOGIN:
-        props.login(email.value, password.value);
+        props.authLoginAction(email.value, password.value);
         break;
       case AuthState.STATE_SIGNUP:
         if (password.value !== confirmPassword.value) {
           console.log("비밀번호 확인란이 같지 않습니다.");
           break;
         }
-        props.create_user(
+        props.userCreateAction(
           userName.value,
           email.value,
           password.value,
@@ -65,8 +66,8 @@ const AuthContainer = (props: {
 export default connect(
   ({ auth, loading }: RootStateType) => ({
     auth,
-    loadingAuth: loading["auth/AUTHENTICATE"],
-    loadingCreateUser: loading["user/CREATE_USERE"]
+    loadingAuth: loading["auth/AUTH_LOGIN_REQUEST"],
+    loadingCreateUser: loading["user/USER_CREATE_REQUEST"]
   }),
-  { login, create_user }
+  { authLoginAction, userCreateAction }
 )(AuthContainer);

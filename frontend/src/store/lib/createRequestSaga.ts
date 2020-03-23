@@ -1,19 +1,19 @@
 import { call, put } from "redux-saga/effects";
-import { startLoading, finishLoading } from "@Store/modules/Loading";
-import { createMSG, clearMSG } from "@Store/modules/Msg";
+import { loadingStart, loadingFinish } from "@Store/modules/Loading";
+import { msgCreate, msgClear } from "@Store/modules/Msg";
 
 export default function createRequestSaga(type: any, request: any) {
   const SUCCESS = String(type).replace("REQUEST", "SUCCESS");
   const FAILURE = String(type).replace("REQUEST", "FAILURE");
   return function*(action: any) {
-    yield put(startLoading(type)); // 로딩 시작
+    yield put(loadingStart(type)); // 로딩 시작
     try {
       const response = yield call(request, action.payload);
       yield put({
         type: SUCCESS,
         payload: response.data
       });
-      yield put(clearMSG());
+      yield put(msgClear());
       action.callback && action.callback();
     } catch (error) {
       yield put({
@@ -21,9 +21,9 @@ export default function createRequestSaga(type: any, request: any) {
         payload: error,
         error: true
       });
-      yield put(createMSG(FAILURE, "ERROR", error));
+      yield put(msgCreate(FAILURE, "ERROR", error));
     } finally {
-      yield put(finishLoading(type)); // 로딩 끝
+      yield put(loadingFinish(type)); // 로딩 끝
     }
   };
 }

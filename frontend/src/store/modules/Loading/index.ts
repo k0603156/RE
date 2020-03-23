@@ -1,28 +1,27 @@
 import { createAction, createReducer } from "typesafe-actions";
-const START_LOADING = "loading/START_LOADING";
-const FINISH_LOADING = "loading/FINISH_LOADING";
 
-export const startLoading = createAction(
-  START_LOADING,
+const LOADING_START = "loading/LOADING_START";
+const LOADING_FINISH = "loading/LOADING_FINISH";
+
+export const loadingStart = createAction(
+  LOADING_START,
   requestType => requestType
 )();
 
-export const finishLoading = createAction(
-  FINISH_LOADING,
+export const loadingFinish = createAction(
+  LOADING_FINISH,
   requestType => requestType
 )();
 
 const initialState = {};
 
-const loading = createReducer(initialState, {
-  [START_LOADING]: (state: any, action: any) => ({
+export default createReducer(initialState, {
+  [LOADING_START]: (state: any, action: any) => ({
     ...state,
     [action.payload]: true
   }),
-  [FINISH_LOADING]: (state: any, action: any) => ({
+  [LOADING_FINISH]: (state: any, action: any) => ({
     ...state,
     [action.payload]: false
   })
 });
-
-export default loading;
