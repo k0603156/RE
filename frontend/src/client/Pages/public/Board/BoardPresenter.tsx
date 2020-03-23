@@ -1,17 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { Pagination, PostBox } from "@Client/Components/organisms";
+import { RootStateType } from "@Store/modules";
 
-interface IPost {
-  title: string;
-  date: Date;
-  image: string;
-  content: String;
-}
-interface IPostList {
-  board: string;
-  data: IPost[];
-}
 const BoardBox = styled.div``;
 const BoardTitle = styled.h3``;
 const BoardList = styled.ul``;
@@ -20,21 +11,22 @@ interface IProps {
   handlePage: (event: React.MouseEvent<HTMLLIElement, MouseEvent>) => void;
   lengthPage: number;
   currentPage: number;
-  postList: any;
+  postlist: RootStateType["postlist"];
 }
-export default ({ handlePage, lengthPage, currentPage }: IProps) => {
+export default (props: IProps) => {
+  console.log(props.postlist);
   return (
     <BoardBox>
-      <BoardTitle></BoardTitle>
+      <BoardTitle>title</BoardTitle>
       <BoardList>
         {new Array(20).fill("").map((_, index) => (
           <PostBox key={index} index={index} />
         ))}
 
         <Pagination
-          handlePage={handlePage}
-          lengthPage={lengthPage}
-          currentPage={currentPage}
+          handlePage={props.handlePage}
+          lengthPage={props.lengthPage}
+          currentPage={props.currentPage}
         />
       </BoardList>
     </BoardBox>

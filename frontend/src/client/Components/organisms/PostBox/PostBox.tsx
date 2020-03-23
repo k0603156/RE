@@ -40,7 +40,7 @@ const Content = styled.div`
   text-overflow: ellipsis;
   overflow: hidden;
 `;
-const PostBox = ({ index }: any) => {
+const PostBox = ({ post, index }: any) => {
   return (
     <Box>
       <Hash>#여행 #포스팅</Hash>

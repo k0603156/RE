@@ -6,7 +6,7 @@ import Api from "@Client/Api";
 //포스트 리스트 읽기
 const postlistBrowseSaga = createRequestSaga(
   POSTLIST_BROWSE_REQUEST,
-  Api.post.post_browse
+  Api.post.post_browse_list
 );
 
 function* postlistBrowse() {

@@ -6,7 +6,11 @@ export const POSTLIST_BROWSE_FAILURE = "postlist/POSTLIST_BROWSE_FAILURE";
 //게시글 리스트 요청
 export interface IPostlistBrowseRequest {
   type: typeof POSTLIST_BROWSE_REQUEST;
-  payload: {};
+  payload: { page: number };
 }
 
 export type IPostlistAction = IPostlistBrowseRequest;
+
+export interface IPostlistState {
+  postList: Array<any>;
+}
