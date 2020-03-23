@@ -14,8 +14,8 @@ import {
   POST_DELETE_REQUEST,
   POST_UPDATE_REQUEST
 } from "./types";
-import { startLoading, finishLoading } from "../Loading";
-import { createMSG } from "../Msg";
+import { loadingStart, loadingFinish } from "../Loading";
+import { msgCreate } from "../Msg";
 import Api from "@Client/Api";
 
 function createSaga(type: string, request: AxiosPromiseType) {
@@ -23,7 +23,7 @@ function createSaga(type: string, request: AxiosPromiseType) {
   const FAILURE = type.replace("REQUEST", "FAILURE");
 
   return function*(action: any) {
-    yield put(startLoading(type));
+    yield put(loadingStart(type));
     try {
       const response = yield call(request, action.payload);
       yield put({
@@ -31,9 +31,9 @@ function createSaga(type: string, request: AxiosPromiseType) {
         payload: response.data
       });
     } catch (error) {
-      yield put(createMSG(FAILURE, "ERROR", error));
+      yield put(msgCreate(FAILURE, "ERROR", error));
     } finally {
-      yield put(finishLoading(type));
+      yield put(loadingFinish(type));
     }
   };
 }

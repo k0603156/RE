@@ -1,30 +1,30 @@
 // 사용자 정보 요청
-export const SELECT_USER_REQUEST = "user/SELECT_USER_REQUEST";
-export const SELECT_USER_SUCCESS = "user/SELECT_USER_SUCCESS";
-export const SELECT_USER_FAILURE = "user/SELECT_USER_FAILURE";
+export const USER_SELECT_REQUEST = "user/USER_SELECT_REQUEST";
+export const USER_SELECT_SUCCESS = "user/USER_SELECT_SUCCESS";
+export const USER_SELECT_FAILURE = "user/USER_SELECT_FAILURE";
 // 사용자 가입
-export const CREATE_USER_REQUEST = "user/CREATE_USER_REQUEST";
-export const CREATE_USER_SUCCESS = "user/CREATE_USER_SUCCESS";
-export const CREATE_USER_FAILURE = "user/CREATE_USER_FAILURE";
+export const USER_CREATE_REQUEST = "user/USER_CREATE_REQUEST";
+export const USER_CREATE_SUCCESS = "user/USER_CREATE_SUCCESS";
+export const USER_CREATE_FAILURE = "user/USER_CREATE_FAILURE";
 // 사용자 정보수정
-export const UPDATE_USER_REQUEST = "user/UPDATE_USER_REQUEST";
-export const UPDATE_USER_SUCCESS = "user/UPDATE_USER_SUCCESS";
-export const UPDATE_USER_FAILURE = "user/UPDATE_USER_FAILURE";
+export const USER_UPDATE_REQUEST = "user/USER_UPDATE_REQUEST";
+export const USER_UPDATE_SUCCESS = "user/USER_UPDATE_SUCCESS";
+export const USER_UPDATE_FAILURE = "user/USER_UPDATE_FAILURE";
 // 사용자 탈퇴
-export const DELETE_USER_REQUEST = "user/DELETE_USER_REQUEST";
-export const DELETE_USER_SUCCESS = "user/DELETE_USER_SUCCESS";
-export const DELETE_USER_FAILURE = "user/DELETE_USER_FAILURE";
+export const USER_DELETE_REQUEST = "user/USER_DELETE_REQUEST";
+export const USER_DELETE_SUCCESS = "user/USER_DELETE_SUCCESS";
+export const USER_DELETE_FAILURE = "user/USER_DELETE_FAILURE";
 
 // 사용자 정보 요청
-export interface select_user_action {
-  type: typeof SELECT_USER_REQUEST;
+export interface IUserSelectRequest {
+  type: typeof USER_SELECT_REQUEST;
   payload: {
     userName: string;
   };
 }
 // 사용자 가입
-export interface create_user_action {
-  type: typeof CREATE_USER_REQUEST;
+export interface IUserCreateRequest {
+  type: typeof USER_CREATE_REQUEST;
   payload: {
     userName: string;
     email: string;
@@ -34,8 +34,8 @@ export interface create_user_action {
   callback: () => void;
 }
 // 사용자 정보수정
-export interface update_user_action {
-  type: typeof UPDATE_USER_REQUEST;
+export interface IUserUpdateRequest {
+  type: typeof USER_UPDATE_REQUEST;
   payload: {
     userName: string;
     password: string;
@@ -43,14 +43,14 @@ export interface update_user_action {
   };
 }
 // 사용자 탈퇴
-export interface delete_user_action {
-  type: typeof DELETE_USER_REQUEST;
+export interface IUserDeleteRequest {
+  type: typeof USER_DELETE_REQUEST;
   payload: {
     email: string;
   };
 }
-export type USER_ACTION_TYPES =
-  | select_user_action
-  | create_user_action
-  | update_user_action
-  | delete_user_action;
+export type IUserAction =
+  | IUserSelectRequest
+  | IUserCreateRequest
+  | IUserUpdateRequest
+  | IUserDeleteRequest;

@@ -1,15 +1,15 @@
 import { all, fork, takeLatest, delay, put } from "redux-saga/effects";
 import { createAction, createReducer } from "typesafe-actions";
-const CREATE_MSG = "msg/CREATE_MSG";
-const CLEAR_MSG = "msg/CLEAR_MSG";
+const MSG_CREATE = "msg/MSG_CREATE";
+const MSG_CLEAR = "msg/MSG_CLEAR";
 
-export const createMSG = createAction(
-  CREATE_MSG,
+export const msgCreate = createAction(
+  MSG_CREATE,
   (actionType, msgType: "ALERT" | "ERROR", Message) => {
     return { actionType, msgType, Message };
   }
 )();
-export const clearMSG = createAction(CLEAR_MSG, () => {
+export const msgClear = createAction(MSG_CLEAR, () => {
   return {};
 })();
 
@@ -22,7 +22,7 @@ const initialState: IMsgState = {
 };
 
 const msgReducer = createReducer(initialState, {
-  [CREATE_MSG]: (state: any, action: any) => {
+  [MSG_CREATE]: (state: any, action: any) => {
     const { actionType, msgType, Message } = action.payload;
     return {
       isAlert: true,
@@ -32,7 +32,7 @@ const msgReducer = createReducer(initialState, {
       status: Message.response?.status || "localErr"
     };
   },
-  [CLEAR_MSG]: (state: any, action: any) => {
+  [MSG_CLEAR]: (state: any, action: any) => {
     return {
       isAlert: false,
       actionType: "",
@@ -45,11 +45,11 @@ const msgReducer = createReducer(initialState, {
 
 function* increaseStorySaga() {
   yield delay(3000);
-  yield put(clearMSG());
+  yield put(msgClear());
 }
 
 function* increaseStory() {
-  yield takeLatest(CREATE_MSG, increaseStorySaga);
+  yield takeLatest(MSG_CREATE, increaseStorySaga);
 }
 
 function* msgSaga() {

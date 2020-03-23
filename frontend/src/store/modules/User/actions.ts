@@ -1,31 +1,31 @@
 import {
-  SELECT_USER_REQUEST,
-  CREATE_USER_REQUEST,
-  UPDATE_USER_REQUEST,
-  DELETE_USER_REQUEST,
-  USER_ACTION_TYPES
+  USER_SELECT_REQUEST,
+  USER_CREATE_REQUEST,
+  USER_UPDATE_REQUEST,
+  USER_DELETE_REQUEST,
+  IUserAction
 } from "./types";
 
 //** CREATE ACTION **//
 // 사용자 정보 확인
-export function select_user(userName: string): USER_ACTION_TYPES {
+export function userSelectAction(userName: string): IUserAction {
   return {
-    type: SELECT_USER_REQUEST,
+    type: USER_SELECT_REQUEST,
     payload: {
       userName
     }
   };
 }
 // 사용자 생성
-export function create_user(
+export function userCreateAction(
   userName: string,
   email: string,
   password: string,
   confirmPassword: string,
   callback: () => void
-): USER_ACTION_TYPES {
+): IUserAction {
   return {
-    type: CREATE_USER_REQUEST,
+    type: USER_CREATE_REQUEST,
     payload: {
       userName,
       email,
@@ -36,13 +36,13 @@ export function create_user(
   };
 }
 // 사용자 정보 수정
-export function update_user(
+export function userUpdateAction(
   userName: string,
   password: string,
   confirmPassword: string
-): USER_ACTION_TYPES {
+): IUserAction {
   return {
-    type: UPDATE_USER_REQUEST,
+    type: USER_UPDATE_REQUEST,
     payload: {
       userName,
       password,
@@ -51,9 +51,9 @@ export function update_user(
   };
 }
 // 사용자 탈퇴
-export function delete_user(email: string): USER_ACTION_TYPES {
+export function userDeleteAction(email: string): IUserAction {
   return {
-    type: DELETE_USER_REQUEST,
+    type: USER_DELETE_REQUEST,
     payload: {
       email
     }

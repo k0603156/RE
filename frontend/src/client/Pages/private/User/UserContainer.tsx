@@ -1,21 +1,26 @@
 import React, { useEffect } from "react";
 import UserPresenter from "./UserPresenter";
-import { withRouter } from "react-router-dom";
+import { withRouter, RouteComponentProps } from "react-router-dom";
 import { connect } from "react-redux";
-import { select_user } from "@Store/modules/User/actions";
+import { userSelectAction } from "@Store/modules/User/actions";
 import { RootStateType } from "@Store/modules";
 
-const UserContainer = withRouter((props: any) => {
+interface IProps extends RouteComponentProps<{ searchUserName: string }> {
+  user: RootStateType["user"];
+  userSelectAction: typeof userSelectAction;
+}
+const UserContainer = withRouter((props: IProps) => {
   const searchUserName = props.match.params.searchUserName;
   useEffect(() => {
-    props.select_user(searchUserName);
+    props.userSelectAction(searchUserName);
   }, [props.match.params.searchUserName]);
+
   return <UserPresenter user={props.user} />;
 });
 export default connect(
   ({ user, loading }: RootStateType) => ({
     user,
-    loadingAuth: loading["user/SELECT_USER"]
+    loadingAuth: loading["user/USER_SELECT_REQUEST"]
   }),
-  { select_user }
+  { userSelectAction }
 )(UserContainer);

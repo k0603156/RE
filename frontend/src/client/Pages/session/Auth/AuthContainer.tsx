@@ -4,15 +4,15 @@ import useInput from "@Client/Hooks/useInput";
 import AuthState from "./AuthState";
 import { connect } from "react-redux";
 import { authLoginAction } from "@Store/modules/Auth/actions";
-import { create_user } from "@Store/modules/User/actions";
+import { userCreateAction } from "@Store/modules/User/actions";
 import { RootStateType } from "store/modules";
 
 const AuthContainer = (props: {
   auth: RootStateType["auth"];
-  loadingAuth: any;
-  loadingCreateUser: any;
+  loadingAuth: RootStateType["loading"];
+  loadingCreateUser: RootStateType["loading"];
   authLoginAction: typeof authLoginAction;
-  create_user: ActionCreateUserType;
+  userCreateAction: typeof userCreateAction;
 }) => {
   const [action, setAction] = useState<AuthState>(AuthState.STATE_LOGIN);
   const userName = useInput<string>("");
@@ -31,7 +31,7 @@ const AuthContainer = (props: {
           console.log("비밀번호 확인란이 같지 않습니다.");
           break;
         }
-        props.create_user(
+        props.userCreateAction(
           userName.value,
           email.value,
           password.value,
@@ -66,8 +66,8 @@ const AuthContainer = (props: {
 export default connect(
   ({ auth, loading }: RootStateType) => ({
     auth,
-    loadingAuth: loading["auth/AUTHENTICATE"],
-    loadingCreateUser: loading["user/CREATE_USER"]
+    loadingAuth: loading["auth/AUTH_LOGIN_REQUEST"],
+    loadingCreateUser: loading["user/USER_CREATE_REQUEST"]
   }),
-  { authLoginAction, create_user }
+  { authLoginAction, userCreateAction }
 )(AuthContainer);

@@ -4,9 +4,9 @@ export const POSTLIST_BROWSE_SUCCESS = "postlist/POSTLIST_BROWSE_SUCCESS";
 export const POSTLIST_BROWSE_FAILURE = "postlist/POSTLIST_BROWSE_FAILURE";
 
 //게시글 리스트 요청
-export interface IPostlistBrowseAction {
+export interface IPostlistBrowseRequest {
   type: typeof POSTLIST_BROWSE_REQUEST;
   payload: {};
 }
 
-export type IPostlistState = IPostlistBrowseAction;
+export type IPostlistAction = IPostlistBrowseRequest;

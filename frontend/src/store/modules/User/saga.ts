@@ -1,52 +1,52 @@
 import {
-  SELECT_USER_REQUEST,
-  CREATE_USER_REQUEST,
-  UPDATE_USER_REQUEST,
-  DELETE_USER_REQUEST
+  USER_SELECT_REQUEST,
+  USER_CREATE_REQUEST,
+  USER_UPDATE_REQUEST,
+  USER_DELETE_REQUEST
 } from "./types";
 import { all, fork, takeLatest } from "redux-saga/effects";
 import createRequestSaga from "@Store/lib/createRequestSaga";
 import Api from "@Client/Api";
 
 //사용자 정보 요청
-const selectUserSaga = createRequestSaga(
-  SELECT_USER_REQUEST,
+const userSelectSaga = createRequestSaga(
+  USER_SELECT_REQUEST,
   Api.user.select_user
 );
 //사용자 생성 요청
-const createUserSaga = createRequestSaga(
-  CREATE_USER_REQUEST,
+const userCreateSaga = createRequestSaga(
+  USER_CREATE_REQUEST,
   Api.user.create_user
 );
 // 사용자 정보수정 요청
-const updateUserSaga = createRequestSaga(
-  UPDATE_USER_REQUEST,
+const userUpdateSaga = createRequestSaga(
+  USER_UPDATE_REQUEST,
   Api.user.update_user
 );
 // 사용자 탈퇴 요청
-const deleteUserSaga = createRequestSaga(
-  DELETE_USER_REQUEST,
+const userDeleteSaga = createRequestSaga(
+  USER_DELETE_REQUEST,
   Api.user.delete_user
 );
 
-function* selectUser(): Generator {
-  yield takeLatest(SELECT_USER_REQUEST, selectUserSaga);
+function* userSelect(): Generator {
+  yield takeLatest(USER_SELECT_REQUEST, userSelectSaga);
 }
-function* createUser(): Generator {
-  yield takeLatest(CREATE_USER_REQUEST, createUserSaga);
+function* userCreate(): Generator {
+  yield takeLatest(USER_CREATE_REQUEST, userCreateSaga);
 }
-function* updateUser(): Generator {
-  yield takeLatest(UPDATE_USER_REQUEST, updateUserSaga);
+function* userUpdate(): Generator {
+  yield takeLatest(USER_UPDATE_REQUEST, userUpdateSaga);
 }
-function* deleteUser(): Generator {
-  yield takeLatest(DELETE_USER_REQUEST, deleteUserSaga);
+function* userDelete(): Generator {
+  yield takeLatest(USER_DELETE_REQUEST, userDeleteSaga);
 }
 function* userSaga(): Generator {
   yield all([
-    fork(selectUser),
-    fork(createUser),
-    fork(updateUser),
-    fork(deleteUser)
+    fork(userSelect),
+    fork(userCreate),
+    fork(userUpdate),
+    fork(userDelete)
   ]);
 }
 export default userSaga;

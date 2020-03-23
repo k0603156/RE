@@ -14,12 +14,12 @@ import {
   IAuthLogoutRequest
 } from "./types";
 import Api from "@Client/Api";
-import { createMSG } from "../Msg";
-import { startLoading, finishLoading } from "../Loading";
+import { msgCreate } from "../Msg";
+import { loadingStart, loadingFinish } from "../Loading";
 import createRequestSaga from "@Store/lib/createRequestSaga";
 
 export function* authLoginSaga(data: IAuthLoginRequest): Generator {
-  yield put(startLoading(data.type));
+  yield put(loadingStart(data.type));
   const payload = {
     email: data.payload.email,
     password: data.payload.password
@@ -32,15 +32,15 @@ export function* authLoginSaga(data: IAuthLoginRequest): Generator {
     localStorage.setItem("userName", response.data.response.userName);
     localStorage.setItem("email", response.data.response.email);
     yield put(
-      createMSG(AUTH_LOGIN_FAILURE, "ALERT", { message: "로그인되었습니다." })
+      msgCreate(AUTH_LOGIN_FAILURE, "ALERT", { message: "로그인되었습니다." })
     );
   } catch (error) {
-    yield put(createMSG(AUTH_LOGIN_FAILURE, "ERROR", error));
+    yield put(msgCreate(AUTH_LOGIN_FAILURE, "ERROR", error));
     localStorage.removeItem("token");
     localStorage.removeItem("userName");
     localStorage.removeItem("email");
   }
-  yield put(finishLoading(data.type));
+  yield put(loadingFinish(data.type));
 }
 
 export const authTokenrefreshSaga = createRequestSaga(
@@ -49,7 +49,7 @@ export const authTokenrefreshSaga = createRequestSaga(
 );
 
 export function* authLogoutSaga(data: IAuthLogoutRequest): Generator {
-  yield put(startLoading(data.type));
+  yield put(loadingStart(data.type));
   const payload = {
     email: data.payload.email
   };
@@ -62,9 +62,9 @@ export function* authLogoutSaga(data: IAuthLogoutRequest): Generator {
       localStorage.removeItem("email");
     }
   } catch (error) {
-    yield put(createMSG(AUTH_LOGOUT_FAILURE, "ERROR", error));
+    yield put(msgCreate(AUTH_LOGOUT_FAILURE, "ERROR", error));
   }
-  yield put(finishLoading(data.type));
+  yield put(loadingFinish(data.type));
 }
 
 function* authLogin() {

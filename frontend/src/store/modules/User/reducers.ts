@@ -1,8 +1,8 @@
 import {
-  SELECT_USER_SUCCESS,
-  CREATE_USER_SUCCESS,
-  UPDATE_USER_SUCCESS,
-  DELETE_USER_SUCCESS
+  USER_SELECT_SUCCESS,
+  USER_CREATE_SUCCESS,
+  USER_UPDATE_SUCCESS,
+  USER_DELETE_SUCCESS
 } from "./types";
 
 import { createReducer } from "typesafe-actions";
@@ -10,23 +10,23 @@ import { createReducer } from "typesafe-actions";
 const initialState = { userName: "" };
 
 const UserReducer = createReducer(initialState, {
-  [SELECT_USER_SUCCESS]: (state, action) => {
+  [USER_SELECT_SUCCESS]: (state, action) => {
     console.log(action.payload.result);
     return {
       userName: action.payload.result.userName
     };
   },
-  [CREATE_USER_SUCCESS]: (state, action) => {
+  [USER_CREATE_SUCCESS]: (state, action) => {
     return {
       ...state
     };
   },
-  [UPDATE_USER_SUCCESS]: (state, action) => {
+  [USER_UPDATE_SUCCESS]: (state, action) => {
     return {
       ...state
     };
   },
-  [DELETE_USER_SUCCESS]: (state, action) => {
+  [USER_DELETE_SUCCESS]: (state, action) => {
     return {
       ...state
     };
