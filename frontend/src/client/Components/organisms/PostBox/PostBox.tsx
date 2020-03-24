@@ -43,22 +43,22 @@ const Content = styled.div`
 const PostBox = ({ post, index }: any) => {
   return (
     <Box>
-      <Hash>#여행 #포스팅</Hash>
+      <Hash></Hash>
       <Link to={`/board/post/${index}`} key={index}>
-        <Title>laoreetlaoreet</Title>
+        <Title>{post && post.title}</Title>
       </Link>
       <Written>
-        Jone doe <Time>Dec 4, 2019 9:14 AM</Time>
+        {post && post.user.userName} <Time>{post && post.updatedAt}</Time>
       </Written>
 
-      <Content>
+      {/* <Content> 
         Lorem ipsum dolor sit amet, adhuc nulla definiebas mei ad, ei doming
         aperiam delicata est. Lorem ipsum dolor sit amet, adhuc nulla definiebas
         mei ad, ei doming aperiam delicata est. Lorem ipsum dolor sit amet,
         adhuc nulla definiebas mei ad, ei doming aperiam delicata est. Lorem
         ipsum dolor sit amet, adhuc nulla definiebas mei ad, ei doming aperiam
         delicata est.
-      </Content>
+      </Content> */}
     </Box>
   );
 };

@@ -9,7 +9,7 @@ interface IProps extends RouteComponentProps<{ boardName: string }> {
   postlistBrowseAction: typeof postlistBrowseAction;
 }
 const BoardContainer = withRouter((props: IProps) => {
-  const POST_LENGTH: number = 100;
+  const POST_LENGTH: number = 20;
   const POST_PER_PAGE: number = 10;
   const LENGTH_PAGE: number = POST_LENGTH / POST_PER_PAGE;
   const [currentPage, setCurrentPage] = React.useState<number>(1);
@@ -24,13 +24,13 @@ const BoardContainer = withRouter((props: IProps) => {
     e.persist();
     setCurrentPage(parseInt(e.currentTarget.dataset.page));
   };
-
+  console.log(LENGTH_PAGE);
   return (
     <BoardPresenter
       handlePage={handlePage}
       lengthPage={LENGTH_PAGE}
       currentPage={currentPage}
-      postlist={props.postlist}
+      postlist={props.postlist.board}
     />
   );
 });

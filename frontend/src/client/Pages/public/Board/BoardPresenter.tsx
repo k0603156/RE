@@ -19,8 +19,8 @@ export default (props: IProps) => {
     <BoardBox>
       <BoardTitle>title</BoardTitle>
       <BoardList>
-        {new Array(20).fill("").map((_, index) => (
-          <PostBox key={index} index={index} />
+        {props.postlist.map((post: any) => (
+          <PostBox key={post.id} index={post.id} post={post} />
         ))}
 
         <Pagination

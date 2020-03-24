@@ -57,7 +57,7 @@ export default () => (
         Traveler
       </Jumbo>
       <Article>
-        <Title>베스트 여행기</Title>
+        <Title>개발자 게시글</Title>
         {new Array(3).fill("").map((_, index) => (
           <PostBox key={index} />
         ))}
@@ -65,7 +65,7 @@ export default () => (
     </TB>
     <TB>
       <Article>
-        <Title>최신 여행기</Title>
+        <Title>베스트 게시글</Title>
         {new Array(3).fill("").map((_, index) => (
           <PostBox key={index} />
         ))}
@@ -78,7 +78,7 @@ export default () => (
       <Jumbo verticalFrom={"tablet"}>당신의 열정에 맡기고</Jumbo>
       <Article>
         <Title>
-          해외 여행기
+          디자이너 게시글
           <Link to="/board/1">
             <FiList />
           </Link>
@@ -92,7 +92,7 @@ export default () => (
     <TB>
       <Article>
         <Title>
-          국내 여행기
+          게시글
           <Link to="/board/2">
             <FiList />
           </Link>

@@ -73,11 +73,15 @@ module.exports.getPostList = async req => {
       {
         model: Models.user,
         attributes: ["userName"]
+      },
+      {
+        model: Models.hashtag,
+        attributes: ["name"]
       }
     ],
     offset,
     limit: 5,
-    attributes: ["id", "title", "content", "updatedAt"]
+    attributes: ["id", "title", "updatedAt"]
   });
   return result;
 };

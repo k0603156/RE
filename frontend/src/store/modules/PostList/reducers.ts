@@ -1,8 +1,8 @@
 import { createReducer } from "typesafe-actions";
 import { POSTLIST_BROWSE_SUCCESS } from "./types";
 
-const initialState: { postList: any } = {
-  postList: []
+const initialState: { board: any } = {
+  board: []
 };
 
 export default createReducer(initialState, {
@@ -11,7 +11,7 @@ export default createReducer(initialState, {
     console.log(action);
     return {
       ...initialState,
-      postList: [...action.payload.response]
+      board: [...action.payload.response]
     };
   }
 });
