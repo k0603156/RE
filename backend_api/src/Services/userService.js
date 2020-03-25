@@ -1,20 +1,36 @@
 const { user } = require("../Models/tables");
 const { NotFoundError } = require("../Utils/Error");
 const { generateRandomString, encryptString } = require("../Utils");
-
 const ENCRYPT_BUFF = 64;
 const ENCODE_TYPE = "base64";
 
-module.exports.findUser = async req => {
-  const existUser = await user.findOne({
-    where: { userName: req.params.userName },
-    attributes: ["id", "userName"]
-  });
+const PostService = require("../Services/postService");
 
-  if (!existUser) {
-    throw new NotFoundError("해당 사용자를 찾을 수 없습니다.");
+module.exports.getUser = async (req, res, next) => {
+  try {
+    const existUser = await user.findOne({
+      where: { userName: req.params.userName },
+      attributes: ["id", "userName"]
+    });
+
+    if (!existUser) {
+      throw new NotFoundError("해당 사용자를 찾을 수 없습니다.");
+    }
+
+    const resultPost = await PostService.getPostListByUser(
+      existUser.dataValues.id
+    );
+    res.status(200).json({
+      success: true,
+      response: {
+        id: existUser.dataValues.id,
+        userName: existUser.dataValues.userName,
+        posts: resultPost
+      }
+    });
+  } catch (error) {
+    next(error);
   }
-  return existUser;
 };
 
 module.exports.signup = async (req, res, next) => {
@@ -84,18 +100,15 @@ module.exports.updateUser = async (req, res, next) => {
 
 module.exports.deleteUser = async (req, res, next) => {
   try {
-    const id = req.body.id;
+    const id = req.user.id;
 
-    const result = UserModel.destroy({
+    const result = user.destroy({
       where: { id }
     });
 
     if (!result) throw new Error("삭제실패");
 
-    res.status(204).json({
-      success: true,
-      response: result
-    });
+    res.status(204).send();
   } catch (error) {
     next(error);
   }

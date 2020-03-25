@@ -330,4 +330,12 @@ describe("user flow test", () => {
       .expect(404);
     expect(res.body.success).toEqual(false);
   });
+
+  it("회원탈퇴", async () => {
+    console.log("회원탈퇴");
+    const res = await request
+      .delete(`/api/v1/user`)
+      .set("Authorization", "bearer " + store.getToken())
+      .expect(204);
+  });
 });
