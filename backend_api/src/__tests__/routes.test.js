@@ -203,7 +203,9 @@ describe("user flow test", () => {
   it("해시태그로 글 검색", async () => {
     console.log("해시태그로 글 검색");
     const res = await request
-      .get(`/api/v1/post/byhashtag/${store.getHashtag()}/${store.getPage()}`)
+      .get(
+        `/api/v1/post/list/byhashtag/${store.getHashtag()}/?page=${store.getPage()}&limit=5`
+      )
       .set("Authorization", "bearer " + store.getToken())
       .expect(200);
     expect(res.body.success).toEqual(true);
@@ -215,9 +217,8 @@ describe("user flow test", () => {
 
   it("글리스트 불러오기", async () => {
     console.log("글리스트 불러오기");
-
     const res = await request
-      .get(`/api/v1/post/list/${store.getPage()}`)
+      .get(`/api/v1/post/list/?page=${store.getPage()}&limit=5`)
       .set("Authorization", "bearer " + store.getToken())
       .expect(200);
     expect(Array.isArray(res.body.response)).toEqual(true);
@@ -302,31 +303,3 @@ describe("user flow test", () => {
     expect(res.body.success).toEqual(false);
   });
 });
-
-// const request = require("supertest");
-// const express = require("express");
-
-// const app = express();
-// const port = 3000;
-
-// app.get("/hello", (req, res) => {
-//   res.send("world!");
-// });
-
-// app.get("/status", (req, res) => {
-//   res.send("ok");
-// });
-
-// app.listen(port);
-// describe("Post Endpoints", () => {
-//   it("should create a new post", async () => {
-//     const res = await request(app);
-//     request(app)
-//       .get("/hello")
-//       .then(response => {
-//         expect(response.text).toBe("world!");
-//         expect(response.statusCode).toEqual(200);
-//         done();
-//       });
-//   });
-// });

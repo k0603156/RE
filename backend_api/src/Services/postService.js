@@ -2,7 +2,8 @@ const Models = require("../Models/tables");
 const { Op } = require("sequelize");
 
 module.exports.getPostListByHashtag = async req => {
-  const offset = 5 * (req.params.page - 1);
+  const limit = parseInt(req.query.limit) || 5;
+  const offset = req.query.page ? limit * (req.query.page - 1) : 0;
   const result = await Models.post.findAll({
     include: [
       {
@@ -20,26 +21,8 @@ module.exports.getPostListByHashtag = async req => {
     attributes: ["id", "title", "updatedAt"],
     where: { "$hashtags.name$": req.params.hashtag },
     offset,
-    limit: 5
+    limit
   });
-  // const result = await Models.hashtag.findOne({
-  //   where: { name: req.params.hashtag },
-  //   attributes: ["name", "postId"],
-  //   include: [
-  //     {
-  //       model: Models.post,
-  //       attributes: ["id", "hashtagId", "title"],
-  //       offset,
-  //       limit: 5,
-  //       include: [
-  //         {
-  //           model: Models.user,
-  //           attributes: ["userName"]
-  //         }
-  //       ]
-  //     }
-  //   ]
-  // });
 
   return result;
 };
@@ -67,7 +50,8 @@ module.exports.getPostDetail = async req => {
 };
 
 module.exports.getPostList = async req => {
-  const offset = 5 * (req.params.page - 1);
+  const limit = parseInt(req.query.limit) || 5;
+  const offset = req.query.page ? limit * (req.query.page - 1) : 0;
   const result = await Models.post.findAll({
     include: [
       {
@@ -80,7 +64,7 @@ module.exports.getPostList = async req => {
       }
     ],
     offset,
-    limit: 5,
+    limit,
     attributes: ["id", "title", "updatedAt"]
   });
   return result;

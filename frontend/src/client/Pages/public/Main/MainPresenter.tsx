@@ -54,13 +54,13 @@ export default () => (
   <Container>
     <TB>
       <Jumbo medium verticalFrom={"tablet"}>
-        Traveler
+        Symphonia
       </Jumbo>
       <Article>
-        <Title>개발자 게시글</Title>
+        {/* <Title>개발자 게시글</Title>
         {new Array(3).fill("").map((_, index) => (
           <PostBox key={index} />
-        ))}
+        ))} */}
       </Article>
     </TB>
     <TB>
