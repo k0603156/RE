@@ -1,6 +1,6 @@
 const { user } = require("../Models/tables");
 const { NotFoundError } = require("../Utils/Error");
-const { generateRandomString, encryptString, checkProps } = require("../Utils");
+const { generateRandomString, encryptString } = require("../Utils");
 
 const ENCRYPT_BUFF = 64;
 const ENCODE_TYPE = "base64";
@@ -17,71 +17,86 @@ module.exports.findUser = async req => {
   return existUser;
 };
 
-module.exports.signup = async req => {
-  const { userName, email, password, confirmPassword } = checkProps(
-    req.body,
-    "userName",
-    "email",
-    "password",
-    "confirmPassword"
-  );
-  if (password !== confirmPassword) {
-    const error = new Error("비밀번호 체크값이 같지 않음");
-    error.status = 400;
-    throw error;
-  }
+module.exports.signup = async (req, res, next) => {
+  try {
+    const userName = req.body.userName;
+    const email = req.body.email;
+    const password = req.body.password;
+    const confirmPassword = req.body.confirmPassword;
 
-  const existUser = await user.findOne({ where: { email } });
+    if (password !== confirmPassword) {
+      const error = new Error("비밀번호 체크값이 같지 않음");
+      error.status = 400;
+      throw error;
+    }
 
-  if (existUser) {
-    throw new Error("이미 가입된 이메일").status(400);
-  }
+    const existUser = await user.findOne({ where: { email } });
 
-  const salt = await generateRandomString(ENCRYPT_BUFF, ENCODE_TYPE);
-  const cryptoPass = await encryptString(password, salt);
+    if (existUser) {
+      throw new Error("이미 가입된 이메일").status(400);
+    }
 
-  const result = await user.create({
-    userName,
-    email,
-    cryptoPass,
-    salt
-  });
+    const salt = await generateRandomString(ENCRYPT_BUFF, ENCODE_TYPE);
+    const cryptoPass = await encryptString(password, salt);
 
-  if (!result) throw new Error("가입실패");
-
-  return result;
-};
-
-module.exports.updateUser = async req => {
-  const { id, userName, password, confirmPassword } = checkProps(
-    req.body,
-    "id",
-    "userName",
-    "password",
-    "confirmPassword"
-  );
-  const salt = await generateRandomString(ENCRYPT_BUFF, ENCODE_TYPE);
-  const cryptoPass = await encryptString(password, salt);
-
-  const result = user.update(
-    {
+    const result = await user.create({
       userName,
+      email,
       cryptoPass,
       salt
-    },
-    { where: { id: reqId } }
-  );
-  return result;
+    });
+
+    if (!result) throw new Error("가입실패");
+
+    res.status(201).json({
+      success: true
+    });
+  } catch (error) {
+    next(error);
+  }
 };
 
-module.exports.deleteUser = async req => {
-  const { id } = checkProps(req.body, "id");
+module.exports.updateUser = async (req, res, next) => {
+  try {
+    const id = req.user.id;
+    const userName = req.body.userName;
+    const password = req.body.password;
+    const confirmPassword = req.body.confirmPassword;
+    const salt = await generateRandomString(ENCRYPT_BUFF, ENCODE_TYPE);
+    const cryptoPass = await encryptString(password, salt);
 
-  const result = UserModel.destroy({
-    where: { id }
-  });
+    const response = user.update(
+      {
+        userName,
+        cryptoPass,
+        salt
+      },
+      { where: { id } }
+    );
+    response &&
+      res.status(200).json({
+        success: true
+      });
+  } catch (error) {
+    next(error);
+  }
+};
 
-  if (!result) throw new Error("삭제실패");
+module.exports.deleteUser = async (req, res, next) => {
+  try {
+    const id = req.body.id;
 
-  return result;
+    const result = UserModel.destroy({
+      where: { id }
+    });
+
+    if (!result) throw new Error("삭제실패");
+
+    res.status(204).json({
+      success: true,
+      response: result
+    });
+  } catch (error) {
+    next(error);
+  }
 };

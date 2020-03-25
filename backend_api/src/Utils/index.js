@@ -1,28 +1,7 @@
-const { ValidationError } = require("./Error");
+const { ValidationError, AuthenticationError } = require("./Error");
 const jwt = require("jsonwebtoken");
 const { promisify } = require("util");
 const { randomBytes, scrypt } = require("crypto");
-
-//Todo:수정필요
-
-module.exports.checkProps = (data, ...checkList) => {
-  return checkList.reduce((obj, key) => {
-    if (
-      !data.hasOwnProperty(key) ||
-      data[key] === null ||
-      data[key] === undefined ||
-      data[key] === ""
-    ) {
-      throw new ValidationError(`요청 된 값을 확인해주세요`);
-    } else {
-      obj[key] = data[key];
-      return obj;
-    }
-  }, {});
-};
-// Object.entries(obj).map(([key, value]) => {
-//   return key, value;
-// }, {});
 
 module.exports.generateRandomString = (buffSize = 64, encodeType = "base64") =>
   promisify(randomBytes)(buffSize)
@@ -63,9 +42,35 @@ module.exports.generateToken = email =>
 
 module.exports.isAuthenticated = (req, res, next) => {
   if (!req.user) {
-    throw new Err(401, "로그인이 필요한 요청입니다.");
+    throw new AuthenticationError("로그인이 필요한 요청입니다.");
   } else {
     next();
   }
   return;
+};
+
+module.exports.defaultPagination = (req, res, next) => {
+  if (!req.query.limit) req.query.limit = 5;
+  if (!req.query.page) req.query.page = 1;
+  next();
+};
+
+module.exports.checkProps = (...checkList) => {
+  return (req, res, next) => {
+    const data = req.body;
+    checkList.reduce((obj, key) => {
+      if (
+        !data.hasOwnProperty(key) ||
+        data[key] === null ||
+        data[key] === undefined ||
+        data[key] === ""
+      ) {
+        throw new ValidationError(`요청 된 값에 ${key}가 없습니다.`);
+      } else {
+        obj[key] = data[key];
+        return obj;
+      }
+    }, {});
+    next();
+  };
 };

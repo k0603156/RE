@@ -1,6 +1,7 @@
 const Router = require("express").Router();
 const UserService = require("../Services/userService");
 const PostService = require("../Services/postService");
+const { checkProps, isAuthenticated } = require("../Utils");
 
 Router.get("/:userName", async (req, res, next) => {
   try {
@@ -22,41 +23,21 @@ Router.get("/:userName", async (req, res, next) => {
 });
 
 //회원가입
-Router.post("/", async (req, res, next) => {
-  try {
-    const result = await UserService.signup(req);
-    res.status(201).json({
-      success: true
-    });
-  } catch (error) {
-    next(error);
-  }
-});
+Router.post(
+  "/",
+  checkProps("userName", "email", "password", "confirmPassword"),
+  UserService.signup
+);
 
 //회원정보 수정
-Router.put("/", async (req, res, next) => {
-  try {
-    const result = await UserService.updateUser(req);
-    res.status(200).json({
-      success: true,
-      response: result
-    });
-  } catch (error) {
-    next(error);
-  }
-});
+Router.patch(
+  "/",
+  isAuthenticated,
+  checkProps("userName", "password", "confirmPassword"),
+  UserService.updateUser
+);
 
 //탈퇴
-Router.delete("/", async (req, res, next) => {
-  try {
-    const result = await UserService.deleteUser(req);
-    res.status(204).json({
-      success: true,
-      response: result
-    });
-  } catch (error) {
-    next(error);
-  }
-});
+Router.delete("/", checkProps("id"), UserService.deleteUser);
 
 module.exports = Router;

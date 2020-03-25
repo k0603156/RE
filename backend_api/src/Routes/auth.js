@@ -9,36 +9,37 @@ const {
 } = require("../Utils");
 
 //로그인 토큰발행
-Router.post("/authenticate", async (req, res, next) => {
-  try {
-    const { email: reqEmail, password: reqPassword } = checkProps(
-      req.body,
-      "email",
-      "password"
-    );
-    const resUser = await UserModel.findOne({
-      where: {
-        email: reqEmail
-      }
-    });
-    if (resUser && resUser.dataValues) {
-      const { email, userName, salt, cryptoPass } = resUser.dataValues;
-      const loginPassword = await encryptString(reqPassword, salt);
-      if (loginPassword === cryptoPass) {
-        res.status(200).json({
-          success: true,
-          response: { email, userName, token: generateToken(email) }
-        });
+Router.post(
+  "/authenticate",
+  checkProps("email", "password"),
+  async (req, res, next) => {
+    try {
+      const reqEmail = req.body.email;
+      const reqPassword = req.body.password;
+      const resUser = await UserModel.findOne({
+        where: {
+          email: reqEmail
+        }
+      });
+      if (resUser && resUser.dataValues) {
+        const { email, userName, salt, cryptoPass } = resUser.dataValues;
+        const loginPassword = await encryptString(reqPassword, salt);
+        if (loginPassword === cryptoPass) {
+          res.status(200).json({
+            success: true,
+            response: { email, userName, token: generateToken(email) }
+          });
+        } else {
+          throw new AuthenticationError("로그인실패");
+        }
       } else {
         throw new AuthenticationError("로그인실패");
       }
-    } else {
-      throw new AuthenticationError("로그인실패");
+    } catch (error) {
+      next(error);
     }
-  } catch (error) {
-    next(error);
   }
-});
+);
 
 Router.post("/authorize", isAuthenticated, (req, res, next) => {
   try {

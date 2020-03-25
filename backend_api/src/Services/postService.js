@@ -2,8 +2,8 @@ const Models = require("../Models/tables");
 const { Op } = require("sequelize");
 
 module.exports.getPostListByHashtag = async req => {
-  const limit = parseInt(req.query.limit) || 5;
-  const offset = req.query.page ? limit * (req.query.page - 1) : 0;
+  const limit = parseInt(req.query.limit);
+  const offset = limit * (req.query.page - 1);
   const result = await Models.post.findAll({
     include: [
       {
@@ -50,8 +50,8 @@ module.exports.getPostDetail = async req => {
 };
 
 module.exports.getPostList = async req => {
-  const limit = parseInt(req.query.limit) || 5;
-  const offset = req.query.page ? limit * (req.query.page - 1) : 0;
+  const limit = parseInt(req.query.limit);
+  const offset = limit * (req.query.page - 1);
   const result = await Models.post.findAll({
     include: [
       {

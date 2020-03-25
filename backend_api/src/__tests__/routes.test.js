@@ -50,6 +50,22 @@ describe("user flow test", () => {
     store.setUsername(res.body.response.userName);
   });
 
+  it("회원정보수정", async () => {
+    console.log("회원정보수정");
+    const res = await request
+      .patch("/api/v1/user")
+      .set("Accept", "application/json")
+      .set("Authorization", "bearer " + store.getToken())
+      .send({
+        userName: "john2",
+        password: "test1234",
+        confirmPassword: "test1234"
+      })
+      .expect(200);
+    expect(res.body).toHaveProperty("success");
+    expect(res.body.success).toEqual(true);
+    store.setUsername("john2");
+  });
   it("글작성", async () => {
     console.log("글작성");
     const res = await request
@@ -203,6 +219,19 @@ describe("user flow test", () => {
   it("해시태그로 글 검색", async () => {
     console.log("해시태그로 글 검색");
     const res = await request
+      .get(`/api/v1/post/list/byhashtag/${store.getHashtag()}`)
+      .set("Authorization", "bearer " + store.getToken())
+      .expect(200);
+    expect(res.body.success).toEqual(true);
+    expect(Array.isArray(res.body.response)).toEqual(true);
+    expect(res.body.response.length <= 5).toEqual(true);
+    expect(res.body.response[0]).toHaveProperty("title");
+    expect(res.body.response[0]).toHaveProperty("user");
+  });
+
+  it("해시태그로 글 검색2", async () => {
+    console.log("해시태그로 글 검색");
+    const res = await request
       .get(
         `/api/v1/post/list/byhashtag/${store.getHashtag()}/?page=${store.getPage()}&limit=5`
       )
@@ -214,7 +243,6 @@ describe("user flow test", () => {
     expect(res.body.response[0]).toHaveProperty("title");
     expect(res.body.response[0]).toHaveProperty("user");
   });
-
   it("글리스트 불러오기", async () => {
     console.log("글리스트 불러오기");
     const res = await request
@@ -237,7 +265,7 @@ describe("user flow test", () => {
     expect(res.body.response).toHaveProperty("updatedAt");
     expect(res.body.response).toHaveProperty("user");
     expect(res.body.response.user).toHaveProperty("userName");
-    expect(res.body.response.user.userName).toEqual("john");
+    expect(res.body.response.user.userName).toEqual(store.getUsername());
   });
 
   it("글수정", async () => {
@@ -279,7 +307,7 @@ describe("user flow test", () => {
     expect(res.body.response).toHaveProperty("updatedAt");
     expect(res.body.response).toHaveProperty("user");
     expect(res.body.response.user).toHaveProperty("userName");
-    expect(res.body.response.user.userName).toEqual("john");
+    expect(res.body.response.user.userName).toEqual(store.getUsername());
   });
 
   it("글삭제", async () => {

@@ -1,8 +1,9 @@
 const Router = require("express").Router();
 const PostService = require("../Services/postService");
 const { NotFoundError } = require("../Utils/Error");
+const { defaultPagination } = require("../Utils");
 
-Router.get("/list", async (req, res, next) => {
+Router.get("/list", defaultPagination, async (req, res, next) => {
   try {
     const result = await PostService.getPostList(req);
     if (result) {
@@ -15,18 +16,22 @@ Router.get("/list", async (req, res, next) => {
   }
 });
 
-Router.get("/list/byhashtag/:hashtag", async (req, res, next) => {
-  try {
-    const result = await PostService.getPostListByHashtag(req);
-    if (result) {
-      res.status(200).json({ success: true, response: result });
-    } else {
-      throw new NotFoundError("해당 태그에 맞는 글이 없습니다.");
+Router.get(
+  "/list/byhashtag/:hashtag",
+  defaultPagination,
+  async (req, res, next) => {
+    try {
+      const result = await PostService.getPostListByHashtag(req);
+      if (result) {
+        res.status(200).json({ success: true, response: result });
+      } else {
+        throw new NotFoundError("해당 태그에 맞는 글이 없습니다.");
+      }
+    } catch (error) {
+      next(error);
     }
-  } catch (error) {
-    next(error);
   }
-});
+);
 
 Router.get("/:pid", async (req, res, next) => {
   try {
