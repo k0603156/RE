@@ -49,7 +49,7 @@ module.exports.isAuthenticated = (req, res, next) => {
   return;
 };
 
-module.exports.defaultPagination = (req, res, next) => {
+module.exports.defaultPagingParams = (req, res, next) => {
   if (!req.query.limit) req.query.limit = 5;
   if (!req.query.page) req.query.page = 1;
   next();

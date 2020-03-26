@@ -1,69 +1,17 @@
 const Router = require("express").Router();
-const { AuthenticationError } = require("../Utils/Error");
-const { user: UserModel } = require("../Models/tables");
-const {
-  checkProps,
-  encryptString,
-  generateToken,
-  isAuthenticated
-} = require("../Utils");
+const AuthService = require("../Services/authService");
+const { checkProps, isAuthenticated } = require("../Utils");
 
-//로그인 토큰발행
 Router.post(
   "/authenticate",
   checkProps("email", "password"),
-  async (req, res, next) => {
-    try {
-      const reqEmail = req.body.email;
-      const reqPassword = req.body.password;
-      const resUser = await UserModel.findOne({
-        where: {
-          email: reqEmail
-        }
-      });
-      if (resUser && resUser.dataValues) {
-        const { email, userName, salt, cryptoPass } = resUser.dataValues;
-        const loginPassword = await encryptString(reqPassword, salt);
-        if (loginPassword === cryptoPass) {
-          res.status(200).json({
-            success: true,
-            response: { email, userName, token: generateToken(email) }
-          });
-        } else {
-          throw new AuthenticationError("로그인실패");
-        }
-      } else {
-        throw new AuthenticationError("로그인실패");
-      }
-    } catch (error) {
-      next(error);
-    }
-  }
+  AuthService.authenticate
 );
 
-Router.post("/authorize", isAuthenticated, (req, res, next) => {
-  try {
-    res.status(200).json({ success: "ok" });
-  } catch (error) {
-    next(error);
-  }
-});
+Router.post("/authorize", isAuthenticated, AuthService.authorize);
 
-Router.post("/reauthorize", (req, res, next) => {
-  try {
-    res.status(200).json({ success: "ok" });
-  } catch (error) {
-    next(error);
-  }
-});
+Router.post("/reauthorize", AuthService.reauthorize);
 
-Router.post("/deauthorize", (req, res, next) => {
-  try {
-    // const { email: resEmail } = checkProps(req.body, "email");
-    res.status(200).json({ success: "ok" });
-  } catch (error) {
-    next(error);
-  }
-});
+Router.post("/deauthorize", AuthService.deauthorize);
 
 module.exports = Router;
