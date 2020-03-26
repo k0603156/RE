@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { postlistBrowseAction } from "@Store/modules/PostList/actions";
@@ -11,9 +11,8 @@ export interface IProps extends RouteComponentProps<{ boardName: string }> {
 }
 
 const BoardContainer = withRouter((props: IProps) => {
-  const POST_LENGTH: number = 20;
-  const POST_PER_PAGE: number = 10;
-  const LENGTH_PAGE: number = POST_LENGTH / POST_PER_PAGE;
+  const POST_PER_PAGE = 10;
+
   const [currentPage, setCurrentPage] = React.useState<number>(1);
 
   React.useEffect(() => {
@@ -26,13 +25,13 @@ const BoardContainer = withRouter((props: IProps) => {
     e.persist();
     setCurrentPage(parseInt(e.currentTarget.dataset.page));
   };
-  console.log(LENGTH_PAGE);
+  console.log(props.postlist.count / POST_PER_PAGE);
   return (
     <BoardPresenter
       handlePage={handlePage}
-      lengthPage={LENGTH_PAGE}
+      lengthPage={Math.ceil(props.postlist.count / POST_PER_PAGE)}
       currentPage={currentPage}
-      postlist={props.postlist.board}
+      postlist={props.postlist.rows}
     />
   );
 });

@@ -1,17 +1,18 @@
 import { createReducer } from "typesafe-actions";
 import { POSTLIST_BROWSE_SUCCESS } from "./types";
 
-const initialState: { board: any } = {
-  board: []
+const initialState: { count: number; rows: any } = {
+  count: 0,
+  rows: []
 };
 
 export default createReducer(initialState, {
-  // 플랜리스트 요청
+  // 게시글리스트 요청
   [POSTLIST_BROWSE_SUCCESS]: (state, action: any) => {
     console.log(action);
     return {
       ...initialState,
-      board: [...action.payload.response]
+      ...action.payload.response
     };
   }
 });

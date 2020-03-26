@@ -6,7 +6,7 @@ module.exports.getPostListByHashtag = async (req, res, next) => {
   try {
     const limit = parseInt(req.query.limit);
     const offset = limit * (req.query.page - 1);
-    const result = await Models.post.findAll({
+    const result = await Models.post.findAndCountAll({
       include: [
         {
           model: Models.hashtag,
@@ -25,7 +25,8 @@ module.exports.getPostListByHashtag = async (req, res, next) => {
       offset,
       limit
     });
-    if (!result) throw new NotFoundError("해당 태그에 맞는 글이 없습니다.");
+    if (!result.count)
+      throw new NotFoundError("해당 태그에 맞는 글이 없습니다.");
     res.status(200).json({ success: true, response: result });
   } catch (error) {
     next(error);
@@ -69,7 +70,7 @@ module.exports.getPostList = async (req, res, next) => {
   try {
     const limit = parseInt(req.query.limit);
     const offset = limit * (req.query.page - 1);
-    const result = await Models.post.findAll({
+    const result = await Models.post.findAndCountAll({
       include: [
         {
           model: Models.user,
@@ -84,7 +85,7 @@ module.exports.getPostList = async (req, res, next) => {
       limit,
       attributes: ["id", "title", "updatedAt"]
     });
-    if (!result) throw new NotFoundError("가져올 글이 없습니다.");
+    if (!result.count) throw new NotFoundError("가져올 글이 없습니다.");
     res.status(200).json({ success: true, response: result });
   } catch (error) {
     next(error);

@@ -223,10 +223,10 @@ describe("user flow test", () => {
       .set("Authorization", "bearer " + store.getToken())
       .expect(200);
     expect(res.body.success).toEqual(true);
-    expect(Array.isArray(res.body.response)).toEqual(true);
-    expect(res.body.response.length <= 5).toEqual(true);
-    expect(res.body.response[0]).toHaveProperty("title");
-    expect(res.body.response[0]).toHaveProperty("user");
+    expect(Array.isArray(res.body.response.rows)).toEqual(true);
+    expect(res.body.response.rows.length <= 5).toEqual(true);
+    expect(res.body.response.rows[0]).toHaveProperty("title");
+    expect(res.body.response.rows[0]).toHaveProperty("user");
   });
 
   it("해시태그로 글 검색2", async () => {
@@ -238,10 +238,10 @@ describe("user flow test", () => {
       .set("Authorization", "bearer " + store.getToken())
       .expect(200);
     expect(res.body.success).toEqual(true);
-    expect(Array.isArray(res.body.response)).toEqual(true);
-    expect(res.body.response.length <= 5).toEqual(true);
-    expect(res.body.response[0]).toHaveProperty("title");
-    expect(res.body.response[0]).toHaveProperty("user");
+    expect(Array.isArray(res.body.response.rows)).toEqual(true);
+    expect(res.body.response.rows.length <= 5).toEqual(true);
+    expect(res.body.response.rows[0]).toHaveProperty("title");
+    expect(res.body.response.rows[0]).toHaveProperty("user");
   });
   it("글리스트 불러오기", async () => {
     console.log("글리스트 불러오기");
@@ -249,7 +249,8 @@ describe("user flow test", () => {
       .get(`/api/v1/post/list/?page=${store.getPage()}&limit=5`)
       .set("Authorization", "bearer " + store.getToken())
       .expect(200);
-    expect(Array.isArray(res.body.response)).toEqual(true);
+    expect(res.body.success).toEqual(true);
+    expect(Array.isArray(res.body.response.rows)).toEqual(true);
   });
 
   it("글읽기", async () => {
