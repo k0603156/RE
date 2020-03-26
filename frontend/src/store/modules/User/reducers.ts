@@ -7,13 +7,14 @@ import {
 
 import { createReducer } from "typesafe-actions";
 
-const initialState = { userName: "" };
+const initialState = { id: "", userName: "", posts: [] };
 
-const UserReducer = createReducer(initialState, {
+export default createReducer(initialState, {
   [USER_SELECT_SUCCESS]: (state, action) => {
-    console.log(action.payload.result);
     return {
-      userName: action.payload.result.userName
+      id: action.payload.response.id,
+      userName: action.payload.response.userName,
+      posts: action.payload.response.posts
     };
   },
   [USER_CREATE_SUCCESS]: (state, action) => {
@@ -32,4 +33,3 @@ const UserReducer = createReducer(initialState, {
     };
   }
 });
-export default UserReducer;

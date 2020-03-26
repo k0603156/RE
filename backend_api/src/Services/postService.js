@@ -35,7 +35,7 @@ module.exports.getPostListByHashtag = async (req, res, next) => {
 module.exports.getPostListByUser = async userId => {
   const result = await Models.post.findAll({
     where: { userId },
-    attributes: ["title"]
+    attributes: ["id", "title"]
   });
   return result;
 };
@@ -47,6 +47,11 @@ module.exports.getPostDetail = async (req, res, next) => {
         {
           model: Models.user,
           attributes: ["userName"]
+        },
+        {
+          model: Models.hashtag,
+          as: "hashtags",
+          attributes: ["name"]
         }
       ],
       where: { id: req.params.pid },

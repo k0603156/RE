@@ -37,7 +37,7 @@ export default {
   },
   //게시글 리스트 요청
   post_browse_list(payload: { page: number }) {
-    return req("get", `/list/${payload.page}`);
+    return req("get", `/list/?page=${payload.page}`);
   },
   //게시글 생성 요청
   post_create(payload: IPostState) {

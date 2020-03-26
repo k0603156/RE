@@ -4,10 +4,12 @@ import { withRouter, RouteComponentProps } from "react-router-dom";
 import { postlistBrowseAction } from "@Store/modules/PostList/actions";
 import { RootStateType } from "@Store/modules";
 import BoardPresenter from "./BoardPresenter";
-interface IProps extends RouteComponentProps<{ boardName: string }> {
+
+export interface IProps extends RouteComponentProps<{ boardName: string }> {
   postlist: RootStateType["postlist"];
   postlistBrowseAction: typeof postlistBrowseAction;
 }
+
 const BoardContainer = withRouter((props: IProps) => {
   const POST_LENGTH: number = 20;
   const POST_PER_PAGE: number = 10;

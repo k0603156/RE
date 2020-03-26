@@ -9,6 +9,7 @@ import {
 } from "./types";
 
 const initialState: IPostState = {
+  id: "",
   title: "",
   content: [
     {
@@ -16,7 +17,9 @@ const initialState: IPostState = {
       children: [{ text: "test" }]
     }
   ],
-  hashtags: []
+  hashtags: [],
+  updatedAt: "",
+  user: { userName: "" }
 };
 
 export default createReducer(initialState, {
@@ -26,7 +29,8 @@ export default createReducer(initialState, {
   },
   //게시글 읽기 성공
   [POST_BROWSE_SUCCESS]: (state, action) => {
-    return { ...state };
+    console.log(action.payload.response);
+    return { ...state, ...action.payload.response };
   },
   //게시글 생성 성공
   [POST_CREATE_SUCCESS]: (state, action) => {

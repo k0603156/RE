@@ -8,12 +8,12 @@ import {
 } from "@Store/modules/Post/actions";
 import Presenter from "./Presenter";
 import { RootStateType } from "@Store/modules";
-
-const Container = (props: {
+export interface IProps {
   post: RootStateType["post"];
   postFillinAction: typeof postFillinAction;
   postCreateAction: typeof postCreateAction;
-}) => {
+}
+const Container = (props: IProps) => {
   const _debounce = debounce(
     (f: (...any: (string | number)[]) => void, ...arr: (string | number)[]) =>
       f(...arr),

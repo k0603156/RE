@@ -1,13 +1,16 @@
 import React from "react";
 import styled from "styled-components";
+import { RootStateType } from "@Store/modules";
 const Box = styled.div`
   min-height: 200px;
 `;
 const Profile = styled(Box)``;
-const MyContents = styled(Box)``;
 
-export default (props: { user: any }) => {
-  const { userName } = props.user;
+interface IProps {
+  user: RootStateType["user"];
+}
+export default (props: IProps) => {
+  const { userName, posts } = props.user;
   const isSelf = true;
   return (
     <div>
@@ -19,7 +22,14 @@ export default (props: { user: any }) => {
       </Profile>
       {isSelf && (
         <>
-          <MyContents>내가 작성한 글</MyContents>
+          <Box>
+            <h2>내가 작성한 글</h2>
+            <ul>
+              {posts.map((post: any) => {
+                return <li key={post.id}>{post.title}</li>;
+              })}
+            </ul>
+          </Box>
           <div>회원탈퇴</div>
         </>
       )}

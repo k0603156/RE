@@ -30,7 +30,7 @@ export interface IPostFillinConduct {
 export interface IPostBrowseRequest {
   type: typeof POST_BROWSE_REQUEST;
   payload: {
-    pid: number;
+    pid: string;
   };
 }
 //게시글 생성 요청
@@ -55,7 +55,10 @@ export type TPostAction =
   | IPostUpdateRequest;
 
 export interface IPostState {
+  id: string;
   title: string;
   content: Array<Node>;
   hashtags: Array<{ name: string }>;
+  updatedAt: string;
+  user: { userName: string };
 }

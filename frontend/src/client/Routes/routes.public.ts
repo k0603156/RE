@@ -10,6 +10,6 @@ export default {
   },
   Post: {
     component: PublicPost,
-    path: "/board/post/:boardName"
+    path: "/board/post/:postId"
   }
 };

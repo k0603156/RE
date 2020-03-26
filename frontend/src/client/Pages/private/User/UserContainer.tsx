@@ -5,7 +5,8 @@ import { connect } from "react-redux";
 import { userSelectAction } from "@Store/modules/User/actions";
 import { RootStateType } from "@Store/modules";
 
-interface IProps extends RouteComponentProps<{ searchUserName: string }> {
+export interface IProps
+  extends RouteComponentProps<{ searchUserName: string }> {
   user: RootStateType["user"];
   userSelectAction: typeof userSelectAction;
 }

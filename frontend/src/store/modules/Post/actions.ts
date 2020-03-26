@@ -21,7 +21,7 @@ export function postFillinAction(
   };
 }
 //게시글 읽기 요청
-export function postBrowseAction(pid: number): TPostAction {
+export function postBrowseAction(pid: string): TPostAction {
   return {
     type: POST_BROWSE_REQUEST,
     payload: { pid }

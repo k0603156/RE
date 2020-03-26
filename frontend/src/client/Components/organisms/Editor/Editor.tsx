@@ -7,6 +7,7 @@ import { Mx_Width } from "@Client/Styles/Device";
 interface IProps {
   onChange: (value: Node[]) => void;
   value: Array<Node>;
+  readOnly?: boolean;
 }
 
 const Toolbar = styled.div`
