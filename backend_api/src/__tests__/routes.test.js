@@ -17,7 +17,6 @@ describe("user flow test", () => {
     server.close(done);
   });
   it("회원가입", async () => {
-    console.log("회원가입");
     const res = await request
       .post("/api/v1/user")
       .set("Accept", "application/json")
@@ -33,7 +32,6 @@ describe("user flow test", () => {
   });
 
   it("로그인", async () => {
-    console.log("로그인");
     const res = await request
       .post("/api/v1/auth/authenticate")
       .send({
@@ -51,7 +49,6 @@ describe("user flow test", () => {
   });
 
   it("회원정보수정", async () => {
-    console.log("회원정보수정");
     const res = await request
       .patch("/api/v1/user")
       .set("Accept", "application/json")
@@ -67,7 +64,6 @@ describe("user flow test", () => {
     store.setUsername("john2");
   });
   it("글작성", async () => {
-    console.log("글작성");
     const res = await request
       .post("/api/v1/post")
       .set("Authorization", "bearer " + store.getToken())
@@ -88,7 +84,6 @@ describe("user flow test", () => {
   });
 
   it("글작성", async () => {
-    console.log("글작성");
     const res = await request
       .post("/api/v1/post")
       .set("Authorization", "bearer " + store.getToken())
@@ -107,7 +102,6 @@ describe("user flow test", () => {
     expect(res.body.response).toHaveProperty("id");
   });
   it("글작성", async () => {
-    console.log("글작성");
     const res = await request
       .post("/api/v1/post")
       .set("Authorization", "bearer " + store.getToken())
@@ -126,7 +120,6 @@ describe("user flow test", () => {
     expect(res.body.response).toHaveProperty("id");
   });
   it("글작성", async () => {
-    console.log("글작성");
     const res = await request
       .post("/api/v1/post")
       .set("Authorization", "bearer " + store.getToken())
@@ -146,7 +139,6 @@ describe("user flow test", () => {
   });
 
   it("글작성", async () => {
-    console.log("글작성");
     const res = await request
       .post("/api/v1/post")
       .set("Authorization", "bearer " + store.getToken())
@@ -166,7 +158,6 @@ describe("user flow test", () => {
   });
 
   it("글작성", async () => {
-    console.log("글작성");
     const res = await request
       .post("/api/v1/post")
       .set("Authorization", "bearer " + store.getToken())
@@ -185,7 +176,6 @@ describe("user flow test", () => {
     expect(res.body.response).toHaveProperty("id");
   });
   it("글작성", async () => {
-    console.log("글작성");
     const res = await request
       .post("/api/v1/post")
       .set("Authorization", "bearer " + store.getToken())
@@ -204,7 +194,6 @@ describe("user flow test", () => {
     expect(res.body.response).toHaveProperty("id");
   });
   it("회원정보 불러오기", async () => {
-    console.log("회원정보 불러오기");
     const res = await request
       .get(`/api/v1/user/${store.getUsername()}`)
       .set("Authorization", "bearer " + store.getToken())
@@ -217,7 +206,6 @@ describe("user flow test", () => {
   });
 
   it("해시태그로 글 검색", async () => {
-    console.log("해시태그로 글 검색");
     const res = await request
       .get(`/api/v1/post/list/byhashtag/${store.getHashtag()}`)
       .set("Authorization", "bearer " + store.getToken())
@@ -230,7 +218,6 @@ describe("user flow test", () => {
   });
 
   it("해시태그로 글 검색2", async () => {
-    console.log("해시태그로 글 검색");
     const res = await request
       .get(
         `/api/v1/post/list/byhashtag/${store.getHashtag()}/?page=${store.getPage()}&limit=5`
@@ -244,7 +231,6 @@ describe("user flow test", () => {
     expect(res.body.response.rows[0]).toHaveProperty("user");
   });
   it("글리스트 불러오기", async () => {
-    console.log("글리스트 불러오기");
     const res = await request
       .get(`/api/v1/post/list/?page=${store.getPage()}&limit=5`)
       .set("Authorization", "bearer " + store.getToken())
@@ -254,7 +240,6 @@ describe("user flow test", () => {
   });
 
   it("글읽기", async () => {
-    console.log("글읽기");
     const res = await request
       .get(`/api/v1/post/${store.getPid()}`)
       .set("Authorization", "bearer " + store.getToken())
@@ -270,7 +255,6 @@ describe("user flow test", () => {
   });
 
   it("글수정", async () => {
-    console.log("글수정");
     const res = await request
       .patch("/api/v1/post")
       .set("Authorization", "bearer " + store.getToken())
@@ -289,7 +273,6 @@ describe("user flow test", () => {
   });
 
   it("글읽기_수정후", async () => {
-    console.log("글읽기_수정후");
     const res = await request
       .get(`/api/v1/post/${store.getPid()}`)
       .set("Authorization", "bearer " + store.getToken())
@@ -312,7 +295,6 @@ describe("user flow test", () => {
   });
 
   it("글삭제", async () => {
-    console.log("글삭제");
     const res = await request
       .delete(`/api/v1/post`)
       .set("Authorization", "bearer " + store.getToken())
@@ -324,7 +306,6 @@ describe("user flow test", () => {
   });
 
   it("글읽기_삭제후", async () => {
-    console.log("글읽기_삭제후");
     const res = await request
       .get(`/api/v1/post/${store.getPid()}`)
       .set("Authorization", "bearer " + store.getToken())
@@ -333,7 +314,6 @@ describe("user flow test", () => {
   });
 
   it("회원탈퇴", async () => {
-    console.log("회원탈퇴");
     const res = await request
       .delete(`/api/v1/user`)
       .set("Authorization", "bearer " + store.getToken())
