@@ -25,8 +25,7 @@ module.exports = {
       username: process.env.DB_TEST_USER,
       password: process.env.DB_TEST_PW,
       database: process.env.DB_TEST_NAME,
-      host: "127.0.0.1",
-      logging: true
+      host: "127.0.0.1"
     },
     baseDbSetting
   ),
@@ -35,8 +34,7 @@ module.exports = {
       username: process.env.DB_DEVELOPMENT_USER,
       password: process.env.DB_DEVELOPMENT_PW,
       database: process.env.DB_DEVELOPMENT_NAME,
-      host: "127.0.0.1",
-      logging: true
+      host: "127.0.0.1"
     },
     baseDbSetting
   ),
@@ -46,8 +44,7 @@ module.exports = {
       username: process.env.DB_PRODUCTION_USER,
       password: process.env.DB_PRODUCTION_PW,
       database: process.env.DB_PRODUCTION_NAME,
-      host: process.env.DB_PRODUCTION_HOST,
-      logging: false
+      host: process.env.DB_PRODUCTION_HOST
     },
     baseDbSetting
   )
