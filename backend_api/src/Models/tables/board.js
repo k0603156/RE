@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
   const board = sequelize.define(
     "board",
     {
-      subject: {
+      name: {
         allowNull: false,
         type: DataTypes.STRING(50)
       }
@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   board.associate = function(models) {
-    // board.hasMany(models.plan);
+    board.hasMany(models.post);
   };
 
   return board;

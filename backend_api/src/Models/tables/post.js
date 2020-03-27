@@ -11,11 +11,6 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         type: DataTypes.JSON
       }
-      // createdDate: {
-      //   allowNull: false,
-      //   type: DataTypes.DATE,
-      //   defaultValue: sequelize.fn("NOW")
-      // }
     },
     {
       charset: "utf8mb4",
@@ -26,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
   );
   post.associate = function(models) {
     post.belongsTo(models.user);
-    // post.belongsTo(models.board);
+    post.belongsTo(models.board);
     // post.hasMany(models.story);
     post.belongsToMany(models.hashtag, {
       through: "PostHashtag",

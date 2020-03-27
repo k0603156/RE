@@ -1,9 +1,0 @@
-const fs = require("fs");
-const path = require("path");
-
-module.exports = {
-  'config':          path.resolve(fs.realpathSync(process.cwd()), 'config', 'db.config.js'),
-  'migrations-path': path.resolve('Models', 'migrations'),
-  'models-path':     path.resolve('Models', 'tables'),
-  'seeders-path':    path.resolve('Models', 'seeders'),
-}
