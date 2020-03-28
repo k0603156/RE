@@ -54,4 +54,5 @@ const Badge = styled.span`
   border-radius: 3px;
   font-size: 0.8rem;
 `;
+
 export { Input, Box, Button, TextArea, Badge };

@@ -1,8 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { RootStateType } from "@Store/modules/index";
 import { FiList } from "@Client/Components/molecules/Icon/fi";
 import { PostBox, Jumbo } from "@Client/Components/organisms";
+import { KeywordBox } from "@Client/Components/molecules";
 
 const Container = styled.div`
   display: flex;
@@ -49,63 +51,78 @@ const TB = styled.div`
     content: "";
   } */
 `;
+interface IProps {
+  boardlist: RootStateType["base"]["boardlist"];
+}
+export default (props: IProps) => (
+  <>
+    <Container>
+      <TB>
+        <Jumbo medium verticalFrom={"tablet"}>
+          Symphonia
+        </Jumbo>
+        <Article>
+          <Title>
+            게시글
+            <Link to="/board/2">
+              <FiList />
+            </Link>
+          </Title>
 
-export default () => (
-  <Container>
-    <TB>
-      <Jumbo medium verticalFrom={"tablet"}>
-        Symphonia
-      </Jumbo>
-      <Article>
-        {/* <Title>개발자 게시글</Title>
-        {new Array(3).fill("").map((_, index) => (
-          <PostBox key={index} />
-        ))} */}
-      </Article>
-    </TB>
-    <TB>
-      <Article>
-        <Title>베스트 게시글</Title>
-        {new Array(3).fill("").map((_, index) => (
-          <PostBox key={index} />
-        ))}
-      </Article>
-      <Jumbo large verticalFrom={"tablet"}>
-        고민은
-      </Jumbo>
-    </TB>
-    <TB>
-      <Jumbo verticalFrom={"tablet"}>당신의 열정에 맡기고</Jumbo>
-      <Article>
-        <Title>
-          디자이너 게시글
-          <Link to="/board/1">
-            <FiList />
-          </Link>
-        </Title>
+          {new Array(7).fill("").map((_, index) => (
+            <PostBox key={index} />
+          ))}
+        </Article>
+      </TB>
+      <TB>
+        <Article>
+          <Title>베스트 게시글</Title>
+          {new Array(3).fill("").map((_, index) => (
+            <PostBox key={index} />
+          ))}
+        </Article>
+        <Jumbo large verticalFrom={"tablet"}>
+          고민은
+        </Jumbo>
+      </TB>
+    </Container>
 
-        {new Array(2).fill("").map((_, index) => (
-          <PostBox key={index} />
-        ))}
-      </Article>
-    </TB>
-    <TB>
-      <Article>
-        <Title>
-          게시글
-          <Link to="/board/2">
-            <FiList />
-          </Link>
-        </Title>
+    <KeywordBox boardlist={props.boardlist} />
 
-        {new Array(7).fill("").map((_, index) => (
-          <PostBox key={index} />
-        ))}
-      </Article>
-      <Jumbo>
-        지금
-        <br /> 떠나세요
-      </Jumbo>
-    </TB>
-  </Container>
+    <Container>
+      <TB>
+        <Jumbo verticalFrom={"tablet"}>당신의 열정에 맡기고</Jumbo>
+        <Article>
+          <Title>
+            디자이너 게시글
+            <Link to="/board/1">
+              <FiList />
+            </Link>
+          </Title>
+
+          {new Array(2).fill("").map((_, index) => (
+            <PostBox key={index} />
+          ))}
+        </Article>
+      </TB>
+      <TB>
+        <Article>
+          <Title>
+            게시글
+            <Link to="/board/2">
+              <FiList />
+            </Link>
+          </Title>
+
+          {new Array(7).fill("").map((_, index) => (
+            <PostBox key={index} />
+          ))}
+        </Article>
+        <Jumbo>
+          지금
+          <br /> 떠나세요
+        </Jumbo>
+      </TB>
+    </Container>
+  </>
 );

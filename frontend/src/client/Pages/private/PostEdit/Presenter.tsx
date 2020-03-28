@@ -1,6 +1,5 @@
 import React from "react";
 import { Node } from "slate";
-import { SearchableSelector } from "@Client/Components/molecules";
 import { Editor } from "@Client/Components/organisms";
 
 export default (props: {

@@ -12,5 +12,5 @@ export interface IPostlistBrowseRequest {
 export type IPostlistAction = IPostlistBrowseRequest;
 
 export interface IPostlistState {
-  postList: Array<any>;
+  postlist: Array<any>;
 }

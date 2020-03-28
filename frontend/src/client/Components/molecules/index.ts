@@ -1,2 +1,2 @@
-import SearchableSelector from "./SearchableSelector";
-export { SearchableSelector };
+import KeywordBox from "./KeywordBox";
+export { KeywordBox };

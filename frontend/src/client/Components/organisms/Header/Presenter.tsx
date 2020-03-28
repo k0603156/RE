@@ -5,7 +5,7 @@ import { Mx_Width } from "@Client/Styles/Device";
 import UMenu from "./UserMenu";
 
 const Title = styled.div`
-  /* T r a v e l e r */
+  /* Symphonia */
   left: 0;
   margin-left: 10vw;
   ${props => props.theme.headerAttr}
