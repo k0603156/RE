@@ -5,7 +5,40 @@ module.exports = {
       "boards",
       [
         {
-          name: "test1",
+          name: "IT",
+          createdAt: new Date()
+            .toISOString()
+            .replace(/T/, " ")
+            .replace(/\..+/, ""),
+          updatedAt: new Date()
+            .toISOString()
+            .replace(/T/, " ")
+            .replace(/\..+/, "")
+        },
+        {
+          name: "디자인",
+          createdAt: new Date()
+            .toISOString()
+            .replace(/T/, " ")
+            .replace(/\..+/, ""),
+          updatedAt: new Date()
+            .toISOString()
+            .replace(/T/, " ")
+            .replace(/\..+/, "")
+        },
+        {
+          name: "일상",
+          createdAt: new Date()
+            .toISOString()
+            .replace(/T/, " ")
+            .replace(/\..+/, ""),
+          updatedAt: new Date()
+            .toISOString()
+            .replace(/T/, " ")
+            .replace(/\..+/, "")
+        },
+        {
+          name: "여행",
           createdAt: new Date()
             .toISOString()
             .replace(/T/, " ")
