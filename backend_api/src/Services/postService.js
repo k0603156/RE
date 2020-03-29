@@ -2,6 +2,24 @@ const Models = require("../Models/tables");
 const { Op, literal } = require("sequelize");
 const { NotFoundError } = require("../Utils/Error");
 
+module.exports.getPostListByBoardnViews = async (req, res, next) => {
+  const limit = parseInt(req.query.limit);
+  const result = await Models.post.findAll({
+    include: [
+      {
+        model: Models.user,
+        attributes: ["userName"]
+      }
+    ],
+    where: { boardId: req.params.boardId },
+    attributes: ["id", "title", "readcount", "updatedAt"],
+    order: [literal("readcount DESC")],
+    limit
+  });
+  // if (!result) throw new NotFoundError("해당 분류에 맞는 글이 없습니다.");
+  res.status(200).json({ success: true, response: result });
+};
+
 module.exports.getPostListByHashtag = async (req, res, next) => {
   try {
     const limit = parseInt(req.query.limit);
@@ -121,6 +139,7 @@ module.exports.createPost = async (req, res, next) => {
       const createdPost = await Models.post.create(
         {
           userId: req.user.id,
+          boardId: req.body.boardId,
           title: req.body.title,
           content: [...req.body.content],
           hashtags: existTagsArr("name").length
