@@ -1,5 +1,5 @@
 const Models = require("../Models/tables");
-const { Op } = require("sequelize");
+const { Op, literal } = require("sequelize");
 const { NotFoundError } = require("../Utils/Error");
 
 module.exports.getPostListByHashtag = async (req, res, next) => {
@@ -20,7 +20,7 @@ module.exports.getPostListByHashtag = async (req, res, next) => {
           attributes: ["userName"]
         }
       ],
-      attributes: ["id", "title", "updatedAt"],
+      attributes: ["id", "title", "readcount", "updatedAt"],
       where: { "$hashtags.name$": req.params.hashtag },
       offset,
       limit
@@ -43,22 +43,35 @@ module.exports.getPostListByUser = async userId => {
 
 module.exports.getPostDetail = async (req, res, next) => {
   try {
-    const result = await Models.post.findOne({
-      include: [
+    const result = await Models.sequelize.transaction(async transaction => {
+      await Models.post.update(
         {
-          model: Models.user,
-          attributes: ["userName"]
+          readcount: literal(`readcount + 1`)
         },
         {
-          model: Models.hashtag,
-          as: "hashtags",
-          attributes: ["name"]
+          where: { id: req.params.pid },
+          transaction
         }
-      ],
-      where: { id: req.params.pid },
-      attributes: ["id", "title", "content", "updatedAt"]
-    });
+      );
+      const result = await Models.post.findOne({
+        include: [
+          {
+            model: Models.user,
+            attributes: ["userName"]
+          },
+          {
+            model: Models.hashtag,
+            as: "hashtags",
+            attributes: ["name"]
+          }
+        ],
+        where: { id: req.params.pid },
+        attributes: ["id", "title", "content", "readcount", "updatedAt"],
+        transaction
+      });
 
+      return result;
+    });
     if (!result) throw new NotFoundError("해당글이 없습니다.");
     res.status(200).json({ success: true, response: result });
   } catch (error) {

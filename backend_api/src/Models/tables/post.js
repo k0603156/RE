@@ -10,6 +10,10 @@ module.exports = (sequelize, DataTypes) => {
       content: {
         allowNull: false,
         type: DataTypes.JSON
+      },
+      readcount: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0
       }
     },
     {
