@@ -14,10 +14,16 @@ interface IProps {
 const MainContainer = (props: IProps) => {
   useEffect(() => {
     props.main.boardlist.length == 0 && props.boardlistBrowseAction();
-    props.postlistBrowseAction("1");
+    props.postlistBrowseAction(props.main.selectedBoard);
     return () => {};
   }, []);
-  return <MainPresenter boardlist={props.main.boardlist} />;
+  return (
+    <MainPresenter
+      selectedBoard={props.main.selectedBoard}
+      boardlist={props.main.boardlist}
+      postlist={props.main.postlist}
+    />
+  );
 };
 
 export default connect(({ main }: RootStateType) => ({ main }), {

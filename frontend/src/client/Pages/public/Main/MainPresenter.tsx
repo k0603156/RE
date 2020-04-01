@@ -52,77 +52,90 @@ const TB = styled.div`
   } */
 `;
 interface IProps {
+  selectedBoard: number;
   boardlist: RootStateType["base"]["boardlist"];
+  postlist: RootStateType["base"]["postlist"];
 }
-export default (props: IProps) => (
-  <>
-    <Container>
-      <TB>
-        <Jumbo medium verticalFrom={"tablet"}>
-          Symphonia
-        </Jumbo>
-        <Article>
-          <Title>
-            게시글
-            <Link to="/board/2">
-              <FiList />
-            </Link>
-          </Title>
+export default (props: IProps) => {
+  const selectedBoardName = () =>
+    props.boardlist.length != 0 && props.boardlist[0].name;
+  const selectedBoardPosts = () =>
+    props.postlist.map(
+      (post: { id: string; title: string; updatedAt: string }) => (
+        <div key={post.id}>
+          <h2>{post.title}</h2>
+          <div>{post.updatedAt}</div>
+        </div>
+      )
+    );
+  return (
+    <>
+      <Container>
+        <TB>
+          <Jumbo medium verticalFrom={"tablet"}>
+            Symphonia
+          </Jumbo>
+          <Article>
+            <Title>
+              {selectedBoardName()}
+              <Link to="/board/2">
+                <FiList />
+              </Link>
+            </Title>
 
-          {new Array(7).fill("").map((_, index) => (
-            <PostBox key={index} />
-          ))}
-        </Article>
-      </TB>
-      <TB>
-        <Article>
-          <Title>베스트 게시글</Title>
-          {new Array(3).fill("").map((_, index) => (
-            <PostBox key={index} />
-          ))}
-        </Article>
-        <Jumbo large verticalFrom={"tablet"}>
-          고민은
-        </Jumbo>
-      </TB>
-    </Container>
+            {selectedBoardPosts()}
+          </Article>
+        </TB>
+        <TB>
+          <Article>
+            <Title>베스트 게시글</Title>
+            {new Array(3).fill("").map((_, index) => (
+              <PostBox key={index} />
+            ))}
+          </Article>
+          <Jumbo large verticalFrom={"tablet"}>
+            고민은
+          </Jumbo>
+        </TB>
+      </Container>
 
-    <KeywordBox boardlist={props.boardlist} />
+      <KeywordBox boardlist={props.boardlist} />
 
-    <Container>
-      <TB>
-        <Jumbo verticalFrom={"tablet"}>당신의 열정에 맡기고</Jumbo>
-        <Article>
-          <Title>
-            디자이너 게시글
-            <Link to="/board/1">
-              <FiList />
-            </Link>
-          </Title>
+      <Container>
+        <TB>
+          <Jumbo verticalFrom={"tablet"}>당신의 열정에 맡기고</Jumbo>
+          <Article>
+            <Title>
+              디자이너 게시글
+              <Link to="/board/1">
+                <FiList />
+              </Link>
+            </Title>
 
-          {new Array(2).fill("").map((_, index) => (
-            <PostBox key={index} />
-          ))}
-        </Article>
-      </TB>
-      <TB>
-        <Article>
-          <Title>
-            게시글
-            <Link to="/board/2">
-              <FiList />
-            </Link>
-          </Title>
+            {new Array(2).fill("").map((_, index) => (
+              <PostBox key={index} />
+            ))}
+          </Article>
+        </TB>
+        <TB>
+          <Article>
+            <Title>
+              게시글
+              <Link to="/board/2">
+                <FiList />
+              </Link>
+            </Title>
 
-          {new Array(7).fill("").map((_, index) => (
-            <PostBox key={index} />
-          ))}
-        </Article>
-        <Jumbo>
-          지금
-          <br /> 떠나세요
-        </Jumbo>
-      </TB>
-    </Container>
-  </>
-);
+            {new Array(7).fill("").map((_, index) => (
+              <PostBox key={index} />
+            ))}
+          </Article>
+          <Jumbo>
+            지금
+            <br /> 떠나세요
+          </Jumbo>
+        </TB>
+      </Container>
+    </>
+  );
+};

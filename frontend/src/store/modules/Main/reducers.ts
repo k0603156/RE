@@ -6,7 +6,7 @@ import {
 import { createReducer } from "typesafe-actions";
 
 const initialState: IMainState = {
-  selectedBoard: "1",
+  selectedBoard: "2",
   boardlist: [],
   postlist: []
 };

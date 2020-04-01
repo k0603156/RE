@@ -30,7 +30,12 @@ export default {
   boardlist_browse() {
     return req("get", "board", "/boardlist");
   },
-  postlist_browse(boardId: string) {
-    return req("get", "post", `/list/byboardnviews/${boardId}/?limit=5`);
+  postlist_browse(payload: { boardId: string }) {
+    console.log("payload::", payload);
+    return req(
+      "get",
+      "post",
+      `/list/byboardnviews/${payload.boardId}/?limit=5`
+    );
   }
 };
