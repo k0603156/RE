@@ -15,7 +15,7 @@ const req = (
     | {
         pid?: number;
       }
-    | IPostState
+    | Omit<IPostState, "id" | "updatedAt" | "user">
 ) => {
   const token = localStorage.getItem("token");
   return Axios({
@@ -40,8 +40,13 @@ export default {
     return req("get", `/list/?page=${payload.page}`);
   },
   //게시글 생성 요청
-  post_create(payload: IPostState) {
-    return req("post", "", payload);
+  post_create(payload: Omit<IPostState, "id" | "updatedAt" | "user">) {
+    return req("post", "/", {
+      title: payload.title,
+      boardId: payload.boardId,
+      content: payload.content,
+      hashtags: payload.hashtags
+    });
   },
   //게시글 삭제 요청
   post_delete(payload: { pid: number }) {

@@ -6,7 +6,7 @@ const http = require("http");
 const { sequelize } = require(appSrc + "/Models/tables");
 const { NormLog, ErrorLog } = require(appSrc + "/Utils/log");
 const app = require(appSrc + "/app");
-const option = { force: true };
+const option = { force: false };
 
 const util = require("util");
 const exec = util.promisify(require("child_process").exec);

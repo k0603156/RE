@@ -28,7 +28,9 @@ export function postBrowseAction(pid: string): TPostAction {
   };
 }
 //게시글 생성 요청
-export function postCreateAction(payload: IPostState): TPostAction {
+export function postCreateAction(
+  payload: Omit<IPostState, "id" | "updatedAt" | "user">
+): TPostAction {
   return {
     type: POST_CREATE_REQUEST,
     payload

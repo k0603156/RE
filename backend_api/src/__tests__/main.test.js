@@ -344,7 +344,7 @@ describe("Test Start::", () => {
   describe("Base::", () => {
     it("글분류 가져오기", async () => {
       const res = await request
-        .get("/api/v1/base/boardlist")
+        .get("/api/v1/board/boardlist")
         .set("Accept", "application/json")
         .expect(200);
       expect(res.body).toHaveProperty("success");

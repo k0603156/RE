@@ -20,7 +20,7 @@ Router.get("/:pid", PostService.getPostDetail);
 
 Router.post(
   "/",
-  checkProps("title", "content", "hashtags", "boardId"),
+  checkProps("title", "boardId", "content", "hashtags"),
   PostService.createPost
 );
 

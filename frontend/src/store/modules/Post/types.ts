@@ -36,7 +36,7 @@ export interface IPostBrowseRequest {
 //게시글 생성 요청
 export interface IPostCreateRequest {
   type: typeof POST_CREATE_REQUEST;
-  payload: IPostState;
+  payload: Omit<IPostState, "id" | "updatedAt" | "user">;
 }
 //게시글 삭제 요청
 export interface IPostDeleteRequest {
@@ -57,6 +57,7 @@ export type TPostAction =
 export interface IPostState {
   id: string;
   title: string;
+  boardId: string;
   content: Array<Node>;
   hashtags: Array<{ name: string }>;
   updatedAt: string;

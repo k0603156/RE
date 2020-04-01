@@ -11,6 +11,7 @@ import {
 const initialState: IPostState = {
   id: "",
   title: "",
+  boardId: "1",
   content: [
     {
       type: "paragraph",
@@ -29,12 +30,11 @@ export default createReducer(initialState, {
   },
   //게시글 읽기 성공
   [POST_BROWSE_SUCCESS]: (state, action) => {
-    console.log(action.payload.response);
     return { ...state, ...action.payload.response };
   },
   //게시글 생성 성공
   [POST_CREATE_SUCCESS]: (state, action) => {
-    return { ...state };
+    return { ...initialState };
   },
   //게시글 삭제 성공
   [POST_DELETE_SUCCESS]: (state, action) => {

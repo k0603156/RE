@@ -1,2 +1,2 @@
-import PrivatePostEdit from "./Container";
+import PrivatePostEdit from "./PostEditContainer";
 export default PrivatePostEdit;
