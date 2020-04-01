@@ -2,12 +2,14 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { RootStateType } from "@Store/modules/index";
 import {
+  boardSelectMutate,
   boardlistBrowseAction,
   postlistBrowseAction
 } from "@Store/modules/Main/actions";
 import MainPresenter from "./MainPresenter";
 interface IProps {
   main: RootStateType["main"];
+  boardSelectMutate: typeof boardSelectMutate;
   boardlistBrowseAction: typeof boardlistBrowseAction;
   postlistBrowseAction: typeof postlistBrowseAction;
 }
@@ -16,9 +18,10 @@ const MainContainer = (props: IProps) => {
     props.main.boardlist.length == 0 && props.boardlistBrowseAction();
     props.postlistBrowseAction(props.main.selectedBoard);
     return () => {};
-  }, []);
+  }, [props.main.selectedBoard]);
   return (
     <MainPresenter
+      changeKeyword={props.boardSelectMutate}
       selectedBoard={props.main.selectedBoard}
       boardlist={props.main.boardlist}
       postlist={props.main.postlist}
@@ -27,6 +30,7 @@ const MainContainer = (props: IProps) => {
 };
 
 export default connect(({ main }: RootStateType) => ({ main }), {
+  boardSelectMutate,
   boardlistBrowseAction,
   postlistBrowseAction
 })(MainContainer);

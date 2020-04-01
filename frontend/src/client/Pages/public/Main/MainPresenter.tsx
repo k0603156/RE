@@ -5,7 +5,7 @@ import { RootStateType } from "@Store/modules/index";
 import { FiList } from "@Client/Components/molecules/Icon/fi";
 import { PostBox, Jumbo } from "@Client/Components/organisms";
 import { KeywordBox } from "@Client/Components/molecules";
-
+import { boardSelectMutate } from "@Store/modules/Main/actions";
 const Container = styled.div`
   display: flex;
   overflow: auto;
@@ -52,13 +52,15 @@ const TB = styled.div`
   } */
 `;
 interface IProps {
+  changeKeyword: typeof boardSelectMutate;
   selectedBoard: number;
   boardlist: RootStateType["base"]["boardlist"];
   postlist: RootStateType["base"]["postlist"];
 }
 export default (props: IProps) => {
   const selectedBoardName = () =>
-    props.boardlist.length != 0 && props.boardlist[0].name;
+    props.boardlist.length != 0 &&
+    props.boardlist[props.selectedBoard - 1].name;
   const selectedBoardPosts = () =>
     props.postlist.map(
       (post: { id: string; title: string; updatedAt: string }) => (
@@ -94,12 +96,15 @@ export default (props: IProps) => {
             ))}
           </Article>
           <Jumbo large verticalFrom={"tablet"}>
-            고민은
+            {selectedBoardName()}
           </Jumbo>
         </TB>
       </Container>
 
-      <KeywordBox boardlist={props.boardlist} />
+      <KeywordBox
+        boardlist={props.boardlist}
+        changeKeyword={props.changeKeyword}
+      />
 
       <Container>
         <TB>

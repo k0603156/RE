@@ -1,6 +1,6 @@
 import { createReducer } from "typesafe-actions";
 import {
-  POST_FILLIN_CONDUCT,
+  POST_FILLIN_MUTATE,
   POST_BROWSE_SUCCESS,
   POST_CREATE_SUCCESS,
   POST_DELETE_SUCCESS,
@@ -25,7 +25,7 @@ const initialState: IPostState = {
 
 export default createReducer(initialState, {
   // 게시글 작성 액션
-  [POST_FILLIN_CONDUCT]: (state, action) => {
+  [POST_FILLIN_MUTATE]: (state, action) => {
     return { ...state, [action.payload.name]: action.payload.data };
   },
   //게시글 읽기 성공

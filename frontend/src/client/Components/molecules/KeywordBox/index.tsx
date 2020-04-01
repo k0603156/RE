@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { RootStateType } from "@Store/modules/index";
+import { boardSelectMutate } from "@Store/modules/Main/actions";
 const Box = styled.div`
   margin: 3rem auto;
 `;
@@ -23,15 +24,22 @@ const Li = styled.li`
   }
 `;
 interface IProps {
+  changeKeyword: typeof boardSelectMutate;
   boardlist: RootStateType["base"]["boardlist"];
 }
 
 export default (props: IProps) => {
+  const onClick = (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
+    props.changeKeyword(e.currentTarget.dataset.keyid!);
+  };
+
   return (
     <Box>
       <Ul>
         {props.boardlist.map((board: { id: string; name: string }) => (
-          <Li key={board.id}>{board.name}</Li>
+          <Li key={board.id} data-keyid={board.id} onClick={onClick}>
+            {board.name}
+          </Li>
         ))}
       </Ul>
     </Box>

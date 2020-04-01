@@ -1,11 +1,20 @@
 import {
+  BOARD_SELECT_MUTATE,
   BOARDLIST_BROWSE_REQUEST,
   POSTLIST_BROWSE_REQUEST,
   IMainAction
 } from "./types";
 
 //** CREATE ACTION **//
-// 게시글 분류 리스트 요청
+export function boardSelectMutate(boardId: string): IMainAction {
+  return {
+    type: BOARD_SELECT_MUTATE,
+    payload: {
+      boardId
+    }
+  };
+}
+
 export function boardlistBrowseAction(): IMainAction {
   return {
     type: BOARDLIST_BROWSE_REQUEST

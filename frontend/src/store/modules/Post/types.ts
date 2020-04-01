@@ -1,6 +1,6 @@
 import { Node } from "slate";
 
-export const POST_FILLIN_CONDUCT = "post/POST_FILLIN_CONDUCT";
+export const POST_FILLIN_MUTATE = "post/POST_FILLIN_MUTATE";
 
 export const POST_BROWSE_REQUEST = "post/POST_BROWSE_REQUEST";
 export const POST_BROWSE_SUCCESS = "post/POST_BROWSE_SUCCESS";
@@ -19,8 +19,8 @@ export const POST_UPDATE_SUCCESS = "post/POST_UPDATE_SUCCESS";
 export const POST_UPDATE_FAILURE = "post/POST_UPDATE_FAILURE";
 
 //게시글 작성 액션
-export interface IPostFillinConduct {
-  type: typeof POST_FILLIN_CONDUCT;
+export interface IPostFillinMutate {
+  type: typeof POST_FILLIN_MUTATE;
   payload: {
     name: string;
     data: Array<Node> | string;
@@ -48,7 +48,7 @@ export interface IPostUpdateRequest {
 }
 
 export type TPostAction =
-  | IPostFillinConduct
+  | IPostFillinMutate
   | IPostBrowseRequest
   | IPostCreateRequest
   | IPostDeleteRequest

@@ -1,5 +1,5 @@
 import {
-  POST_FILLIN_CONDUCT,
+  POST_FILLIN_MUTATE,
   POST_BROWSE_REQUEST,
   POST_CREATE_REQUEST,
   POST_DELETE_REQUEST,
@@ -16,7 +16,7 @@ export function postFillinAction(
   data: Array<Node> | string
 ): TPostAction {
   return {
-    type: POST_FILLIN_CONDUCT,
+    type: POST_FILLIN_MUTATE,
     payload: { name, data }
   };
 }
