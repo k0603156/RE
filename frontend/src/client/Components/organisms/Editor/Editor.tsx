@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
+import styled from "styled-components";
 import { createEditor, Node, Editor as BaseEditor } from "slate";
 import { Slate, Editable, withReact, useSlate } from "slate-react";
-import styled from "styled-components";
 import { Mx_Width } from "@Client/Styles/Device";
 
 interface IProps {
@@ -12,9 +12,10 @@ interface IProps {
 
 const Toolbar = styled.div`
   position: relative;
-  padding: 1px 18px 17px;
+  padding: 2px 18px 2px;
   margin: 0 -20px;
-  border-bottom: 2px solid #eee;
+  border-top: 2px solid lightgray;
+  border-bottom: 2px solid lightgray;
   margin-bottom: 20px;
   & > * {
     display: inline-block;
@@ -22,6 +23,13 @@ const Toolbar = styled.div`
   & > * + * {
     margin-left: 15px;
   }
+`;
+const StyledEditable = styled(Editable)`
+  height: 300px;
+  padding: 0.3rem;
+  box-shadow: 2px 2px 4px gray;
+  border: 1px solid lightgray;
+  border-bottom: none;
 `;
 const isMarkActive = (editor: any, format: any) => {
   const marks = BaseEditor.marks(editor);
@@ -50,7 +58,7 @@ const Editor = (props: IProps) => {
       <Toolbar>
         <MarkButton format="bold" />
       </Toolbar>
-      <Editable
+      <StyledEditable
         onKeyDown={event => {
           console.log(event.key);
         }}

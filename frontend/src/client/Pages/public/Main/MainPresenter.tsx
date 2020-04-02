@@ -1,6 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import { RootStateType } from "@Store/modules/index";
 import { FiList } from "@Client/Components/molecules/Icon/fi";
 import { PostBox, Jumbo } from "@Client/Components/organisms";
@@ -30,7 +30,7 @@ const Article = styled.div`
     padding: 20px 0;
   }
 `;
-const TB = styled.div`
+const VT = styled.div`
   width: 50%;
   display: flex;
   flex-direction: column;
@@ -50,6 +50,15 @@ const TB = styled.div`
     visibility: hidden;
     content: "";
   } */
+`;
+
+const SlideBox = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  @media only screen and (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 interface IProps {
   changeKeyword: typeof boardSelectMutate;
@@ -72,8 +81,19 @@ export default (props: IProps) => {
     );
   return (
     <>
+      <SlideBox>
+        <Jumbo medium verticalFrom={"tablet"}>
+          {selectedBoardName()}
+        </Jumbo>
+        <Article>{selectedBoardPosts()}</Article>
+      </SlideBox>
+      <KeywordBox
+        boardlist={props.boardlist}
+        changeKeyword={props.changeKeyword}
+      />
+
       <Container>
-        <TB>
+        <VT>
           <Jumbo medium verticalFrom={"tablet"}>
             Symphonia
           </Jumbo>
@@ -87,27 +107,20 @@ export default (props: IProps) => {
 
             {selectedBoardPosts()}
           </Article>
-        </TB>
-        <TB>
+        </VT>
+        <VT>
           <Article>
             <Title>베스트 게시글</Title>
             {new Array(3).fill("").map((_, index) => (
               <PostBox key={index} />
             ))}
           </Article>
-          <Jumbo large verticalFrom={"tablet"}>
-            {selectedBoardName()}
-          </Jumbo>
-        </TB>
+          <Jumbo verticalFrom={"tablet"}>RECOMMENDED ARTICLES</Jumbo>
+        </VT>
       </Container>
 
-      <KeywordBox
-        boardlist={props.boardlist}
-        changeKeyword={props.changeKeyword}
-      />
-
       <Container>
-        <TB>
+        <VT>
           <Jumbo verticalFrom={"tablet"}>당신의 열정에 맡기고</Jumbo>
           <Article>
             <Title>
@@ -121,8 +134,8 @@ export default (props: IProps) => {
               <PostBox key={index} />
             ))}
           </Article>
-        </TB>
-        <TB>
+        </VT>
+        <VT>
           <Article>
             <Title>
               게시글
@@ -139,7 +152,7 @@ export default (props: IProps) => {
             지금
             <br /> 떠나세요
           </Jumbo>
-        </TB>
+        </VT>
       </Container>
     </>
   );

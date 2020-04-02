@@ -124,7 +124,6 @@ module.exports.getPostList = async (req, res, next) => {
 };
 
 module.exports.createPost = async (req, res, next) => {
-  console.log(req);
   try {
     const result = await Models.sequelize.transaction(async transaction => {
       const existTags = await Models.hashtag.findAll({
