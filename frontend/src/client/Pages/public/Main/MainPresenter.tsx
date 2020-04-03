@@ -82,7 +82,7 @@ export default (props: IProps) => {
   return (
     <>
       <SlideBox>
-        <Jumbo medium verticalFrom={"tablet"}>
+        <Jumbo size="md" verticalFrom={"tablet"}>
           {selectedBoardName()}
         </Jumbo>
         <Article>{selectedBoardPosts()}</Article>
@@ -94,7 +94,7 @@ export default (props: IProps) => {
 
       <Container>
         <VT>
-          <Jumbo medium verticalFrom={"tablet"}>
+          <Jumbo size="md" verticalFrom={"tablet"}>
             Symphonia
           </Jumbo>
           <Article>
@@ -115,13 +115,17 @@ export default (props: IProps) => {
               <PostBox key={index} />
             ))}
           </Article>
-          <Jumbo verticalFrom={"tablet"}>RECOMMENDED ARTICLES</Jumbo>
+          <Jumbo size="sm" verticalFrom={"tablet"}>
+            RECOMMENDED ARTICLES
+          </Jumbo>
         </VT>
       </Container>
 
       <Container>
         <VT>
-          <Jumbo verticalFrom={"tablet"}>당신의 열정에 맡기고</Jumbo>
+          <Jumbo size="sm" verticalFrom={"tablet"}>
+            당신의 열정에 맡기고
+          </Jumbo>
           <Article>
             <Title>
               디자이너 게시글
@@ -148,9 +152,9 @@ export default (props: IProps) => {
               <PostBox key={index} />
             ))}
           </Article>
-          <Jumbo>
-            지금
-            <br /> 떠나세요
+          <Jumbo size="sm">
+            하루를
+            <br /> 기록하세요
           </Jumbo>
         </VT>
       </Container>

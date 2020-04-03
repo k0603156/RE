@@ -3,27 +3,35 @@ import styled from "styled-components";
 import { Mx_Width } from "@Client/Styles/Device";
 
 interface IProps {
-  large?: boolean;
+  size: "lg" | "md" | "sm";
   medium?: boolean;
   verticalFrom?: string;
   children?: React.ReactNode;
 }
 
+const setTypo = (size: IProps["size"]) => {
+  const Size: { [Key in IProps["size"]]: number } = {
+    lg: 0,
+    md: 1,
+    sm: 2,
+  };
+  return {
+    "font-size": 3.2 - Size[size] + "rem;",
+    "line-height": 4.2 - Size[size] + "rem;",
+  };
+};
+
 const Box = styled.div`
   display: flex;
   padding: 50px 0;
   writing-mode: ${({ verticalFrom }: IProps) => verticalFrom && "vertical-lr"};
-  //Todo:style만 분리한 함수 필요 빈값체크가 생겨서는안됨
   ${({ verticalFrom }: IProps) =>
     verticalFrom && Mx_Width(`{writing-mode: horizontal-tb;}`)[verticalFrom]}
   height: auto;
   align-items: center;
   justify-content: center;
   span {
-    font-size: ${({ large, medium }: IProps) =>
-      large ? 3.8 : medium ? 2.8 : 1.8}rem;
-    line-height: ${({ large, medium }: IProps) =>
-      large ? 4.8 : medium ? 3.8 : 2.8}rem;
+    ${({ size }: IProps) => setTypo(size)}
     letter-spacing: 10px;
     > br {
       display: none;
@@ -33,7 +41,6 @@ const Box = styled.div`
     }
   }
 `;
-
 const Jumbo = (props: IProps) => {
   return (
     <Box {...props}>
