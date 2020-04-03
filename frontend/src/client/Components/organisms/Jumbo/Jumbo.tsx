@@ -4,7 +4,6 @@ import { Mx_Width } from "@Client/Styles/Device";
 
 interface IProps {
   size: "lg" | "md" | "sm";
-  medium?: boolean;
   verticalFrom?: string;
   children?: React.ReactNode;
 }
