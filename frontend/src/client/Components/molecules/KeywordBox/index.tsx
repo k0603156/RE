@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { RootStateType } from "@Store/modules/index";
-import { boardSelectMutate } from "@Store/modules/Main/actions";
+import { boardSelectAction } from "@Store/modules/Main/actions";
 const Box = styled.div`
   margin: 3rem auto;
 `;
@@ -24,13 +24,13 @@ const Li = styled.li`
   }
 `;
 interface IProps {
-  changeKeyword: typeof boardSelectMutate;
+  boardSelectAction: typeof boardSelectAction;
   boardlist: RootStateType["base"]["boardlist"];
 }
 
 export default (props: IProps) => {
   const onClick = (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
-    props.changeKeyword(e.currentTarget.dataset.keyid!);
+    props.boardSelectAction(e.currentTarget.dataset.keyid!);
   };
 
   return (

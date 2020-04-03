@@ -1,5 +1,5 @@
 // 게시글 분류 선택
-export const BOARD_SELECT_MUTATE = "main/BOARD_SELECT_MUTATE";
+export const BOARD_SELECT_TRIGGER = "main/BOARD_SELECT_TRIGGER";
 // 게시글 분류 리스트 가져오기
 export const BOARDLIST_BROWSE_REQUEST = "main/BOARDLIST_BROWSE_REQUEST";
 export const BOARDLIST_BROWSE_SUCCESS = "main/BOARDLIST_BROWSE_SUCCESS";
@@ -9,8 +9,8 @@ export const POSTLIST_BROWSE_REQUEST = "main/POSTLIST_BROWSE_REQUEST";
 export const POSTLIST_BROWSE_SUCCESS = "main/POSTLIST_BROWSE_SUCCESS";
 export const POSTLIST_BROWSE_FAILURE = "main/POSTLIST_BROWSE_FAILURE";
 
-export interface IBoardSelectMutate {
-  type: typeof BOARD_SELECT_MUTATE;
+export interface IBoardSelectTrigger {
+  type: typeof BOARD_SELECT_TRIGGER;
   payload: {
     boardId: string;
   };
@@ -25,7 +25,7 @@ export interface IPostlistBrowseRequest {
   };
 }
 export type IMainAction =
-  | IBoardSelectMutate
+  | IBoardSelectTrigger
   | IBoardlistBrowseRequest
   | IPostlistBrowseRequest;
 

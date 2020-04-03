@@ -1,35 +1,35 @@
 import {
-  BOARD_SELECT_MUTATE,
+  BOARD_SELECT_TRIGGER,
   BOARDLIST_BROWSE_SUCCESS,
   POSTLIST_BROWSE_SUCCESS,
-  IMainState
+  IMainState,
 } from "./types";
 import { createReducer } from "typesafe-actions";
 
 const initialState: IMainState = {
   selectedBoard: "1",
   boardlist: [],
-  postlist: []
+  postlist: [],
 };
 
 export default createReducer(initialState, {
-  [BOARD_SELECT_MUTATE]: (state, action) => {
+  [BOARD_SELECT_TRIGGER]: (state, action) => {
     return {
       ...state,
-      selectedBoard: action.payload.boardId
+      selectedBoard: action.payload.boardId,
     };
   },
   [BOARDLIST_BROWSE_SUCCESS]: (state, action) => {
     return {
       ...state,
-      boardlist: action.payload.response
+      boardlist: action.payload.response,
     };
   },
   [POSTLIST_BROWSE_SUCCESS]: (state, action) => {
     console.log(action);
     return {
       ...state,
-      postlist: action.payload.response
+      postlist: action.payload.response,
     };
-  }
+  },
 });

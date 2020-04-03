@@ -5,7 +5,7 @@ import { RootStateType } from "@Store/modules/index";
 import { FiList } from "@Client/Components/molecules/Icon/fi";
 import { PostBox, Jumbo } from "@Client/Components/organisms";
 import { KeywordBox } from "@Client/Components/molecules";
-import { boardSelectMutate } from "@Store/modules/Main/actions";
+import { boardSelectAction } from "@Store/modules/Main/actions";
 const Container = styled.div`
   display: flex;
   overflow: auto;
@@ -61,7 +61,7 @@ const SlideBox = styled.div`
   }
 `;
 interface IProps {
-  changeKeyword: typeof boardSelectMutate;
+  boardSelectAction: typeof boardSelectAction;
   selectedBoard: number;
   boardlist: RootStateType["base"]["boardlist"];
   postlist: RootStateType["base"]["postlist"];
@@ -89,7 +89,7 @@ export default (props: IProps) => {
       </SlideBox>
       <KeywordBox
         boardlist={props.boardlist}
-        changeKeyword={props.changeKeyword}
+        boardSelectAction={props.boardSelectAction}
       />
 
       <Container>
