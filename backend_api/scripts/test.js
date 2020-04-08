@@ -3,7 +3,7 @@ process.env.BABEL_ENV = "test";
 process.env.NODE_ENV = "test";
 process.env.PUBLIC_URL = "";
 
-process.on("unhandledRejection", err => {
+process.on("unhandledRejection", (err) => {
   throw err;
 });
 
@@ -20,17 +20,17 @@ NormLog("Sequelize TEST DB Initialize");
 
 sequelize
   .sync({ force: true, logging: false })
-  .then(_ => exec("npx sequelize-cli db:seed:all"))
-  .then(_ => {
+  .then((_) => exec("npx sequelize-cli db:seed:all"))
+  .then((_) => {
     console.log(_.stdout);
     NormLog("✓ TEST DB reset connection success.");
   })
-  .catch(err => {
+  .catch((err) => {
     ErrorLog(err);
     ErrorLog("✗ TEST DB connection error. Please make sure DB is running.");
     process.exit();
   })
-  .finally(_ => {
+  .finally((_) => {
     jest.run(argv + " --detectOpenHandles");
     NormLog("✓ TEST start");
   });

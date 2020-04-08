@@ -4,11 +4,11 @@ exports.go = go;
 const go2 = (...as) => curryReduce(go, as);
 exports.go2 = go2;
 
-const curry = f => (a, ...bs) =>
+const curry = (f) => (a, ...bs) =>
   bs.length ? f(a, ...bs) : (...bs) => f(a, ...bs);
 module.exports.curry = curry;
 
-const curryReduce = curry(function(f, acc, iter) {
+const curryReduce = curry(function (f, acc, iter) {
   if (arguments.length === 2) {
     iter = acc[Symbol.iterator]();
     acc = iter.next().value;

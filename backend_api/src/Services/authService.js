@@ -8,8 +8,8 @@ module.exports.authenticate = async (req, res, next) => {
     const reqPassword = req.body.password;
     const resUser = await Models.user.findOne({
       where: {
-        email: reqEmail
-      }
+        email: reqEmail,
+      },
     });
     if (resUser && resUser.dataValues) {
       const { email, userName, salt, cryptoPass } = resUser.dataValues;
@@ -17,7 +17,7 @@ module.exports.authenticate = async (req, res, next) => {
       if (loginPassword === cryptoPass) {
         res.status(200).json({
           success: true,
-          response: { email, userName, token: generateToken(email) }
+          response: { email, userName, token: generateToken(email) },
         });
       } else {
         throw new AuthenticationError("로그인실패");

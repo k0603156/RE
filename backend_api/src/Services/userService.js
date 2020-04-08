@@ -10,7 +10,7 @@ module.exports.getUser = async (req, res, next) => {
   try {
     const existUser = await user.findOne({
       where: { userName: req.params.userName },
-      attributes: ["id", "userName"]
+      attributes: ["id", "userName"],
     });
 
     if (!existUser) {
@@ -25,8 +25,8 @@ module.exports.getUser = async (req, res, next) => {
       response: {
         id: existUser.dataValues.id,
         userName: existUser.dataValues.userName,
-        posts: resultPost
-      }
+        posts: resultPost,
+      },
     });
   } catch (error) {
     next(error);
@@ -59,13 +59,13 @@ module.exports.signup = async (req, res, next) => {
       userName,
       email,
       cryptoPass,
-      salt
+      salt,
     });
 
     if (!result) throw new Error("가입실패");
 
     res.status(201).json({
-      success: true
+      success: true,
     });
   } catch (error) {
     next(error);
@@ -85,13 +85,13 @@ module.exports.updateUser = async (req, res, next) => {
       {
         userName,
         cryptoPass,
-        salt
+        salt,
       },
       { where: { id } }
     );
     response &&
       res.status(200).json({
-        success: true
+        success: true,
       });
   } catch (error) {
     next(error);
@@ -103,7 +103,7 @@ module.exports.deleteUser = async (req, res, next) => {
     const id = req.user.id;
 
     const result = user.destroy({
-      where: { id }
+      where: { id },
     });
 
     if (!result) throw new Error("삭제실패");

@@ -8,13 +8,13 @@ module.exports.getPostListByBoardnViews = async (req, res, next) => {
     include: [
       {
         model: Models.user,
-        attributes: ["userName"]
-      }
+        attributes: ["userName"],
+      },
     ],
     where: { boardId: req.params.boardId },
     attributes: ["id", "title", "readcount", "updatedAt"],
     order: [literal("readcount DESC")],
-    limit
+    limit,
   });
   // if (!result) throw new NotFoundError("해당 분류에 맞는 글이 없습니다.");
   res.status(200).json({ success: true, response: result });
@@ -31,17 +31,17 @@ module.exports.getPostListByHashtag = async (req, res, next) => {
           as: "hashtags",
           separate: false,
           attributes: ["name"],
-          duplicating: false
+          duplicating: false,
         },
         {
           model: Models.user,
-          attributes: ["userName"]
-        }
+          attributes: ["userName"],
+        },
       ],
       attributes: ["id", "title", "readcount", "updatedAt"],
       where: { "$hashtags.name$": req.params.hashtag },
       offset,
-      limit
+      limit,
     });
     if (!result.count)
       throw new NotFoundError("해당 태그에 맞는 글이 없습니다.");
@@ -51,41 +51,41 @@ module.exports.getPostListByHashtag = async (req, res, next) => {
   }
 };
 
-module.exports.getPostListByUser = async userId => {
+module.exports.getPostListByUser = async (userId) => {
   const result = await Models.post.findAll({
     where: { userId },
-    attributes: ["id", "title"]
+    attributes: ["id", "title"],
   });
   return result;
 };
 
 module.exports.getPostDetail = async (req, res, next) => {
   try {
-    const result = await Models.sequelize.transaction(async transaction => {
+    const result = await Models.sequelize.transaction(async (transaction) => {
       await Models.post.update(
         {
-          readcount: literal(`readcount + 1`)
+          readcount: literal(`readcount + 1`),
         },
         {
           where: { id: req.params.pid },
-          transaction
+          transaction,
         }
       );
       const result = await Models.post.findOne({
         include: [
           {
             model: Models.user,
-            attributes: ["userName"]
+            attributes: ["userName"],
           },
           {
             model: Models.hashtag,
             as: "hashtags",
-            attributes: ["name"]
-          }
+            attributes: ["name"],
+          },
         ],
         where: { id: req.params.pid },
         attributes: ["id", "title", "content", "readcount", "updatedAt"],
-        transaction
+        transaction,
       });
 
       return result;
@@ -105,16 +105,16 @@ module.exports.getPostList = async (req, res, next) => {
       include: [
         {
           model: Models.user,
-          attributes: ["userName"]
+          attributes: ["userName"],
         },
         {
           model: Models.hashtag,
-          attributes: ["name"]
-        }
+          attributes: ["name"],
+        },
       ],
       offset,
       limit,
-      attributes: ["id", "title", "updatedAt"]
+      attributes: ["id", "title", "updatedAt"],
     });
     if (!result.count) throw new NotFoundError("가져올 글이 없습니다.");
     res.status(200).json({ success: true, response: result });
@@ -125,16 +125,16 @@ module.exports.getPostList = async (req, res, next) => {
 
 module.exports.createPost = async (req, res, next) => {
   try {
-    const result = await Models.sequelize.transaction(async transaction => {
+    const result = await Models.sequelize.transaction(async (transaction) => {
       const existTags = await Models.hashtag.findAll({
         where: {
-          name: { [Op.in]: [...req.body.hashtags.map(_ => _.name)] }
+          name: { [Op.in]: [...req.body.hashtags.map((_) => _.name)] },
         },
         attributes: ["id", "name"],
-        transaction
+        transaction,
       });
 
-      const existTagsArr = attr => existTags.map(_ => _.dataValues[attr]);
+      const existTagsArr = (attr) => existTags.map((_) => _.dataValues[attr]);
 
       const createdPost = await Models.post.create(
         {
@@ -144,17 +144,17 @@ module.exports.createPost = async (req, res, next) => {
           content: [...req.body.content],
           hashtags: existTagsArr("name").length
             ? req.body.hashtags.filter(
-                _ => !existTagsArr("name").includes(_.name)
+                (_) => !existTagsArr("name").includes(_.name)
               )
-            : req.body.hashtags
+            : req.body.hashtags,
         },
         {
           include: [
             {
-              model: Models.hashtag
-            }
+              model: Models.hashtag,
+            },
           ],
-          transaction
+          transaction,
         }
       );
 
@@ -168,8 +168,8 @@ module.exports.createPost = async (req, res, next) => {
       res.status(201).json({
         success: true,
         response: {
-          id: result.dataValues.id
-        }
+          id: result.dataValues.id,
+        },
       });
   } catch (error) {
     next(error);
@@ -181,15 +181,15 @@ module.exports.updatePost = async (req, res, next) => {
     const result = await Models.post.update(
       {
         title: req.body.title,
-        content: [...req.body.content]
+        content: [...req.body.content],
       },
       {
-        where: { id: req.body.pid }
+        where: { id: req.body.pid },
       }
     );
     result &&
       res.status(201).json({
-        success: true
+        success: true,
       });
   } catch (error) {
     next(error);
@@ -199,12 +199,12 @@ module.exports.updatePost = async (req, res, next) => {
 module.exports.deletePost = async (req, res, next) => {
   try {
     const toDeletePost = {
-      where: { id: req.body.pid }
+      where: { id: req.body.pid },
     };
     const result = await Models.post.destroy(toDeletePost);
     if (!result) throw new NotFoundError("해당하는 글이 없습니다.");
     res.status(200).json({
-      success: true
+      success: true,
     });
   } catch (error) {
     next(error);

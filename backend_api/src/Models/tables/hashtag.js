@@ -6,19 +6,19 @@ module.exports = (sequelize, DataTypes) => {
       name: {
         type: DataTypes.STRING(30),
         unique: true,
-        allowNull: false
-      }
+        allowNull: false,
+      },
     },
     {
       charset: "utf8",
       collate: "utf8_general_ci",
-      timestamps: false
+      timestamps: false,
     }
   );
-  hashtag.associate = function(models) {
+  hashtag.associate = function (models) {
     hashtag.belongsToMany(models.post, {
       through: "PostHashtag",
-      timestamps: false
+      timestamps: false,
     });
   };
   return hashtag;

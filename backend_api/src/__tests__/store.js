@@ -1,4 +1,4 @@
-module.exports = (function() {
+module.exports = (function () {
   function setToken(token) {
     this.token = token;
   }
@@ -39,6 +39,6 @@ module.exports = (function() {
     setHashtag,
     getHashtag,
     setPage,
-    getPage
+    getPage,
   };
 })();

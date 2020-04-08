@@ -6,7 +6,7 @@ const postRouter = require("./post");
 const boardRouter = require("./board");
 const API_ROOT = "/api/v1";
 
-module.exports = app => {
+module.exports = (app) => {
   app.use(authenticateJwt);
   app.use(`${API_ROOT}/auth/`, authRouter);
   app.use(`${API_ROOT}/user/`, userRouter);
@@ -26,7 +26,7 @@ module.exports = app => {
   /**
    * @uncaughtException
    */
-  process.on("uncaughtException", err => {
+  process.on("uncaughtException", (err) => {
     //TODO: 기록=>프로세스 종료
     console.log("ErrUncaught");
     console.error(err);

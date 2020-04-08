@@ -5,13 +5,13 @@ const { randomBytes, scrypt } = require("crypto");
 
 module.exports.generateRandomString = (buffSize = 64, encodeType = "base64") =>
   promisify(randomBytes)(buffSize)
-    .then(buff => {
+    .then((buff) => {
       return new Promise((resolve, reject) => {
         const salt = buff.toString(encodeType);
         resolve(salt);
       });
     })
-    .catch(error => {
+    .catch((error) => {
       throw new Err(error, 500, "fail generateString");
     });
 
@@ -22,20 +22,20 @@ module.exports.encryptString = (
   encodeType = "base64"
 ) =>
   promisify(scrypt)(password, salt, keyLen)
-    .then(buff => {
+    .then((buff) => {
       return new Promise((resolve, reject) => {
         const key = buff.toString(encodeType);
         resolve(key);
       });
     })
-    .catch(error => {
+    .catch((error) => {
       throw new Err(error, 500, "fail encryptString");
     });
 
-module.exports.generateToken = email =>
+module.exports.generateToken = (email) =>
   jwt.sign(
     {
-      email
+      email,
     },
     process.env.JWT_SECRET
   );

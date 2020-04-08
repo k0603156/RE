@@ -5,18 +5,18 @@ module.exports = (sequelize, DataTypes) => {
     {
       name: {
         allowNull: false,
-        type: DataTypes.STRING(50)
-      }
+        type: DataTypes.STRING(50),
+      },
     },
     {
       charset: "utf8mb4",
       collate: "utf8mb4_general_ci",
       timestamps: true,
-      paranoid: true
+      paranoid: true,
     }
   );
 
-  board.associate = function(models) {
+  board.associate = function (models) {
     board.hasMany(models.post);
   };
 

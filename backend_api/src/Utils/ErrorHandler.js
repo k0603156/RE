@@ -2,7 +2,7 @@ const {
   ValidationError,
   AuthenticationError,
   AuthorizationError,
-  NotFoundError
+  NotFoundError,
 } = require("../Utils/Error");
 
 const isProduction = process.env.NODE_ENV === "production";
@@ -17,7 +17,7 @@ function handleValidateError(error, req, res, next) {
   if (error instanceof ValidationError) {
     res.status(400).json({
       type: "ValidationError",
-      message: error.message
+      message: error.message,
     });
   }
   next(error);
@@ -31,7 +31,7 @@ function handleAuthenticateError(error, req, res, next) {
   if (error instanceof AuthenticationError) {
     res.status(401).json({
       type: "AuthenticationError",
-      message: error.message
+      message: error.message,
     });
   }
   next(error);
@@ -45,7 +45,7 @@ function handleAuthorizationError(error, req, res, next) {
   if (error instanceof AuthorizationError) {
     res.status(403).json({
       type: "AuthorizationError",
-      message: error.message
+      message: error.message,
     });
   }
   next(error);
@@ -61,8 +61,8 @@ function handleNotFoundError(error, req, res, next) {
       success: false,
       response: {
         type: "NotFoundError",
-        message: error.message
-      }
+        message: error.message,
+      },
     });
   }
 }
@@ -75,8 +75,8 @@ function handleBaseError(error, req, res, next) {
       success: false,
       response: {
         type: "BaseError",
-        message: error.message
-      }
+        message: error.message,
+      },
     });
   }
 }
@@ -100,5 +100,5 @@ module.exports = [
   handleAuthorizationError,
   handleNotFoundError,
   handleBaseError,
-  handleDefalultError
+  handleDefalultError,
 ];

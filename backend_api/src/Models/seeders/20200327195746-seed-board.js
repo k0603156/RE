@@ -13,7 +13,7 @@ module.exports = {
           updatedAt: new Date()
             .toISOString()
             .replace(/T/, " ")
-            .replace(/\..+/, "")
+            .replace(/\..+/, ""),
         },
         {
           name: "디자인",
@@ -24,7 +24,7 @@ module.exports = {
           updatedAt: new Date()
             .toISOString()
             .replace(/T/, " ")
-            .replace(/\..+/, "")
+            .replace(/\..+/, ""),
         },
         {
           name: "일상",
@@ -35,7 +35,7 @@ module.exports = {
           updatedAt: new Date()
             .toISOString()
             .replace(/T/, " ")
-            .replace(/\..+/, "")
+            .replace(/\..+/, ""),
         },
         {
           name: "여행",
@@ -46,8 +46,8 @@ module.exports = {
           updatedAt: new Date()
             .toISOString()
             .replace(/T/, " ")
-            .replace(/\..+/, "")
-        }
+            .replace(/\..+/, ""),
+        },
       ],
       {}
     );
@@ -55,5 +55,5 @@ module.exports = {
 
   down: (queryInterface, Sequelize) => {
     return queryInterface.bulkDelete("boards", null, {});
-  }
+  },
 };

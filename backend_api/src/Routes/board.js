@@ -4,7 +4,7 @@ const Models = require("../Models/tables");
 
 Router.get("/boardlist", async (req, res, next) => {
   const result = await Models.board.findAll({
-    attributes: ["id", "name"]
+    attributes: ["id", "name"],
   });
   res.status(200).json({ success: true, response: result });
 });

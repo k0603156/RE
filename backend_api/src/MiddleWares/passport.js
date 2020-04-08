@@ -3,7 +3,7 @@ const Models = require("../Models/tables");
 const { Strategy, ExtractJwt } = require("passport-jwt");
 const jwtOptions = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-  secretOrKey: process.env.JWT_SECRET
+  secretOrKey: process.env.JWT_SECRET,
 };
 
 const verifyUser = async (payload, done) => {
@@ -11,8 +11,8 @@ const verifyUser = async (payload, done) => {
     //payload:{email,iat=>토큰이 발급 된 시간}
     const { dataValues } = await Models.user.findOne({
       where: {
-        email: payload.email
-      }
+        email: payload.email,
+      },
     });
     return done(null, dataValues);
   } catch (error) {
@@ -24,7 +24,7 @@ exports.authenticateJwt = (req, res, next) => {
   passport.authenticate(
     "jwt",
     {
-      sessions: false
+      sessions: false,
     },
     (error, user) => {
       if (user) {

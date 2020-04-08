@@ -5,31 +5,31 @@ module.exports = (sequelize, DataTypes) => {
     {
       title: {
         allowNull: false,
-        type: DataTypes.STRING(100)
+        type: DataTypes.STRING(100),
       },
       content: {
         allowNull: false,
-        type: DataTypes.JSON
+        type: DataTypes.JSON,
       },
       readcount: {
         type: DataTypes.INTEGER,
-        defaultValue: 0
-      }
+        defaultValue: 0,
+      },
     },
     {
       charset: "utf8mb4",
       collate: "utf8mb4_general_ci",
       timestamps: true,
-      paranoid: true
+      paranoid: true,
     }
   );
-  post.associate = function(models) {
+  post.associate = function (models) {
     post.belongsTo(models.user);
     post.belongsTo(models.board);
     // post.hasMany(models.story);
     post.belongsToMany(models.hashtag, {
       through: "PostHashtag",
-      timestamps: false
+      timestamps: false,
     });
   };
   return post;

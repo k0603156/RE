@@ -6,14 +6,14 @@ describe("Test Start::", () => {
   let server;
   let request;
 
-  beforeAll(done => {
+  beforeAll((done) => {
     server = http.createServer(app);
     request = supertest(server);
     server.listen(done);
     store.setPage(1);
     store.setHashtag("tag2");
   });
-  afterAll(done => {
+  afterAll((done) => {
     server.close(done);
   });
   describe("User Flow::", () => {
@@ -25,7 +25,7 @@ describe("Test Start::", () => {
           userName: "john",
           email: "test@test.com",
           password: "test123",
-          confirmPassword: "test123"
+          confirmPassword: "test123",
         })
         .expect(201);
       expect(res.body).toHaveProperty("success");
@@ -37,7 +37,7 @@ describe("Test Start::", () => {
         .post("/api/v1/auth/authenticate")
         .send({
           email: "test@test.com",
-          password: "test123"
+          password: "test123",
         })
         .expect(200);
       expect(res.body.success).toEqual(true);
@@ -57,7 +57,7 @@ describe("Test Start::", () => {
         .send({
           userName: "john2",
           password: "test1234",
-          confirmPassword: "test1234"
+          confirmPassword: "test1234",
         })
         .expect(200);
       expect(res.body).toHaveProperty("success");
@@ -74,10 +74,10 @@ describe("Test Start::", () => {
           content: [
             {
               type: "paragraph",
-              children: [{ text: "test post paragraph" }]
-            }
+              children: [{ text: "test post paragraph" }],
+            },
           ],
-          hashtags: [{ name: "tag1" }, { name: "tag2" }]
+          hashtags: [{ name: "tag1" }, { name: "tag2" }],
         })
         .expect(201);
       expect(res.body.success).toEqual(true);
@@ -95,10 +95,10 @@ describe("Test Start::", () => {
           content: [
             {
               type: "paragraph",
-              children: [{ text: "test post paragraph2" }]
-            }
+              children: [{ text: "test post paragraph2" }],
+            },
           ],
-          hashtags: [{ name: "tag3" }, { name: "tag4" }]
+          hashtags: [{ name: "tag3" }, { name: "tag4" }],
         })
         .expect(201);
       expect(res.body.success).toEqual(true);
@@ -114,10 +114,10 @@ describe("Test Start::", () => {
           content: [
             {
               type: "paragraph",
-              children: [{ text: "test post paragraph3" }]
-            }
+              children: [{ text: "test post paragraph3" }],
+            },
           ],
-          hashtags: [{ name: "tag2" }, { name: "tag5" }]
+          hashtags: [{ name: "tag2" }, { name: "tag5" }],
         })
         .expect(201);
       expect(res.body.success).toEqual(true);
@@ -133,10 +133,10 @@ describe("Test Start::", () => {
           content: [
             {
               type: "paragraph",
-              children: [{ text: "test post paragraph3" }]
-            }
+              children: [{ text: "test post paragraph3" }],
+            },
           ],
-          hashtags: [{ name: "tag2" }, { name: "tag5" }]
+          hashtags: [{ name: "tag2" }, { name: "tag5" }],
         })
         .expect(201);
       expect(res.body.success).toEqual(true);
@@ -153,10 +153,10 @@ describe("Test Start::", () => {
           content: [
             {
               type: "paragraph",
-              children: [{ text: "test post paragraph4" }]
-            }
+              children: [{ text: "test post paragraph4" }],
+            },
           ],
-          hashtags: [{ name: "tag2" }, { name: "tag5" }]
+          hashtags: [{ name: "tag2" }, { name: "tag5" }],
         })
         .expect(201);
       expect(res.body.success).toEqual(true);
@@ -173,10 +173,10 @@ describe("Test Start::", () => {
           content: [
             {
               type: "paragraph",
-              children: [{ text: "test post paragraph5" }]
-            }
+              children: [{ text: "test post paragraph5" }],
+            },
           ],
-          hashtags: [{ name: "tag2" }, { name: "tag5" }]
+          hashtags: [{ name: "tag2" }, { name: "tag5" }],
         })
         .expect(201);
       expect(res.body.success).toEqual(true);
@@ -192,10 +192,10 @@ describe("Test Start::", () => {
           content: [
             {
               type: "paragraph",
-              children: [{ text: "test post paragraph6" }]
-            }
+              children: [{ text: "test post paragraph6" }],
+            },
           ],
-          hashtags: [{ name: "tag2" }, { name: "tag5" }]
+          hashtags: [{ name: "tag2" }, { name: "tag5" }],
         })
         .expect(201);
       expect(res.body.success).toEqual(true);
@@ -285,9 +285,9 @@ describe("Test Start::", () => {
           content: [
             {
               type: "paragraph",
-              children: [{ text: "updated test post paragraph" }]
-            }
-          ]
+              children: [{ text: "updated test post paragraph" }],
+            },
+          ],
         })
         .expect(201);
       expect(res.body.success).toEqual(true);
@@ -306,8 +306,8 @@ describe("Test Start::", () => {
       expect(res.body.response.content).toEqual([
         {
           type: "paragraph",
-          children: [{ text: "updated test post paragraph" }]
-        }
+          children: [{ text: "updated test post paragraph" }],
+        },
       ]);
       expect(res.body.response).toHaveProperty("updatedAt");
       expect(res.body.response).toHaveProperty("user");
@@ -320,7 +320,7 @@ describe("Test Start::", () => {
         .delete(`/api/v1/post`)
         .set("Authorization", "bearer " + store.getToken())
         .send({
-          pid: store.getPid()
+          pid: store.getPid(),
         })
         .expect(200);
       expect(res.body.success).toEqual(true);
@@ -349,7 +349,7 @@ describe("Test Start::", () => {
         .expect(200);
       expect(res.body).toHaveProperty("success");
       expect(res.body.success).toEqual(true);
-      res.body.response.map(_ => {
+      res.body.response.map((_) => {
         expect(_).toHaveProperty("id");
         expect(_).toHaveProperty("name");
       });
