@@ -4,7 +4,7 @@ require("dotenv").config({
 });
 const baseDbSetting = {
   timezone: "+09:00",
-  port: 3307,
+  port: 3333,
   dialect: process.env.DB_DIALECT,
   pool: {
     max: 100,

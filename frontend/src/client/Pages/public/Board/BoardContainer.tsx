@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { withRouter, RouteComponentProps } from "react-router-dom";
-import { postlistBrowseAction } from "@Store/modules/Postlist/actions";
+import { postlistBrowseAction } from "@Store/modules/PostList/actions";
 import { RootStateType } from "@Store/modules";
 import BoardPresenter from "./BoardPresenter";
 
@@ -38,7 +38,7 @@ const BoardContainer = withRouter((props: IProps) => {
 
 export default connect(
   ({ postlist, loading }: RootStateType) => ({
-    postlist
+    postlist,
   }),
   { postlistBrowseAction }
 )(BoardContainer);

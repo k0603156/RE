@@ -3,7 +3,7 @@ import { POSTLIST_BROWSE_SUCCESS } from "./types";
 
 const initialState: { count: number; rows: any } = {
   count: 0,
-  rows: []
+  rows: [],
 };
 
 export default createReducer(initialState, {
@@ -12,7 +12,7 @@ export default createReducer(initialState, {
     console.log(action);
     return {
       ...initialState,
-      ...action.payload.response
+      ...action.payload.response,
     };
-  }
+  },
 });
