@@ -1,22 +1,21 @@
 const path = require("path");
 require("dotenv").config({
-  path: path.resolve(__dirname, `${process.env.NODE_ENV}.env`)
+  path: path.resolve(__dirname, `${process.env.NODE_ENV}.env`),
 });
-
 const baseDbSetting = {
   timezone: "+09:00",
-  port: 3306,
+  port: 3307,
   dialect: process.env.DB_DIALECT,
   pool: {
     max: 100,
     min: 0,
-    idle: 10000
+    idle: 10000,
   },
   define: {
     charset: "utf8mb4",
     collate: "utf8mb4_general_ci",
-    timestamps: true
-  }
+    timestamps: true,
+  },
 };
 
 module.exports = {
@@ -26,7 +25,7 @@ module.exports = {
       password: process.env.DB_TEST_PW,
       database: process.env.DB_TEST_NAME,
       host: "127.0.0.1",
-      logging: false
+      logging: false,
     },
     baseDbSetting
   ),
@@ -36,7 +35,7 @@ module.exports = {
       password: process.env.DB_DEVELOPMENT_PW,
       database: process.env.DB_DEVELOPMENT_NAME,
       host: "127.0.0.1",
-      logging: true
+      logging: true,
     },
     baseDbSetting
   ),
@@ -47,8 +46,8 @@ module.exports = {
       password: process.env.DB_PRODUCTION_PW,
       database: process.env.DB_PRODUCTION_NAME,
       host: process.env.DB_PRODUCTION_HOST,
-      logging: false
+      logging: false,
     },
     baseDbSetting
-  )
+  ),
 };

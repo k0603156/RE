@@ -13,6 +13,8 @@
 
 ##### Document
 
+- Mysql version 5.7.\*
+
 - scripts/run.js production 실행 스크립트
 - scripts/test.js test 실행 스크립트
   - 각 파일에서 프로세스 환경변수를 세팅
