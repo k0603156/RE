@@ -1,9 +1,9 @@
 import { createReducer } from "typesafe-actions";
-import { POSTLIST_BROWSE_SUCCESS } from "./types";
+import { POSTLIST_BROWSE_SUCCESS, InitialState } from "./types";
 
-const initialState: { count: number; rows: any } = {
+const initialState: InitialState = {
   count: 0,
-  rows: []
+  rows: [],
 };
 
 export default createReducer(initialState, {
@@ -12,7 +12,7 @@ export default createReducer(initialState, {
     console.log(action);
     return {
       ...initialState,
-      ...action.payload.response
+      ...action.payload.response,
     };
-  }
+  },
 });

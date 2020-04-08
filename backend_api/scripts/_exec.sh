@@ -1,1 +1,1 @@
-sudo docker exec -it  traveler_container /bin/bash
+sudo docker exec -it  symphony_container /bin/bash

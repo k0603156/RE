@@ -6,7 +6,7 @@ import {
 } from "./types";
 
 //** CREATE ACTION **//
-export function boardSelectAction(boardId: string): IMainAction {
+export function boardSelectAction(boardId: number): IMainAction {
   return {
     type: BOARD_SELECT_TRIGGER,
     payload: {
@@ -21,7 +21,7 @@ export function boardlistBrowseAction(): IMainAction {
   };
 }
 
-export function postlistBrowseAction(boardId: string): IMainAction {
+export function postlistBrowseAction(boardId: number): IMainAction {
   return {
     type: POSTLIST_BROWSE_REQUEST,
     payload: {

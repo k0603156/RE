@@ -4,8 +4,9 @@ import { Link } from "react-router-dom";
 import { RootStateType } from "@Store/modules/index";
 import { FiList } from "@Client/Components/molecules/Icon/fi";
 import { PostBox, Jumbo } from "@Client/Components/organisms";
-import { KeywordBox } from "@Client/Components/molecules";
 import { boardSelectAction } from "@Store/modules/Main/actions";
+import { KeywordBox, List } from "@Client/Components/molecules";
+
 const Container = styled.div`
   display: flex;
   overflow: auto;
@@ -63,8 +64,8 @@ const SlideBox = styled.div`
 interface IProps {
   boardSelectAction: typeof boardSelectAction;
   selectedBoard: number;
-  boardlist: RootStateType["base"]["boardlist"];
-  postlist: RootStateType["base"]["postlist"];
+  boardlist: RootStateType["main"]["boardlist"];
+  postlist: RootStateType["main"]["postlist"];
 }
 export default (props: IProps) => {
   const selectedBoardName = () =>

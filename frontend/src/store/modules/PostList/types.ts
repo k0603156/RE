@@ -11,6 +11,7 @@ export interface IPostlistBrowseRequest {
 
 export type IPostlistAction = IPostlistBrowseRequest;
 
-export interface IPostlistState {
-  postlist: Array<any>;
+export interface InitialState {
+  count: number;
+  rows: Array<any>;
 }

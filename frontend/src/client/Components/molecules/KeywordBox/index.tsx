@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { RootStateType } from "@Store/modules/index";
 import { boardSelectAction } from "@Store/modules/Main/actions";
+import List from "../List";
+
 const Box = styled.div`
   margin: 3rem auto;
 `;
@@ -25,23 +27,25 @@ const Li = styled.li`
 `;
 interface IProps {
   boardSelectAction: typeof boardSelectAction;
-  boardlist: RootStateType["base"]["boardlist"];
+  boardlist: RootStateType["main"]["boardlist"];
 }
 
 export default (props: IProps) => {
   const onClick = (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
-    props.boardSelectAction(e.currentTarget.dataset.keyid!);
+    props.boardSelectAction(parseInt(e.currentTarget.dataset.keyid!));
   };
 
   return (
     <Box>
-      <Ul>
-        {props.boardlist.map((board: { id: string; name: string }) => (
-          <Li key={board.id} data-keyid={board.id} onClick={onClick}>
-            {board.name}
+      <List<RootStateType["main"]["boardlist"]>
+        wrapper={Ul}
+        dataList={props.boardlist}
+        temp={(data) => (
+          <Li key={data.id} data-keyid={data.id} onClick={onClick}>
+            {data.name}
           </Li>
-        ))}
-      </Ul>
+        )}
+      />
     </Box>
   );
 };
