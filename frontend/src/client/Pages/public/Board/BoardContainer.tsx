@@ -17,15 +17,11 @@ const BoardContainer = withRouter((props: IProps) => {
 
   React.useEffect(() => {
     props.postlistBrowseAction(currentPage);
-    console.log(props.postlist);
-    console.log(currentPage);
-    console.log(props.match.params.boardName);
   }, [props.match.params.boardName, currentPage]);
   const handlePage = (e: any) => {
     e.persist();
     setCurrentPage(parseInt(e.currentTarget.dataset.page));
   };
-  console.log(props.postlist.count / POST_PER_PAGE);
   return (
     <BoardPresenter
       handlePage={handlePage}

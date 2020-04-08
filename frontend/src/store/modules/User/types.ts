@@ -54,3 +54,9 @@ export type IUserAction =
   | IUserCreateRequest
   | IUserUpdateRequest
   | IUserDeleteRequest;
+
+export interface InitialState {
+  id: number;
+  userName: string;
+  posts: Array<any>;
+}

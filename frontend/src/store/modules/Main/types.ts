@@ -12,7 +12,7 @@ export const POSTLIST_BROWSE_FAILURE = "main/POSTLIST_BROWSE_FAILURE";
 export interface IBoardSelectTrigger {
   type: typeof BOARD_SELECT_TRIGGER;
   payload: {
-    boardId: string;
+    boardId: number;
   };
 }
 export interface IBoardlistBrowseRequest {
@@ -21,7 +21,7 @@ export interface IBoardlistBrowseRequest {
 export interface IPostlistBrowseRequest {
   type: typeof POSTLIST_BROWSE_REQUEST;
   payload: {
-    boardId: string;
+    boardId: number;
   };
 }
 export type IMainAction =
@@ -29,8 +29,8 @@ export type IMainAction =
   | IBoardlistBrowseRequest
   | IPostlistBrowseRequest;
 
-export interface IMainState {
-  selectedBoard: string;
+export interface InitialState {
+  selectedBoard: number;
   boardlist: Array<{ id: string; name: string }>;
   postlist: Array<any>;
 }

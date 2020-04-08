@@ -5,23 +5,23 @@ const LOADING_FINISH = "loading/LOADING_FINISH";
 
 export const loadingStart = createAction(
   LOADING_START,
-  requestType => requestType
+  (requestType) => requestType
 )();
 
 export const loadingFinish = createAction(
   LOADING_FINISH,
-  requestType => requestType
+  (requestType) => requestType
 )();
 
-const initialState = {};
+const initialState: any = {};
 
 export default createReducer(initialState, {
-  [LOADING_START]: (state: any, action: any) => ({
+  [LOADING_START]: (state, action) => ({
     ...state,
-    [action.payload]: true
+    [action.payload]: true,
   }),
-  [LOADING_FINISH]: (state: any, action: any) => ({
+  [LOADING_FINISH]: (state, action) => ({
     ...state,
-    [action.payload]: false
-  })
+    [action.payload]: false,
+  }),
 });
