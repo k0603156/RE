@@ -44,5 +44,5 @@ module.exports = {
   ValidationError,
   AuthenticationError,
   AuthorizationError,
-  NotFoundError
+  NotFoundError,
 };

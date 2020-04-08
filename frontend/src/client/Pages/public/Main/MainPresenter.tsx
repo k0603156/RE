@@ -79,6 +79,7 @@ export default (props: IProps) => {
         </div>
       )
     );
+
   return (
     <>
       <SlideBox>
@@ -124,7 +125,7 @@ export default (props: IProps) => {
       <Container>
         <VT>
           <Jumbo size="sm" verticalFrom={"tablet"}>
-            당신의 열정에 맡기고
+            블로그 서비스
           </Jumbo>
           <Article>
             <Title>

@@ -20,7 +20,7 @@ if (process.env.NODE_ENV !== "production") {
 }
 app.use(express.static(STATIC_PATH));
 
-middleWares.map(mw => app.use(mw));
+middleWares.map((mw) => app.use(mw));
 routes(app);
 app.get("*", (req, res) => {
   res.sendFile(STATIC_ENTRY_POINT);
