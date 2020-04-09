@@ -7,8 +7,8 @@ import UMenu from "./UserMenu";
 const Title = styled.div`
   /* Symphonia */
   left: 0;
-  margin-left: 10vw;
-  ${props => props.theme.headerAttr}
+  margin-left: ${(props) => props.theme.rootSideOffset};
+  ${(props) => props.theme.headerAttr}
   font-family: Montserrat Alternates;
   font-weight: 300;
   letter-spacing: 7px;
@@ -17,10 +17,10 @@ const Title = styled.div`
 const UserBox = styled.div`
   /* signIn */
   right: 0;
-  margin-right: 10vw;
+  margin-right: ${(props) => props.theme.rootSideOffset};
+  ${(props) => props.theme.headerAttr}
   min-width: 100px;
   text-align: right;
-  ${props => props.theme.headerAttr}
   ${Mx_Width(`{
     width: 100px;
     overflow: hidden;

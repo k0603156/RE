@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { RootStateType } from "@Store/modules/index";
 import { boardSelectAction } from "@Store/modules/Main/actions";
-import List from "../List";
+import List from "@Client/Components/atoms/List";
 
 const Box = styled.div`
   margin: 3rem auto;
@@ -11,7 +11,8 @@ const Ul = styled.ul`
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  width: 320px;
+  width: 100%;
+  max-width: 640px;
   margin: auto;
 `;
 const Li = styled.li`

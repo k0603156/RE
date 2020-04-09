@@ -13,6 +13,6 @@ function* postlistBrowse() {
   yield takeLatest(POSTLIST_BROWSE_REQUEST, postlistBrowseSaga);
 }
 
-export default function*() {
+export default function* () {
   yield all([fork(postlistBrowse)]);
 }

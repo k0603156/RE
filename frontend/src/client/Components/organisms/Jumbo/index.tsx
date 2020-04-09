@@ -40,12 +40,10 @@ const Box = styled.div`
     }
   }
 `;
-const Jumbo = (props: IProps) => {
+export default (props: IProps) => {
   return (
     <Box {...props}>
       <span>{props.children}</span>
     </Box>
   );
 };
-
-export default Jumbo;

@@ -6,6 +6,6 @@ import { POSTLIST_BROWSE_REQUEST, IPostlistAction } from "./types";
 export function postlistBrowseAction(page: number): IPostlistAction {
   return {
     type: POSTLIST_BROWSE_REQUEST,
-    payload: { page }
+    payload: { page },
   };
 }

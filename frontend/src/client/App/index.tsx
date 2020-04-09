@@ -10,7 +10,7 @@ import {
   PrivateRoutes,
   PublicRoutes,
   SessionRoutes,
-  AdminRoutes
+  AdminRoutes,
 } from "@Client/Routes";
 import Theme from "@Client//Styles/Theme";
 import GlobalStyles from "@Client//Styles/Global";
@@ -19,7 +19,7 @@ import { RootStateType } from "@Store/modules";
 
 const Wrapper = styled.div`
   position: relative;
-  padding: 0 10vw;
+  padding: ${(props) => "0 " + props.theme.rootSideOffset};
   width: 100%;
   flex: 1;
   overflow-y: auto;
@@ -36,7 +36,7 @@ const MSGBox = styled.div`
   font-weight: 800;
   border-radius: 3px;
   box-shadow: 1px 1px 4px gray;
-  background-color: ${props =>
+  background-color: ${(props) =>
     props.id === "ERROR" ? "rgba(100, 0, 0, 0.5)" : "rgba(0, 100, 0, 0.5)"};
 `;
 
@@ -55,7 +55,7 @@ function App(props: { auth: IAuthState; msg: IMsgState }) {
                 exact
                 path={path}
                 key={key}
-                render={route =>
+                render={(route) =>
                   props.auth.isLogged ? (
                     <PrivateLayout component={component} />
                   ) : (
@@ -72,7 +72,7 @@ function App(props: { auth: IAuthState; msg: IMsgState }) {
                 exact
                 path={path}
                 key={key}
-                render={route =>
+                render={(route) =>
                   props.auth.isLogged ? (
                     <PrivateLayout component={component} />
                   ) : (
@@ -90,7 +90,7 @@ function App(props: { auth: IAuthState; msg: IMsgState }) {
                 exact
                 path={path}
                 key={key}
-                render={route =>
+                render={(route) =>
                   props.auth.isLogged ? (
                     <Redirect to={PublicRoutes.Main.path} />
                   ) : (
@@ -108,7 +108,7 @@ function App(props: { auth: IAuthState; msg: IMsgState }) {
                 exact
                 path={path}
                 key={key}
-                render={route =>
+                render={(route) =>
                   props.auth.isLogged && props.auth.isAdmin ? (
                     <PrivateLayout component={component} />
                   ) : (
@@ -131,5 +131,5 @@ function App(props: { auth: IAuthState; msg: IMsgState }) {
 
 export default connect(({ auth, msg }: RootStateType) => ({
   auth,
-  msg
+  msg,
 }))(App);

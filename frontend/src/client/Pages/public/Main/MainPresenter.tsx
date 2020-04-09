@@ -2,11 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { RootStateType } from "@Store/modules/index";
-import { FiList } from "@Client/Components/molecules/Icon/fi";
+import { Icon } from "@Client/Components/atoms";
 import { PostBox, Jumbo } from "@Client/Components/organisms";
 import { boardSelectAction } from "@Store/modules/Main/actions";
-import { KeywordBox, List } from "@Client/Components/molecules";
-
+import { KeywordBox } from "@Client/Components/molecules";
 const Container = styled.div`
   display: flex;
   overflow: auto;
@@ -94,7 +93,7 @@ export default (props: IProps) => {
         boardSelectAction={props.boardSelectAction}
       />
 
-      <Container>
+      {/* <Container>
         <VT>
           <Jumbo size="md" verticalFrom={"tablet"}>
             Symphonia
@@ -103,7 +102,7 @@ export default (props: IProps) => {
             <Title>
               {selectedBoardName()}
               <Link to="/board/2">
-                <FiList />
+                <Icon.Fi.FiList />
               </Link>
             </Title>
 
@@ -132,7 +131,7 @@ export default (props: IProps) => {
             <Title>
               디자이너 게시글
               <Link to="/board/1">
-                <FiList />
+                <Icon.Fi.FiList />
               </Link>
             </Title>
 
@@ -146,7 +145,7 @@ export default (props: IProps) => {
             <Title>
               게시글
               <Link to="/board/2">
-                <FiList />
+                <Icon.Fi.FiList />
               </Link>
             </Title>
 
@@ -159,7 +158,7 @@ export default (props: IProps) => {
             <br /> 기록하세요
           </Jumbo>
         </VT>
-      </Container>
+      </Container> */}
     </>
   );
 };
