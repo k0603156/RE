@@ -1,6 +1,6 @@
 {
   "name": "traveler-client",
-  "main": "src/index.tsx",
+  "main": "src/client/index.tsx",
   "version": "0.1.0",
   "description": "Traveler-service-client",
   "author": {
@@ -17,7 +17,9 @@
     "build:prod:client": "node scripts/build.prod.client.js",
     "build:prod:server": "node scripts/build.prod.server.js",
     "start:server": "node dist/server.js",
-    "dev": "node scripts/dev.js"
+    "dev": "node scripts/dev.js",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "dependencies": {
     "@babel/core": "7.7.4",
@@ -45,6 +47,11 @@
     "webpack-node-externals": "^1.7.2"
   },
   "devDependencies": {
+    "@storybook/addon-actions": "^5.3.18",
+    "@storybook/addon-links": "^5.3.18",
+    "@storybook/addons": "^5.3.18",
+    "@storybook/preset-typescript": "^3.0.0",
+    "@storybook/react": "^5.3.18",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
@@ -103,6 +110,7 @@
     "postcss-safe-parser": "4.0.1",
     "react-app-polyfill": "^1.0.5",
     "react-dev-utils": "^10.0.0",
+    "react-docgen-typescript-loader": "^3.7.2",
     "react-test-renderer": "^16.12.0",
     "resolve": "1.12.2",
     "resolve-url-loader": "3.1.1",
