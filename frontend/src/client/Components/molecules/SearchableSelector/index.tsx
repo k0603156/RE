@@ -60,14 +60,14 @@ const Option = styled.li`
     background: rgba(200, 200, 200, 0.7);
   }
 `;
-const SearchableSelect = ({
+export default ({
   className,
   id,
   entry,
   value,
   defaultValue,
   onChange,
-  options
+  options,
 }: IProps) => {
   const box = useRef(document.createElement("div"));
   const searchInput = useRef(document.createElement("input"));
@@ -97,7 +97,7 @@ const SearchableSelect = ({
 
   const onOptionClick = (e: any) => {
     const event = {
-      ...e
+      ...e,
     };
     setSelectedOption(event.target.dataset.displayValue);
     onChange(event);
@@ -105,8 +105,8 @@ const SearchableSelect = ({
   };
 
   const searchedArray = options
-    .filter(option => option.name.includes(searchForm))
-    .map(option => (
+    .filter((option) => option.name.includes(searchForm))
+    .map((option) => (
       <Option
         key={option.key}
         value={option.key}
@@ -133,5 +133,3 @@ const SearchableSelect = ({
     </Box>
   );
 };
-
-export default SearchableSelect;

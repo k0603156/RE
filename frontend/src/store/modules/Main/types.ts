@@ -32,5 +32,11 @@ export type IMainAction =
 export interface InitialState {
   selectedBoard: number;
   boardlist: Array<{ id: string; name: string }>;
-  postlist: Array<any>;
+  postlist: Array<{
+    id: number;
+    title: string;
+    readcount: number;
+    updatedAt: string;
+    user: { userName: string };
+  }>;
 }

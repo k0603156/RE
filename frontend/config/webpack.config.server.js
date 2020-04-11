@@ -1,3 +1,5 @@
+/* eslint-disable strict */
+"use strict";
 const nodeExternals = require("webpack-node-externals");
 const paths = require("./paths");
 const webpack = require("webpack");

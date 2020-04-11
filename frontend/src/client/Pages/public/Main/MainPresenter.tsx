@@ -5,7 +5,7 @@ import { RootStateType } from "@Store/modules/index";
 import { Icon } from "@Client/Components/atoms";
 import { PostBox, Jumbo } from "@Client/Components/organisms";
 import { boardSelectAction } from "@Store/modules/Main/actions";
-import { KeywordBox } from "@Client/Components/molecules";
+import { KeywordBox, Carousel } from "@Client/Components/molecules";
 const Container = styled.div`
   display: flex;
   overflow: auto;
@@ -70,15 +70,6 @@ export default (props: IProps) => {
   const selectedBoardName = () =>
     props.boardlist.length != 0 &&
     props.boardlist[props.selectedBoard - 1].name;
-  const selectedBoardPosts = () =>
-    props.postlist.map(
-      (post: { id: string; title: string; updatedAt: string }) => (
-        <div key={post.id}>
-          <h2>{post.title}</h2>
-          <div>{post.updatedAt}</div>
-        </div>
-      )
-    );
 
   return (
     <>
@@ -86,7 +77,9 @@ export default (props: IProps) => {
         <Jumbo size="md" verticalFrom={"tablet"}>
           {selectedBoardName()}
         </Jumbo>
-        <Article>{selectedBoardPosts()}</Article>
+        <Article>
+          <Carousel dataList={props.postlist} />
+        </Article>
       </SlideBox>
       <KeywordBox
         boardlist={props.boardlist}
