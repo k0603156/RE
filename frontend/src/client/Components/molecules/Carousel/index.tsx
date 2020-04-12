@@ -7,25 +7,29 @@ interface IProps {
 const Carousel = styled((props: IProps) => {
   return <div className={props.className}>{props.children}</div>;
 })`
-  width: 80%;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
   overflow-x: hidden;
 `;
 
 const CarouselWrapper = styled((props) => {
   return <ul className={props.className}>{props.children}</ul>;
 })`
-  height: 200px;
-  width: auto;
   display: flex;
+  flex: 1;
   flex-direction: column;
   flex-wrap: wrap;
+  height: 200px;
+  width: ${(props) => props.length * 80 + "%"};
   padding: 0;
   margin-left: ${(props) => props.currentPage * -80 + "%"};
   margin-right: ${(props) => props.currentPage * 80 + "%"};
   transition-duration: 1s;
 `;
 
-const CarouselItem = styled((props, key) => {
+const CarouselItem = styled(({ length, key, ...props }) => {
   return (
     <li className={props.className} key={props.id}>
       <h2>{props.title}</h2>
@@ -34,11 +38,11 @@ const CarouselItem = styled((props, key) => {
       <div> {props.body}</div>
     </li>
   );
-})({
-  height: "inherit",
-  width: "80%",
-  listStyle: "none",
-});
+})`
+  height: 100%;
+  width: ${(length) => length * 80 + "%"};
+  list-style: none;
+`;
 
 const CarouselFooter = styled(
   <T extends Array<any>>(props: {
@@ -61,6 +65,7 @@ const CarouselFooter = styled(
     </ul>
   )
 )`
+  height: 50px;
   display: flex;
   width: 20%;
   margin: auto;
@@ -83,9 +88,9 @@ export default <T extends Array<any>>(props: { dataList: T }) => {
   };
   return (
     <Carousel>
-      <CarouselWrapper currentPage={current}>
+      <CarouselWrapper currentPage={current} length={props.dataList.length}>
         {props.dataList.map((data, index) => (
-          <CarouselItem key={index} {...data} />
+          <CarouselItem key={index} {...data} length={props.dataList.length} />
         ))}
       </CarouselWrapper>
       <CarouselFooter

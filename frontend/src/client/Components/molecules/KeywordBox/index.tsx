@@ -5,7 +5,7 @@ import { boardSelectAction } from "@Store/modules/Main/actions";
 import List from "@Client/Components/atoms/List";
 
 const Box = styled.div`
-  margin: 3rem auto;
+  margin: 1rem auto;
 `;
 const Ul = styled.ul`
   display: flex;
