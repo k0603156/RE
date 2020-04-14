@@ -5,7 +5,11 @@ import { RootStateType } from "@Store/modules/index";
 import { Icon } from "@Client/Components/atoms";
 import { PostBox, Jumbo } from "@Client/Components/organisms";
 import { boardSelectAction } from "@Store/modules/Main/actions";
-import { KeywordBox, Carousel } from "@Client/Components/molecules";
+import {
+  KeywordBox,
+  Carousel,
+  CarouselItem,
+} from "@Client/Components/molecules";
 const Container = styled.div`
   display: flex;
   overflow: auto;
@@ -79,7 +83,16 @@ export default (props: IProps) => {
           {selectedBoardName()}
         </Jumbo>
         <Article>
-          <Carousel dataList={props.postlist} />
+          <Carousel
+            pageDataList={props.postlist}
+            CarouselItem={(data, index) => (
+              <CarouselItem
+                key={index}
+                length={props.postlist.length}
+                data={data}
+              />
+            )}
+          />
         </Article>
       </SlideBox>
       <KeywordBox

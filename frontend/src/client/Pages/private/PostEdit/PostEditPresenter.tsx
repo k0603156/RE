@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Node } from "slate";
-import { Editor } from "@Client/Components/organisms";
+import { Editor, HashtagInput } from "@Client/Components/molecules";
 import { RootStateType } from "@Store/modules";
 
 const Input = styled.input`
@@ -35,13 +35,13 @@ export default (props: {
       <form onSubmit={props.onSubmit}>
         <Input
           placeholder="제목을 입력하세요"
-          onChange={e => props.onChange("title", e.target.value)}
+          onChange={(e) => props.onChange("title", e.target.value)}
           value={props.value.title}
         />
         <label>글 분류</label>
         <select
           value={props.value.boardId}
-          onChange={e => props.onChange("boardId", e.target.value)}
+          onChange={(e) => props.onChange("boardId", e.target.value)}
         >
           {props.initData.boardlist.map(
             (board: { id: string; name: string }) => (
@@ -52,7 +52,7 @@ export default (props: {
           )}
         </select>
         <Editor
-          onChange={value => props.onChange("content", value)}
+          onChange={(value) => props.onChange("content", value)}
           value={props.value.content}
         />
         <Button type="submit">글쓰기</Button>
