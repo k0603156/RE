@@ -4,6 +4,7 @@ interface IProps {
   className?: string;
   tags: Array<string>;
   setTags: (value: string) => void;
+  maxTags: number;
 }
 export default styled((props: IProps) => {
   const [state, setState] = useState({ input: "", error: false, message: "" });
@@ -20,7 +21,7 @@ export default styled((props: IProps) => {
             message: "이미 추가된 태그입니다.",
           });
           break;
-        case props.tags.length === 5:
+        case props.tags.length === props.maxTags:
           setState({
             ...state,
             error: true,

@@ -15,7 +15,7 @@ export const HashtagInput = () => {
   const setTagFunc = (value) => {
     setTags([...tags, value]);
   };
-  return <Component tags={tags} setTags={setTagFunc} />;
+  return <Component tags={tags} setTags={setTagFunc} maxTags={5} />;
 };
 HashtagInput.story = {
   name: "default",
