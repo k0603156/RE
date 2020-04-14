@@ -1,5 +1,5 @@
 /** @tsx tsx */
-import React from "react";
+import React, { useState } from "react";
 import { action } from "@storybook/addon-actions";
 import Component from "./index";
 
@@ -11,7 +11,11 @@ export default {
 };
 
 export const HashtagInput = () => {
-  return <Component />;
+  const [tags, setTags] = useState(["tag"]);
+  const setTagFunc = (value) => {
+    setTags([...tags, value]);
+  };
+  return <Component tags={tags} setTags={setTagFunc} />;
 };
 HashtagInput.story = {
   name: "default",
