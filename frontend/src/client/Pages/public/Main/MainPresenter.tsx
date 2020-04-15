@@ -67,20 +67,23 @@ const SlideBox = styled.div`
 `;
 interface IProps {
   boardSelectAction: typeof boardSelectAction;
-  selectedBoard: number;
+  currentBId: number;
   boardlist: RootStateType["main"]["boardlist"];
   postlist: RootStateType["main"]["postlist"];
 }
 export default (props: IProps) => {
-  const selectedBoardName = () =>
-    props.boardlist.length != 0 &&
-    props.boardlist[props.selectedBoard - 1].name;
-
+  const selectedBoard = () =>
+    props.boardlist.length !== 0
+      ? props.boardlist[props.currentBId - 1]
+      : {
+          id: 0,
+          name: "",
+        };
   return (
     <>
       <SlideBox>
         <Jumbo size="md" verticalFrom={"tablet"}>
-          {selectedBoardName()}
+          {selectedBoard().name}
         </Jumbo>
         <Article>
           <Carousel
@@ -100,20 +103,18 @@ export default (props: IProps) => {
         boardSelectAction={props.boardSelectAction}
       />
 
-      {/* <Container>
+      <Container>
         <VT>
           <Jumbo size="md" verticalFrom={"tablet"}>
             Symphonia
           </Jumbo>
           <Article>
             <Title>
-              {selectedBoardName()}
-              <Link to="/board/2">
+              {selectedBoard().name}
+              <Link to={"/board/" + selectedBoard().id}>
                 <Icon.Fi.FiList />
               </Link>
             </Title>
-
-            {selectedBoardPosts()}
           </Article>
         </VT>
         <VT>
@@ -128,7 +129,7 @@ export default (props: IProps) => {
           </Jumbo>
         </VT>
       </Container>
-
+      {/*
       <Container>
         <VT>
           <Jumbo size="sm" verticalFrom={"tablet"}>

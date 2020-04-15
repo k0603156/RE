@@ -22,7 +22,7 @@ const MainContainer = (props: IProps) => {
   return (
     <MainPresenter
       boardSelectAction={props.boardSelectAction}
-      selectedBoard={props.main.selectedBoard}
+      currentBId={props.main.selectedBoard}
       boardlist={props.main.boardlist}
       postlist={props.main.postlist}
     />
