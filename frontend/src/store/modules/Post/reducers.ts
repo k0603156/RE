@@ -1,14 +1,13 @@
 import { createReducer } from "typesafe-actions";
 import {
-  POST_FILLIN_TRIGGER,
   POST_BROWSE_SUCCESS,
   POST_CREATE_SUCCESS,
   POST_DELETE_SUCCESS,
   POST_UPDATE_SUCCESS,
-  IPostState,
+  InitialState,
 } from "./types";
 
-const initialState: IPostState = {
+const initialState: InitialState = {
   id: "",
   title: "",
   boardId: "1",
@@ -24,10 +23,6 @@ const initialState: IPostState = {
 };
 
 export default createReducer(initialState, {
-  // 게시글 작성 액션
-  [POST_FILLIN_TRIGGER]: (state, action) => {
-    return { ...state, [action.payload.name]: action.payload.data };
-  },
   //게시글 읽기 성공
   [POST_BROWSE_SUCCESS]: (state, action) => {
     return { ...state, ...action.payload.response };

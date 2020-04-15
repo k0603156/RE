@@ -11,7 +11,7 @@ export default {
 };
 
 export const HashtagInput = () => {
-  const [tags, setTags] = useState(["tag"]);
+  const [tags, setTags] = useState([{ name: "tag" }]);
   const setTagFunc = (value) => {
     setTags([...tags, value]);
   };

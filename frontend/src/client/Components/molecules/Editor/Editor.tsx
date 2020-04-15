@@ -42,7 +42,7 @@ const MarkButton = (format: any) => {
     <button
       type="button"
       disabled={isMarkActive(editor, format)}
-      onMouseDown={event => {
+      onMouseDown={(event) => {
         event.preventDefault();
       }}
     >
@@ -59,8 +59,8 @@ const Editor = (props: IProps) => {
         <MarkButton format="bold" />
       </Toolbar>
       <StyledEditable
-        onKeyDown={event => {
-          console.log(event.key);
+        onKeyDown={(event) => {
+          // console.log(event.key);
         }}
       />
     </Slate>

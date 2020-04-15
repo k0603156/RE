@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Node } from "slate";
 import { Editor, HashtagInput } from "@Client/Components/molecules";
 import { RootStateType } from "@Store/modules";
+import { IPostCreatePayload } from "@Store/modules/Post/types";
 
 const Input = styled.input`
   width: 100%;
@@ -10,7 +11,7 @@ const Input = styled.input`
   line-height: 1.5rem;
   margin-bottom: 0.5rem;
   border: 1px solid lightgray;
-  box-shadow: inset 1px 1px 2px gray;
+  box-shadow: inset 1px 1px 2px lightgray;
 `;
 const Button = styled.button`
   padding: 0.3rem 0.7rem;
@@ -19,44 +20,53 @@ const Button = styled.button`
   border-left: 1px solid lightgray;
   outline: none;
   float: right;
+  background: white;
   & :hover {
   }
 `;
 export default (props: {
   onSubmit: (event: React.ChangeEvent<any>) => void;
-  onChange: (name: string, value: Array<Node> | string) => void;
-  value: { title: string; boardId: string; content: Array<Node> };
+  onChange: (
+    key: keyof IPostCreatePayload,
+    value: Array<Node> | string
+  ) => void;
+  postData: IPostCreatePayload;
   initData: {
     boardlist: RootStateType["main"]["boardlist"];
   };
 }) => {
   return (
     <div>
-      <form onSubmit={props.onSubmit}>
-        <Input
-          placeholder="제목을 입력하세요"
-          onChange={(e) => props.onChange("title", e.target.value)}
-          value={props.value.title}
-        />
-        <label>글 분류</label>
-        <select
-          value={props.value.boardId}
-          onChange={(e) => props.onChange("boardId", e.target.value)}
-        >
-          {props.initData.boardlist.map(
-            (board: { id: string; name: string }) => (
-              <option key={board.id} value={board.id}>
-                {board.name}
-              </option>
-            )
-          )}
-        </select>
-        <Editor
-          onChange={(value) => props.onChange("content", value)}
-          value={props.value.content}
-        />
-        <Button type="submit">글쓰기</Button>
-      </form>
+      <Input
+        placeholder="제목을 입력하세요"
+        onChange={(e) => props.onChange("title", e.target.value)}
+        value={props.postData.title}
+      />
+
+      <label>글 분류</label>
+      <select
+        value={props.postData.boardId}
+        onChange={(e) => props.onChange("boardId", e.target.value)}
+      >
+        {props.initData.boardlist.map((board: { id: string; name: string }) => (
+          <option key={board.id} value={board.id}>
+            {board.name}
+          </option>
+        ))}
+      </select>
+      <HashtagInput
+        tags={props.postData.hashtags}
+        setTags={(value) => props.onChange("hashtags", value)}
+        maxTags={5}
+      />
+      <Editor
+        onChange={(value) => props.onChange("content", value)}
+        value={props.postData.content}
+      />
+
+      <Button type="button" onClick={props.onSubmit}>
+        글쓰기
+      </Button>
     </div>
   );
 };

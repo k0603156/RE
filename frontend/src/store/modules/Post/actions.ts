@@ -1,25 +1,14 @@
 import {
-  POST_FILLIN_TRIGGER,
   POST_BROWSE_REQUEST,
   POST_CREATE_REQUEST,
   POST_DELETE_REQUEST,
   POST_UPDATE_REQUEST,
   TPostAction,
-  IPostState,
+  IPostCreatePayload,
 } from "./types";
 import { Node } from "slate";
 //** CREATE ACTION **//
 
-//게시글 작성 액션
-export function postFillinAction(
-  name: string,
-  data: Array<Node> | string
-): TPostAction {
-  return {
-    type: POST_FILLIN_TRIGGER,
-    payload: { name, data },
-  };
-}
 //게시글 읽기 요청
 export function postBrowseAction(pid: string): TPostAction {
   return {
@@ -28,9 +17,7 @@ export function postBrowseAction(pid: string): TPostAction {
   };
 }
 //게시글 생성 요청
-export function postCreateAction(
-  payload: Omit<IPostState, "id" | "updatedAt" | "user">
-): TPostAction {
+export function postCreateAction(payload: IPostCreatePayload): TPostAction {
   return {
     type: POST_CREATE_REQUEST,
     payload,

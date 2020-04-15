@@ -1,7 +1,5 @@
 import { Node } from "slate";
 
-export const POST_FILLIN_TRIGGER = "post/POST_FILLIN_TRIGGER";
-
 export const POST_BROWSE_REQUEST = "post/POST_BROWSE_REQUEST";
 export const POST_BROWSE_SUCCESS = "post/POST_BROWSE_SUCCESS";
 export const POST_BROWSE_FAILURE = "post/POST_BROWSE_FAILURE";
@@ -18,14 +16,6 @@ export const POST_UPDATE_REQUEST = "post/POST_UPDATE_REQUEST";
 export const POST_UPDATE_SUCCESS = "post/POST_UPDATE_SUCCESS";
 export const POST_UPDATE_FAILURE = "post/POST_UPDATE_FAILURE";
 
-//게시글 작성 액션
-export interface IPostFillinTrigger {
-  type: typeof POST_FILLIN_TRIGGER;
-  payload: {
-    name: string;
-    data: Array<Node> | string;
-  };
-}
 //게시글 읽기 요청
 export interface IPostBrowseRequest {
   type: typeof POST_BROWSE_REQUEST;
@@ -36,7 +26,7 @@ export interface IPostBrowseRequest {
 //게시글 생성 요청
 export interface IPostCreateRequest {
   type: typeof POST_CREATE_REQUEST;
-  payload: Omit<IPostState, "id" | "updatedAt" | "user">;
+  payload: IPostCreatePayload;
 }
 //게시글 삭제 요청
 export interface IPostDeleteRequest {
@@ -48,13 +38,12 @@ export interface IPostUpdateRequest {
 }
 
 export type TPostAction =
-  | IPostFillinTrigger
   | IPostBrowseRequest
   | IPostCreateRequest
   | IPostDeleteRequest
   | IPostUpdateRequest;
 
-export interface IPostState {
+export interface InitialState {
   id: string;
   title: string;
   boardId: string;
@@ -63,3 +52,8 @@ export interface IPostState {
   updatedAt: string;
   user: { userName: string };
 }
+
+export type IPostCreatePayload = Omit<
+  InitialState,
+  "id" | "updatedAt" | "user"
+>;

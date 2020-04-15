@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 interface IProps {
   className?: string;
-  tags: Array<string>;
+  tags: Array<{ name: string }>;
   setTags: (value: string) => void;
   maxTags: number;
 }
@@ -14,7 +14,7 @@ export default styled((props: IProps) => {
   const onKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       switch (true) {
-        case props.tags.includes(e.currentTarget.value):
+        case props.tags.includes({ name: e.currentTarget.value }):
           setState({
             ...state,
             error: true,
@@ -40,7 +40,7 @@ export default styled((props: IProps) => {
   return (
     <div className={props.className}>
       {props.tags.map((tag) => (
-        <span key={tag}>#{tag}</span>
+        <span key={tag.name}>#{tag.name}</span>
       ))}
       <input
         placeholder={"태그입력"}

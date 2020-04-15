@@ -1,6 +1,5 @@
 import Axios from "axios";
-import { IPostState } from "@Store/modules/Post/types";
-import { Node } from "slate";
+import { IPostCreatePayload } from "@Store/modules/Post/types";
 // Api url
 const API_ROOT =
   process.env.NODE_ENV !== "production"
@@ -15,7 +14,7 @@ const req = (
     | {
         pid?: number;
       }
-    | Omit<IPostState, "id" | "updatedAt" | "user">
+    | IPostCreatePayload
 ) => {
   const token = localStorage.getItem("token");
   return Axios({
@@ -24,9 +23,9 @@ const req = (
     data,
     headers: {
       common: {
-        Authorization: token ? `Bearer ${token}` : null
-      }
-    }
+        Authorization: token ? `Bearer ${token}` : null,
+      },
+    },
   });
 };
 
@@ -40,12 +39,12 @@ export default {
     return req("get", `/list/?page=${payload.page}`);
   },
   //게시글 생성 요청
-  post_create(payload: Omit<IPostState, "id" | "updatedAt" | "user">) {
+  post_create(payload: IPostCreatePayload) {
     return req("post", "/", {
       title: payload.title,
       boardId: payload.boardId,
       content: payload.content,
-      hashtags: payload.hashtags
+      hashtags: payload.hashtags,
     });
   },
   //게시글 삭제 요청
@@ -55,5 +54,5 @@ export default {
   //게시글 수정 요청
   post_update(payload: { pid: number; contents: Array<any> }) {
     return req("put", "/", payload);
-  }
+  },
 };

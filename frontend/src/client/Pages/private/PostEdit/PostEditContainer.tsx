@@ -1,52 +1,78 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Node } from "slate";
 import { connect } from "react-redux";
 import { debounce } from "lodash";
-import {
-  postFillinAction,
-  postCreateAction
-} from "@Store/modules/Post/actions";
+import { postCreateAction } from "@Store/modules/Post/actions";
 import { boardlistBrowseAction } from "@Store/modules/Main/actions";
 import Presenter from "./PostEditPresenter";
 import { RootStateType } from "@Store/modules";
+import { IPostCreatePayload } from "@Store/modules/Post/types";
+
 export interface IProps {
   main: RootStateType["main"];
-  post: RootStateType["post"];
-  postFillinAction: typeof postFillinAction;
   postCreateAction: typeof postCreateAction;
   boardlistBrowseAction: typeof boardlistBrowseAction;
 }
 const Container = (props: IProps) => {
-  const _debounce = debounce(
-    (f: (...any: (string | number)[]) => void, ...arr: (string | number)[]) =>
-      f(...arr),
-    50
-  );
+  const [postState, setPostState] = useState<IPostCreatePayload>({
+    title: "",
+    boardId: "1",
+    content: [
+      {
+        type: "paragraph",
+        children: [{ text: "" }],
+      },
+    ],
+    hashtags: [{ name: "tag2" }],
+  });
+
   useEffect(() => {
     props.main.boardlist.length == 0 && props.boardlistBrowseAction();
     return () => {};
   }, []);
+
   const onSubmit = (event: React.ChangeEvent<any>) => {
     event.preventDefault();
-    props.postCreateAction(props.post);
+    props.postCreateAction(postState);
   };
-  const onChange = (name: string, value: string | Array<Node>) => {
-    props.postFillinAction(name, value);
+
+  const onChange = (
+    key: keyof IPostCreatePayload,
+    value: Array<Node> | string
+  ) => {
+    switch (key) {
+      case "content":
+        setPostState({ ...postState, content: [...(value as Array<Node>)] });
+        break;
+      case "hashtags":
+        setPostState({
+          ...postState,
+          hashtags: [...postState.hashtags, { name: value as string }],
+        });
+        break;
+      default:
+        setPostState({ ...postState, [key]: value });
+    }
   };
   return (
     <Presenter
       onSubmit={onSubmit}
       onChange={onChange}
-      value={props.post}
+      postData={postState}
       initData={{ boardlist: props.main.boardlist }}
     />
   );
 };
 
 export default connect(
-  ({ main, post, loading }: RootStateType) => ({
+  ({ main, loading }: RootStateType) => ({
     main,
-    post
   }),
-  { boardlistBrowseAction, postFillinAction, postCreateAction }
+  { boardlistBrowseAction, postCreateAction }
 )(Container);
+
+// const _debounce = debounce(
+//   (f: (...any: (string | number)[]) => void, ...arr: (string | number)[]) =>
+//     f(...arr),
+//   50
+// );
