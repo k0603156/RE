@@ -39,7 +39,7 @@ const Footer = styled(
     &.active {
       font-weight: 600;
     }
-    transition-duration: 1s;
+    transition: transform 0.3s ease 0s;
   }
 `;
 
@@ -62,7 +62,7 @@ const Body = styled(
       return -100 * (currentPage / pageDataList.length) + "%";
     }}
   );
-  transition-duration: 1s;
+  transition: transform 0.3s ease 0s;
 `;
 
 const Carousel = styled(

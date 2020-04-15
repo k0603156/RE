@@ -55,9 +55,9 @@ const Editor = (props: IProps) => {
   const editor = useMemo(() => withReact(createEditor()), []);
   return (
     <Slate editor={editor} value={props.value} onChange={props.onChange}>
-      <Toolbar>
+      {/* <Toolbar>
         <MarkButton format="bold" />
-      </Toolbar>
+      </Toolbar> */}
       <StyledEditable
         onKeyDown={(event) => {
           // console.log(event.key);

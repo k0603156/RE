@@ -52,7 +52,6 @@ export default styled((props: IProps) => {
     </div>
   );
 })`
-  padding: 3px;
   span {
     margin: 0 5px;
     font-weight: 600;

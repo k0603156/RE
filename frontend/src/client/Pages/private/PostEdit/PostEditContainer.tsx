@@ -23,7 +23,7 @@ const Container = (props: IProps) => {
         children: [{ text: "" }],
       },
     ],
-    hashtags: [{ name: "tag2" }],
+    hashtags: [],
   });
 
   useEffect(() => {
