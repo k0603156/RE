@@ -18,6 +18,7 @@ export const Carousel = () => {
       readcount: 0,
       updatedAt: "2020:04:04",
       user: { userName: "user1" },
+      hashtags: [{ name: "tag1" }],
     },
     {
       id: 2,
@@ -25,6 +26,7 @@ export const Carousel = () => {
       readcount: 0,
       updatedAt: "2020:04:04",
       user: { userName: "user2" },
+      hashtags: [{ name: "tag1" }],
     },
     {
       id: 3,
@@ -32,6 +34,7 @@ export const Carousel = () => {
       readcount: 0,
       updatedAt: "2020:04:04",
       user: { userName: "user3" },
+      hashtags: [{ name: "tag1" }],
     },
     {
       id: 4,
@@ -39,6 +42,7 @@ export const Carousel = () => {
       readcount: 0,
       updatedAt: "2020:04:04",
       user: { userName: "user4" },
+      hashtags: [{ name: "tag1" }],
     },
   ];
   return (
