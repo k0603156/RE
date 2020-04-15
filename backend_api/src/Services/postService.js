@@ -10,6 +10,10 @@ module.exports.getPostListByBoardnViews = async (req, res, next) => {
         model: Models.user,
         attributes: ["userName"],
       },
+      {
+        model: Models.hashtag,
+        attributes: ["name"],
+      },
     ],
     where: { boardId: req.params.boardId },
     attributes: ["id", "title", "readcount", "updatedAt"],
