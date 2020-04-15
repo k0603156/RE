@@ -12,11 +12,15 @@ module.exports.getPostListByBoardnViews = async (req, res, next) => {
       },
       {
         model: Models.hashtag,
-        attributes: ["name"],
+        as: "hashtags",
+        attributes: ["id", "name"],
+        through: { attributes: [] },
       },
     ],
     where: { boardId: req.params.boardId },
-    attributes: ["id", "title", "readcount", "updatedAt"],
+    attributes: {
+      include: ["id", "title", "readcount", "updatedAt"],
+    },
     order: [literal("readcount DESC")],
     limit,
   });

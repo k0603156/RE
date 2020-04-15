@@ -38,5 +38,6 @@ export interface InitialState {
     readcount: number;
     updatedAt: string;
     user: { userName: string };
+    hashtags: Array<{ name: string }>;
   }>;
 }
