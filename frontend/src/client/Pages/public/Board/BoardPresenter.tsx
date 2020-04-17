@@ -8,6 +8,7 @@ const BoardTitle = styled.h3``;
 const BoardList = styled.ul``;
 
 interface IProps {
+  title: string;
   handlePage: (event: React.MouseEvent<HTMLLIElement, MouseEvent>) => void;
   lengthPage: number;
   currentPage: number;
@@ -17,7 +18,7 @@ export default (props: IProps) => {
   console.log(props.postlist);
   return (
     <BoardBox>
-      <BoardTitle>title</BoardTitle>
+      <BoardTitle>{props.title}</BoardTitle>
       <BoardList>
         {props.postlist.map((post: any) => (
           <PostBox key={post.id} index={post.id} post={post} />

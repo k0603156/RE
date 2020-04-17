@@ -6,6 +6,7 @@ import { RootStateType } from "@Store/modules";
 import BoardPresenter from "./BoardPresenter";
 
 export interface IProps extends RouteComponentProps<{ boardName: string }> {
+  main: RootStateType["main"];
   postlist: RootStateType["postlist"];
   postlistBrowseAction: typeof postlistBrowseAction;
 }
@@ -24,6 +25,7 @@ const BoardContainer = withRouter((props: IProps) => {
   };
   return (
     <BoardPresenter
+      title={props.main["boardlist"][props.main["selectedBoard"] - 1].name}
       handlePage={handlePage}
       lengthPage={Math.ceil(props.postlist.count / POST_PER_PAGE)}
       currentPage={currentPage}
@@ -33,8 +35,6 @@ const BoardContainer = withRouter((props: IProps) => {
 });
 
 export default connect(
-  ({ postlist, loading }: RootStateType) => ({
-    postlist,
-  }),
+  ({ main, postlist, loading }: RootStateType) => ({ main, postlist }),
   { postlistBrowseAction }
 )(BoardContainer);
