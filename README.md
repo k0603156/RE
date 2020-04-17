@@ -85,21 +85,20 @@ https://github.com/k0603156/Symphonia
 
     - [O] DOCKER 설치
 
-      - [참고](https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-engine---community)
+      - [참고](https://docs.docker.com/engine/install/ubuntu/)
 
             ```
             $ sudo apt-get remove docker docker-engine docker.io containerd runc
-
             $ sudo apt-get update
 
             https로 저장소에 접근하기위한 패키지 설치
 
             $ sudo apt-get install \
-            apt-transport-https \
-            ca-certificates \
-            curl \
-            gnupg-agent \
-            software-properties-common
+              apt-transport-https \
+              ca-certificates \
+              curl \
+              gnupg-agent \
+              software-properties-common
 
             Docker 공식 GPG 키
 
@@ -111,7 +110,7 @@ https://github.com/k0603156/Symphonia
 
             $ sudo add-apt-repository \
             "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-            \$(lsb_release -cs) \
+            $(lsb_release -cs) \
             stable"
 
             $ sudo apt-get update
@@ -119,6 +118,7 @@ https://github.com/k0603156/Symphonia
             $ sudo apt-get install docker-ce docker-ce-cli containerd.io
 
             $ docker
+
             ```
 
             https://cloud.google.com/compute/docs/containers/?hl=ko
