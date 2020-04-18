@@ -14,9 +14,9 @@ Router.get(
   "/:boardId/posts",
   setDefQueryParams({
     limit: 5,
-    page: 1,
+    desc: "readcount",
   }),
-  PostService.getPostListByBoardnViews
+  PostService.getPostsByBoard
 );
 
 module.exports = Router;

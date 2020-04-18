@@ -2,9 +2,11 @@ const Models = require("../Models/tables");
 const { Op, literal } = require("sequelize");
 const { NotFoundError } = require("../Utils/Error");
 
-module.exports.getPostListByBoardnViews = async (req, res, next) => {
+module.exports.getPostsByBoard = async (req, res, next) => {
+  const boardId = parseInt(req.params.boardId);
   const limit = parseInt(req.query.limit);
   const desc = req.query.desc;
+
   const result = await Models.post.findAll({
     include: [
       {
@@ -18,7 +20,7 @@ module.exports.getPostListByBoardnViews = async (req, res, next) => {
         through: { attributes: [] },
       },
     ],
-    where: { boardId: req.params.boardId },
+    where: { boardId },
     attributes: {
       include: ["id", "title", "readcount", "updatedAt"],
     },
