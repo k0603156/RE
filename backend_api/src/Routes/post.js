@@ -1,12 +1,22 @@
 const Router = require("express").Router();
 const PostService = require("../Services/postService");
-const { defaultPagingParams, checkBodyParams } = require("../Utils");
+const { setDefQueryParams, checkBodyParams } = require("../Utils");
 
-Router.get("/list", defaultPagingParams, PostService.getPostList);
+Router.get(
+  "/list",
+  setDefQueryParams({
+    limit: 5,
+    page: 1,
+  }),
+  PostService.getPostList
+);
 
 Router.get(
   "/list/byhashtag/:hashtag",
-  defaultPagingParams,
+  setDefQueryParams({
+    limit: 5,
+    page: 1,
+  }),
   PostService.getPostListByHashtag
 );
 

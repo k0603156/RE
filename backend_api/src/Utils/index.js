@@ -49,10 +49,13 @@ module.exports.isAuthenticated = (req, res, next) => {
   return;
 };
 
-module.exports.defaultPagingParams = (req, res, next) => {
-  if (!req.query.limit) req.query.limit = 5;
-  if (!req.query.page) req.query.page = 1;
-  next();
+module.exports.setDefQueryParams = (defParams) => {
+  return (req, res, next) => {
+    Object.keys(defParams).map((key) => {
+      req.query[key] ? null : (req.query[key] = defParams[key]);
+    });
+    next();
+  };
 };
 
 module.exports.checkBodyParams = (...checkList) => {

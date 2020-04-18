@@ -1,6 +1,5 @@
 const Router = require("express").Router();
 const UserService = require("../Services/userService");
-
 const { checkBodyParams, isAuthenticated } = require("../Utils");
 
 //회원정보

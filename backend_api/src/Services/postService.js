@@ -5,7 +5,6 @@ const { NotFoundError } = require("../Utils/Error");
 module.exports.getPostListByBoardnViews = async (req, res, next) => {
   const limit = parseInt(req.query.limit);
   const desc = req.query.desc;
-  console.log(desc);
   const result = await Models.post.findAll({
     include: [
       {

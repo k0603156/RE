@@ -1,5 +1,5 @@
 const Router = require("express").Router();
-const { defaultPagingParams } = require("../Utils");
+const { setDefQueryParams } = require("../Utils");
 const PostService = require("../Services/postService");
 const Models = require("../Models/tables");
 
@@ -12,7 +12,10 @@ Router.get("/boardlist", async (req, res, next) => {
 
 Router.get(
   "/:boardId/posts",
-  defaultPagingParams,
+  setDefQueryParams({
+    limit: 5,
+    page: 1,
+  }),
   PostService.getPostListByBoardnViews
 );
 
