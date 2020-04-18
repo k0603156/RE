@@ -35,8 +35,8 @@ export default {
     return req("get", `/${payload.pid}`);
   },
   //게시글 리스트 요청
-  post_browse_list(payload: { page: number }) {
-    return req("get", `/list/?page=${payload.page}`);
+  post_browse_list(payload: { boardId: number; page: number }) {
+    return req("get", `/list/?page=${payload.page}&boardId=${payload.boardId}`);
   },
   //게시글 생성 요청
   post_create(payload: IPostCreatePayload) {

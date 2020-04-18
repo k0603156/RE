@@ -17,7 +17,10 @@ const BoardContainer = withRouter((props: IProps) => {
   const [currentPage, setCurrentPage] = React.useState<number>(1);
 
   React.useEffect(() => {
-    props.boardBrowseAction(currentPage);
+    props.boardBrowseAction(
+      parseInt(props.match.params.boardName),
+      currentPage
+    );
   }, [props.match.params.boardName, currentPage]);
   const handlePage = (e: any) => {
     e.persist();

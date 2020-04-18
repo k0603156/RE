@@ -110,6 +110,7 @@ module.exports.getPostDetail = async (req, res, next) => {
 
 module.exports.getPosts = async (req, res, next) => {
   try {
+    const boardId = parseInt(req.query.boardId);
     const limit = parseInt(req.query.limit);
     const offset = limit * (parseInt(req.query.page) - 1);
     const result = await Models.post.findAndCountAll({
@@ -123,6 +124,7 @@ module.exports.getPosts = async (req, res, next) => {
           attributes: ["name"],
         },
       ],
+      where: { boardId },
       offset,
       limit,
       attributes: ["id", "title", "updatedAt"],
