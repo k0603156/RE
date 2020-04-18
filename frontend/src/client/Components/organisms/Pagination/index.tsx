@@ -1,6 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 
+interface IProps {
+  handlePage:
+    | ((event: React.MouseEvent<HTMLLIElement, MouseEvent>) => void)
+    | undefined;
+  totalCount: number;
+  currentPage: number;
+  postPerPage: number;
+}
 const PaginationUl = styled.ul`
   display: flex;
   justify-content: center;
@@ -18,22 +26,11 @@ const PaginationLi = styled.li`
   cursor: pointer;
 `;
 
-const PageInput = styled.input`
-  width: 50px;
-`;
-const PageMax = styled.span`
-  padding: 5px;
-`;
+export default (props: IProps) => {
+  const { handlePage, totalCount, currentPage, postPerPage } = props;
+  const pages = Math.ceil(totalCount / postPerPage);
 
-export default (props: {
-  handlePage:
-    | ((event: React.MouseEvent<HTMLLIElement, MouseEvent>) => void)
-    | undefined;
-  lengthPage: number;
-  currentPage: number;
-}) => {
-  const { handlePage, lengthPage, currentPage } = props;
-  const Arr = Array.from(Array(lengthPage), (_, index) => index + 1).map(
+  const Arr = Array.from(Array(pages), (_, index) => index + 1).map(
     (_, index) => (
       <PaginationLi key={index} data-page={_} onClick={handlePage}>
         {_}
@@ -45,17 +42,15 @@ export default (props: {
   };
 
   const From = () => {
-    const from = currentPage === lengthPage ? currentPage - 3 : currentPage - 2;
+    const from = currentPage === pages ? currentPage - 3 : currentPage - 2;
     return check(from) ? from : 0;
   };
   const To = () => (currentPage < 2 ? currentPage + 3 : currentPage + 2);
 
+  // function paginate(array: Array<any>, page_size: number, page_number: number) {
+  //   return array.slice(page_size * (page_number - 1), page_size * page_number);
+  // }
   //TODO:수정필요
   const d = Arr.slice(From(), To());
-  return (
-    <PaginationUl>
-      {d} <PageInput placeholder="page" onKeyUp={e => console.dir(e.keyCode)} />
-      <PageMax>/{lengthPage}</PageMax>
-    </PaginationUl>
-  );
+  return <PaginationUl>{d}</PaginationUl>;
 };

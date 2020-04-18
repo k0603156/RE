@@ -10,12 +10,12 @@ const BoardList = styled.ul``;
 interface IProps {
   title: string;
   handlePage: (event: React.MouseEvent<HTMLLIElement, MouseEvent>) => void;
-  lengthPage: number;
+  totalCount: number;
   currentPage: number;
   postlist: RootStateType["board"]["rows"];
+  postPerPage: number;
 }
 export default (props: IProps) => {
-  console.log(props.postlist);
   return (
     <BoardBox>
       <BoardTitle>{props.title}</BoardTitle>
@@ -26,8 +26,9 @@ export default (props: IProps) => {
 
         <Pagination
           handlePage={props.handlePage}
-          lengthPage={props.lengthPage}
+          totalCount={props.totalCount}
           currentPage={props.currentPage}
+          postPerPage={props.postPerPage}
         />
       </BoardList>
     </BoardBox>

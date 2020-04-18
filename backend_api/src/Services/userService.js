@@ -1,14 +1,18 @@
-const { user } = require("../Models/tables");
+const Models = require("../Models/tables");
 const { NotFoundError } = require("../Utils/Error");
 const { generateRandomString, encryptString } = require("../Utils");
 const ENCRYPT_BUFF = 64;
 const ENCODE_TYPE = "base64";
 
-const PostService = require("../Services/postService");
-
 module.exports.getUser = async (req, res, next) => {
   try {
-    const existUser = await user.findOne({
+    const existUser = await Models.user.findOne({
+      include: [
+        {
+          model: Models.post,
+          attributes: ["id", "title", "updatedAt"],
+        },
+      ],
       where: { userName: req.params.userName },
       attributes: ["id", "userName"],
     });
@@ -17,16 +21,9 @@ module.exports.getUser = async (req, res, next) => {
       throw new NotFoundError("해당 사용자를 찾을 수 없습니다.");
     }
 
-    const resultPost = await PostService.getPostListByUser(
-      existUser.dataValues.id
-    );
     res.status(200).json({
       success: true,
-      response: {
-        id: existUser.dataValues.id,
-        userName: existUser.dataValues.userName,
-        posts: resultPost,
-      },
+      response: existUser,
     });
   } catch (error) {
     next(error);
@@ -46,7 +43,7 @@ module.exports.signup = async (req, res, next) => {
       throw error;
     }
 
-    const existUser = await user.findOne({ where: { email } });
+    const existUser = await Models.user.findOne({ where: { email } });
 
     if (existUser) {
       throw new Error("이미 가입된 이메일").status(400);
@@ -55,7 +52,7 @@ module.exports.signup = async (req, res, next) => {
     const salt = await generateRandomString(ENCRYPT_BUFF, ENCODE_TYPE);
     const cryptoPass = await encryptString(password, salt);
 
-    const result = await user.create({
+    const result = await Models.user.create({
       userName,
       email,
       cryptoPass,
@@ -81,7 +78,7 @@ module.exports.updateUser = async (req, res, next) => {
     const salt = await generateRandomString(ENCRYPT_BUFF, ENCODE_TYPE);
     const cryptoPass = await encryptString(password, salt);
 
-    const response = user.update(
+    const response = Models.user.update(
       {
         userName,
         cryptoPass,
@@ -102,7 +99,7 @@ module.exports.deleteUser = async (req, res, next) => {
   try {
     const id = req.user.id;
 
-    const result = user.destroy({
+    const result = Models.user.destroy({
       where: { id },
     });
 

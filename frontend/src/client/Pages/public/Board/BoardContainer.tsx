@@ -13,7 +13,6 @@ export interface IProps extends RouteComponentProps<{ boardName: string }> {
 
 const BoardContainer = withRouter((props: IProps) => {
   const POST_PER_PAGE = 5;
-
   const [currentPage, setCurrentPage] = React.useState<number>(1);
 
   React.useEffect(() => {
@@ -30,9 +29,10 @@ const BoardContainer = withRouter((props: IProps) => {
     <BoardPresenter
       title={"title"}
       handlePage={handlePage}
-      lengthPage={Math.ceil(props.board.count / POST_PER_PAGE)}
+      totalCount={props.board.count}
       currentPage={currentPage}
       postlist={props.board.rows}
+      postPerPage={POST_PER_PAGE}
     />
   );
 });
