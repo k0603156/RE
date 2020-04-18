@@ -5,12 +5,6 @@ const { defaultPagingParams, checkProps } = require("../Utils");
 Router.get("/list", defaultPagingParams, PostService.getPostList);
 
 Router.get(
-  "/list/byboardnviews/:boardId",
-  defaultPagingParams,
-  PostService.getPostListByBoardnViews
-);
-
-Router.get(
   "/list/byhashtag/:hashtag",
   defaultPagingParams,
   PostService.getPostListByHashtag

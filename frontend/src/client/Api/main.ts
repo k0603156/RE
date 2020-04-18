@@ -20,9 +20,9 @@ const req = (
     data,
     headers: {
       common: {
-        Authorization: token ? `Bearer ${token}` : null
-      }
-    }
+        Authorization: token ? `Bearer ${token}` : null,
+      },
+    },
   });
 };
 
@@ -34,8 +34,8 @@ export default {
     console.log("payload::", payload);
     return req(
       "get",
-      "post",
-      `/list/byboardnviews/${payload.boardId}/?limit=5`
+      "board",
+      `/${payload.boardId}/posts/?limit=5&desc=readcount`
     );
-  }
+  },
 };

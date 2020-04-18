@@ -354,9 +354,10 @@ describe("Test Start::", () => {
         expect(_).toHaveProperty("name");
       });
     });
-    it("특정분류 최다조회 n개", async () => {
+
+    it("1번 게시판 글조회 5개", async () => {
       const res = await request
-        .get("/api/v1/post/list/byboardnviews/1/?limit=5")
+        .get("/api/v1/board/1/posts/?limit=5&desc=readcount")
         .set("Accept", "application/json")
         .expect(200);
       expect(res.body).toHaveProperty("success");

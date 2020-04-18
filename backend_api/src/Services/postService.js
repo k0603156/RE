@@ -4,6 +4,8 @@ const { NotFoundError } = require("../Utils/Error");
 
 module.exports.getPostListByBoardnViews = async (req, res, next) => {
   const limit = parseInt(req.query.limit);
+  const desc = req.query.desc;
+  console.log(desc);
   const result = await Models.post.findAll({
     include: [
       {
@@ -21,7 +23,7 @@ module.exports.getPostListByBoardnViews = async (req, res, next) => {
     attributes: {
       include: ["id", "title", "readcount", "updatedAt"],
     },
-    order: [literal("readcount DESC")],
+    order: [literal(`${desc} DESC`)],
     limit,
   });
   // if (!result) throw new NotFoundError("해당 분류에 맞는 글이 없습니다.");
