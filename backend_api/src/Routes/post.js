@@ -1,6 +1,6 @@
 const Router = require("express").Router();
 const PostService = require("../Services/postService");
-const { setDefQueryParams, checkBodyParams } = require("../Utils");
+const { setDefQueryParams, hasBodyParams } = require("../Utils");
 
 Router.get(
   "/list",
@@ -24,7 +24,7 @@ Router.get("/:pid", PostService.getPostDetail);
 
 Router.post(
   "/",
-  checkBodyParams("title", "boardId", "content", "hashtags"),
+  hasBodyParams("title", "boardId", "content", "hashtags"),
   PostService.createPost
 );
 

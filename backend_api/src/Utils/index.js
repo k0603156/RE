@@ -58,7 +58,7 @@ module.exports.setDefQueryParams = (defParams) => {
   };
 };
 
-module.exports.checkBodyParams = (...checkList) => {
+module.exports.hasBodyParams = (...checkList) => {
   return (req, res, next) => {
     const data = req.body;
     checkList.reduce((obj, key) => {

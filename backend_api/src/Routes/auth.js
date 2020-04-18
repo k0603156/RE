@@ -1,10 +1,10 @@
 const Router = require("express").Router();
 const AuthService = require("../Services/authService");
-const { checkBodyParams, isAuthenticated } = require("../Utils");
+const { hasBodyParams, isAuthenticated } = require("../Utils");
 
 Router.post(
   "/authenticate",
-  checkBodyParams("email", "password"),
+  hasBodyParams("email", "password"),
   AuthService.authenticate
 );
 
