@@ -1,7 +1,7 @@
 const Router = require("express").Router();
 const UserService = require("../Services/userService");
 
-const { checkProps, isAuthenticated } = require("../Utils");
+const { checkBodyParams, isAuthenticated } = require("../Utils");
 
 //회원정보
 Router.get("/:userName", UserService.getUser);
@@ -9,7 +9,7 @@ Router.get("/:userName", UserService.getUser);
 //회원가입
 Router.post(
   "/",
-  checkProps("userName", "email", "password", "confirmPassword"),
+  checkBodyParams("userName", "email", "password", "confirmPassword"),
   UserService.signup
 );
 
@@ -17,7 +17,7 @@ Router.post(
 Router.patch(
   "/",
   isAuthenticated,
-  checkProps("userName", "password", "confirmPassword"),
+  checkBodyParams("userName", "password", "confirmPassword"),
   UserService.updateUser
 );
 

@@ -55,7 +55,7 @@ module.exports.defaultPagingParams = (req, res, next) => {
   next();
 };
 
-module.exports.checkProps = (...checkList) => {
+module.exports.checkBodyParams = (...checkList) => {
   return (req, res, next) => {
     const data = req.body;
     checkList.reduce((obj, key) => {
