@@ -12,7 +12,7 @@ interface IProps {
   handlePage: (event: React.MouseEvent<HTMLLIElement, MouseEvent>) => void;
   lengthPage: number;
   currentPage: number;
-  postlist: RootStateType["postlist"]["rows"];
+  postlist: RootStateType["board"]["rows"];
 }
 export default (props: IProps) => {
   console.log(props.postlist);

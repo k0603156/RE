@@ -8,7 +8,7 @@ Router.get(
     limit: 5,
     page: 1,
   }),
-  PostService.getPostList
+  PostService.getPosts
 );
 
 Router.get(
@@ -17,7 +17,7 @@ Router.get(
     limit: 5,
     page: 1,
   }),
-  PostService.getPostListByHashtag
+  PostService.getPostsByHashtag
 );
 
 Router.get("/:pid", PostService.getPostDetail);

@@ -5,8 +5,8 @@ import user from "./User/reducers";
 import userSaga from "./User/saga";
 import post from "./Post/reducers";
 import postSaga from "./Post/saga";
-import postlist from "./PostList/reducers";
-import postlistSaga from "./PostList/saga";
+import board from "./Board/reducers";
+import boardSaga from "./Board/saga";
 import main from "./Main/reducers";
 import mainSaga from "./Main/saga";
 import loading from "./Loading";
@@ -19,7 +19,7 @@ const rootReducer = combineReducers({
   auth,
   user,
   post,
-  postlist,
+  board,
   loading,
   msg,
 });
@@ -31,7 +31,7 @@ export function* rootSaga() {
     fork(authSaga),
     fork(userSaga),
     fork(postSaga),
-    fork(postlistSaga),
+    fork(boardSaga),
     fork(msgSaga),
   ]);
 }

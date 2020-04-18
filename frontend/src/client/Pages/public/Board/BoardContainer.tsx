@@ -1,23 +1,23 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { withRouter, RouteComponentProps } from "react-router-dom";
-import { postlistBrowseAction } from "@Store/modules/PostList/actions";
+import { boardBrowseAction } from "@Store/modules/Board/actions";
 import { RootStateType } from "@Store/modules";
 import BoardPresenter from "./BoardPresenter";
 
 export interface IProps extends RouteComponentProps<{ boardName: string }> {
   main: RootStateType["main"];
-  postlist: RootStateType["postlist"];
-  postlistBrowseAction: typeof postlistBrowseAction;
+  board: RootStateType["board"];
+  boardBrowseAction: typeof boardBrowseAction;
 }
 
 const BoardContainer = withRouter((props: IProps) => {
-  const POST_PER_PAGE = 10;
+  const POST_PER_PAGE = 5;
 
   const [currentPage, setCurrentPage] = React.useState<number>(1);
 
   React.useEffect(() => {
-    props.postlistBrowseAction(currentPage);
+    props.boardBrowseAction(currentPage);
   }, [props.match.params.boardName, currentPage]);
   const handlePage = (e: any) => {
     e.persist();
@@ -25,16 +25,16 @@ const BoardContainer = withRouter((props: IProps) => {
   };
   return (
     <BoardPresenter
-      title={props.main["boardlist"][props.main["selectedBoard"] - 1].name}
+      title={"title"}
       handlePage={handlePage}
-      lengthPage={Math.ceil(props.postlist.count / POST_PER_PAGE)}
+      lengthPage={Math.ceil(props.board.count / POST_PER_PAGE)}
       currentPage={currentPage}
-      postlist={props.postlist.rows}
+      postlist={props.board.rows}
     />
   );
 });
 
 export default connect(
-  ({ main, postlist, loading }: RootStateType) => ({ main, postlist }),
-  { postlistBrowseAction }
+  ({ main, board, loading }: RootStateType) => ({ main, board }),
+  { boardBrowseAction }
 )(BoardContainer);

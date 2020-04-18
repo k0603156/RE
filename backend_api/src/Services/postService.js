@@ -31,7 +31,7 @@ module.exports.getPostsByBoard = async (req, res, next) => {
   res.status(200).json({ success: true, response: result });
 };
 
-module.exports.getPostListByHashtag = async (req, res, next) => {
+module.exports.getPostsByHashtag = async (req, res, next) => {
   try {
     const limit = parseInt(req.query.limit);
     const offset = limit * (req.query.page - 1);
@@ -62,7 +62,7 @@ module.exports.getPostListByHashtag = async (req, res, next) => {
   }
 };
 
-module.exports.getPostListByUser = async (userId) => {
+module.exports.getPostsByUser = async (userId) => {
   const result = await Models.post.findAll({
     where: { userId },
     attributes: ["id", "title"],
@@ -108,10 +108,10 @@ module.exports.getPostDetail = async (req, res, next) => {
   }
 };
 
-module.exports.getPostList = async (req, res, next) => {
+module.exports.getPosts = async (req, res, next) => {
   try {
     const limit = parseInt(req.query.limit);
-    const offset = limit * (req.query.page - 1);
+    const offset = limit * (parseInt(req.query.page) - 1);
     const result = await Models.post.findAndCountAll({
       include: [
         {
