@@ -240,7 +240,7 @@ describe("Test Start::", () => {
     });
     it("글리스트 불러오기", async () => {
       const res = await request
-        .get(`/api/v1/post/list/?page=${store.getPage()}&limit=5`)
+        .get(`/api/v1/post/list/?page=${store.getPage()}&limit=5&boardId=1`)
         .set("Authorization", "bearer " + store.getToken())
         .expect(200);
       expect(res.body.success).toEqual(true);
