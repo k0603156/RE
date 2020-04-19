@@ -6,12 +6,23 @@ module.exports.getPostsByBoard = async (req, res, next) => {
   try {
     const boardId = parseInt(req.params.boardId);
     const limit = parseInt(req.query.limit);
-
     const result = await Models.post.findAll({
+      where: { boardId },
+      attributes: [
+        "id",
+        "title",
+        "updatedAt",
+        [
+          literal(
+            "(SELECT COUNT(*) FROM postreads WHERE postreads.postId = post.id)"
+          ),
+          "count",
+        ],
+      ],
       include: [
         {
           model: Models.user,
-          attributes: ["userName"],
+          attributes: ["id", "userName"],
         },
         {
           model: Models.hashtag,
@@ -19,18 +30,12 @@ module.exports.getPostsByBoard = async (req, res, next) => {
           attributes: ["id", "name"],
           through: { attributes: [] },
         },
-        {
-          model: Models.postread,
-          attributes: [[fn("COUNT", "id"), "readcount"]],
-          order: [literal(`readcount DESC`)],
-        },
       ],
-      where: { boardId },
-      attributes: {
-        include: ["id", "title", "updatedAt"],
-      },
+      order: [literal(`count DESC`)],
       limit,
     });
+    console.table(result);
+    // console.log(result);
     if (!result) throw new NotFoundError("해당 분류에 맞는 글이 없습니다.");
     res.status(200).json({ success: true, response: result });
   } catch (error) {
