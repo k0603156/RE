@@ -16,7 +16,7 @@ module.exports.getPostsByBoard = async (req, res, next) => {
           literal(
             "(SELECT COUNT(*) FROM postreads WHERE postreads.postId = post.id)"
           ),
-          "count",
+          "readcount",
         ],
       ],
       include: [
@@ -31,15 +31,12 @@ module.exports.getPostsByBoard = async (req, res, next) => {
           through: { attributes: [] },
         },
       ],
-      order: [literal(`count DESC`)],
+      order: [literal(`readcount DESC`)],
       limit,
     });
-    console.table(result);
-    // console.log(result);
     if (!result) throw new NotFoundError("해당 분류에 맞는 글이 없습니다.");
     res.status(200).json({ success: true, response: result });
   } catch (error) {
-    console.log(error);
     next(error);
   }
 };
@@ -62,7 +59,17 @@ module.exports.getPostsByHashtag = async (req, res, next) => {
           attributes: ["userName"],
         },
       ],
-      attributes: ["id", "title", "readcount", "updatedAt"],
+      attributes: [
+        "id",
+        "title",
+        "updatedAt",
+        [
+          literal(
+            "(SELECT COUNT(*) FROM postreads WHERE postreads.postId = post.id)"
+          ),
+          "readcount",
+        ],
+      ],
       where: { "$hashtags.name$": req.params.hashtag },
       offset,
       limit,
@@ -71,6 +78,7 @@ module.exports.getPostsByHashtag = async (req, res, next) => {
       throw new NotFoundError("해당 태그에 맞는 글이 없습니다.");
     res.status(200).json({ success: true, response: result });
   } catch (error) {
+    console.log(error);
     next(error);
   }
 };
@@ -107,20 +115,27 @@ module.exports.getPostDetail = async (req, res, next) => {
         ],
         where: { id: req.params.pid },
         attributes: {
-          include: ["id", "title", "content", "updatedAt"],
+          include: [
+            "id",
+            "title",
+            "content",
+            "updatedAt",
+            [
+              literal(
+                "(SELECT COUNT(*) FROM postreads WHERE postreads.postId = post.id)"
+              ),
+              "readcount",
+            ],
+          ],
         },
         transaction,
       });
-      const readcount = await Models.postread.count(
-        { where: { postId: req.params.pid } },
-        { transaction }
-      );
-      result.dataValues.readcount = readcount;
       return result;
     });
     if (!result) throw new NotFoundError("해당글이 없습니다.");
     res.status(200).json({ success: true, response: result });
   } catch (error) {
+    console.log(error);
     next(error);
   }
 };
