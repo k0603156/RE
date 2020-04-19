@@ -32,10 +32,6 @@ export default {
   },
   postlist_browse(payload: { boardId: string }) {
     console.log("payload::", payload);
-    return req(
-      "get",
-      "board",
-      `/${payload.boardId}/posts/?limit=5&desc=readcount`
-    );
+    return req("get", "board", `/${payload.boardId}/posts/?limit=5`);
   },
 };

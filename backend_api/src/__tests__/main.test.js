@@ -357,7 +357,7 @@ describe("Test Start::", () => {
 
     it("1번 게시판 글조회 5개", async () => {
       const res = await request
-        .get("/api/v1/board/1/posts/?limit=5&desc=readcount")
+        .get("/api/v1/board/1/posts/?limit=5")
         .set("Accept", "application/json")
         .expect(200);
       expect(res.body).toHaveProperty("success");

@@ -11,10 +11,6 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         type: DataTypes.JSON,
       },
-      readcount: {
-        type: DataTypes.INTEGER,
-        defaultValue: 0,
-      },
     },
     {
       charset: "utf8mb4",
@@ -26,6 +22,7 @@ module.exports = (sequelize, DataTypes) => {
   post.associate = function (models) {
     post.belongsTo(models.user);
     post.belongsTo(models.board);
+    post.hasMany(models.postread);
     // post.hasMany(models.story);
     post.belongsToMany(models.hashtag, {
       through: "PostHashtag",

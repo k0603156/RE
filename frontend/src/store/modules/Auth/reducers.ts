@@ -2,7 +2,7 @@ import { createReducer } from "typesafe-actions";
 import {
   AUTH_LOGIN_SUCCESS,
   AUTH_TOKENREFRESH_SUCCESS,
-  AUTH_LOGOUT_SUCCESS
+  AUTH_LOGOUT_SUCCESS,
 } from "./types";
 
 const initialState: IAuthState = {
@@ -10,21 +10,20 @@ const initialState: IAuthState = {
   isAdmin: false,
   me: {
     email: localStorage.getItem("email") || "",
-    userName: localStorage.getItem("userName") || ""
-  }
+    userName: localStorage.getItem("userName") || "",
+  },
 };
 export default createReducer(initialState, {
   // 로그인 성공
   [AUTH_LOGIN_SUCCESS]: (state, action) => {
-    console.log(action);
     const { email, userName } = action.payload.response;
     return {
       isLogged: true,
       isAdmin: true,
       me: {
         email,
-        userName
-      }
+        userName,
+      },
     };
   },
   // 토큰 재발행 성공
@@ -33,8 +32,8 @@ export default createReducer(initialState, {
     isAdmin: false,
     me: {
       userName: "",
-      email: ""
-    }
+      email: "",
+    },
   }),
   // 로그아웃 성공
   [AUTH_LOGOUT_SUCCESS]: (state, action) => {
@@ -43,8 +42,8 @@ export default createReducer(initialState, {
       isAdmin: false,
       me: {
         userName: "",
-        email: ""
-      }
+        email: "",
+      },
     };
-  }
+  },
 });

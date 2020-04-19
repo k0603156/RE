@@ -14,7 +14,6 @@ Router.get(
   "/:boardId/posts",
   setDefQueryParams({
     limit: 5,
-    desc: "readcount",
   }),
   PostService.getPostsByBoard
 );

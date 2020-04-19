@@ -10,7 +10,7 @@ import {
 const initialState: InitialState = {
   id: "",
   title: "",
-  boardId: "1",
+  boardId: "",
   content: [
     {
       type: "paragraph",
@@ -25,7 +25,7 @@ const initialState: InitialState = {
 export default createReducer(initialState, {
   //게시글 읽기 성공
   [POST_BROWSE_SUCCESS]: (state, action) => {
-    return { ...state, ...action.payload.response };
+    return { ...initialState, ...action.payload.response };
   },
   //게시글 생성 성공
   [POST_CREATE_SUCCESS]: (state, action) => {

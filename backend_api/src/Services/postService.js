@@ -1,34 +1,42 @@
 const Models = require("../Models/tables");
-const { Op, literal } = require("sequelize");
+const { fn, Op, col, literal } = require("sequelize");
 const { NotFoundError } = require("../Utils/Error");
 
 module.exports.getPostsByBoard = async (req, res, next) => {
-  const boardId = parseInt(req.params.boardId);
-  const limit = parseInt(req.query.limit);
-  const desc = req.query.desc;
+  try {
+    const boardId = parseInt(req.params.boardId);
+    const limit = parseInt(req.query.limit);
 
-  const result = await Models.post.findAll({
-    include: [
-      {
-        model: Models.user,
-        attributes: ["userName"],
+    const result = await Models.post.findAll({
+      include: [
+        {
+          model: Models.user,
+          attributes: ["userName"],
+        },
+        {
+          model: Models.hashtag,
+          as: "hashtags",
+          attributes: ["id", "name"],
+          through: { attributes: [] },
+        },
+        {
+          model: Models.postread,
+          attributes: [[fn("COUNT", "id"), "readcount"]],
+          order: [literal(`readcount DESC`)],
+        },
+      ],
+      where: { boardId },
+      attributes: {
+        include: ["id", "title", "updatedAt"],
       },
-      {
-        model: Models.hashtag,
-        as: "hashtags",
-        attributes: ["id", "name"],
-        through: { attributes: [] },
-      },
-    ],
-    where: { boardId },
-    attributes: {
-      include: ["id", "title", "readcount", "updatedAt"],
-    },
-    order: [literal(`${desc} DESC`)],
-    limit,
-  });
-  // if (!result) throw new NotFoundError("해당 분류에 맞는 글이 없습니다.");
-  res.status(200).json({ success: true, response: result });
+      limit,
+    });
+    if (!result) throw new NotFoundError("해당 분류에 맞는 글이 없습니다.");
+    res.status(200).json({ success: true, response: result });
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
 };
 
 module.exports.getPostsByHashtag = async (req, res, next) => {
@@ -73,19 +81,17 @@ module.exports.getPostsByUser = async (userId) => {
 module.exports.getPostDetail = async (req, res, next) => {
   try {
     const result = await Models.sequelize.transaction(async (transaction) => {
-      await Models.post.update(
+      await Models.postread.create(
         {
-          readcount: literal(`readcount + 1`),
+          postId: req.params.pid,
         },
-        {
-          where: { id: req.params.pid },
-          transaction,
-        }
+        { transaction }
       );
       const result = await Models.post.findOne({
         include: [
           {
             model: Models.user,
+            as: "user",
             attributes: ["userName"],
           },
           {
@@ -95,10 +101,16 @@ module.exports.getPostDetail = async (req, res, next) => {
           },
         ],
         where: { id: req.params.pid },
-        attributes: ["id", "title", "content", "readcount", "updatedAt"],
+        attributes: {
+          include: ["id", "title", "content", "updatedAt"],
+        },
         transaction,
       });
-
+      const readcount = await Models.postread.count(
+        { where: { postId: req.params.pid } },
+        { transaction }
+      );
+      result.dataValues.readcount = readcount;
       return result;
     });
     if (!result) throw new NotFoundError("해당글이 없습니다.");
@@ -137,7 +149,6 @@ module.exports.getPosts = async (req, res, next) => {
 };
 
 module.exports.createPost = async (req, res, next) => {
-  console.log(req.body);
   try {
     const result = await Models.sequelize.transaction(async (transaction) => {
       const existTags = await Models.hashtag.findAll({
@@ -186,6 +197,7 @@ module.exports.createPost = async (req, res, next) => {
         },
       });
   } catch (error) {
+    console.log(error);
     next(error);
   }
 };
