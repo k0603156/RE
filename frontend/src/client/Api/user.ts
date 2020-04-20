@@ -1,9 +1,6 @@
 import Axios from "axios";
-// Api url
-const API_ROOT =
-  process.env.NODE_ENV !== "production"
-    ? "http://localhost:8000/api/v1/"
-    : "http://35.213.18.30/api/v1/";
+import { API_ROOT } from "./config";
+
 const ROUTE = "user";
 
 const req = (
@@ -25,9 +22,9 @@ const req = (
     data,
     headers: {
       common: {
-        Authorization: token ? `Bearer ${token}` : null
-      }
-    }
+        Authorization: token ? `Bearer ${token}` : null,
+      },
+    },
   });
 };
 
@@ -60,11 +57,11 @@ export default {
       userName,
       email,
       password,
-      confirmPassword
+      confirmPassword,
     });
   },
 
   delete_user(userName: string) {
     return req("delete", "/", { userName });
-  }
+  },
 };

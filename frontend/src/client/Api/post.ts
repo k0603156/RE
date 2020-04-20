@@ -1,10 +1,7 @@
 import Axios from "axios";
 import { IPostCreatePayload } from "@Store/modules/Post/types";
-// Api url
-const API_ROOT =
-  process.env.NODE_ENV !== "production"
-    ? "http://localhost:8000/api/v1/"
-    : "http://35.213.18.30/api/v1/";
+import { API_ROOT } from "./config";
+
 const ROUTE = "post";
 
 const req = (
