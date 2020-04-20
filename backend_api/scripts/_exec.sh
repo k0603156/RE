@@ -1,1 +1,1 @@
-sudo docker exec -it  symphony_container /bin/bash
+sudo docker exec -it  re_container /bin/bash
