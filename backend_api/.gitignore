@@ -7,3 +7,5 @@ config/development.env
 
 # Err log
 yarn-error.log
+
+coverage
