@@ -1,5 +1,6 @@
 import { createReducer } from "typesafe-actions";
 import {
+  AUTH_CREATE_SUCCESS,
   AUTH_LOGIN_SUCCESS,
   AUTH_TOKENREFRESH_SUCCESS,
   AUTH_LOGOUT_SUCCESS,
@@ -13,7 +14,14 @@ const initialState: IAuthState = {
     userName: localStorage.getItem("userName") || "",
   },
 };
+
 export default createReducer(initialState, {
+  // 회원가입 성공
+  [AUTH_CREATE_SUCCESS]: (state, action) => {
+    return {
+      ...state,
+    };
+  },
   // 로그인 성공
   [AUTH_LOGIN_SUCCESS]: (state, action) => {
     const { email, userName } = action.payload.response;

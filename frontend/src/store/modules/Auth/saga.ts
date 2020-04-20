@@ -1,5 +1,6 @@
 import { all, fork, takeLatest, put, call } from "redux-saga/effects";
 import {
+  AUTH_CREATE_REQUEST,
   AUTH_LOGIN_REQUEST,
   AUTH_LOGIN_SUCCESS,
   AUTH_LOGIN_FAILURE,
@@ -18,6 +19,14 @@ import { msgCreate } from "../Msg";
 import { loadingStart, loadingFinish } from "../Loading";
 import createRequestSaga from "@Store/lib/createRequestSaga";
 
+//사용자 생성 요청
+const authCreateSaga = createRequestSaga(
+  AUTH_CREATE_REQUEST,
+  Api.user.create_user
+);
+function* authCreate(): Generator {
+  yield takeLatest(AUTH_CREATE_REQUEST, authCreateSaga);
+}
 export function* authLoginSaga(data: IAuthLoginRequest): Generator {
   yield put(loadingStart(data.type));
   const payload = {
@@ -77,5 +86,10 @@ function* authLogout() {
   yield takeLatest(AUTH_LOGOUT_REQUEST, authLogoutSaga);
 }
 export default function* authSaga(): Generator {
-  yield all([fork(authLogin), fork(authTokenrefresh), fork(authLogout)]);
+  yield all([
+    fork(authCreate),
+    fork(authLogin),
+    fork(authTokenrefresh),
+    fork(authLogout),
+  ]);
 }

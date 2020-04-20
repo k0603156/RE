@@ -23,7 +23,7 @@ const UserMenu = (props: {
   return (
     <Box {...props}>
       <Item>
-        <Link to={`/user/${props.auth.me.userName}`}> Profile</Link>
+        <Link to={`/profile/${props.auth.me.userName}`}> Profile</Link>
       </Item>
       <Item>
         <Link to={`/postedit`}> PostEdit</Link>
@@ -41,7 +41,7 @@ const UserMenu = (props: {
 };
 export default connect(
   ({ auth }: RootStateType) => ({
-    auth
+    auth,
   }),
   { authLogoutAction }
 )(UserMenu);

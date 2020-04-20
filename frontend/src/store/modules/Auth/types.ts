@@ -1,3 +1,7 @@
+// 사용자 가입
+export const AUTH_CREATE_REQUEST = "auth/AUTH_CREATE_REQUEST";
+export const AUTH_CREATE_SUCCESS = "auth/AUTH_CREATE_SUCCESS";
+export const AUTH_CREATE_FAILURE = "auth/AUTH_CREATE_FAILURE";
 // 로그인 요청
 export const AUTH_LOGIN_REQUEST = "auth/AUTH_LOGIN_REQUEST";
 export const AUTH_LOGIN_SUCCESS = "auth/AUTH_LOGIN_SUCCESS";
@@ -11,6 +15,17 @@ export const AUTH_LOGOUT_REQUEST = "auth/AUTH_LOGOUT_REQUEST";
 export const AUTH_LOGOUT_SUCCESS = "auth/AUTH_LOGOUT_SUCCESS";
 export const AUTH_LOGOUT_FAILURE = "auth/AUTH_LOGOUT_FAILURE";
 
+// 사용자 가입
+export interface IAuthCreateRequest {
+  type: typeof AUTH_CREATE_REQUEST;
+  payload: {
+    userName: string;
+    email: string;
+    password: string;
+    confirmPassword: string;
+  };
+  callback: () => void;
+}
 // 로그인 요청
 export interface IAuthLoginRequest {
   type: typeof AUTH_LOGIN_REQUEST;
@@ -27,6 +42,7 @@ export interface IAuthLogoutRequest {
 }
 
 export type IAuthAction =
+  | IAuthCreateRequest
   | IAuthLoginRequest
   | IAuthTokenrefreshRequest
   | IAuthLogoutRequest;

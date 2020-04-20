@@ -7,10 +7,10 @@ const Box = styled.div`
 const Profile = styled(Box)``;
 
 interface IProps {
-  user: RootStateType["user"];
+  profile: RootStateType["profile"];
 }
 export default (props: IProps) => {
-  const { userName, posts } = props.user;
+  const { userName, posts } = props.profile;
   const isSelf = true;
   return (
     <div>
