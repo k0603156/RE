@@ -1,8 +1,8 @@
 {
-  "name": "traveler-client",
+  "name": "re-client",
   "main": "src/client/index.tsx",
   "version": "0.1.0",
-  "description": "Traveler-service-client",
+  "description": "RE:*-service-client",
   "author": {
     "name": "YongkukKim",
     "email": "syntax-err@kakao.com",

@@ -1,6 +1,6 @@
 #### ProjectName
 
-`Symphonia`
+`RE:*`
 
 #### Collaborators
 

@@ -1,8 +1,8 @@
 {
-  "name": "traveler-server",
+  "name": "re-server",
   "version": "0.0.0",
   "private": true,
-  "description": "Traveler-service-server",
+  "description": "RE:*-service-server",
   "engines": {
     "node": ">=12"
   },
