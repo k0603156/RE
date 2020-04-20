@@ -8,7 +8,7 @@
 
 ###### Structure
 
-<img width="100%" src="https://user-images.githubusercontent.com/16025776/76679777-80910700-6626-11ea-9357-a4254dfa4d85.jpg">
+<img width="100%" src="https://github.com/k0603156/RE/blob/master/resources/Structure.jpg?raw=true">
 
 ###### Definition
 
