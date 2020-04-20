@@ -4,6 +4,7 @@ import {
   AUTH_LOGIN_SUCCESS,
   AUTH_TOKENREFRESH_SUCCESS,
   AUTH_LOGOUT_SUCCESS,
+  AUTH_DELETE_SUCCESS,
 } from "./types";
 
 const initialState: IAuthState = {
@@ -52,6 +53,11 @@ export default createReducer(initialState, {
         userName: "",
         email: "",
       },
+    };
+  },
+  [AUTH_DELETE_SUCCESS]: (state, action) => {
+    return {
+      ...state,
     };
   },
 });

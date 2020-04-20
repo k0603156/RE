@@ -14,6 +14,10 @@ export const AUTH_TOKENREFRESH_FAILURE = "auth/AUTH_TOKENREFRESH_FAILURE";
 export const AUTH_LOGOUT_REQUEST = "auth/AUTH_LOGOUT_REQUEST";
 export const AUTH_LOGOUT_SUCCESS = "auth/AUTH_LOGOUT_SUCCESS";
 export const AUTH_LOGOUT_FAILURE = "auth/AUTH_LOGOUT_FAILURE";
+// 사용자 탈퇴
+export const AUTH_DELETE_REQUEST = "auth/AUTH_DELETE_REQUEST";
+export const AUTH_DELETE_SUCCESS = "auth/AUTH_DELETE_SUCCESS";
+export const AUTH_DELETE_FAILURE = "auth/AUTH_DELETE_FAILURE";
 
 // 사용자 가입
 export interface IAuthCreateRequest {
@@ -40,9 +44,16 @@ export interface IAuthLogoutRequest {
   type: typeof AUTH_LOGOUT_REQUEST;
   payload: { email: string };
 }
-
+// 사용자 탈퇴
+export interface IAuthDeleteRequest {
+  type: typeof AUTH_DELETE_REQUEST;
+  payload: {
+    email: string;
+  };
+}
 export type IAuthAction =
   | IAuthCreateRequest
   | IAuthLoginRequest
   | IAuthTokenrefreshRequest
-  | IAuthLogoutRequest;
+  | IAuthLogoutRequest
+  | IAuthDeleteRequest;

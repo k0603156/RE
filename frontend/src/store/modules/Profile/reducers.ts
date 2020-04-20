@@ -1,8 +1,4 @@
-import {
-  PROFILE_SELECT_SUCCESS,
-  PROFILE_UPDATE_SUCCESS,
-  PROFILE_DELETE_SUCCESS,
-} from "./types";
+import { PROFILE_SELECT_SUCCESS, PROFILE_UPDATE_SUCCESS } from "./types";
 
 import { createReducer } from "typesafe-actions";
 
@@ -19,11 +15,6 @@ export default createReducer(initialState, {
   },
 
   [PROFILE_UPDATE_SUCCESS]: (state, action) => {
-    return {
-      ...state,
-    };
-  },
-  [PROFILE_DELETE_SUCCESS]: (state, action) => {
     return {
       ...state,
     };

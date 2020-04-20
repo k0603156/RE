@@ -1,7 +1,6 @@
 import {
   PROFILE_SELECT_REQUEST,
   PROFILE_UPDATE_REQUEST,
-  PROFILE_DELETE_REQUEST,
   IProfileAction,
 } from "./types";
 
@@ -28,15 +27,6 @@ export function profileUpdateAction(
       userName,
       password,
       confirmPassword,
-    },
-  };
-}
-// 사용자 탈퇴
-export function profileDeleteAction(email: string): IProfileAction {
-  return {
-    type: PROFILE_DELETE_REQUEST,
-    payload: {
-      email,
     },
   };
 }

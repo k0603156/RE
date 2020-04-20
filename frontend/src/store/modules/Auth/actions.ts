@@ -3,6 +3,7 @@ import {
   AUTH_LOGIN_REQUEST,
   AUTH_TOKENREFRESH_REQUEST,
   AUTH_LOGOUT_REQUEST,
+  AUTH_DELETE_REQUEST,
   IAuthAction,
 } from "./types";
 
@@ -47,5 +48,14 @@ export function authLogoutAction(email: string): IAuthAction {
   return {
     type: AUTH_LOGOUT_REQUEST,
     payload: { email },
+  };
+}
+// 사용자 탈퇴
+export function authDeleteAction(email: string): IAuthAction {
+  return {
+    type: AUTH_DELETE_REQUEST,
+    payload: {
+      email,
+    },
   };
 }

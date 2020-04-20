@@ -10,6 +10,9 @@ import {
   AUTH_LOGOUT_REQUEST,
   AUTH_LOGOUT_SUCCESS,
   AUTH_LOGOUT_FAILURE,
+  AUTH_DELETE_REQUEST,
+  AUTH_DELETE_SUCCESS,
+  AUTH_DELETE_FAILURE,
   IAuthLoginRequest,
   IAuthTokenrefreshRequest,
   IAuthLogoutRequest,
@@ -75,6 +78,11 @@ export function* authLogoutSaga(data: IAuthLogoutRequest): Generator {
   }
   yield put(loadingFinish(data.type));
 }
+// 사용자 탈퇴 요청
+const profileDeleteSaga = createRequestSaga(
+  AUTH_DELETE_REQUEST,
+  Api.user.delete_user
+);
 
 function* authLogin() {
   yield takeLatest(AUTH_LOGIN_REQUEST, authLoginSaga);
@@ -85,11 +93,15 @@ function* authTokenrefresh() {
 function* authLogout() {
   yield takeLatest(AUTH_LOGOUT_REQUEST, authLogoutSaga);
 }
+function* authDelete(): Generator {
+  yield takeLatest(AUTH_DELETE_REQUEST, profileDeleteSaga);
+}
 export default function* authSaga(): Generator {
   yield all([
     fork(authCreate),
     fork(authLogin),
     fork(authTokenrefresh),
     fork(authLogout),
+    fork(authDelete),
   ]);
 }
