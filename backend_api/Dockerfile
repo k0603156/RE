@@ -29,6 +29,6 @@ RUN yarn
 COPY ./config/ /home/service/config/
 COPY ./scripts/ /home/service/scripts/
 COPY ./src/ /home/service/src/
-
+COPY ./build/ /home/service/build/
 # EXPOSE 80
 ENTRYPOINT ["/bin/bash","./docker-entrypoint.sh" ]
