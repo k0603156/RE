@@ -17,6 +17,7 @@ RUN apt-get update
 #패키지관련파일 복사
 COPY package.json /home/service/package.json
 COPY yarn.lock /home/service/yarn.lock
+COPY .sequelizerc /home/service/.sequelizerc
 
 #엔트리포인트 스크립트 복사
 COPY ./docker-entrypoint.sh     /home/service/docker-entrypoint.sh
