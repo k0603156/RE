@@ -11,7 +11,7 @@ import {
   AUTH_LOGOUT_FAILURE,
   IAuthLoginRequest,
   IAuthTokenrefreshRequest,
-  IAuthLogoutRequest
+  IAuthLogoutRequest,
 } from "./types";
 import Api from "@Client/Api";
 import { msgCreate } from "../Msg";
@@ -22,7 +22,7 @@ export function* authLoginSaga(data: IAuthLoginRequest): Generator {
   yield put(loadingStart(data.type));
   const payload = {
     email: data.payload.email,
-    password: data.payload.password
+    password: data.payload.password,
   };
   try {
     const response: any = yield call(Api.auth.authenticate, payload);
@@ -51,7 +51,7 @@ export const authTokenrefreshSaga = createRequestSaga(
 export function* authLogoutSaga(data: IAuthLogoutRequest): Generator {
   yield put(loadingStart(data.type));
   const payload = {
-    email: data.payload.email
+    email: data.payload.email,
   };
   try {
     const response: any = yield call(Api.auth.deauthorize, payload);
