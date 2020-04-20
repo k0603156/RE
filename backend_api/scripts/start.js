@@ -46,6 +46,7 @@ async function execute() {
     });
   }
 }
+execute();
 // sequelize
 //   .sync(option) //force:false
 //   .then((_) => NormLog("✓ PRODUCTION DB connection success."))
