@@ -7,8 +7,8 @@ const routes = require("./Routes");
 const { authenticateJwt } = require("./MiddleWares/passport");
 
 const PORT = process.env.PORT || 8000;
-const STATIC_PATH = path.resolve(__dirname, "./build/");
-const STATIC_ENTRY_POINT = path.resolve(__dirname, "./build/index.html");
+const STATIC_PATH = path.resolve(__dirname, "../build/");
+const STATIC_ENTRY_POINT = path.resolve(__dirname, "../build/index.html");
 
 const middleWares = [express.json(), express.urlencoded({ extended: false })];
 
