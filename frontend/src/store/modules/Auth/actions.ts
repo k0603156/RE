@@ -1,14 +1,13 @@
 import {
-  AUTH_CREATE_REQUEST,
-  AUTH_LOGIN_REQUEST,
+  AUTH_SIGNUP_REQUEST,
+  AUTH_SIGNIN_REQUEST,
   AUTH_TOKENREFRESH_REQUEST,
-  AUTH_LOGOUT_REQUEST,
-  AUTH_DELETE_REQUEST,
+  AUTH_SIGNOUT_REQUEST,
+  AUTH_DROPOUT_REQUEST,
   IAuthAction,
 } from "./types";
 
-// 사용자 생성
-export function authCreateAction(
+export function authSignupAction(
   userName: string,
   email: string,
   password: string,
@@ -16,7 +15,7 @@ export function authCreateAction(
   callback: () => void
 ): IAuthAction {
   return {
-    type: AUTH_CREATE_REQUEST,
+    type: AUTH_SIGNUP_REQUEST,
     payload: {
       userName,
       email,
@@ -26,34 +25,33 @@ export function authCreateAction(
     callback,
   };
 }
-//** CREATE ACTION **//
-// 로그인 요청
-export function authLoginAction(email: string, password: string): IAuthAction {
+
+export function authSigninAction(email: string, password: string): IAuthAction {
   return {
-    type: AUTH_LOGIN_REQUEST,
+    type: AUTH_SIGNIN_REQUEST,
     payload: {
       email,
       password,
     },
   };
 }
-// 토큰 재발행 요청
+
 export function authTokenrefreshAction(): IAuthAction {
   return {
     type: AUTH_TOKENREFRESH_REQUEST,
   };
 }
-// 로그아웃 요청
-export function authLogoutAction(email: string): IAuthAction {
+
+export function authSignoutAction(email: string): IAuthAction {
   return {
-    type: AUTH_LOGOUT_REQUEST,
+    type: AUTH_SIGNOUT_REQUEST,
     payload: { email },
   };
 }
-// 사용자 탈퇴
-export function authDeleteAction(email: string): IAuthAction {
+
+export function authDropoutAction(email: string): IAuthAction {
   return {
-    type: AUTH_DELETE_REQUEST,
+    type: AUTH_DROPOUT_REQUEST,
     payload: {
       email,
     },

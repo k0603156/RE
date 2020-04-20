@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import Presenter from "./Presenter";
-
-const Container = (props: { auth: IAuthState }) => {
-  const { auth } = props;
+import { RootStateType } from "@Store/modules";
+interface IProps {
+  auth: RootStateType["auth"];
+}
+export default (props: IProps) => {
   const [value, setValue] = useState(false);
   const MouseEnter = () => {
     setValue(true);
@@ -15,9 +17,7 @@ const Container = (props: { auth: IAuthState }) => {
       onMouseEnter={MouseEnter}
       onMouseLeave={MouseLeave}
       toggle={value}
-      auth={auth}
+      auth={props.auth}
     />
   );
 };
-
-export default Container;

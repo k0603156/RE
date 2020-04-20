@@ -3,16 +3,18 @@ import AuthPresenter from "./AuthPresenter";
 import useInput from "@Client/Hooks/useInput";
 import AuthState from "./AuthState";
 import { connect } from "react-redux";
-import { authLoginAction } from "@Store/modules/Auth/actions";
-import { authCreateAction } from "@Store/modules/Auth/actions";
+import {
+  authSignupAction,
+  authSigninAction,
+} from "@Store/modules/Auth/actions";
 import { RootStateType } from "store/modules";
 
 const AuthContainer = (props: {
   auth: RootStateType["auth"];
   loadingAuth: RootStateType["loading"];
   loadingCreateUser: RootStateType["loading"];
-  authLoginAction: typeof authLoginAction;
-  authCreateAction: typeof authCreateAction;
+  authSigninAction: typeof authSigninAction;
+  authSignupAction: typeof authSignupAction;
 }) => {
   const [action, setAction] = useState<AuthState>(AuthState.STATE_LOGIN);
   const userName = useInput<string>("");
@@ -24,14 +26,14 @@ const AuthContainer = (props: {
     e.preventDefault();
     switch (action) {
       case AuthState.STATE_LOGIN:
-        props.authLoginAction(email.value, password.value);
+        props.authSigninAction(email.value, password.value);
         break;
       case AuthState.STATE_SIGNUP:
         if (password.value !== confirmPassword.value) {
           console.log("비밀번호 확인란이 같지 않습니다.");
           break;
         }
-        props.authCreateAction(
+        props.authSignupAction(
           userName.value,
           email.value,
           password.value,
@@ -69,5 +71,5 @@ export default connect(
     loadingAuth: loading["auth/AUTH_LOGIN_REQUEST"],
     loadingCreateUser: loading["user/USER_CREATE_REQUEST"],
   }),
-  { authLoginAction, authCreateAction }
+  { authSignupAction, authSigninAction }
 )(AuthContainer);

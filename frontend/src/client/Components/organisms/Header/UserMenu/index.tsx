@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import { authLogoutAction } from "@Store/modules/Auth/actions";
+import { authSignoutAction } from "@Store/modules/Auth/actions";
 import PrivateRoutes from "@Client/Routes/routes.private";
 import { RootStateType } from "store/modules";
 
@@ -18,7 +18,7 @@ const Box = styled.ul`
 const UserMenu = (props: {
   toggle: boolean;
   auth: RootStateType["auth"];
-  authLogoutAction: typeof authLogoutAction;
+  authSignoutAction: typeof authSignoutAction;
 }) => {
   return (
     <Box {...props}>
@@ -33,7 +33,7 @@ const UserMenu = (props: {
           <Link to={"/adm"}>Admin</Link>
         </Item>
       )}
-      <Item onClick={() => props.authLogoutAction(props.auth.me.email)}>
+      <Item onClick={() => props.authSignoutAction(props.auth.me.email)}>
         Logout
       </Item>
     </Box>
@@ -43,5 +43,5 @@ export default connect(
   ({ auth }: RootStateType) => ({
     auth,
   }),
-  { authLogoutAction }
+  { authSignoutAction }
 )(UserMenu);

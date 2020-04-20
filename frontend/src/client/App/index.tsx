@@ -39,8 +39,11 @@ const MSGBox = styled.div`
   background-color: ${(props) =>
     props.id === "ERROR" ? "rgba(100, 0, 0, 0.5)" : "rgba(0, 100, 0, 0.5)"};
 `;
-
-function App(props: { auth: IAuthState; msg: IMsgState }) {
+interface IProps {
+  auth: RootStateType["auth"];
+  msg: RootStateType["msg"];
+}
+function App(props: IProps) {
   return (
     <ThemeProvider theme={Theme}>
       <GlobalStyles />

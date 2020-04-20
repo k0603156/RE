@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Mx_Width } from "@Client/Styles/Device";
 import UMenu from "./UserMenu";
+import { RootStateType } from "@Store/modules";
 
 const Title = styled.div`
   /* Symphonia */
@@ -27,13 +28,13 @@ const UserBox = styled.div`
     text-overflow: ellipsis;
   }`).mobileL}
 `;
-
-export default (props: {
+interface IProps {
   onMouseEnter: () => void;
   onMouseLeave: () => void;
   toggle: boolean;
-  auth: IAuthState;
-}) => {
+  auth: RootStateType["auth"];
+}
+export default (props: IProps) => {
   const { auth, toggle, onMouseEnter, onMouseLeave } = props;
   return (
     <>

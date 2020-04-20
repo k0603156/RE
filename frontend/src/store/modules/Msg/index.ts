@@ -1,5 +1,6 @@
 import { all, fork, takeLatest, delay, put } from "redux-saga/effects";
 import { createAction, createReducer } from "typesafe-actions";
+import { InitialState } from "./types";
 const MSG_CREATE = "msg/MSG_CREATE";
 const MSG_CLEAR = "msg/MSG_CLEAR";
 
@@ -13,12 +14,12 @@ export const msgClear = createAction(MSG_CLEAR, () => {
   return {};
 })();
 
-const initialState: IMsgState = {
+const initialState: InitialState = {
   isAlert: false,
   actionType: "",
   msgType: "ALERT",
   message: "",
-  status: ""
+  status: "",
 };
 
 const msgReducer = createReducer(initialState, {
@@ -29,7 +30,7 @@ const msgReducer = createReducer(initialState, {
       actionType,
       msgType,
       message: Message.response?.data.message || Message.message,
-      status: Message.response?.status || "localErr"
+      status: Message.response?.status || "localErr",
     };
   },
   [MSG_CLEAR]: (state: any, action: any) => {
@@ -38,9 +39,9 @@ const msgReducer = createReducer(initialState, {
       actionType: "",
       msgType: "ALERT",
       message: "",
-      status: ""
+      status: "",
     };
-  }
+  },
 });
 
 function* increaseStorySaga() {

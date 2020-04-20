@@ -1,13 +1,14 @@
 import { createReducer } from "typesafe-actions";
 import {
-  AUTH_CREATE_SUCCESS,
-  AUTH_LOGIN_SUCCESS,
+  AUTH_SIGNUP_SUCCESS,
+  AUTH_SIGNIN_SUCCESS,
   AUTH_TOKENREFRESH_SUCCESS,
-  AUTH_LOGOUT_SUCCESS,
-  AUTH_DELETE_SUCCESS,
+  AUTH_SIGNOUT_SUCCESS,
+  AUTH_DROPOUT_SUCCESS,
+  InitialState,
 } from "./types";
 
-const initialState: IAuthState = {
+const initialState: InitialState = {
   isLogged: !!localStorage.getItem("token"),
   isAdmin: false,
   me: {
@@ -18,13 +19,13 @@ const initialState: IAuthState = {
 
 export default createReducer(initialState, {
   // 회원가입 성공
-  [AUTH_CREATE_SUCCESS]: (state, action) => {
+  [AUTH_SIGNUP_SUCCESS]: (state, action) => {
     return {
       ...state,
     };
   },
   // 로그인 성공
-  [AUTH_LOGIN_SUCCESS]: (state, action) => {
+  [AUTH_SIGNIN_SUCCESS]: (state, action) => {
     const { email, userName } = action.payload.response;
     return {
       isLogged: true,
@@ -45,7 +46,7 @@ export default createReducer(initialState, {
     },
   }),
   // 로그아웃 성공
-  [AUTH_LOGOUT_SUCCESS]: (state, action) => {
+  [AUTH_SIGNOUT_SUCCESS]: (state, action) => {
     return {
       isLogged: false,
       isAdmin: false,
@@ -55,7 +56,7 @@ export default createReducer(initialState, {
       },
     };
   },
-  [AUTH_DELETE_SUCCESS]: (state, action) => {
+  [AUTH_DROPOUT_SUCCESS]: (state, action) => {
     return {
       ...state,
     };

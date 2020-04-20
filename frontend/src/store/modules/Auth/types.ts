@@ -1,27 +1,31 @@
-// 사용자 가입
-export const AUTH_CREATE_REQUEST = "auth/AUTH_CREATE_REQUEST";
-export const AUTH_CREATE_SUCCESS = "auth/AUTH_CREATE_SUCCESS";
-export const AUTH_CREATE_FAILURE = "auth/AUTH_CREATE_FAILURE";
-// 로그인 요청
-export const AUTH_LOGIN_REQUEST = "auth/AUTH_LOGIN_REQUEST";
-export const AUTH_LOGIN_SUCCESS = "auth/AUTH_LOGIN_SUCCESS";
-export const AUTH_LOGIN_FAILURE = "auth/AUTH_LOGIN_FAILURE";
-// 토큰 재발행 요청
+export const AUTH_SIGNUP_REQUEST = "auth/AUTH_SIGNUP_REQUEST";
+export const AUTH_SIGNUP_SUCCESS = "auth/AUTH_SIGNUP_SUCCESS";
+export const AUTH_SIGNUP_FAILURE = "auth/AUTH_SIGNUP_FAILURE";
+export const AUTH_SIGNIN_REQUEST = "auth/AUTH_SIGNIN_REQUEST";
+export const AUTH_SIGNIN_SUCCESS = "auth/AUTH_SIGNIN_SUCCESS";
+export const AUTH_SIGNIN_FAILURE = "auth/AUTH_SIGNIN_FAILURE";
 export const AUTH_TOKENREFRESH_REQUEST = "auth/AUTH_TOKENREFRESH_REQUEST";
 export const AUTH_TOKENREFRESH_SUCCESS = "auth/AUTH_TOKENREFRESH_SUCCESS";
 export const AUTH_TOKENREFRESH_FAILURE = "auth/AUTH_TOKENREFRESH_FAILURE";
-// 로그아웃 요청
-export const AUTH_LOGOUT_REQUEST = "auth/AUTH_LOGOUT_REQUEST";
-export const AUTH_LOGOUT_SUCCESS = "auth/AUTH_LOGOUT_SUCCESS";
-export const AUTH_LOGOUT_FAILURE = "auth/AUTH_LOGOUT_FAILURE";
-// 사용자 탈퇴
-export const AUTH_DELETE_REQUEST = "auth/AUTH_DELETE_REQUEST";
-export const AUTH_DELETE_SUCCESS = "auth/AUTH_DELETE_SUCCESS";
-export const AUTH_DELETE_FAILURE = "auth/AUTH_DELETE_FAILURE";
+export const AUTH_SIGNOUT_REQUEST = "auth/AUTH_SIGNOUT_REQUEST";
+export const AUTH_SIGNOUT_SUCCESS = "auth/AUTH_SIGNOUT_SUCCESS";
+export const AUTH_SIGNOUT_FAILURE = "auth/AUTH_SIGNOUT_FAILURE";
+export const AUTH_DROPOUT_REQUEST = "auth/AUTH_DROPOUT_REQUEST";
+export const AUTH_DROPOUT_SUCCESS = "auth/AUTH_DROPOUT_SUCCESS";
+export const AUTH_DROPOUT_FAILURE = "auth/AUTH_DROPOUT_FAILURE";
 
-// 사용자 가입
-export interface IAuthCreateRequest {
-  type: typeof AUTH_CREATE_REQUEST;
+export interface InitialState {
+  isLogged: boolean;
+  isAdmin: boolean;
+  me: {
+    email: string;
+    userName: string;
+  };
+}
+
+// 사용자가입
+export interface IAuthSignupAction {
+  type: typeof AUTH_SIGNUP_REQUEST;
   payload: {
     userName: string;
     email: string;
@@ -30,30 +34,30 @@ export interface IAuthCreateRequest {
   };
   callback: () => void;
 }
-// 로그인 요청
-export interface IAuthLoginRequest {
-  type: typeof AUTH_LOGIN_REQUEST;
+// 로그인
+export interface IAuthSigninAction {
+  type: typeof AUTH_SIGNIN_REQUEST;
   payload: { email: string; password: string };
 }
-// 토큰 재발행 요청
-export interface IAuthTokenrefreshRequest {
+// 토큰재발행
+export interface IAuthTokenrefreshAction {
   type: typeof AUTH_TOKENREFRESH_REQUEST;
 }
-// 로그아웃 요청
-export interface IAuthLogoutRequest {
-  type: typeof AUTH_LOGOUT_REQUEST;
+// 로그아웃
+export interface IAuthSignoutAction {
+  type: typeof AUTH_SIGNOUT_REQUEST;
   payload: { email: string };
 }
-// 사용자 탈퇴
-export interface IAuthDeleteRequest {
-  type: typeof AUTH_DELETE_REQUEST;
+// 사용자탈퇴
+export interface IAuthDropoutAction {
+  type: typeof AUTH_DROPOUT_REQUEST;
   payload: {
     email: string;
   };
 }
 export type IAuthAction =
-  | IAuthCreateRequest
-  | IAuthLoginRequest
-  | IAuthTokenrefreshRequest
-  | IAuthLogoutRequest
-  | IAuthDeleteRequest;
+  | IAuthSignupAction
+  | IAuthSigninAction
+  | IAuthTokenrefreshAction
+  | IAuthSignoutAction
+  | IAuthDropoutAction;
