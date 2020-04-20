@@ -12,7 +12,7 @@ RUN apt-get update
 
 #Yarn 설치
 # RUN npm install --global yarn 
-# node:12에 yarn이 설치 되어있는 듯 하다
+# node:12에 yarn이 설치 되어있음
 
 #패키지관련파일 복사
 COPY package.json /home/service/package.json
