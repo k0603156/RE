@@ -11,13 +11,14 @@
   "homepage": "",
   "private": true,
   "scripts": {
-    "test:client": "node scripts/test.js",
     "build:dev:client": "node scripts/build.dev.client.js",
     "build:dev:server": "node scripts/build.dev.server.js",
     "build:prod:client": "node scripts/build.prod.client.js",
     "build:prod:server": "node scripts/build.prod.server.js",
     "start:server": "node dist/server.js",
     "dev": "node scripts/dev.js",
+    "test": "node scripts/test.js",
+    "coverage": "npx jest --coverage --detectOpenHandles --forceExit",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
@@ -112,6 +113,7 @@
     "react-dev-utils": "^10.0.0",
     "react-docgen-typescript-loader": "^3.7.2",
     "react-test-renderer": "^16.12.0",
+    "redux-saga-test-plan": "^4.0.0-rc.3",
     "resolve": "1.12.2",
     "resolve-url-loader": "3.1.1",
     "sass-loader": "8.0.0",
