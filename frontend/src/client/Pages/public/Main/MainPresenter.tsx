@@ -106,7 +106,7 @@ export default (props: IProps) => {
       <Container>
         <VT>
           <Jumbo size="md" verticalFrom={"tablet"}>
-            Symphonia
+            RE:* log
           </Jumbo>
           <Article>
             <Title>

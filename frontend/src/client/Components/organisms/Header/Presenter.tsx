@@ -39,7 +39,7 @@ export default (props: IProps) => {
   return (
     <>
       <Title>
-        <Link to="/">Symphonia</Link>
+        <Link to="/">RE:* log</Link>
       </Title>
 
       <UserBox onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
