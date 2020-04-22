@@ -35,11 +35,16 @@ const Footer = styled(
     flex: 1;
     list-style: none;
     text-align: center;
+    line-height: 50px;
     cursor: pointer;
+    transition: transform 0.3s ease 0s;
     &.active {
       font-weight: 600;
     }
-    transition: transform 0.3s ease 0s;
+    a {
+      padding: 5px 10px;
+      color: rgb(21, 18, 31);
+    }
   }
 `;
 
