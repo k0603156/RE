@@ -1,7 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import { Node } from "slate";
-import { Editor, HashtagInput } from "@Client/Components/molecules";
+import {
+  Editor,
+  HashtagInput,
+  ImageUploader,
+} from "@Client/Components/molecules";
 import { RootStateType } from "@Store/modules";
 import { IPostCreatePayload } from "@Store/modules/Post/types";
 interface IProps {
@@ -70,6 +74,7 @@ export default styled((props: IProps) => {
         onChange={(value) => props.onChange("content", value)}
         value={props.postData.content}
       />
+      <ImageUploader />
       <button type="button" onClick={props.onSubmit}>
         글쓰기
       </button>
