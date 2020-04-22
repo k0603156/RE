@@ -14,8 +14,7 @@ export default styled((props: IProps) => {
   const onKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       switch (true) {
-        //!fix: 이미 추가된 태그 체크 안됨
-        case props.tags.includes({ name: e.currentTarget.value }):
+        case props.tags.some((tag) => tag.name === e.currentTarget.value):
           setState({
             ...state,
             error: true,
@@ -40,8 +39,8 @@ export default styled((props: IProps) => {
   };
   return (
     <div className={props.className}>
-      {props.tags.map((tag) => (
-        <span key={tag.name}>#{tag.name}</span>
+      {props.tags.map((tag, index) => (
+        <span key={tag.name + index}>#{tag.name}</span>
       ))}
       <input
         placeholder={"태그입력"}
