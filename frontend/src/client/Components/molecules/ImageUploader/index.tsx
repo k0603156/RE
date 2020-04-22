@@ -10,8 +10,14 @@ export default styled((props: IProps) => {
   }
   return (
     <div className={props.className}>
-      <img src={file} />
+      <img className={"preview"} src={file} />
       <input type="file" onChange={onChange} />
     </div>
   );
-})``;
+})`
+  display: flex;
+  flex-direction: column;
+  img.preview {
+    max-width: 100%;
+  }
+`;
