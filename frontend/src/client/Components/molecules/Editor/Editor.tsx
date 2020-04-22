@@ -27,9 +27,9 @@ const Toolbar = styled.div`
 const StyledEditable = styled(Editable)`
   height: 300px;
   padding: 0.3rem;
-  box-shadow: 2px 2px 4px gray;
   border: 1px solid lightgray;
   border-bottom: none;
+  box-shadow: 5px 5px 10px rgb(47, 44, 55);
 `;
 const isMarkActive = (editor: any, format: any) => {
   const marks = BaseEditor.marks(editor);

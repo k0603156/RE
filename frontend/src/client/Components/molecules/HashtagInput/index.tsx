@@ -14,6 +14,7 @@ export default styled((props: IProps) => {
   const onKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       switch (true) {
+        //!fix: 이미 추가된 태그 체크 안됨
         case props.tags.includes({ name: e.currentTarget.value }):
           setState({
             ...state,
@@ -52,11 +53,14 @@ export default styled((props: IProps) => {
     </div>
   );
 })`
+  display: flex;
+  flex-wrap: wrap;
   span {
     margin: 0 5px;
     font-weight: 600;
   }
   input {
+    flex: 1;
     padding-left: 1px;
     border: none;
     border-bottom: 1px solid lightgray;
@@ -66,6 +70,7 @@ export default styled((props: IProps) => {
     }
   }
   p {
+    width: 100%;
     font-size: 0.8rem;
     margin: 3px 5px;
   }
