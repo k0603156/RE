@@ -1,5 +1,6 @@
 /** @tsx tsx */
 import React from "react";
+import { BrowserRouter } from "react-router-dom";
 import { action } from "@storybook/addon-actions";
 import { Carousel as Component, CarouselItem as ComponentItem } from "./index";
 
@@ -46,12 +47,14 @@ export const Carousel = () => {
     },
   ];
   return (
-    <Component
-      pageDataList={dataList}
-      CarouselItem={(data, index) => (
-        <ComponentItem key={index} length={dataList.length} data={data} />
-      )}
-    />
+    <BrowserRouter>
+      <Component
+        pageDataList={dataList}
+        CarouselItem={(data, index) => (
+          <ComponentItem key={index} length={dataList.length} data={data} />
+        )}
+      />
+    </BrowserRouter>
   );
 };
 Carousel.story = {
