@@ -19,11 +19,14 @@ const Li = styled.li`
   width: 33%;
   padding: 0.5rem;
   margin: 1px 0;
-  border: 1px solid gray;
-  border-radius: 3px;
+  border: 1px solid rgba(47, 44, 55, 0.1);
+  border-radius: 5px;
   cursor: pointer;
+  text-align: center;
+  box-shadow: 5px 5px 10px rgba(47, 44, 55, 0.5);
+  transition: transform 0.3s ease 0s;
   &:hover {
-    box-shadow: 0.05rem 0.05rem 0.4rem lightgray;
+    box-shadow: 1px 1px 8px rgba(47, 44, 55, 0.1);
   }
 `;
 interface IProps {
