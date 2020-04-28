@@ -4,7 +4,7 @@ import { Router } from "react-router-dom";
 import { createBrowserHistory } from "history";
 import configStore from "@Store/index";
 import { Provider } from "react-redux";
-import * as serviceWorker from "./Worker/serviceWorker";
+import * as serviceWorker from "./serviceWorker";
 import App from "./App";
 
 const customHistory = createBrowserHistory();

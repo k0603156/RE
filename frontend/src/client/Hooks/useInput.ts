@@ -9,7 +9,7 @@ const useInput = <T>(defaultValue: T): IUseInputReturn<T> => {
   return {
     value,
     onChange,
-    setValue
+    setValue,
   };
 };
 export default useInput;

@@ -29,7 +29,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "typeRoots": ["node_modules/@types", "src/@types"],
+    "typeRoots": ["node_modules/@types", "src/client/Types"],
     "types": ["node", "jest", "lodash"]
   },
   "exclude": ["**/*.stories.tsx"]

@@ -3,18 +3,17 @@ import _ from "lodash";
 import { connect } from "react-redux";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
-import PrivateLayout from "./privateLayout";
-import PublicLayout from "./publicLayout";
-import NotFound from "./publicLayout/NotFound";
+import PrivateLayout from "./Layouts/privateLayout";
+import PublicLayout, { NotFound } from "./Layouts/publicLayout";
 import {
   PrivateRoutes,
   PublicRoutes,
   SessionRoutes,
   AdminRoutes,
-} from "@Client/Routes";
-import Theme from "@Client//Styles/Theme";
-import GlobalStyles from "@Client//Styles/Global";
-import { Header } from "@Client/Components/organisms";
+} from "@Client/App/Routes";
+import Theme from "@Client/Styles/Theme";
+import GlobalStyles from "@Client/Styles/Global";
+import { Header } from "@Client/App/Components/organisms";
 import { RootStateType } from "@Store/modules";
 
 const Wrapper = styled.div`
