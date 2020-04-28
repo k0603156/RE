@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Presenter from "./Presenter";
-import { RootStateType } from "@Store/modules";
+import { RootStateType } from "@Services/Store/modules";
+
 interface IProps {
   auth: RootStateType["auth"];
 }

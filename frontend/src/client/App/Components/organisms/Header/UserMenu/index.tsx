@@ -2,9 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import { authSignoutAction } from "@Store/modules/Auth/actions";
 import PrivateRoutes from "@Client/App/Routes/routes.private";
-import { RootStateType } from "store/modules";
+import { RootStateType } from "@Services/Store/modules";
+import { authSignoutAction } from "@Services/Store/modules/Auth/actions";
 
 const Item = styled.li`
   margin: 10px 0;

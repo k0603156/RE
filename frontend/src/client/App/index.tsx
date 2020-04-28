@@ -14,7 +14,7 @@ import {
 import Theme from "@Client/Styles/Theme";
 import GlobalStyles from "@Client/Styles/Global";
 import { Header } from "@Client/App/Components/organisms";
-import { RootStateType } from "@Store/modules";
+import { RootStateType } from "@Services/Store/modules";
 
 const Wrapper = styled.div`
   position: relative;

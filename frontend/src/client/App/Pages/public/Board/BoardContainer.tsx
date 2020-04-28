@@ -1,9 +1,12 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
 import { withRouter, RouteComponentProps } from "react-router-dom";
-import { boardSetPage, boardBrowseAction } from "@Store/modules/Board/actions";
-import { RootStateType } from "@Store/modules";
+import { connect } from "react-redux";
 import BoardPresenter from "./BoardPresenter";
+import { RootStateType } from "@Services/Store/modules";
+import {
+  boardSetPage,
+  boardBrowseAction,
+} from "@Services/Store/modules/Board/actions";
 
 export interface IProps extends RouteComponentProps<{ boardName: string }> {
   main: RootStateType["main"];

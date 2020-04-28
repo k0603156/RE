@@ -1,23 +1,57 @@
 import React, { useEffect } from "react";
-import { connect } from "react-redux";
 import { withRouter, RouteComponentProps } from "react-router-dom";
-import { RootStateType } from "@Store/modules";
-import { postBrowseAction } from "@Store/modules/Post/actions";
+import { connect } from "react-redux";
 import PostPresenter from "./PostPresenter";
+import { RootStateType } from "@Services/Store/modules";
+import { postBrowseAction } from "@Services/Store/modules/Post/actions";
 
 export interface IProps extends RouteComponentProps<{ postId: string }> {
-  post: RootStateType["post"];
+  title: RootStateType["post"]["title"];
+  updatedAt: RootStateType["post"]["updatedAt"];
+  hashtags: RootStateType["post"]["hashtags"];
+  userName: RootStateType["post"]["user"]["userName"];
+  content: RootStateType["post"]["content"];
   postBrowseAction: typeof postBrowseAction;
 }
 
 const PostContainer = withRouter((props: IProps) => {
-  useEffect(() => {
-    props.postBrowseAction(props.match.params.postId);
+  const {
+    title,
+    content,
+    hashtags,
+    updatedAt,
+    userName,
+    match: {
+      params: { postId },
+    },
+    postBrowseAction,
+  } = props;
 
+  useEffect(() => {
+    postBrowseAction(postId);
     return () => {};
-  }, [props.match.params.postId]);
-  return <PostPresenter post={props.post} />;
+  }, [postId]);
+
+  return (
+    <PostPresenter
+      title={title}
+      content={content}
+      hashtags={hashtags}
+      updatedAt={updatedAt}
+      userName={userName}
+    />
+  );
 });
-export default connect(({ post, loading }: RootStateType) => ({ post }), {
-  postBrowseAction
-})(PostContainer);
+
+export default connect(
+  ({ post, loading }: RootStateType) => ({
+    title: post.title,
+    content: post.content,
+    hashtags: post.hashtags,
+    updatedAt: post.updatedAt,
+    userName: post.user.userName,
+  }),
+  {
+    postBrowseAction,
+  }
+)(PostContainer);

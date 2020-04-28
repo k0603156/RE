@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
-import ProfilePresenter from "./ProfilePresenter";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { connect } from "react-redux";
-import { profileSelectAction } from "@Store/modules/Profile/actions";
-import { RootStateType } from "@Store/modules";
+import ProfilePresenter from "./ProfilePresenter";
+import { RootStateType } from "@Services/Store/modules";
+import { profileSelectAction } from "@Services/Store/modules/Profile/actions";
 
 export interface IProps
   extends RouteComponentProps<{ searchUserName: string }> {

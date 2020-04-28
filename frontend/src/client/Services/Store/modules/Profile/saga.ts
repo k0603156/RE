@@ -1,7 +1,7 @@
 import { PROFILE_SELECT_REQUEST, PROFILE_UPDATE_REQUEST } from "./types";
 import { all, fork, takeLatest } from "redux-saga/effects";
-import createRequestSaga from "@Store/lib/createRequestSaga";
-import Api from "@Client/Api";
+import createRequestSaga from "@Services/Store/lib/createRequestSaga";
+import Api from "@Services/Api";
 
 //사용자 정보 요청
 const profileSelectSaga = createRequestSaga(

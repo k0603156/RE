@@ -1,6 +1,6 @@
 import Axios from "axios";
-import { IPostCreatePayload } from "@Store/modules/Post/types";
 import { API_ROOT } from "./config";
+import { IPostCreatePayload } from "@Services/Store/modules/Post/types";
 
 const ROUTE = "post";
 

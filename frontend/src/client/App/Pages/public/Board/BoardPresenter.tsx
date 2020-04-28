@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import { RootStateType } from "@Services/Store/modules";
 import { Pagination, PostBox } from "@Client/App/Components/organisms";
-import { RootStateType } from "@Store/modules";
 
 const BoardBox = styled.div``;
 const BoardTitle = styled.h3``;

@@ -1,13 +1,13 @@
 import React from "react";
-import styled from "styled-components";
 import { Node } from "slate";
+import styled from "styled-components";
 import {
   Editor,
   HashtagInput,
   ImageUploader,
 } from "@Client/App/Components/molecules";
-import { RootStateType } from "@Store/modules";
-import { IPostCreatePayload } from "@Store/modules/Post/types";
+import { RootStateType } from "@Services/Store/modules";
+import { IPostCreatePayload } from "@Services/Store/modules/Post/types";
 interface IProps {
   className?: string;
   onSubmit: (event: React.ChangeEvent<any>) => void;

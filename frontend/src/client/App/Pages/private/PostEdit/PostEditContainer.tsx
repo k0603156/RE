@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Node } from "slate";
-import { connect } from "react-redux";
 import { debounce } from "lodash";
-import { postCreateAction } from "@Store/modules/Post/actions";
-import { boardlistBrowseAction } from "@Store/modules/Main/actions";
+import { connect } from "react-redux";
 import Presenter from "./PostEditPresenter";
-import { RootStateType } from "@Store/modules";
-import { IPostCreatePayload } from "@Store/modules/Post/types";
+import { RootStateType } from "@Services/Store/modules";
+import { postCreateAction } from "@Services/Store/modules/Post/actions";
+import { IPostCreatePayload } from "@Services/Store/modules/Post/types";
+import { boardlistBrowseAction } from "@Services/Store/modules/Main/actions";
 
 export interface IProps {
   main: RootStateType["main"];

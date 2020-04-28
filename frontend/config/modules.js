@@ -83,7 +83,7 @@ function getWebpackAliases(options = {}) {
     return {
       "@Server": path.resolve(__dirname, "../src/server/"),
       "@Client": path.resolve(__dirname, "../src/client/"),
-      "@Store": path.resolve(__dirname, "../src/store/"),
+      "@Services": path.resolve(__dirname, "../src/client/Services/"),
     };
   }
 }

@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import AuthPresenter from "./AuthPresenter";
-import useInput from "@Client/Hooks/useInput";
+import useInput from "@Client/App/Hooks/useInput";
 import AuthState from "./AuthState";
 import { connect } from "react-redux";
 import {
   authSignupAction,
   authSigninAction,
-} from "@Store/modules/Auth/actions";
-import { RootStateType } from "store/modules";
+} from "@Services/Store/modules/Auth/actions";
+import { RootStateType } from "@Services/Store/modules";
 
 const AuthContainer = (props: {
   auth: RootStateType["auth"];
@@ -22,7 +22,7 @@ const AuthContainer = (props: {
   const password = useInput<string>("");
   const confirmPassword = useInput<string>("");
 
-  const onSubmit = (e: any) => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     switch (action) {
       case AuthState.STATE_LOGIN:

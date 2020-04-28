@@ -2,7 +2,8 @@ import React, { useMemo, useState } from "react";
 import styled from "styled-components";
 import { createEditor, Node } from "slate";
 import { Slate, Editable, withReact } from "slate-react";
-import { RootStateType } from "@Store/modules";
+import { RootStateType } from "@Services/Store/modules";
+
 const Hashtags = styled.div`
   font-size: 0.8rem;
 `;
@@ -18,23 +19,24 @@ const Owner = styled.div`
 const Content = styled.div``;
 
 interface IProps {
-  post: RootStateType["post"];
+  title: RootStateType["post"]["title"];
+  updatedAt: RootStateType["post"]["updatedAt"];
+  hashtags: RootStateType["post"]["hashtags"];
+  userName: RootStateType["post"]["user"]["userName"];
+  content: RootStateType["post"]["content"];
 }
 export default (props: IProps) => {
-  const content = props.post.content;
-  console.log(content);
+  const { title, content, hashtags, updatedAt, userName } = props;
   const [value, setValue] = useState<Array<Node>>(content);
   const editor = useMemo(() => withReact(createEditor()), []);
   return (
     <div>
-      <Hashtags>
-        {props.post.hashtags.map((hashtag: any) => `#${hashtag.name}`)}
-      </Hashtags>
-      <Title>{props.post.title}</Title>
-      <UpdatedAt>{props.post.updatedAt}</UpdatedAt>
-      <Owner>{props.post.user.userName}</Owner>
+      <Hashtags>{hashtags.map((hashtag: any) => `#${hashtag.name}`)}</Hashtags>
+      <Title>{title}</Title>
+      <UpdatedAt>{updatedAt}</UpdatedAt>
+      <Owner>{userName}</Owner>
       <Content>
-        <Slate editor={editor} value={value} onChange={v => setValue(v)}>
+        <Slate editor={editor} value={value} onChange={(v) => setValue(v)}>
           <Editable readOnly />
         </Slate>
       </Content>

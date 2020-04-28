@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { RootStateType } from "@Store/modules";
+import { RootStateType } from "@Services/Store/modules";
 const Box = styled.div`
   min-height: 200px;
 `;

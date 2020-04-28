@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { RootStateType } from "@Store/modules/index";
-import { boardSelectAction } from "@Store/modules/Main/actions";
 import List from "@Client/App/Components/atoms/List";
+import { RootStateType } from "@Services/Store/modules/index";
+import { boardSelectAction } from "@Services/Store/modules/Main/actions";
 
 const Box = styled.div`
   margin: 1rem auto;

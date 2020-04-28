@@ -1,7 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { RootStateType } from "@Store/modules/index";
+import { Link } from "react-router-dom";
+import { RootStateType } from "@Services/Store/modules/index";
 
 interface IProps {
   className?: string;

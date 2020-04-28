@@ -5,30 +5,30 @@ import {
   put,
   call,
   select,
-  getContext
+  getContext,
 } from "redux-saga/effects";
 import {
   POST_BROWSE_REQUEST,
   POST_CREATE_REQUEST,
   POST_CREATE_SUCCESS,
   POST_DELETE_REQUEST,
-  POST_UPDATE_REQUEST
+  POST_UPDATE_REQUEST,
 } from "./types";
 import { loadingStart, loadingFinish } from "../Loading";
 import { msgCreate } from "../Msg";
-import Api from "@Client/Api";
+import Api from "@Services/Api";
 
 function createSaga(type: string, request: AxiosPromiseType) {
   const SUCCESS = type.replace("REQUEST", "SUCCESS");
   const FAILURE = type.replace("REQUEST", "FAILURE");
 
-  return function*(action: any) {
+  return function* (action: any) {
     yield put(loadingStart(type));
     try {
       const response = yield call(request, action.payload);
       yield put({
         type: SUCCESS,
-        payload: response.data
+        payload: response.data,
       });
     } catch (error) {
       yield put(msgCreate(FAILURE, "ERROR", error));
@@ -69,12 +69,12 @@ function* postUpdate() {
   yield takeLatest(POST_UPDATE_REQUEST, postUpdateSaga);
 }
 
-export default function*() {
+export default function* () {
   yield all([
     fork(postBrowse),
     fork(postCreate),
     fork(postCreateSuccess),
     fork(postDelete),
-    fork(postUpdate)
+    fork(postUpdate),
   ]);
 }

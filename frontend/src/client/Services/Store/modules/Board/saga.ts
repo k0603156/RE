@@ -1,7 +1,7 @@
 import { all, fork, takeLatest } from "redux-saga/effects";
 import { BOARD_BROWSE_REQUEST } from "./types";
 import createRequestSaga from "../../lib/createRequestSaga";
-import Api from "@Client/Api";
+import Api from "@Services/Api";
 
 //포스트 리스트 읽기
 const boardBrowseSaga = createRequestSaga(

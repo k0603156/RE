@@ -6,10 +6,10 @@ import { Provider } from "react-redux";
 import App from "@Client/App";
 import createPage from "./createPage";
 
-import PreloadContext from "@Store/lib/preloadContext";
-import { store, sagaPromise } from "@Store/configStore";
 import { END } from "redux-saga";
 import createPreloadRedux from "./createPreloadRedux";
+import PreloadContext from "@Services/Store/lib/preloadContext";
+import { store, sagaPromise } from "@Services/Store/configStore";
 
 const serverRender = async (req: any, res: any, next: any) => {
   const context = {};
