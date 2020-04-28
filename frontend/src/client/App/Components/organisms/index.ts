@@ -1,3 +1,8 @@
+export * from "./Carousel";
+export { default as KeywordBox } from "./KeywordBox";
+export { default as HashtagInput } from "./HashtagInput";
+export { default as ImageUploader } from "./ImageUploader";
+export { default as Editor } from "./Editor";
 export { default as Pagination } from "./Pagination";
 export { default as Header } from "./Header";
 export { default as Jumbo } from "./Jumbo";

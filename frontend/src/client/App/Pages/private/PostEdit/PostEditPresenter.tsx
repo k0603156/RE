@@ -5,7 +5,7 @@ import {
   Editor,
   HashtagInput,
   ImageUploader,
-} from "@Client/App/Components/molecules";
+} from "@Client/App/Components/organisms";
 import { RootStateType } from "@Services/Store/modules";
 import { IPostCreatePayload } from "@Services/Store/modules/Post/types";
 interface IProps {

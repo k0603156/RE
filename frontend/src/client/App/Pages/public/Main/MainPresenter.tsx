@@ -3,12 +3,14 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { RootStateType } from "@Services/Store/modules/index";
 import { Icon } from "@Client/App/Components/atoms";
-import { PostBox, Jumbo } from "@Client/App/Components/organisms";
 import {
   KeywordBox,
   Carousel,
   CarouselItem,
-} from "@Client/App/Components/molecules";
+  PostBox,
+  Jumbo,
+} from "@Client/App/Components/organisms";
+
 import { boardSelectAction } from "@Services/Store/modules/Main/actions";
 
 const Container = styled.div`
