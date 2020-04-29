@@ -159,6 +159,7 @@ module.exports.getPosts = async (req, res, next) => {
       where: { boardId },
       offset,
       limit,
+      distinct: true,
       attributes: ["id", "title", "updatedAt"],
     });
     if (!result.count) throw new NotFoundError("가져올 글이 없습니다.");
