@@ -7,7 +7,7 @@ import {
   KeywordBox,
   Carousel,
   CarouselItem,
-  PostBox,
+  BoardItem,
   Jumbo,
 } from "@Client/App/Components/organisms";
 
@@ -124,7 +124,7 @@ export default (props: IProps) => {
           <Article>
             <Title>베스트 게시글</Title>
             {new Array(3).fill("").map((_, index) => (
-              <PostBox key={index} />
+              <div key={index}>_</div>
             ))}
           </Article>
           <Jumbo size="sm" verticalFrom={"tablet"}>

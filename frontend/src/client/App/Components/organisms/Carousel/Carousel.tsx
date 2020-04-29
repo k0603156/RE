@@ -29,7 +29,7 @@ const Footer = styled(
 )`
   height: 50px;
   display: flex;
-  width: 20%;
+  width: auto;
   margin: auto;
   li {
     flex: 1;

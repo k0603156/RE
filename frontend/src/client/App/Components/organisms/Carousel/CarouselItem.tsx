@@ -12,7 +12,7 @@ interface IProps {
 const CarouselItem = styled.div`
   border: 1px solid gray;
   border-radius: 10px;
-  padding: 2%;
+  padding: 30px;
   color: white;
   h2.title {
     font-size: 1.5rem;

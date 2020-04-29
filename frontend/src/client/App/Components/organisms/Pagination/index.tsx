@@ -12,6 +12,7 @@ interface IProps {
 const PaginationUl = styled.ul`
   display: flex;
   justify-content: center;
+  margin-top: 15px;
   padding: 20px;
   width: 100%;
   overflow: hidden;
@@ -21,6 +22,9 @@ const PaginationLi = styled.li`
   width: 40px;
   padding: 5px;
   margin: 0 5px;
+  color: rgb(21, 18, 31);
+
+  font-weight: 600;
   text-align: center;
   user-select: none;
   cursor: pointer;

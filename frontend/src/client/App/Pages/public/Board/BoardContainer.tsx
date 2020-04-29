@@ -1,47 +1,64 @@
 import React, { useState } from "react";
+import { createSelector } from "reselect";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { connect } from "react-redux";
 import BoardPresenter from "./BoardPresenter";
 import { RootStateType } from "@Services/Store/modules";
+import { boardlistBrowseAction } from "@Services/Store/modules/Main/actions";
 import {
-  boardSetPage,
+  boardSetPageAction,
   boardBrowseAction,
 } from "@Services/Store/modules/Board/actions";
 
 export interface IProps extends RouteComponentProps<{ boardName: string }> {
-  main: RootStateType["main"];
-  board: RootStateType["board"];
+  boardList: RootStateType["main"]["boardlist"];
+  boardposts: RootStateType["board"];
+  boardlistBrowseAction: typeof boardlistBrowseAction;
   boardBrowseAction: typeof boardBrowseAction;
-  boardSetPage: typeof boardSetPage;
+  boardSetPageAction: typeof boardSetPageAction;
 }
 
-const BoardContainer = withRouter((props: IProps) => {
-  const POST_PER_PAGE = 5;
-  const [currentPage, setCurrentPage] = React.useState<number>(1);
+const BoardContainer = withRouter(
+  ({
+    match,
+    boardList,
+    boardposts,
+    boardlistBrowseAction,
+    boardBrowseAction,
+    boardSetPageAction,
+  }: IProps) => {
+    const POST_PER_PAGE = 5;
+    React.useEffect(() => {
+      boardlistBrowseAction();
+      boardBrowseAction(parseInt(match.params.boardName), boardposts.page);
+    }, [match.params.boardName, boardposts.page]);
 
-  React.useEffect(() => {
-    props.boardBrowseAction(
-      parseInt(props.match.params.boardName),
-      props.board.page
+    const handlePage = (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
+      e.persist();
+      boardSetPageAction(parseInt(e.currentTarget.dataset.page!));
+    };
+
+    return (
+      <BoardPresenter
+        title={
+          boardList.filter(
+            ({ id }) => Number(id) === Number(match.params.boardName)
+          )[0]?.name
+        }
+        totalCount={boardposts.count}
+        currentPage={boardposts.page}
+        postlist={boardposts.rows}
+        postPerPage={POST_PER_PAGE}
+        handlePage={handlePage}
+      />
     );
-  }, [props.match.params.boardName, props.board.page]);
-  const handlePage = (e: any) => {
-    e.persist();
-    props.boardSetPage(parseInt(e.currentTarget.dataset.page));
-  };
-  return (
-    <BoardPresenter
-      title={"title"}
-      handlePage={handlePage}
-      totalCount={props.board.count}
-      currentPage={props.board.page}
-      postlist={props.board.rows}
-      postPerPage={POST_PER_PAGE}
-    />
-  );
-});
+  }
+);
 
 export default connect(
-  ({ main, board, loading }: RootStateType) => ({ main, board }),
-  { boardSetPage, boardBrowseAction }
+  ({ main, board }: RootStateType) => ({
+    boardList: main.boardlist,
+    boardposts: board,
+  }),
+  { boardlistBrowseAction, boardSetPageAction, boardBrowseAction }
 )(BoardContainer);

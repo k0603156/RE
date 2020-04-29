@@ -6,7 +6,7 @@ import UMenu from "./UserMenu";
 import { RootStateType } from "@Services/Store/modules";
 
 const Title = styled.div`
-  /* Symphonia */
+  /* RE: */
   left: 0;
   margin-left: ${(props) => props.theme.rootSideOffset};
   ${(props) => props.theme.headerAttr}
