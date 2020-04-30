@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const Layout = styled.div`
   width: 100%;
-  ${(props) => props.theme.layout};
+  ${(props) => props.theme.layoutAttr};
 `;
 function PublicLayout(props: { component: any }) {
   const Component = props.component;

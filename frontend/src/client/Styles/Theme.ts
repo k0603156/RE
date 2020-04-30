@@ -6,12 +6,15 @@ const Theme = () => {
 
     headerAttr: `
       position: absolute;
-      top: 65px;
+      top: 30px;
       font-size: 25px;
       line-height: 35px;
       z-index: 10;
       cursor: pointer;
     `,
+    layoutAttr: `
+    padding: 150px 0 0 0;
+  `,
     DW: {
       mobileS: "320px",
       mobileM: "375px",
@@ -31,10 +34,6 @@ const Theme = () => {
     darkGreyColor: "#999",
     darkBlueColor: "#003569",
     rootMaxWidth: `calc(100vw - ${rootSideOffset} * 2)`,
-
-    layout: `
-    ${LAYOUT_PADDING};
-  `,
 
     trendBgColor: "#F2F2F2",
     trendPink: "#BF545D",
