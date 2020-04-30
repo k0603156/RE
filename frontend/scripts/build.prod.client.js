@@ -32,6 +32,9 @@ const measureFileSizesBeforeBuild =
 const printFileSizesAfterBuild = FileSizeReporter.printFileSizesAfterBuild;
 const useYarn = fs.existsSync(paths.yarnLockFile);
 
+//git commit script
+const autoCommit = require("./commit");
+
 // These sizes are pretty large. We'll warn for bundles exceeding them.
 const WARN_AFTER_BUNDLE_GZIP_SIZE = 512 * 1024;
 const WARN_AFTER_CHUNK_GZIP_SIZE = 1024 * 1024;
@@ -105,6 +108,7 @@ checkBrowsers(paths.appPath, isInteractive)
         buildFolder,
         useYarn
       );
+      autoCommit("Client Build", "../backend_api/build/");
     },
     err => {
       const tscCompileOnError = process.env.TSC_COMPILE_ON_ERROR === "true";

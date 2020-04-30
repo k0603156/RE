@@ -11,13 +11,9 @@
   "homepage": "",
   "private": true,
   "scripts": {
-    "build:dev:client": "node scripts/build.dev.client.js",
-    "build:dev:server": "node scripts/build.dev.server.js",
-    "build:prod:client": "node scripts/build.prod.client.js",
-    "build:prod:server": "node scripts/build.prod.server.js",
-    "start:server": "node dist/server.js",
     "dev": "node scripts/dev.js",
     "test": "node scripts/test.js",
+    "build": "node scripts/build.prod.client.js",
     "coverage": "npx jest --coverage --detectOpenHandles --forceExit",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
@@ -39,6 +35,7 @@
     "redux-logger": "^3.0.6",
     "redux-saga": "^1.1.3",
     "reselect": "^4.0.0",
+    "shelljs": "^0.8.4",
     "slate": "^0.57.1",
     "slate-react": "^0.57.1",
     "styled-components": "^4.4.1",
