@@ -61,13 +61,11 @@ const DragAndDrop = styled((props: IProps) => {
   }, []);
   return (
     <div className={props.className} ref={dropRef}>
-      {state.dragging && (
-        <div className={"wrapper"}>
-          <div className={"text"}>
-            <div>Drag n Drop</div>
-          </div>
+      {
+        <div className={`wrapper ${state.dragging && "active"}`}>
+          <div className={"text"}>Image</div>
         </div>
-      )}
+      }
       {props.children}
     </div>
   );
@@ -76,44 +74,56 @@ const DragAndDrop = styled((props: IProps) => {
   position: relative;
   z-index: 100;
   > div.wrapper {
-    border: dashed rgb(21, 18, 31) 4px;
-    background-color: rgba(255, 255, 255, 0.8);
     position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
+    background-color: rgba(255, 255, 255, 0.8);
     z-index: -9999;
     > div.text {
-      position: absolute;
-      top: 50%;
-      right: 0;
-      left: 0;
-      text-align: center;
-      color: rgb(21, 18, 31);
-      font-size: 36;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      color: rgba(21, 18, 31, 0.3);
+    }
+    &.active {
+      border: dashed rgb(21, 18, 31) 4px;
+      > div.text {
+      }
     }
   }
 `;
 
-export default () => {
+export default styled(({ className }: { className?: string }) => {
   const [files, setFiles] = useState<string[]>([]);
-  //todo:중복, 확장자 체크
+  const checkFile = (array: string[], name: string) =>
+    !array.includes(name) && RegExp(".(jpg|jpeg|png)").test(name);
+
   const handleDrop = (newfiles: FileList) => {
     let fileList = files;
     Array.from(newfiles).forEach(({ name }) => {
-      fileList.push(name);
+      checkFile(files, name) && fileList.push(name);
     });
     setFiles([...fileList]);
   };
 
   return (
     <DragAndDrop handleDrop={handleDrop}>
-      <div style={{ height: 300, width: 250 }}>
+      <div className={className}>
         {files.map((file, index) => (
           <div key={file + index}>{file}</div>
         ))}
       </div>
     </DragAndDrop>
   );
-};
+})`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  border: dashed rgba(21, 18, 31, 0.3) 4px;
+`;

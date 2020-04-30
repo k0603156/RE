@@ -4,7 +4,7 @@ import styled from "styled-components";
 import {
   Editor,
   HashtagInput,
-  ImageUploader,
+  ImageDndZone,
 } from "@Client/App/Components/organisms";
 import { RootStateType } from "@Services/Store/modules";
 import { IPostCreatePayload } from "@Services/Store/modules/Post/types";
@@ -74,7 +74,7 @@ export default styled((props: IProps) => {
         onChange={(value) => props.onChange("content", value)}
         value={props.postData.content}
       />
-      <ImageUploader />
+      <ImageDndZone />
       <button type="button" onClick={props.onSubmit}>
         글쓰기
       </button>
@@ -83,7 +83,8 @@ export default styled((props: IProps) => {
 })`
   display: flex;
   flex-direction: column;
-  padding: 10px;
+  padding: 15px;
+  margin-bottom: 15px;
   box-shadow: 5px 5px 10px rgb(47, 44, 55);
   > * {
     box-shadow: none;
