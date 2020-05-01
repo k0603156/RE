@@ -2,12 +2,12 @@
 
 ###### Definition
 
-`여행지 포스팅 앱`
-`Traveler Client + SSR Server`
+`블로그 서비스`
+`RE:* log Client + `~~SSR Server~~
 
 ###### Preview
 
-<img width="100%" src="https://user-images.githubusercontent.com/16025776/72452345-bec5a200-3800-11ea-9c45-1eb2bfa9cef4.jpg">
+<img width="100%" src="">
 
 ##### Document
 
