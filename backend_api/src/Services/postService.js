@@ -80,7 +80,6 @@ module.exports.getPostsByHashtag = async (req, res, next) => {
       throw new NotFoundError("해당 태그에 맞는 글이 없습니다.");
     res.status(200).json({ success: true, response: result });
   } catch (error) {
-    console.log(error);
     next(error);
   }
 };
@@ -137,7 +136,6 @@ module.exports.getPostDetail = async (req, res, next) => {
     if (!result) throw new NotFoundError("해당글이 없습니다.");
     res.status(200).json({ success: true, response: result });
   } catch (error) {
-    console.log(error);
     next(error);
   }
 };
@@ -223,7 +221,6 @@ module.exports.createPost = async (req, res, next) => {
         },
       });
   } catch (error) {
-    console.log(error);
     next(error);
   }
 };

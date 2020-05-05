@@ -331,7 +331,6 @@ describe("Test Start::", () => {
         .get(`/api/v1/post/${store.getPid()}`)
         .set("Authorization", "bearer " + store.getToken())
         .expect(404);
-      expect(res.body.success).toEqual(false);
     });
 
     it("회원탈퇴", async () => {

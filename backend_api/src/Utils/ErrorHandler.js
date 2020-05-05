@@ -78,8 +78,9 @@ function handleBaseError(error, req, res, next) {
         message: error.message,
       },
     });
+  } else {
+    next(error);
   }
-  next(error);
 }
 /**
  * @DefalultError
