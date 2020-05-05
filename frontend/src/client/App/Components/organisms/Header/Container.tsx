@@ -6,18 +6,14 @@ interface IProps {
   auth: RootStateType["auth"];
 }
 export default (props: IProps) => {
-  const [value, setValue] = useState(false);
-  const MouseEnter = () => {
-    setValue(true);
-  };
-  const MouseLeave = () => {
-    setValue(false);
+  const [visible, setVisible] = useState(false);
+  const toggleVisible = () => {
+    setVisible(!visible);
   };
   return (
     <Presenter
-      onMouseEnter={MouseEnter}
-      onMouseLeave={MouseLeave}
-      toggle={value}
+      toggleVisible={toggleVisible}
+      visible={visible}
       auth={props.auth}
     />
   );
