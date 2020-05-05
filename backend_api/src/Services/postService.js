@@ -34,7 +34,9 @@ module.exports.getPostsByBoard = async (req, res, next) => {
       order: [literal(`readcount DESC`)],
       limit,
     });
-    if (!result) throw new NotFoundError("해당 분류에 맞는 글이 없습니다.");
+    if (!result.length) {
+      throw new NotFoundError("해당 분류에 가져올 글이 없습니다.");
+    }
     res.status(200).json({ success: true, response: result });
   } catch (error) {
     next(error);
@@ -162,7 +164,10 @@ module.exports.getPosts = async (req, res, next) => {
       distinct: true,
       attributes: ["id", "title", "updatedAt"],
     });
-    if (!result.count) throw new NotFoundError("가져올 글이 없습니다.");
+
+    if (!result.count) {
+      throw new NotFoundError("가져올 글이 없습니다.");
+    }
     res.status(200).json({ success: true, response: result });
   } catch (error) {
     next(error);
