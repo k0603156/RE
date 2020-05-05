@@ -1,46 +1,23 @@
-import Axios from "axios";
-import { API_ROOT } from "./config";
+import request from "./config";
 
-const ROUTE = "auth";
-const req = (
-  // 사용가능 HTTP 메서드
-  method: "post",
-  url: string,
-  // payload 타입
-  data?: {
-    email?: string;
-    password?: string;
-  }
-) => {
-  const token = localStorage.getItem("token");
-
-  return Axios({
-    method,
-    url: API_ROOT + ROUTE + url,
-    data,
-    headers: {
-      common: {
-        Authorization: token ? `Bearer ${token}` : null,
-      },
-    },
-  });
-};
-
+export interface Iauthenticate {
+  email: string;
+  password: string;
+}
+export interface Ideauthorize {
+  email: string;
+}
 export default {
-  authenticate(payload: { email: string; password: string }) {
-    return req("post", "/authenticate", payload);
+  authenticate(payload: Iauthenticate) {
+    return request.post("/auth/authenticate", payload);
   },
-
   authorize() {
-    return req("post", "/authorize", {});
+    return request.post("/auth/authorize", {});
   },
-
   reauthorize() {
-    return req("post", "/reauthorize", {});
+    return request.post("/auth/reauthorize", {});
   },
-
-  //로그아웃
-  deauthorize(payload: { email: string }) {
-    return req("post", "/deauthorize", payload);
+  deauthorize(payload: Ideauthorize) {
+    return request.post("/auth/deauthorize", payload);
   },
 };

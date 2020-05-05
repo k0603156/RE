@@ -1,67 +1,42 @@
-import Axios from "axios";
-import { API_ROOT } from "./config";
+import request from "./config";
 
-const ROUTE = "user";
-
-const req = (
-  // 사용가능 HTTP 메서드
-  method: "get" | "post" | "put" | "delete",
-  url: string,
-  // payload 타입
-  data?: {
-    userName?: string;
-    email?: string;
-    password?: string;
-    confirmPassword?: string;
-  }
-) => {
-  const token = localStorage.getItem("token");
-  return Axios({
-    method,
-    url: API_ROOT + ROUTE + url,
-    data,
-    headers: {
-      common: {
-        Authorization: token ? `Bearer ${token}` : null,
-      },
-    },
-  });
-};
+export interface IuserSelect {
+  userName: string;
+}
+export interface IuserCreate {
+  userName: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
+export interface IuserUpdate {
+  userName: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
+export interface IuserDelete {
+  userName: string;
+}
 
 export default {
-  select_user(payload: { userName: string }) {
-    console.log(payload);
-    return req("get", `/${payload.userName}`);
+  select_user(payload: IuserSelect) {
+    return request.get(`/user/${payload.userName}`);
   },
 
   select_users() {
-    return req("get", "/");
+    return request.get("/user");
   },
 
-  create_user(payload: {
-    userName: string;
-    email: string;
-    password: string;
-    confirmPassword: string;
-  }) {
-    return req("post", "/", payload);
+  create_user(payload: IuserCreate) {
+    return request.post("/user", payload);
   },
 
-  update_user(
-    userName: string,
-    email: string,
-    password: string,
-    confirmPassword: string
-  ) {
-    return req("put", "/", {
-      userName,
-      email,
-      password,
-      confirmPassword,
-    });
+  update_user(payload: IuserUpdate) {
+    return request.put("/user", payload);
   },
 
-  delete_user(userName: string) {
-    return req("delete", "/", { userName });
+  delete_user(payload: IuserDelete) {
+    return request.delete(`/user/${payload.userName}`);
   },
 };
