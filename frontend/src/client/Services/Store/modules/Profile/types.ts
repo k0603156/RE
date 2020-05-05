@@ -31,5 +31,9 @@ export type IProfileAction = IProfileSelectRequest | IProfileUpdateRequest;
 export interface InitialState {
   id: number;
   userName: string;
-  posts: Array<any>;
+  posts: Array<{
+    id: number;
+    title: string;
+    updatedAt: string;
+  }>;
 }

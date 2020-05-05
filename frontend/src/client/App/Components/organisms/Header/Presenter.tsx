@@ -61,5 +61,6 @@ export default styled(
       overflow: hidden;
       text-overflow: ellipsis;
     }`).mobileL}
+    user-select:none;
   }
 `;
