@@ -4,19 +4,19 @@ import { action } from "@storybook/addon-actions";
 import Component from "./index";
 
 export default {
-  title: "ImageDndZone",
+  title: "ImageUploader",
   parameters: {
-    componentSubtitle: "ImageDndZone",
+    componentSubtitle: "ImageUploader",
   },
 };
 
-export const ImageDndZone = () => {
+export const ImageUploader = () => {
   return (
     <div style={{ width: "500px" }}>
       <Component />
     </div>
   );
 };
-ImageDndZone.story = {
+ImageUploader.story = {
   name: "default",
 };

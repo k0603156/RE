@@ -70,7 +70,6 @@ const DragAndDrop = styled((props: IProps) => {
     </div>
   );
 })`
-  display: inline-block;
   position: relative;
   z-index: 100;
   > div.wrapper {
@@ -98,14 +97,16 @@ const DragAndDrop = styled((props: IProps) => {
 `;
 
 export default styled(({ className }: { className?: string }) => {
-  const [files, setFiles] = useState<string[]>([]);
-  const checkFile = (array: string[], name: string) =>
-    !array.includes(name) && RegExp(".(jpg|jpeg|png)").test(name);
+  const [files, setFiles] = useState<Array<File>>([]);
+  const checkFile = (fileArray: Array<File>, newFile: File) =>
+    !(fileArray.length >= 4) &&
+    !fileArray.filter((existFile) => existFile.name === newFile.name).length &&
+    RegExp(".(jpg|jpeg|png)").test(newFile.name);
 
   const handleDrop = (newfiles: FileList) => {
     let fileList = files;
-    Array.from(newfiles).forEach(({ name }) => {
-      checkFile(files, name) && fileList.push(name);
+    Array.from(newfiles).forEach((newfile) => {
+      checkFile(files, newfile) && fileList.push(newfile);
     });
     setFiles([...fileList]);
   };
@@ -114,16 +115,49 @@ export default styled(({ className }: { className?: string }) => {
     <DragAndDrop handleDrop={handleDrop}>
       <div className={className}>
         {files.map((file, index) => (
-          <div key={file + index}>{file}</div>
+          <div className={"image-item"} key={file.name + index}>
+            <img className={"image-preview"} src={URL.createObjectURL(file)} />
+            <p className={"image-name"}>{file.name}</p>
+          </div>
         ))}
       </div>
     </DragAndDrop>
   );
 })`
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
   height: 300px;
   border: dashed rgba(21, 18, 31, 0.3) 4px;
+  padding: 10px;
+  .image-item {
+    max-width: 25%;
+    height: 50%;
+    overflow: hidden;
+    text-align: center;
+    opacity: 0;
+    animation: fadeIn 1s linear;
+    animation-fill-mode: forwards;
+    .image-preview {
+      width: 100px;
+      height: 100px;
+      border-radius: 5px;
+      object-fit: cover;
+    }
+    .image-name {
+      font-size: 0.7rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
 `;

@@ -7,6 +7,7 @@ export default styled((props: IProps) => {
   const [file, setFile] = useState("");
   function onChange(e: React.ChangeEvent<HTMLInputElement>) {
     e.target.files && setFile(URL.createObjectURL(e.target.files[0]));
+    console.log(e.target.files);
   }
   return (
     <div className={props.className}>
