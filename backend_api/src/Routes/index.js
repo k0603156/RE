@@ -4,6 +4,7 @@ const authRouter = require("./auth");
 const userRouter = require("./user");
 const postRouter = require("./post");
 const boardRouter = require("./board");
+
 const API_ROOT = "/api/v1";
 
 module.exports = (app) => {
@@ -27,8 +28,7 @@ module.exports = (app) => {
    * @uncaughtException
    */
   process.on("uncaughtException", (err) => {
-    //TODO: 기록=>프로세스 종료
-    console.log("ErrUncaught");
+    // TODO: 기록=>프로세스 종료
     console.error(err);
   });
 };

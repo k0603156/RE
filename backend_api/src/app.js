@@ -1,10 +1,11 @@
 const express = require("express");
+
 const app = express();
 const path = require("path");
 const logger = require("morgan");
 const cors = require("cors");
 const routes = require("./Routes");
-const { authenticateJwt } = require("./MiddleWares/passport");
+// const { authenticateJwt } = require("./MiddleWares/passport");
 
 const PORT = process.env.PORT || 8000;
 const STATIC_PATH = path.resolve(__dirname, "../build/");

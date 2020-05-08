@@ -12,7 +12,9 @@ module.exports.authenticate = async (req, res, next) => {
       },
     });
     if (resUser && resUser.dataValues) {
-      const { email, userName, salt, cryptoPass } = resUser.dataValues;
+      const {
+        email, userName, salt, cryptoPass,
+      } = resUser.dataValues;
       const loginPassword = await encryptString(reqPassword, salt);
       if (loginPassword === cryptoPass) {
         res.status(200).json({

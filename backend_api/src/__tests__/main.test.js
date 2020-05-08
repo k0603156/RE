@@ -1,7 +1,10 @@
+/* eslint-disable no-undef */
 const supertest = require("supertest");
 const http = require("http");
 const app = require("../app");
 const store = require("./store");
+
+
 describe("Test Start::", () => {
   let server;
   let request;
@@ -53,7 +56,7 @@ describe("Test Start::", () => {
       const res = await request
         .patch("/api/v1/user")
         .set("Accept", "application/json")
-        .set("Authorization", "bearer " + store.getToken())
+        .set("Authorization", `bearer ${store.getToken()}`)
         .send({
           userName: "john2",
           password: "test1234",
@@ -67,7 +70,7 @@ describe("Test Start::", () => {
     it("글작성", async () => {
       const res = await request
         .post("/api/v1/post")
-        .set("Authorization", "bearer " + store.getToken())
+        .set("Authorization", `bearer ${store.getToken()}`)
         .send({
           title: "test post title",
           boardId: 1,
@@ -88,7 +91,7 @@ describe("Test Start::", () => {
     it("글작성", async () => {
       const res = await request
         .post("/api/v1/post")
-        .set("Authorization", "bearer " + store.getToken())
+        .set("Authorization", `bearer ${store.getToken()}`)
         .send({
           title: "test post title2",
           boardId: 1,
@@ -107,7 +110,7 @@ describe("Test Start::", () => {
     it("글작성", async () => {
       const res = await request
         .post("/api/v1/post")
-        .set("Authorization", "bearer " + store.getToken())
+        .set("Authorization", `bearer ${store.getToken()}`)
         .send({
           title: "test post title3",
           boardId: 1,
@@ -126,7 +129,7 @@ describe("Test Start::", () => {
     it("글작성", async () => {
       const res = await request
         .post("/api/v1/post")
-        .set("Authorization", "bearer " + store.getToken())
+        .set("Authorization", `bearer ${store.getToken()}`)
         .send({
           title: "test post title3",
           boardId: 1,
@@ -146,7 +149,7 @@ describe("Test Start::", () => {
     it("글작성", async () => {
       const res = await request
         .post("/api/v1/post")
-        .set("Authorization", "bearer " + store.getToken())
+        .set("Authorization", `bearer ${store.getToken()}`)
         .send({
           title: "test post title4",
           boardId: 1,
@@ -166,7 +169,7 @@ describe("Test Start::", () => {
     it("글작성", async () => {
       const res = await request
         .post("/api/v1/post")
-        .set("Authorization", "bearer " + store.getToken())
+        .set("Authorization", `bearer ${store.getToken()}`)
         .send({
           title: "test post title5",
           boardId: 1,
@@ -185,7 +188,7 @@ describe("Test Start::", () => {
     it("글작성", async () => {
       const res = await request
         .post("/api/v1/post")
-        .set("Authorization", "bearer " + store.getToken())
+        .set("Authorization", `bearer ${store.getToken()}`)
         .send({
           title: "test post title6",
           boardId: 1,
@@ -204,7 +207,7 @@ describe("Test Start::", () => {
     it("회원정보 불러오기", async () => {
       const res = await request
         .get(`/api/v1/user/${store.getUsername()}`)
-        .set("Authorization", "bearer " + store.getToken())
+        .set("Authorization", `bearer ${store.getToken()}`)
         .expect(200);
       expect(res.body.success).toEqual(true);
       expect(res.body.response).toHaveProperty("id");
@@ -216,7 +219,7 @@ describe("Test Start::", () => {
     it("해시태그로 글 검색", async () => {
       const res = await request
         .get(`/api/v1/post/list/byhashtag/${store.getHashtag()}`)
-        .set("Authorization", "bearer " + store.getToken())
+        .set("Authorization", `bearer ${store.getToken()}`)
         .expect(200);
       expect(res.body.success).toEqual(true);
       expect(Array.isArray(res.body.response.rows)).toEqual(true);
@@ -228,9 +231,9 @@ describe("Test Start::", () => {
     it("해시태그로 글 검색2", async () => {
       const res = await request
         .get(
-          `/api/v1/post/list/byhashtag/${store.getHashtag()}/?page=${store.getPage()}&limit=5`
+          `/api/v1/post/list/byhashtag/${store.getHashtag()}/?page=${store.getPage()}&limit=5`,
         )
-        .set("Authorization", "bearer " + store.getToken())
+        .set("Authorization", `bearer ${store.getToken()}`)
         .expect(200);
       expect(res.body.success).toEqual(true);
       expect(Array.isArray(res.body.response.rows)).toEqual(true);
@@ -238,10 +241,11 @@ describe("Test Start::", () => {
       expect(res.body.response.rows[0]).toHaveProperty("title");
       expect(res.body.response.rows[0]).toHaveProperty("user");
     });
+
     it("글리스트 불러오기", async () => {
       const res = await request
         .get(`/api/v1/post/list/?page=${store.getPage()}&limit=5&boardId=1`)
-        .set("Authorization", "bearer " + store.getToken())
+        .set("Authorization", `bearer ${store.getToken()}`)
         .expect(200);
       expect(res.body.success).toEqual(true);
       expect(Array.isArray(res.body.response.rows)).toEqual(true);
@@ -250,7 +254,7 @@ describe("Test Start::", () => {
     it("글읽기", async () => {
       const res = await request
         .get(`/api/v1/post/${store.getPid()}`)
-        .set("Authorization", "bearer " + store.getToken())
+        .set("Authorization", `bearer ${store.getToken()}`)
         .expect(200);
       expect(res.body.success).toEqual(true);
       expect(res.body.response).toHaveProperty("id");
@@ -264,7 +268,7 @@ describe("Test Start::", () => {
     it("글읽기", async () => {
       const res = await request
         .get(`/api/v1/post/${store.getPid() + 1}`)
-        .set("Authorization", "bearer " + store.getToken())
+        .set("Authorization", `bearer ${store.getToken()}`)
         .expect(200);
       expect(res.body.success).toEqual(true);
       expect(res.body.response).toHaveProperty("id");
@@ -278,7 +282,7 @@ describe("Test Start::", () => {
     it("글수정", async () => {
       const res = await request
         .patch("/api/v1/post")
-        .set("Authorization", "bearer " + store.getToken())
+        .set("Authorization", `bearer ${store.getToken()}`)
         .send({
           pid: store.getPid(),
           title: "updated test post title",
@@ -296,7 +300,7 @@ describe("Test Start::", () => {
     it("글읽기_수정후", async () => {
       const res = await request
         .get(`/api/v1/post/${store.getPid()}`)
-        .set("Authorization", "bearer " + store.getToken())
+        .set("Authorization", `bearer ${store.getToken()}`)
         .expect(200);
       expect(res.body.success).toEqual(true);
       expect(res.body.response).toHaveProperty("id");
@@ -317,8 +321,8 @@ describe("Test Start::", () => {
 
     it("글삭제", async () => {
       const res = await request
-        .delete(`/api/v1/post`)
-        .set("Authorization", "bearer " + store.getToken())
+        .delete("/api/v1/post")
+        .set("Authorization", `bearer ${store.getToken()}`)
         .send({
           pid: store.getPid(),
         })
@@ -327,16 +331,16 @@ describe("Test Start::", () => {
     });
 
     it("글읽기_삭제후", async () => {
-      const res = await request
+      await request
         .get(`/api/v1/post/${store.getPid()}`)
-        .set("Authorization", "bearer " + store.getToken())
+        .set("Authorization", `bearer ${store.getToken()}`)
         .expect(404);
     });
 
     it("회원탈퇴", async () => {
-      const res = await request
-        .delete(`/api/v1/user`)
-        .set("Authorization", "bearer " + store.getToken())
+      await request
+        .delete("/api/v1/user")
+        .set("Authorization", `bearer ${store.getToken()}`)
         .expect(204);
     });
   });
@@ -351,6 +355,7 @@ describe("Test Start::", () => {
       res.body.response.map((_) => {
         expect(_).toHaveProperty("id");
         expect(_).toHaveProperty("name");
+        return null;
       });
     });
 

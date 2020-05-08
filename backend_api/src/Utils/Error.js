@@ -1,4 +1,5 @@
-/// 정의: name, super: message, 제외: stack
+// / 정의: name, super: message, 제외: stack
+// eslint-disable-next-line max-classes-per-file
 class BaseError extends Error {
   constructor(message) {
     super(message);
@@ -6,7 +7,7 @@ class BaseError extends Error {
     Error.captureStackTrace(this, this.constructor);
   }
 }
-//유효성오류
+// 유효성오류
 class ValidationError extends Error {
   constructor(message) {
     super(message);
@@ -15,7 +16,7 @@ class ValidationError extends Error {
   }
 }
 
-//인증오류
+// 인증오류
 class AuthenticationError extends Error {
   constructor(error) {
     super(error.message);
@@ -23,7 +24,7 @@ class AuthenticationError extends Error {
     Error.captureStackTrace(this, this.constructor);
   }
 }
-//권한부여오류
+// 권한부여오류
 class AuthorizationError extends Error {
   constructor(error) {
     super(error.message);
@@ -31,7 +32,7 @@ class AuthorizationError extends Error {
     Error.captureStackTrace(this, this.constructor);
   }
 }
-//리소스NotFound오류
+// 리소스NotFound오류
 class NotFoundError extends Error {
   constructor(message) {
     super(message);

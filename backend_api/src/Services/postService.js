@@ -1,11 +1,13 @@
+const {
+  Op, literal,
+} = require("sequelize");
 const Models = require("../Models/tables");
-const { fn, Op, col, literal } = require("sequelize");
 const { NotFoundError } = require("../Utils/Error");
 
 module.exports.getPostsByBoard = async (req, res, next) => {
   try {
-    const boardId = parseInt(req.params.boardId);
-    const limit = parseInt(req.query.limit);
+    const boardId = Number(req.params.boardId);
+    const limit = Number(req.query.limit);
     const result = await Models.post.findAll({
       where: { boardId },
       attributes: [
@@ -14,7 +16,7 @@ module.exports.getPostsByBoard = async (req, res, next) => {
         "updatedAt",
         [
           literal(
-            "(SELECT COUNT(*) FROM postreads WHERE postreads.postId = post.id)"
+            "(SELECT COUNT(*) FROM postreads WHERE postreads.postId = post.id)",
           ),
           "readcount",
         ],
@@ -31,7 +33,7 @@ module.exports.getPostsByBoard = async (req, res, next) => {
           through: { attributes: [] },
         },
       ],
-      order: [literal(`readcount DESC`)],
+      order: [literal("readcount DESC")],
       limit,
     });
     if (!result.length) {
@@ -45,7 +47,7 @@ module.exports.getPostsByBoard = async (req, res, next) => {
 
 module.exports.getPostsByHashtag = async (req, res, next) => {
   try {
-    const limit = parseInt(req.query.limit);
+    const limit = Number(req.query.limit);
     const offset = limit * (req.query.page - 1);
     const result = await Models.post.findAndCountAll({
       include: [
@@ -67,7 +69,7 @@ module.exports.getPostsByHashtag = async (req, res, next) => {
         "updatedAt",
         [
           literal(
-            "(SELECT COUNT(*) FROM postreads WHERE postreads.postId = post.id)"
+            "(SELECT COUNT(*) FROM postreads WHERE postreads.postId = post.id)",
           ),
           "readcount",
         ],
@@ -76,8 +78,7 @@ module.exports.getPostsByHashtag = async (req, res, next) => {
       offset,
       limit,
     });
-    if (!result.count)
-      throw new NotFoundError("해당 태그에 맞는 글이 없습니다.");
+    if (!result.count) { throw new NotFoundError("해당 태그에 맞는 글이 없습니다."); }
     res.status(200).json({ success: true, response: result });
   } catch (error) {
     next(error);
@@ -99,9 +100,9 @@ module.exports.getPostDetail = async (req, res, next) => {
         {
           postId: req.params.pid,
         },
-        { transaction }
+        { transaction },
       );
-      const result = await Models.post.findOne({
+      return Models.post.findOne({
         include: [
           {
             model: Models.user,
@@ -123,7 +124,7 @@ module.exports.getPostDetail = async (req, res, next) => {
             "updatedAt",
             [
               literal(
-                "(SELECT COUNT(*) FROM postreads WHERE postreads.postId = post.id)"
+                "(SELECT COUNT(*) FROM postreads WHERE postreads.postId = post.id)",
               ),
               "readcount",
             ],
@@ -131,7 +132,6 @@ module.exports.getPostDetail = async (req, res, next) => {
         },
         transaction,
       });
-      return result;
     });
     if (!result) throw new NotFoundError("해당글이 없습니다.");
     res.status(200).json({ success: true, response: result });
@@ -142,9 +142,9 @@ module.exports.getPostDetail = async (req, res, next) => {
 
 module.exports.getPosts = async (req, res, next) => {
   try {
-    const boardId = parseInt(req.query.boardId);
-    const limit = parseInt(req.query.limit);
-    const offset = limit * (parseInt(req.query.page) - 1);
+    const boardId = Number(req.query.boardId);
+    const limit = Number(req.query.limit);
+    const offset = limit * (Number(req.query.page) - 1);
     const result = await Models.post.findAndCountAll({
       include: [
         {
@@ -193,8 +193,8 @@ module.exports.createPost = async (req, res, next) => {
           content: [...req.body.content],
           hashtags: existTagsArr("name").length
             ? req.body.hashtags.filter(
-                (_) => !existTagsArr("name").includes(_.name)
-              )
+              (_) => !existTagsArr("name").includes(_.name),
+            )
             : req.body.hashtags,
         },
         {
@@ -204,7 +204,7 @@ module.exports.createPost = async (req, res, next) => {
             },
           ],
           transaction,
-        }
+        },
       );
 
       if (existTags.length) {
@@ -213,13 +213,14 @@ module.exports.createPost = async (req, res, next) => {
       return createdPost;
     });
 
-    result &&
+    if (result) {
       res.status(201).json({
         success: true,
         response: {
           id: result.dataValues.id,
         },
       });
+    }
   } catch (error) {
     next(error);
   }
@@ -234,12 +235,13 @@ module.exports.updatePost = async (req, res, next) => {
       },
       {
         where: { id: req.body.pid },
-      }
+      },
     );
-    result &&
+    if (result) {
       res.status(201).json({
         success: true,
       });
+    }
   } catch (error) {
     next(error);
   }
