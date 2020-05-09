@@ -1,4 +1,7 @@
+/* eslint-disable strict */
+
 "use strict";
+
 module.exports = (sequelize, DataTypes) => {
   const story = sequelize.define(
     "story",
@@ -28,9 +31,9 @@ module.exports = (sequelize, DataTypes) => {
       collate: "utf8mb4_general_ci",
       timestamps: true,
       paranoid: true,
-    }
+    },
   );
-  story.associate = (models) => {
+  story.associate = () => {
     // story.belongsTo(models.plan);
   };
   return story;

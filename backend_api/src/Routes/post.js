@@ -8,7 +8,7 @@ Router.get(
     limit: 5,
     page: 1,
   }),
-  PostService.getPosts
+  PostService.getPosts,
 );
 
 Router.get(
@@ -17,7 +17,7 @@ Router.get(
     limit: 5,
     page: 1,
   }),
-  PostService.getPostsByHashtag
+  PostService.getPostsByHashtag,
 );
 
 Router.get("/:pid", PostService.getPostDetail);
@@ -25,7 +25,7 @@ Router.get("/:pid", PostService.getPostDetail);
 Router.post(
   "/",
   hasBodyParams("title", "boardId", "content", "hashtags"),
-  PostService.createPost
+  PostService.createPost,
 );
 
 Router.patch("/", PostService.updatePost);

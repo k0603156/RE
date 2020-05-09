@@ -4,10 +4,14 @@ const PostService = require("../Services/postService");
 const Models = require("../Models/tables");
 
 Router.get("/boardlist", async (req, res, next) => {
-  const result = await Models.board.findAll({
-    attributes: ["id", "name"],
-  });
-  res.status(200).json({ success: true, response: result });
+  try {
+    const result = await Models.board.findAll({
+      attributes: ["id", "name"],
+    });
+    res.status(200).json({ success: true, response: result });
+  } catch (error) {
+    next(error);
+  }
 });
 
 Router.get(
@@ -15,7 +19,7 @@ Router.get(
   setDefQueryParams({
     limit: 5,
   }),
-  PostService.getPostsByBoard
+  PostService.getPostsByBoard,
 );
 
 module.exports = Router;

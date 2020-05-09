@@ -5,7 +5,7 @@ const { hasBodyParams, isAuthenticated } = require("../Utils");
 Router.post(
   "/authenticate",
   hasBodyParams("email", "password"),
-  AuthService.authenticate
+  AuthService.authenticate,
 );
 
 Router.post("/authorize", isAuthenticated, AuthService.authorize);

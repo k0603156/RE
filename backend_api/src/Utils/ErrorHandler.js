@@ -3,11 +3,12 @@ const {
   AuthenticationError,
   AuthorizationError,
   NotFoundError,
-} = require("../Utils/Error");
+  BaseError,
+} = require("./Error");
 
 const isProduction = process.env.NODE_ENV === "production";
 
-//Todo:에러처리를 어떤식으로 해야할까
+// Todo:에러처리를 어떤식으로 해야할까
 /**
  * @ValidationError
  * @유효성오류
@@ -57,7 +58,6 @@ function handleAuthorizationError(error, req, res, next) {
  */
 function handleNotFoundError(error, req, res, next) {
   if (error instanceof NotFoundError) {
-    console.log(error);
     res.status(404).json({
       type: "NotFoundError",
       message: error.message,
@@ -85,15 +85,14 @@ function handleBaseError(error, req, res, next) {
 /**
  * @DefalultError
  */
-//*임시 에러 핸들링*//
-function handleDefalultError(error, req, res, next) {
-  const request_error = isProduction ? {} : error;
-  request_error.status = error.status || 500;
-  if (request_error.status < 500) {
-    res.status(reqErr.status).json({ message: reqErr.message });
+//* 임시 에러 핸들링*//
+function handleDefalultError(error, req, res) {
+  const requestError = isProduction ? {} : error;
+  requestError.status = error.status || 500;
+  if (requestError.status < 500) {
+    res.status(requestError.status).json({ message: requestError.message });
   } else {
-    //TODO:로그남기기
-    console.log(request_error);
+    // TODO:로그남기기
   }
 }
 module.exports = [

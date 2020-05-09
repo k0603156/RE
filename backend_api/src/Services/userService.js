@@ -1,6 +1,7 @@
 const Models = require("../Models/tables");
 const { NotFoundError } = require("../Utils/Error");
 const { generateRandomString, encryptString } = require("../Utils");
+
 const ENCRYPT_BUFF = 64;
 const ENCODE_TYPE = "base64";
 
@@ -32,10 +33,10 @@ module.exports.getUser = async (req, res, next) => {
 
 module.exports.signup = async (req, res, next) => {
   try {
-    const userName = req.body.userName;
-    const email = req.body.email;
-    const password = req.body.password;
-    const confirmPassword = req.body.confirmPassword;
+    const { userName } = req.body;
+    const { email } = req.body;
+    const { password } = req.body;
+    const { confirmPassword } = req.body;
 
     if (password !== confirmPassword) {
       const error = new Error("비밀번호 체크값이 같지 않음");
@@ -71,10 +72,10 @@ module.exports.signup = async (req, res, next) => {
 
 module.exports.updateUser = async (req, res, next) => {
   try {
-    const id = req.user.id;
-    const userName = req.body.userName;
-    const password = req.body.password;
-    const confirmPassword = req.body.confirmPassword;
+    const { id } = req.user;
+    const { userName } = req.body;
+    const { password } = req.body;
+    // const { confirmPassword } = req.body;
     const salt = await generateRandomString(ENCRYPT_BUFF, ENCODE_TYPE);
     const cryptoPass = await encryptString(password, salt);
 
@@ -84,12 +85,13 @@ module.exports.updateUser = async (req, res, next) => {
         cryptoPass,
         salt,
       },
-      { where: { id } }
+      { where: { id } },
     );
-    response &&
+    if (response) {
       res.status(200).json({
         success: true,
       });
+    }
   } catch (error) {
     next(error);
   }
@@ -97,7 +99,7 @@ module.exports.updateUser = async (req, res, next) => {
 
 module.exports.deleteUser = async (req, res, next) => {
   try {
-    const id = req.user.id;
+    const { id } = req.user;
 
     const result = Models.user.destroy({
       where: { id },
