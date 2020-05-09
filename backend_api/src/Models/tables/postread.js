@@ -1,4 +1,7 @@
+/* eslint-disable strict */
+
 "use strict";
+
 module.exports = (sequelize, DataTypes) => {
   const postread = sequelize.define(
     "postread",
@@ -12,9 +15,9 @@ module.exports = (sequelize, DataTypes) => {
       collate: "utf8mb4_general_ci",
       timestamps: true,
       paranoid: true,
-    }
+    },
   );
-  postread.associate = function (models) {
+  postread.associate = (models) => {
     postread.belongsTo(models.post, {
       onDelete: "CASCADE",
       onUpdate: "restrict",

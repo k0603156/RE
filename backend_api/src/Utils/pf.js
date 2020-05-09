@@ -1,4 +1,5 @@
-const curry = (f) => (a, ...bs) => (bs.length ? f(a, ...bs) : (...bs) => f(a, ...bs));
+const curry = (f) => (a, ...bs) =>
+  bs.length ? f(a, ...bs) : (...bs) => f(a, ...bs);
 module.exports.curry = curry;
 
 const curryReduce = curry((f, acc, iter) => {

@@ -1,4 +1,7 @@
+/* eslint-disable strict */
+
 "use strict";
+
 module.exports = (sequelize, DataTypes) => {
   const post = sequelize.define(
     "post",
@@ -17,9 +20,9 @@ module.exports = (sequelize, DataTypes) => {
       collate: "utf8mb4_general_ci",
       timestamps: true,
       paranoid: true,
-    }
+    },
   );
-  post.associate = function (models) {
+  post.associate = (models) => {
     post.belongsTo(models.user);
     post.belongsTo(models.board);
     post.hasMany(models.postread);

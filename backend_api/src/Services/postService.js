@@ -1,6 +1,4 @@
-const {
-  Op, literal,
-} = require("sequelize");
+const { Op, literal } = require("sequelize");
 const Models = require("../Models/tables");
 const { NotFoundError } = require("../Utils/Error");
 
@@ -78,7 +76,9 @@ module.exports.getPostsByHashtag = async (req, res, next) => {
       offset,
       limit,
     });
-    if (!result.count) { throw new NotFoundError("해당 태그에 맞는 글이 없습니다."); }
+    if (!result.count) {
+      throw new NotFoundError("해당 태그에 맞는 글이 없습니다.");
+    }
     res.status(200).json({ success: true, response: result });
   } catch (error) {
     next(error);
@@ -193,8 +193,8 @@ module.exports.createPost = async (req, res, next) => {
           content: [...req.body.content],
           hashtags: existTagsArr("name").length
             ? req.body.hashtags.filter(
-              (_) => !existTagsArr("name").includes(_.name),
-            )
+                (_) => !existTagsArr("name").includes(_.name),
+              )
             : req.body.hashtags,
         },
         {

@@ -1,12 +1,10 @@
 module.exports = {
-  root: true,
   env: {
     browser: true,
     es6: true,
     node: true,
-    commonjs: true,
   },
-  extends: ["airbnb-base"],
+  extends: ["airbnb-base", "plugin:prettier/recommended"],
   globals: {
     Atomics: "readonly",
     SharedArrayBuffer: "readonly",
@@ -14,6 +12,10 @@ module.exports = {
   parser: "babel-eslint",
   parserOptions: {
     ecmaVersion: 2018,
+    sourceType: "module",
+    allowImportExportEverywhere: false,
+    codeFrame: true,
   },
-  rules: { quotes: ["error", "double"] },
+  plugins: ["prettier"],
+  rules: { "prettier/prettier": "error", quotes: ["error", "double"] },
 };

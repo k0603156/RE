@@ -1,4 +1,7 @@
+/* eslint-disable strict */
+
 "use strict";
+
 module.exports = (sequelize, DataTypes) => {
   const hashtag = sequelize.define(
     "hashtag",
@@ -13,9 +16,9 @@ module.exports = (sequelize, DataTypes) => {
       charset: "utf8",
       collate: "utf8_general_ci",
       timestamps: false,
-    }
+    },
   );
-  hashtag.associate = function (models) {
+  hashtag.associate = (models) => {
     hashtag.belongsToMany(models.post, {
       through: "PostHashtag",
       timestamps: false,
