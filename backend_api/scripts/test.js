@@ -39,6 +39,6 @@ sequelize
     process.exit();
   })
   .finally(() => {
-    jest.run(`${argv} --detectOpenHandles`);
+    jest.run(`${argv} --detectOpenHandles --forceExit`);
     NormLog("✓ TEST start");
   });
