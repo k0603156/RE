@@ -7,22 +7,22 @@ export default createGlobalStyle`
     * {
         box-sizing:border-box;
     }
-    body {  
+    body {
         min-width: ${(props: any) => props.theme.minWidth};
-        background-color:${props => props.theme.bgColor};}
-        color:${props => props.theme.blackColor};
+        background-color:${(props) => props.theme.bgColor};}
+        color:${(props) => props.theme.blackColor};
         font-size:15px;
         font-family:-apple-system,'Montserrat', 'Helvetica Neue', sans-serif;
-        
-    #root{   
+
+    #root{
         position: relative;
         overflow:hidden;
         display: flex;
         height: 100vh;
-        -ms-overflow-style: none;    
-    }::-webkit-scrollbar {display:none;} 
+        -ms-overflow-style: none;
+    }::-webkit-scrollbar {display:none;}
     a {
-        color:${props => props.theme.blackColor};
+        color:${(props) => props.theme.blackColor};
         text-decoration:none;
     }
     input:focus{

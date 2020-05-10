@@ -4,9 +4,9 @@ import {
   takeLatest,
   put,
   call,
-  select,
   getContext,
 } from "redux-saga/effects";
+import Api from "@Services/Api";
 import {
   POST_BROWSE_REQUEST,
   POST_CREATE_REQUEST,
@@ -16,13 +16,12 @@ import {
 } from "./types";
 import { loadingStart, loadingFinish } from "../Loading";
 import { msgCreate } from "../Msg";
-import Api from "@Services/Api";
 
 function createSaga(type: string, request: AxiosPromiseType) {
   const SUCCESS = type.replace("REQUEST", "SUCCESS");
   const FAILURE = type.replace("REQUEST", "FAILURE");
 
-  return function* (action: any) {
+  return function* ge(action: any) {
     yield put(loadingStart(type));
     try {
       const response = yield call(request, action.payload);

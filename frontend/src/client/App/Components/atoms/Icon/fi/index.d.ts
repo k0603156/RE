@@ -1,4 +1,5 @@
-import { IconTree } from "../lib";
+// import { IconTree } from "../lib";
+
 export interface IconBaseProps extends React.SVGAttributes<SVGElement> {
   children?: React.ReactNode;
   size?: string | number;

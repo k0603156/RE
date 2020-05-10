@@ -34,15 +34,13 @@ export default (props: IProps) => {
   const { handlePage, totalCount, currentPage, postPerPage } = props;
   const pages = Math.ceil(totalCount / postPerPage);
 
-  const Arr = Array.from(Array(pages), (_, index) => index + 1).map(
-    (_, index) => (
-      <PaginationLi key={index} data-page={_} onClick={handlePage}>
-        {_}
-      </PaginationLi>
-    )
-  );
+  const Arr = Array.from(Array(pages), (_, index) => index + 1).map((_) => (
+    <PaginationLi key={_} data-page={_} onClick={handlePage}>
+      {_}
+    </PaginationLi>
+  ));
   const check = (n: number): boolean => {
-    return Math.sign(n) === -1 ? false : true;
+    return Math.sign(n) !== -1;
   };
 
   const From = () => {
@@ -54,7 +52,7 @@ export default (props: IProps) => {
   // function paginate(array: Array<any>, page_size: number, page_number: number) {
   //   return array.slice(page_size * (page_number - 1), page_size * page_number);
   // }
-  //TODO:수정필요
+  // TODO:수정필요
   const d = Arr.slice(From(), To());
   return <PaginationUl>{d}</PaginationUl>;
 };

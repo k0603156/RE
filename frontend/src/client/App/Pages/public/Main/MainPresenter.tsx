@@ -7,7 +7,6 @@ import {
   KeywordBox,
   Carousel,
   CarouselItem,
-  BoardItem,
   Jumbo,
 } from "@Client/App/Components/organisms";
 
@@ -74,10 +73,15 @@ interface IProps {
   boardlist: RootStateType["main"]["boardlist"];
   postlist: RootStateType["main"]["postlist"];
 }
-export default (props: IProps) => {
+export default ({
+  boardSelectAction,
+  currentBId,
+  boardlist,
+  postlist,
+}: IProps) => {
   const selectedBoard = () =>
-    props.boardlist.length !== 0
-      ? props.boardlist[props.currentBId - 1]
+    boardlist.length !== 0
+      ? boardlist[currentBId - 1]
       : {
           id: 0,
           name: "",
@@ -85,36 +89,29 @@ export default (props: IProps) => {
   return (
     <>
       <SlideBox>
-        <Jumbo size="md" verticalFrom={"tablet"}>
+        <Jumbo size="md" verticalFrom="tablet">
           {selectedBoard().name}
         </Jumbo>
         <Article>
           <Carousel
-            pageDataList={props.postlist}
+            pageDataList={postlist}
             CarouselItem={(data, index) => (
-              <CarouselItem
-                key={index}
-                length={props.postlist.length}
-                data={data}
-              />
+              <CarouselItem key={index} length={postlist.length} data={data} />
             )}
           />
         </Article>
       </SlideBox>
-      <KeywordBox
-        boardlist={props.boardlist}
-        boardSelectAction={props.boardSelectAction}
-      />
+      <KeywordBox boardlist={boardlist} boardSelectAction={boardSelectAction} />
 
       <Container>
         <VT>
-          <Jumbo size="md" verticalFrom={"tablet"}>
+          <Jumbo size="md" verticalFrom="tablet">
             RE:* log
           </Jumbo>
           <Article>
             <Title>
               {selectedBoard().name}
-              <Link to={"/board/" + selectedBoard().id}>
+              <Link to={`/board/${selectedBoard().id}`}>
                 <Icon.Fi.FiList />
               </Link>
             </Title>
@@ -123,11 +120,8 @@ export default (props: IProps) => {
         <VT>
           <Article>
             <Title>베스트 게시글</Title>
-            {new Array(3).fill("").map((_, index) => (
-              <div key={index}>_</div>
-            ))}
           </Article>
-          <Jumbo size="sm" verticalFrom={"tablet"}>
+          <Jumbo size="sm" verticalFrom="tablet">
             RECOMMENDED ARTICLES
           </Jumbo>
         </VT>

@@ -10,14 +10,14 @@ interface IProps {
 const PostBox = ({ className, post }: IProps) => {
   return (
     <div className={className}>
-      <div className={"title"}>
+      <div className="title">
         <Link to={`/board/post/${post.id}`} key={post.id}>
           {post && post.title}
         </Link>
       </div>
-      <div className={"author"}>{post && post.user.userName} </div>
-      <div className={"time"}>{post && post.updatedAt}</div>
-      <div className={"hash"}>#tag</div>
+      <div className="author">{post && post.user.userName}</div>
+      <div className="time">{post && post.updatedAt}</div>
+      <div className="hash">#tag</div>
     </div>
   );
 };

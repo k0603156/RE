@@ -18,7 +18,7 @@ const DragAndDrop = styled((props: IProps) => {
   const handleDragIn = useCallback((e: DragEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    setState({ ...state, dragCounter: state.dragCounter++ });
+    setState({ ...state, dragCounter: state.dragCounter + 1 });
     if (e.dataTransfer?.items && e.dataTransfer.items.length > 0) {
       setState({ ...state, dragging: true });
     }
@@ -26,7 +26,7 @@ const DragAndDrop = styled((props: IProps) => {
   const handleDragOut = useCallback((e: DragEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    setState({ ...state, dragCounter: state.dragCounter-- });
+    setState({ ...state, dragCounter: state.dragCounter - 1 });
     if (state.dragCounter > 0) return;
     setState({ ...state, dragging: false });
   }, []);
@@ -42,7 +42,7 @@ const DragAndDrop = styled((props: IProps) => {
     }
   }, []);
   useEffect(() => {
-    let div = dropRef.current;
+    const div = dropRef.current;
     if (div) {
       div.addEventListener("dragenter", handleDragIn);
       div.addEventListener("dragleave", handleDragOut);
@@ -50,7 +50,7 @@ const DragAndDrop = styled((props: IProps) => {
       div.addEventListener("drop", handleDrop);
     }
     return () => {
-      let div = dropRef.current;
+      const div = dropRef.current;
       if (div) {
         div.removeEventListener("dragenter", handleDragIn);
         div.removeEventListener("dragleave", handleDragOut);
@@ -61,11 +61,9 @@ const DragAndDrop = styled((props: IProps) => {
   }, []);
   return (
     <div className={props.className} ref={dropRef}>
-      {
-        <div className={`wrapper ${state.dragging && "active"}`}>
-          <div className={"text"}>Image</div>
-        </div>
-      }
+      <div className={`wrapper ${state.dragging && "active"}`}>
+        <div className="text">Image</div>
+      </div>
       {props.children}
     </div>
   );
@@ -104,7 +102,7 @@ export default styled(({ className }: { className?: string }) => {
     RegExp(".(jpg|jpeg|png)").test(newFile.name);
 
   const handleDrop = (newfiles: FileList) => {
-    let fileList = files;
+    const fileList = files;
     Array.from(newfiles).forEach((newfile) => {
       checkFile(files, newfile) && fileList.push(newfile);
     });
@@ -114,10 +112,14 @@ export default styled(({ className }: { className?: string }) => {
   return (
     <DragAndDrop handleDrop={handleDrop}>
       <div className={className}>
-        {files.map((file, index) => (
-          <div className={"image-item"} key={file.name + index}>
-            <img className={"image-preview"} src={URL.createObjectURL(file)} />
-            <p className={"image-name"}>{file.name}</p>
+        {files.map((file) => (
+          <div className="image-item" key={file.name}>
+            <img
+              className="image-preview"
+              src={URL.createObjectURL(file)}
+              alt={`preview-${file.name}`}
+            />
+            <p className="image-name">{file.name}</p>
           </div>
         ))}
       </div>

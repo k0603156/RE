@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import AuthPresenter from "./AuthPresenter";
 import useInput from "@Client/App/Hooks/useInput";
-import AuthState from "./AuthState";
 import { connect } from "react-redux";
 import {
   authSignupAction,
   authSigninAction,
 } from "@Services/Store/modules/Auth/actions";
 import { RootStateType } from "@Services/Store/modules";
+import AuthState from "./AuthState";
+import AuthPresenter from "./AuthPresenter";
 
 const AuthContainer = (props: {
   auth: RootStateType["auth"];
@@ -30,6 +30,7 @@ const AuthContainer = (props: {
         break;
       case AuthState.STATE_SIGNUP:
         if (password.value !== confirmPassword.value) {
+          /* eslint-disable no-console */
           console.log("비밀번호 확인란이 같지 않습니다.");
           break;
         }
@@ -44,10 +45,12 @@ const AuthContainer = (props: {
             password.setValue("");
             confirmPassword.setValue("");
             setAction(AuthState.STATE_LOGIN);
-          }
+          },
         );
         break;
       case AuthState.STATE_CONFIRM:
+        break;
+      default:
         break;
     }
   };
@@ -71,5 +74,5 @@ export default connect(
     loadingAuth: loading["auth/AUTH_LOGIN_REQUEST"],
     loadingCreateUser: loading["user/USER_CREATE_REQUEST"],
   }),
-  { authSignupAction, authSigninAction }
+  { authSignupAction, authSigninAction },
 )(AuthContainer);

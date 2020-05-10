@@ -1,4 +1,5 @@
 import request from "./config";
+
 export interface Ipostlist {
   boardId: string;
 }

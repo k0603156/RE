@@ -5,7 +5,7 @@ import {
   IMainAction,
 } from "./types";
 
-//** CREATE ACTION **//
+//* * CREATE ACTION **//
 export function boardSelectAction(boardId: number): IMainAction {
   return {
     type: BOARD_SELECT_TRIGGER,

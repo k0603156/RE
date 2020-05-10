@@ -19,7 +19,7 @@ const initialState: InitialState = {
 
 export default createReducer(initialState, {
   // 회원가입 성공
-  [AUTH_SIGNUP_SUCCESS]: (state, action) => {
+  [AUTH_SIGNUP_SUCCESS]: (state) => {
     return {
       ...state,
     };
@@ -37,7 +37,7 @@ export default createReducer(initialState, {
     };
   },
   // 토큰 재발행 성공
-  [AUTH_TOKENREFRESH_SUCCESS]: (state, action) => ({
+  [AUTH_TOKENREFRESH_SUCCESS]: () => ({
     isLogged: false,
     isAdmin: false,
     me: {
@@ -46,7 +46,7 @@ export default createReducer(initialState, {
     },
   }),
   // 로그아웃 성공
-  [AUTH_SIGNOUT_SUCCESS]: (state, action) => {
+  [AUTH_SIGNOUT_SUCCESS]: () => {
     return {
       isLogged: false,
       isAdmin: false,
@@ -56,7 +56,7 @@ export default createReducer(initialState, {
       },
     };
   },
-  [AUTH_DROPOUT_SUCCESS]: (state, action) => {
+  [AUTH_DROPOUT_SUCCESS]: (state) => {
     return {
       ...state,
     };

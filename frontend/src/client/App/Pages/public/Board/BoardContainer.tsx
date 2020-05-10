@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import { createSelector } from "reselect";
+import React from "react";
+// import { createSelector } from "reselect";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { connect } from "react-redux";
-import BoardPresenter from "./BoardPresenter";
 import { RootStateType } from "@Services/Store/modules";
 import { boardlistBrowseAction } from "@Services/Store/modules/Main/actions";
 import {
   boardSetPageAction,
   boardBrowseAction,
 } from "@Services/Store/modules/Board/actions";
+import BoardPresenter from "./BoardPresenter";
 
 export interface IProps extends RouteComponentProps<{ boardName: string }> {
   boardList: RootStateType["main"]["boardlist"];
@@ -30,19 +30,19 @@ const BoardContainer = withRouter(
     const POST_PER_PAGE = 5;
     React.useEffect(() => {
       boardlistBrowseAction();
-      boardBrowseAction(parseInt(match.params.boardName), boardposts.page);
+      boardBrowseAction(Number(match.params.boardName), boardposts.page);
     }, [match.params.boardName, boardposts.page]);
 
     const handlePage = (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
       e.persist();
-      boardSetPageAction(parseInt(e.currentTarget.dataset.page!));
+      boardSetPageAction(Number(e.currentTarget.dataset.page!));
     };
 
     return (
       <BoardPresenter
         title={
           boardList.filter(
-            ({ id }) => Number(id) === Number(match.params.boardName)
+            ({ id }) => Number(id) === Number(match.params.boardName),
           )[0]?.name
         }
         totalCount={boardposts.count}
@@ -52,7 +52,7 @@ const BoardContainer = withRouter(
         handlePage={handlePage}
       />
     );
-  }
+  },
 );
 
 export default connect(
@@ -60,5 +60,5 @@ export default connect(
     boardList: main.boardlist,
     boardposts: board,
   }),
-  { boardlistBrowseAction, boardSetPageAction, boardBrowseAction }
+  { boardlistBrowseAction, boardSetPageAction, boardBrowseAction },
 )(BoardContainer);

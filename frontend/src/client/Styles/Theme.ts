@@ -1,5 +1,5 @@
 const Theme = () => {
-  const LAYOUT_PADDING = "padding: 250px 0 0 0";
+  // const LAYOUT_PADDING = "padding: 250px 0 0 0";
   const rootSideOffset = "5vw";
   const theme = {
     rootSideOffset,

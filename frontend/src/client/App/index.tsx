@@ -1,10 +1,8 @@
 import React from "react";
 import _ from "lodash";
 import { connect } from "react-redux";
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
-import PrivateLayout from "./Layouts/privateLayout";
-import PublicLayout, { NotFound } from "./Layouts/publicLayout";
 import {
   PrivateRoutes,
   PublicRoutes,
@@ -15,10 +13,12 @@ import Theme from "@Client/Styles/Theme";
 import GlobalStyles from "@Client/Styles/Global";
 import { Header } from "@Client/App/Components/organisms";
 import { RootStateType } from "@Services/Store/modules";
+import PublicLayout, { NotFound } from "./Layouts/publicLayout";
+import PrivateLayout from "./Layouts/privateLayout";
 
 const Wrapper = styled.div`
   position: relative;
-  padding: ${(props) => "0 " + props.theme.rootSideOffset};
+  padding: ${(props) => `0 ${props.theme.rootSideOffset}`};
   width: 100%;
   flex: 1;
   overflow-y: auto;
@@ -42,12 +42,12 @@ interface IProps {
   auth: RootStateType["auth"];
   msg: RootStateType["msg"];
 }
-function App(props: IProps) {
+function App({ auth, msg }: IProps) {
   return (
     <ThemeProvider theme={Theme}>
       <GlobalStyles />
       {/* <BrowserRouter> */}
-      <Header auth={props.auth} />
+      <Header auth={auth} />
       <Wrapper>
         <Switch>
           {_.map(PublicRoutes, (route, key) => {
@@ -57,8 +57,8 @@ function App(props: IProps) {
                 exact
                 path={path}
                 key={key}
-                render={(route) =>
-                  props.auth.isLogged ? (
+                render={() =>
+                  auth.isLogged ? (
                     <PrivateLayout component={component} />
                   ) : (
                     <PublicLayout component={component} />
@@ -74,8 +74,8 @@ function App(props: IProps) {
                 exact
                 path={path}
                 key={key}
-                render={(route) =>
-                  props.auth.isLogged ? (
+                render={() =>
+                  auth.isLogged ? (
                     <PrivateLayout component={component} />
                   ) : (
                     <Redirect to={SessionRoutes.Auth.path} />
@@ -92,8 +92,8 @@ function App(props: IProps) {
                 exact
                 path={path}
                 key={key}
-                render={(route) =>
-                  props.auth.isLogged ? (
+                render={() =>
+                  auth.isLogged ? (
                     <Redirect to={PublicRoutes.Main.path} />
                   ) : (
                     <PublicLayout component={component} />
@@ -110,8 +110,8 @@ function App(props: IProps) {
                 exact
                 path={path}
                 key={key}
-                render={(route) =>
-                  props.auth.isLogged && props.auth.isAdmin ? (
+                render={() =>
+                  auth.isLogged && auth.isAdmin ? (
                     <PrivateLayout component={component} />
                   ) : (
                     <Redirect to={SessionRoutes.Auth.path} />
@@ -122,9 +122,7 @@ function App(props: IProps) {
           })}
           <Route component={NotFound} />
         </Switch>
-        {props.msg.isAlert && (
-          <MSGBox id={props.msg.msgType}>{props.msg.message}</MSGBox>
-        )}
+        {msg.isAlert && <MSGBox id={msg.msgType}>{msg.message}</MSGBox>}
       </Wrapper>
       {/* </BrowserRouter> */}
     </ThemeProvider>

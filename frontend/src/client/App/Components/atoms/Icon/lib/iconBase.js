@@ -1,15 +1,17 @@
+/*eslint-disable*/
 import React from "react";
 import { IconContext, DefaultContext } from "./iconContext";
+
 var __assign =
   (this && this.__assign) ||
-  function() {
+  function () {
     __assign =
       Object.assign ||
-      function(t) {
+      function (t) {
         for (var s, i = 1, n = arguments.length; i < n; i++) {
           s = arguments[i];
 
-          for (var p in s)
+          for (const p in s)
             if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
         }
 
@@ -19,10 +21,10 @@ var __assign =
     return __assign.apply(this, arguments);
   };
 
-var __rest =
+const __rest =
   (this && this.__rest) ||
-  function(s, e) {
-    var t = {};
+  function (s, e) {
+    const t = {};
 
     for (var p in s)
       if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
@@ -37,79 +39,69 @@ var __rest =
 function Tree2Element(tree) {
   return (
     tree &&
-    tree.map(function(node, i) {
+    tree.map(function (node, i) {
       return React.createElement(
         node.tag,
-        __assign(
-          {
-            key: i
-          },
-          node.attr
-        ),
-        Tree2Element(node.child)
+        {
+          key: i,
+          ...node.attr,
+        },
+        Tree2Element(node.child),
       );
     })
   );
 }
 
 export function GenIcon(data) {
-  return function(props) {
+  return function (props) {
     return React.createElement(
       IconBase,
-      __assign(
-        {
-          attr: __assign({}, data.attr)
-        },
-        props
-      ),
-      Tree2Element(data.child)
+      {
+        attr: { ...data.attr },
+        ...props,
+      },
+      Tree2Element(data.child),
     );
   };
 }
 export function IconBase(props) {
-  var elem = function(conf) {
-    var computedSize = props.size || conf.size || "1em";
-    var className;
+  const elem = function (conf) {
+    const computedSize = props.size || conf.size || "1em";
+    let className;
     if (conf.className) className = conf.className;
     if (props.className)
-      className = (className ? className + " " : "") + props.className;
+      className = (className ? `${className} ` : "") + props.className;
 
-    var attr = props.attr,
-      title = props.title,
-      svgProps = __rest(props, ["attr", "title"]);
+    const { attr } = props;
+    const { title } = props;
+    const svgProps = __rest(props, ["attr", "title"]);
 
     return React.createElement(
       "svg",
-      __assign(
-        {
-          stroke: "currentColor",
-          fill: "currentColor",
-          strokeWidth: "0"
+      {
+        stroke: "currentColor",
+        fill: "currentColor",
+        strokeWidth: "0",
+        ...conf.attr,
+        ...attr,
+        ...svgProps,
+        className,
+        style: {
+          color: props.color || conf.color,
+          ...conf.style,
+          ...props.style,
         },
-        conf.attr,
-        attr,
-        svgProps,
-        {
-          className: className,
-          style: __assign(
-            {
-              color: props.color || conf.color
-            },
-            conf.style,
-            props.style
-          ),
-          height: computedSize,
-          width: computedSize,
-          xmlns: "http://www.w3.org/2000/svg"
-        }
-      ),
+        height: computedSize,
+        width: computedSize,
+        xmlns: "http://www.w3.org/2000/svg",
+      },
       title && React.createElement("title", null, title),
-      props.children
+      props.children,
     );
   };
 
   return IconContext !== undefined
-    ? React.createElement(IconContext.Consumer, null, function(conf) {
+    ? React.createElement(IconContext.Consumer, null, function (conf) {
         return elem(conf);
       })
     : elem(DefaultContext);

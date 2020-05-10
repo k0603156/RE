@@ -1,8 +1,8 @@
+/*eslint-disable*/
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import PrivateRoutes from "@Client/App/Routes/routes.private";
 import { RootStateType } from "@Services/Store/modules";
 import { authSignoutAction } from "@Services/Store/modules/Auth/actions";
 
@@ -26,11 +26,11 @@ const UserMenu = (props: {
         <Link to={`/profile/${props.auth.me.userName}`}> Profile</Link>
       </Item>
       <Item>
-        <Link to={`/postedit`}> PostEdit</Link>
+        <Link to="/postedit"> PostEdit</Link>
       </Item>
       {props.auth.isAdmin && (
         <Item>
-          <Link to={"/adm"}>Admin</Link>
+          <Link to="/adm">Admin</Link>
         </Item>
       )}
       <Item onClick={() => props.authSignoutAction(props.auth.me.email)}>
@@ -43,5 +43,5 @@ export default connect(
   ({ auth }: RootStateType) => ({
     auth,
   }),
-  { authSignoutAction }
+  { authSignoutAction },
 )(UserMenu);

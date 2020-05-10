@@ -1,1 +1,1 @@
-export { default as AdminMain } from "./Main";
+export * from "./Main";

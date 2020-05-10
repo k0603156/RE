@@ -1,9 +1,9 @@
+import { createReducer } from "typesafe-actions";
 import {
   PROFILE_SELECT_SUCCESS,
   PROFILE_UPDATE_SUCCESS,
   InitialState,
 } from "./types";
-import { createReducer } from "typesafe-actions";
 
 const initialState: InitialState = { id: 0, userName: "", posts: [] };
 
@@ -16,7 +16,7 @@ export default createReducer(initialState, {
     };
   },
 
-  [PROFILE_UPDATE_SUCCESS]: (state, action) => {
+  [PROFILE_UPDATE_SUCCESS]: (state) => {
     return {
       ...state,
     };

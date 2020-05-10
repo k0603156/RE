@@ -8,36 +8,41 @@ import {
 } from "@Client/App/Components/organisms";
 import { RootStateType } from "@Services/Store/modules";
 import { IPostCreatePayload } from "@Services/Store/modules/Post/types";
+
 interface IProps {
   className?: string;
   onSubmit: (event: React.ChangeEvent<any>) => void;
   onChange: (
     key: keyof IPostCreatePayload,
-    value: Array<Node> | string
+    value: Array<Node> | string,
   ) => void;
   postData: IPostCreatePayload;
   initData: {
     boardlist: RootStateType["main"]["boardlist"];
   };
 }
-const BoardSelect = styled((props: Omit<IProps, "onSubmit">) => {
-  return (
-    <div className={props.className}>
-      <label htmlFor={"boardselect"}>글분류</label>
-      <select
-        id={"boardselect"}
-        value={props.postData.boardId}
-        onChange={(e) => props.onChange("boardId", e.target.value)}
-      >
-        {props.initData.boardlist.map((board: { id: string; name: string }) => (
-          <option key={board.id} value={board.id}>
-            {board.name}
-          </option>
-        ))}
-      </select>
-    </div>
-  );
-})`
+const BoardSelect = styled(
+  ({ className, onChange, postData, initData }: Omit<IProps, "onSubmit">) => {
+    return (
+      <div className={className}>
+        <label htmlFor={className}>
+          글분류
+          <select
+            id={className}
+            value={postData.boardId}
+            onChange={(e) => onChange("boardId", e.target.value)}
+          >
+            {initData.boardlist.map((board: { id: string; name: string }) => (
+              <option key={board.id} value={board.id}>
+                {board.name}
+              </option>
+            ))}
+          </select>
+        </label>
+      </div>
+    );
+  },
+)`
   display: flex;
   margin: 10px 0;
   color: rgb(21, 18, 31);
@@ -51,36 +56,38 @@ const BoardSelect = styled((props: Omit<IProps, "onSubmit">) => {
     outline: none;
   }
 `;
-export default styled((props: IProps) => {
-  return (
-    <div className={props.className}>
-      <input
-        className={"title-input"}
-        placeholder="제목을 입력하세요"
-        onChange={(e) => props.onChange("title", e.target.value)}
-        value={props.postData.title}
-      />
-      <HashtagInput
-        tags={props.postData.hashtags}
-        setTags={(value) => props.onChange("hashtags", value)}
-        maxTags={5}
-      />
-      <BoardSelect
-        onChange={props.onChange}
-        postData={props.postData}
-        initData={props.initData}
-      />
-      <Editor
-        onChange={(value) => props.onChange("content", value)}
-        value={props.postData.content}
-      />
-      <ImageDndZone />
-      <button type="button" onClick={props.onSubmit}>
-        글쓰기
-      </button>
-    </div>
-  );
-})`
+export default styled(
+  ({ className, onSubmit, onChange, postData, initData }: IProps) => {
+    return (
+      <div className={className}>
+        <input
+          className="title-input"
+          placeholder="제목을 입력하세요"
+          onChange={(e) => onChange("title", e.target.value)}
+          value={postData.title}
+        />
+        <HashtagInput
+          tags={postData.hashtags}
+          setTags={(value) => onChange("hashtags", value)}
+          maxTags={5}
+        />
+        <BoardSelect
+          onChange={onChange}
+          postData={postData}
+          initData={initData}
+        />
+        <Editor
+          onChange={(value) => onChange("content", value)}
+          value={postData.content}
+        />
+        <ImageDndZone />
+        <button type="button" onClick={onSubmit}>
+          글쓰기
+        </button>
+      </div>
+    );
+  },
+)`
   display: flex;
   flex-direction: column;
   padding: 15px;

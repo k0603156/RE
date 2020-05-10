@@ -5,7 +5,7 @@ import { loadingStart, loadingFinish } from "@Services/Store/modules/Loading";
 export default function createRequestSaga(type: any, request: any) {
   const SUCCESS = String(type).replace("REQUEST", "SUCCESS");
   const FAILURE = String(type).replace("REQUEST", "FAILURE");
-  return function* (action: any) {
+  return function* ge(action: any) {
     yield put(loadingStart(type)); // 로딩 시작
     try {
       const response = yield call(request, action.payload);

@@ -4,7 +4,7 @@ import {
   IProfileAction,
 } from "./types";
 
-//** CREATE ACTION **//
+//* * CREATE ACTION **//
 // 사용자 정보 확인
 export function profileSelectAction(userName: string): IProfileAction {
   return {
@@ -19,7 +19,7 @@ export function profileSelectAction(userName: string): IProfileAction {
 export function profileUpdateAction(
   userName: string,
   password: string,
-  confirmPassword: string
+  confirmPassword: string,
 ): IProfileAction {
   return {
     type: PROFILE_UPDATE_REQUEST,

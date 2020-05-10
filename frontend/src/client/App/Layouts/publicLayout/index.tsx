@@ -5,8 +5,8 @@ const Layout = styled.div`
   width: 100%;
   ${(props) => props.theme.layoutAttr};
 `;
-function PublicLayout(props: { component: any }) {
-  const Component = props.component;
+function PublicLayout({ component }: { component: any }) {
+  const Component = component;
   return (
     <Layout>
       <Component />

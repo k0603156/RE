@@ -1,4 +1,4 @@
-import { AdminMain } from "@Client/App/Pages/admin";
+import * as AdminMain from "@Client/App/Pages/admin";
 
 export default {
   AdminMain: {

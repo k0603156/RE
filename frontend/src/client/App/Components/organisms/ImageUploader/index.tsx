@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+
 interface IProps {
   className?: string;
 }
@@ -11,7 +12,7 @@ export default styled((props: IProps) => {
   }
   return (
     <div className={props.className}>
-      <img className={"preview"} src={file} />
+      <img className="preview" src={file} alt={`preview-${file}`} />
       <input type="file" onChange={onChange} />
     </div>
   );

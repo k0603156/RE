@@ -1,4 +1,5 @@
-import { combineReducers, Reducer } from "redux";
+import { combineReducers } from "redux";
+import { all, fork } from "redux-saga/effects";
 import auth from "./Auth/reducers";
 import authSaga from "./Auth/saga";
 import profile from "./Profile/reducers";
@@ -11,8 +12,6 @@ import main from "./Main/reducers";
 import mainSaga from "./Main/saga";
 import loading from "./Loading";
 import msg, { msgSaga } from "./Msg";
-
-import { all, fork } from "redux-saga/effects";
 
 const rootReducer = combineReducers({
   main,

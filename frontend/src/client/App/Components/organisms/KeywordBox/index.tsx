@@ -34,16 +34,16 @@ interface IProps {
   boardlist: RootStateType["main"]["boardlist"];
 }
 
-export default (props: IProps) => {
+export default ({ boardSelectAction, boardlist }: IProps) => {
   const onClick = (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
-    props.boardSelectAction(parseInt(e.currentTarget.dataset.keyid!));
+    boardSelectAction(Number(e.currentTarget.dataset.keyid!));
   };
 
   return (
     <Box>
       <List<RootStateType["main"]["boardlist"]>
         wrapper={Ul}
-        dataList={props.boardlist}
+        dataList={boardlist}
         temp={(data) => (
           <Li key={data.id} data-keyid={data.id} onClick={onClick}>
             {data.name}

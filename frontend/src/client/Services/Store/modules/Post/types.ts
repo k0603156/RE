@@ -16,23 +16,23 @@ export const POST_UPDATE_REQUEST = "post/POST_UPDATE_REQUEST";
 export const POST_UPDATE_SUCCESS = "post/POST_UPDATE_SUCCESS";
 export const POST_UPDATE_FAILURE = "post/POST_UPDATE_FAILURE";
 
-//게시글 읽기 요청
+// 게시글 읽기 요청
 export interface IPostBrowseRequest {
   type: typeof POST_BROWSE_REQUEST;
   payload: {
     pid: string;
   };
 }
-//게시글 생성 요청
+// 게시글 생성 요청
 export interface IPostCreateRequest {
   type: typeof POST_CREATE_REQUEST;
   payload: IPostCreatePayload;
 }
-//게시글 삭제 요청
+// 게시글 삭제 요청
 export interface IPostDeleteRequest {
   type: typeof POST_DELETE_REQUEST;
 }
-//게시글 수정 요청
+// 게시글 수정 요청
 export interface IPostUpdateRequest {
   type: typeof POST_UPDATE_REQUEST;
 }

@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components";
+import { Input, Button } from "@Client/App/Components/atoms";
+
 import AuthState from "./AuthState";
-import { Input } from "@Client/App/Components/atoms";
-import { Button } from "@Client/App/Components/atoms";
+
 interface IProps {
   email: IUseInputReturn<string>;
   userName: IUseInputReturn<string>;
@@ -59,24 +60,24 @@ function AuthPresenter({
           <>
             <form onSubmit={onSubmit}>
               <Input
-                placeholder={"Email"}
+                placeholder="Email"
                 value={email.value}
                 onChange={email.onChange}
                 type="email"
               />
               <Input
-                placeholder={"Password"}
+                placeholder="Password"
                 value={password.value}
                 onChange={password.onChange}
                 type="password"
-                pattern={"[A-Za-z0-9]*"}
+                pattern="[A-Za-z0-9]*"
               />
-              <Button type={"submit"}>Sign In</Button>
+              <Button type="submit">Sign In</Button>
             </form>
-            Don't have an account?
+            Don&apos;t have an account?
             <Button
               type="button"
-              onClick={(e) => setAction(AuthState.STATE_SIGNUP)}
+              onClick={() => setAction(AuthState.STATE_SIGNUP)}
             >
               Sign Up
             </Button>
@@ -86,41 +87,41 @@ function AuthPresenter({
           <>
             <form onSubmit={onSubmit}>
               <Input
-                placeholder={"Email"}
+                placeholder="Email"
                 value={email.value}
                 onChange={email.onChange}
                 type="email"
               />
               <Input
-                placeholder={"UserName"}
+                placeholder="UserName"
                 value={userName.value}
                 onChange={userName.onChange}
                 type="text"
-                pattern={"[A-Za-z0-9]*"}
+                pattern="[A-Za-z0-9]*"
                 minLength={3}
                 maxLength={15}
               />
               <Input
-                placeholder={"Password"}
+                placeholder="Password"
                 value={password.value}
                 onChange={password.onChange}
                 type="password"
-                pattern={"[A-Za-z0-9]*"}
+                pattern="[A-Za-z0-9]*"
                 minLength={8}
                 maxLength={20}
                 title="특수문자를 제외한 8~20글자"
               />
               <Input
-                placeholder={"ConfirmPassword"}
+                placeholder="ConfirmPassword"
                 value={confirmPassword.value}
                 onChange={confirmPassword.onChange}
                 type="password"
-                pattern={"[A-Za-z0-9]*"}
+                pattern="[A-Za-z0-9]*"
                 minLength={8}
                 maxLength={20}
                 title="특수문자를 제외한 8~20글자"
               />
-              <Button type={"submit"}>Sign up</Button>
+              <Button type="submit">Sign up</Button>
             </form>
             Did you have an account?
             <Button

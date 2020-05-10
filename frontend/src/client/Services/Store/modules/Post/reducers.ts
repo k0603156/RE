@@ -23,20 +23,20 @@ const initialState: InitialState = {
 };
 
 export default createReducer(initialState, {
-  //게시글 읽기 성공
+  // 게시글 읽기 성공
   [POST_BROWSE_SUCCESS]: (state, action) => {
     return { ...initialState, ...action.payload.response };
   },
-  //게시글 생성 성공
-  [POST_CREATE_SUCCESS]: (state, action) => {
+  // 게시글 생성 성공
+  [POST_CREATE_SUCCESS]: () => {
     return { ...initialState };
   },
-  //게시글 삭제 성공
-  [POST_DELETE_SUCCESS]: (state, action) => {
+  // 게시글 삭제 성공
+  [POST_DELETE_SUCCESS]: (state) => {
     return { ...state };
   },
-  //게시글 수정 성공
-  [POST_UPDATE_SUCCESS]: (state, action) => {
+  // 게시글 수정 성공
+  [POST_UPDATE_SUCCESS]: (state) => {
     return { ...state };
   },
 });

@@ -1,8 +1,8 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import styled from "styled-components";
-import { createEditor, Node, Editor as BaseEditor } from "slate";
-import { Slate, Editable, withReact, useSlate } from "slate-react";
-import { Mx_Width } from "@Client/Styles/Device";
+import { createEditor, Node } from "slate";
+import { Slate, Editable, withReact } from "slate-react";
+// import { maxWidth } from "@Client/Styles/Device";
 
 interface IProps {
   onChange: (value: Node[]) => void;
@@ -10,20 +10,6 @@ interface IProps {
   readOnly?: boolean;
 }
 
-const Toolbar = styled.div`
-  position: relative;
-  padding: 2px 18px 2px;
-  margin: 0 -20px;
-  border-top: 2px solid lightgray;
-  border-bottom: 2px solid lightgray;
-  margin-bottom: 20px;
-  & > * {
-    display: inline-block;
-  }
-  & > * + * {
-    margin-left: 15px;
-  }
-`;
 const StyledEditable = styled(Editable)`
   height: 300px;
   padding: 0.3rem;
@@ -31,35 +17,16 @@ const StyledEditable = styled(Editable)`
   border-bottom: none;
   box-shadow: 5px 5px 10px rgb(47, 44, 55);
 `;
-const isMarkActive = (editor: any, format: any) => {
-  const marks = BaseEditor.marks(editor);
-  return marks ? marks[format] === true : false;
-};
 
-const MarkButton = (format: any) => {
-  const editor = useSlate();
-  return (
-    <button
-      type="button"
-      disabled={isMarkActive(editor, format)}
-      onMouseDown={(event) => {
-        event.preventDefault();
-      }}
-    >
-      <span>I</span>
-    </button>
-  );
-};
-
-const Editor = (props: IProps) => {
+const Editor = ({ onChange, value }: IProps) => {
   const editor = useMemo(() => withReact(createEditor()), []);
   return (
-    <Slate editor={editor} value={props.value} onChange={props.onChange}>
+    <Slate editor={editor} value={value} onChange={onChange}>
       {/* <Toolbar>
         <MarkButton format="bold" />
       </Toolbar> */}
       <StyledEditable
-        onKeyDown={(event) => {
+        onKeyDown={() => {
           // console.log(event.key);
         }}
       />

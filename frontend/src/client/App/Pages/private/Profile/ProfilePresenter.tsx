@@ -8,14 +8,14 @@ interface IProps {
   profile: RootStateType["profile"];
 }
 export default styled(({ className, profile: { userName, posts } }: IProps) => {
-  const isSelf = true;
+  // const isSelf = true;
   return (
     <div className={className}>
-      <div className={"profile"}>
-        <p className={"username"}>{userName}</p>
-        <p className={"bio"}>bio............</p>
+      <div className="profile">
+        <p className="username">{userName}</p>
+        <p className="bio">bio............</p>
       </div>
-      <div className={"postlist"}>
+      <div className="postlist">
         <h3>작성한 글</h3>
         <ul>
           {posts.map((post) => {
@@ -30,10 +30,10 @@ export default styled(({ className, profile: { userName, posts } }: IProps) => {
           })}
         </ul>
       </div>
-      <div className={"follow"}>
+      <div className="follow">
         <h3>follow</h3>
       </div>
-      <div className={"follower"}>
+      <div className="follower">
         <h3>follower</h3>
       </div>
     </div>

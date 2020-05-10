@@ -12,7 +12,7 @@ export function authSignupAction(
   email: string,
   password: string,
   confirmPassword: string,
-  callback: () => void
+  callback: () => void,
 ): IAuthAction {
   return {
     type: AUTH_SIGNUP_REQUEST,

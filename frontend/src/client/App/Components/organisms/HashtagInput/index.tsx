@@ -1,5 +1,7 @@
+/* eslint-disable react/jsx-one-expression-per-line */
 import React, { useState } from "react";
 import styled from "styled-components";
+
 interface IProps {
   className?: string;
   tags: Array<{ name: string }>;
@@ -39,11 +41,11 @@ export default styled((props: IProps) => {
   };
   return (
     <div className={props.className}>
-      {props.tags.map((tag, index) => (
-        <span key={tag.name + index}>#{tag.name}</span>
+      {props.tags.map((tag) => (
+        <span key={tag.name}>#{tag.name}</span>
       ))}
       <input
-        placeholder={"태그입력"}
+        placeholder="태그입력"
         value={state.input}
         onChange={onChange}
         onKeyUp={onKeyUp}

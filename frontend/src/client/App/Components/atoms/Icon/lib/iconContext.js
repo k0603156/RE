@@ -1,9 +1,11 @@
-import * as React from 'react';
-export var DefaultContext = {
+import * as React from "react";
+
+export const DefaultContext = {
   color: undefined,
   size: undefined,
   className: undefined,
   style: undefined,
-  attr: undefined
+  attr: undefined,
 };
-export var IconContext = React.createContext && React.createContext(DefaultContext);
+export const IconContext =
+  React.createContext && React.createContext(DefaultContext);

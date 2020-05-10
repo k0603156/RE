@@ -1,7 +1,9 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { Mx_Width } from "@Client/Styles/Device";
+import { maxWidth } from "@Client/Styles/Device";
 import { RootStateType } from "@Services/Store/modules";
 import UMenu from "./UserMenu";
 
@@ -39,7 +41,7 @@ export default styled(
         <div className={`${className} userBox`}>{UserMenu}</div>
       </>
     );
-  }
+  },
 )`
   &.title {
     left: 0;
@@ -56,7 +58,7 @@ export default styled(
     ${(props) => props.theme.headerAttr}
     min-width: 100px;
     text-align: right;
-    ${Mx_Width(`{
+    ${maxWidth(`{
       width: 100px;
       overflow: hidden;
       text-overflow: ellipsis;

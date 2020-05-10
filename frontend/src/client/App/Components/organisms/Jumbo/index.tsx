@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Mx_Width } from "@Client/Styles/Device";
+import { maxWidth } from "@Client/Styles/Device";
 
 interface IProps {
   size: "lg" | "md" | "sm";
@@ -15,8 +15,8 @@ const setTypo = (size: IProps["size"]) => {
     sm: 2,
   };
   return {
-    "font-size": 3.2 - Size[size] + "rem;",
-    "line-height": 4.2 - Size[size] + "rem;",
+    "font-size": `${3.2 - Size[size]}rem;`,
+    "line-height": `${4.2 - Size[size]}rem;`,
   };
 };
 
@@ -25,7 +25,7 @@ const Box = styled.div`
   padding: 50px 0;
   writing-mode: ${({ verticalFrom }: IProps) => verticalFrom && "vertical-lr"};
   ${({ verticalFrom }: IProps) =>
-    verticalFrom && Mx_Width(`{writing-mode: horizontal-tb;}`)[verticalFrom]}
+    verticalFrom && maxWidth(`{writing-mode: horizontal-tb;}`)[verticalFrom]}
   height: auto;
   align-items: center;
   justify-content: center;
@@ -40,10 +40,10 @@ const Box = styled.div`
     }
   }
 `;
-export default (props: IProps) => {
+export default ({ size, verticalFrom, children }: IProps) => {
   return (
-    <Box {...props}>
-      <span>{props.children}</span>
+    <Box size={size} verticalFrom={verticalFrom}>
+      <span>{children}</span>
     </Box>
   );
 };

@@ -6,17 +6,16 @@ import {
   TPostAction,
   IPostCreatePayload,
 } from "./types";
-import { Node } from "slate";
-//** CREATE ACTION **//
+//* * CREATE ACTION **//
 
-//게시글 읽기 요청
+// 게시글 읽기 요청
 export function postBrowseAction(pid: string): TPostAction {
   return {
     type: POST_BROWSE_REQUEST,
     payload: { pid },
   };
 }
-//게시글 생성 요청
+// 게시글 생성 요청
 export function postCreateAction(payload: IPostCreatePayload): TPostAction {
   return {
     type: POST_CREATE_REQUEST,
@@ -24,13 +23,13 @@ export function postCreateAction(payload: IPostCreatePayload): TPostAction {
   };
 }
 
-//게시글 삭제 요청
+// 게시글 삭제 요청
 export function postDeleteAction(): TPostAction {
   return {
     type: POST_DELETE_REQUEST,
   };
 }
-//게시글 수정 요청
+// 게시글 수정 요청
 export function postUpdateAction(): TPostAction {
   return {
     type: POST_UPDATE_REQUEST,

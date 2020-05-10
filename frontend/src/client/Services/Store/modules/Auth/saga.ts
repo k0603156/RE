@@ -1,26 +1,21 @@
 import { all, fork, takeLatest, put, call } from "redux-saga/effects";
+import createRequestSaga from "@Services/Store/lib/createRequestSaga";
+import Api from "@Services/Api";
 import {
   AUTH_SIGNUP_REQUEST,
   AUTH_SIGNIN_REQUEST,
   AUTH_SIGNIN_SUCCESS,
   AUTH_SIGNIN_FAILURE,
   AUTH_TOKENREFRESH_REQUEST,
-  AUTH_TOKENREFRESH_SUCCESS,
-  AUTH_TOKENREFRESH_FAILURE,
   AUTH_SIGNOUT_REQUEST,
   AUTH_SIGNOUT_SUCCESS,
   AUTH_SIGNOUT_FAILURE,
   AUTH_DROPOUT_REQUEST,
-  AUTH_DROPOUT_SUCCESS,
-  AUTH_DROPOUT_FAILURE,
   IAuthSigninAction,
   IAuthSignoutAction,
-  IAuthTokenrefreshAction,
 } from "./types";
 import { msgCreate } from "../Msg";
 import { loadingStart, loadingFinish } from "../Loading";
-import createRequestSaga from "@Services/Store/lib/createRequestSaga";
-import Api from "@Services/Api";
 
 export function* authSigninSaga(data: IAuthSigninAction): Generator {
   yield put(loadingStart(data.type));
@@ -36,7 +31,7 @@ export function* authSigninSaga(data: IAuthSigninAction): Generator {
     localStorage.setItem("userName", response.data.response.userName);
     localStorage.setItem("email", response.data.response.email);
     yield put(
-      msgCreate(AUTH_SIGNIN_SUCCESS, "ALERT", { message: "로그인되었습니다." })
+      msgCreate(AUTH_SIGNIN_SUCCESS, "ALERT", { message: "로그인되었습니다." }),
     );
   } catch (error) {
     yield put(msgCreate(AUTH_SIGNIN_FAILURE, "ERROR", error));
@@ -49,7 +44,7 @@ export function* authSigninSaga(data: IAuthSigninAction): Generator {
 
 export const authTokenrefreshSaga = createRequestSaga(
   AUTH_TOKENREFRESH_REQUEST,
-  Api.auth.reauthorize
+  Api.auth.reauthorize,
 );
 
 export function* authSignoutSaga(data: IAuthSignoutAction): Generator {
@@ -74,7 +69,7 @@ export function* authSignoutSaga(data: IAuthSignoutAction): Generator {
 function* authSignup() {
   yield takeLatest(
     AUTH_SIGNUP_REQUEST,
-    createRequestSaga(AUTH_SIGNUP_REQUEST, Api.user.create_user)
+    createRequestSaga(AUTH_SIGNUP_REQUEST, Api.user.create_user),
   );
 }
 function* authSignin() {
@@ -89,7 +84,7 @@ function* authSignout() {
 function* authDropout() {
   yield takeLatest(
     AUTH_DROPOUT_REQUEST,
-    createRequestSaga(AUTH_DROPOUT_REQUEST, Api.user.delete_user)
+    createRequestSaga(AUTH_DROPOUT_REQUEST, Api.user.delete_user),
   );
 }
 export default function* () {

@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { connect } from "react-redux";
-import ProfilePresenter from "./ProfilePresenter";
 import { RootStateType } from "@Services/Store/modules";
 import { profileSelectAction } from "@Services/Store/modules/Profile/actions";
+import ProfilePresenter from "./ProfilePresenter";
 
 export interface IProps
   extends RouteComponentProps<{ searchUserName: string }> {
@@ -11,7 +11,7 @@ export interface IProps
   profileSelectAction: typeof profileSelectAction;
 }
 const ProfileContainer = withRouter((props: IProps) => {
-  const searchUserName = props.match.params.searchUserName;
+  const { searchUserName } = props.match.params;
   useEffect(() => {
     props.profileSelectAction(searchUserName);
   }, [props.match.params.searchUserName]);
@@ -23,5 +23,5 @@ export default connect(
     profile,
     loadingAuth: loading["profile/PROFILE_SELECT_REQUEST"],
   }),
-  { profileSelectAction }
+  { profileSelectAction },
 )(ProfileContainer);

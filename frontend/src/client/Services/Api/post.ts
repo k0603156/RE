@@ -1,5 +1,5 @@
-import request from "./config";
 import { IPostCreatePayload } from "@Services/Store/modules/Post/types";
+import request from "./config";
 
 export interface IpostBrowse {
   pid: number;
@@ -23,7 +23,7 @@ export default {
 
   post_browse_list(payload: IpostBrowseList) {
     return request.get(
-      `/post/list/?page=${payload.page}&boardId=${payload.boardId}`
+      `/post/list/?page=${payload.page}&boardId=${payload.boardId}`,
     );
   },
   post_create(payload: IPostCreatePayload) {

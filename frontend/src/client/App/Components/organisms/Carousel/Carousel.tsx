@@ -1,3 +1,4 @@
+/*eslint-disable*/
 import React, { useState } from "react";
 import styled from "styled-components";
 
@@ -6,7 +7,7 @@ interface IProps<T extends Array<any>> {
   pageDataList: T;
   CarouselItem: (
     data: IProps<T>["pageDataList"][0],
-    index: number
+    index: number,
   ) => React.ReactNode;
 }
 const Footer = styled(
@@ -14,7 +15,7 @@ const Footer = styled(
     props: IProps<T> & {
       currentPage: number;
       setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
-    }
+    },
   ) => (
     <ul className={props.className}>
       {props.pageDataList.map((data, index) => (
@@ -25,7 +26,7 @@ const Footer = styled(
         </li>
       ))}
     </ul>
-  )
+  ),
 )`
   height: 50px;
   display: flex;
@@ -53,18 +54,18 @@ const Body = styled(
     <ul className={props.className}>
       {props.pageDataList.map(props.CarouselItem)}
     </ul>
-  )
+  ),
 )`
   display: flex;
   flex: 1;
   flex-direction: column;
   flex-wrap: wrap;
   height: 200px;
-  width: ${({ pageDataList }) => pageDataList.length * 80 + "%"};
+  width: ${({ pageDataList }) => `${pageDataList.length * 80}%`};
   padding: 0;
   transform: translateX(
     ${({ currentPage, pageDataList }) => {
-      return -100 * (currentPage / pageDataList.length) + "%";
+      return `${-100 * (currentPage / pageDataList.length)}%`;
     }}
   );
   transition: transform 0.3s ease 0s;
@@ -87,7 +88,7 @@ const Carousel = styled(
         />
       </div>
     );
-  }
+  },
 )`
   display: flex;
   flex-direction: column;

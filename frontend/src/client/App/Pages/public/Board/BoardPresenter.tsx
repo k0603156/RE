@@ -24,7 +24,7 @@ export default styled(
   }: IProps) => {
     return (
       <div className={className}>
-        <h3 className={"title"}>{title}</h3>
+        <h3 className="title">{title}</h3>
         <ul>
           {postlist.map((post: any) => (
             <BoardItem key={post.id} post={post} />
@@ -39,7 +39,7 @@ export default styled(
         </ul>
       </div>
     );
-  }
+  },
 )`
   padding: 15px;
   margin-bottom: 15px;

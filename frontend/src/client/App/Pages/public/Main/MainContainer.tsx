@@ -16,18 +16,25 @@ export interface IProps {
   boardlistBrowseAction: typeof boardlistBrowseAction;
   postlistBrowseAction: typeof postlistBrowseAction;
 }
-const MainContainer = (props: IProps) => {
+const MainContainer = ({
+  selectedBoard,
+  boardlist,
+  postlist,
+  boardSelectAction,
+  boardlistBrowseAction,
+  postlistBrowseAction,
+}: IProps) => {
   useEffect(() => {
-    props.boardlist.length == 0 && props.boardlistBrowseAction();
-    props.postlistBrowseAction(props.selectedBoard);
+    boardlist.length === 0 && boardlistBrowseAction();
+    postlistBrowseAction(selectedBoard);
     return () => {};
-  }, [props.selectedBoard]);
+  }, [selectedBoard]);
   return (
     <MainPresenter
-      boardSelectAction={props.boardSelectAction}
-      currentBId={props.selectedBoard}
-      boardlist={props.boardlist}
-      postlist={props.postlist}
+      boardSelectAction={boardSelectAction}
+      currentBId={selectedBoard}
+      boardlist={boardlist}
+      postlist={postlist}
     />
   );
 };
@@ -42,5 +49,5 @@ export default connect(
     boardSelectAction,
     boardlistBrowseAction,
     postlistBrowseAction,
-  }
+  },
 )(MainContainer);

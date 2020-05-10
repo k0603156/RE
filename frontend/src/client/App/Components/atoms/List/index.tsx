@@ -6,12 +6,17 @@ interface IProps<T extends Array<any>> {
   temp: (data: IProps<T>["dataList"][0]) => React.ReactNode;
   footer?: React.ReactNode;
 }
-export default <T extends Array<any>>(props: IProps<T>) => {
-  const Wrapper = props.wrapper;
+export default <T extends Array<any>>({
+  wrapper,
+  dataList,
+  temp,
+  footer,
+}: IProps<T>) => {
+  const Wrapper = wrapper;
   return (
     <Wrapper>
-      {props.dataList.map(props.temp)}
-      {props.footer}
+      {dataList.map(temp)}
+      {footer}
     </Wrapper>
   );
 };

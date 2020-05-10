@@ -49,20 +49,20 @@ const CarouselItem = styled.div`
     font-size: 0.8rem;
   }
 `;
-export default styled((props: IProps) => {
+export default styled(({ className, data }: IProps) => {
   return (
-    <CarouselItem className={props.className} key={props.data.id}>
-      <h2 className={"title"}>
-        <Link to={`board/post/${props.data.id}`}>{props.data.title}</Link>
+    <CarouselItem className={className} key={data.id}>
+      <h2 className="title">
+        <Link to={`board/post/${data.id}`}>{data.title}</Link>
       </h2>
-      <div className={"username"}>@{props.data.user.userName}</div>
-      <div className={"updatedat"}>{props.data.updatedAt}</div>
-      <div className={"tags"}>
-        {props.data.hashtags.map((hashtag) => (
+      <div className="username">@{data.user.userName}</div>
+      <div className="updatedat">{data.updatedAt}</div>
+      <div className="tags">
+        {data.hashtags.map((hashtag) => (
           <span key={hashtag.name}>#{hashtag.name}</span>
         ))}
       </div>
-      <div className={"views"}>viws {props.data.readcount}</div>
+      <div className="views">viws {data.readcount}</div>
     </CarouselItem>
   );
 })`
