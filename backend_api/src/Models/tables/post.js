@@ -22,12 +22,12 @@ module.exports = (sequelize, DataTypes) => {
       paranoid: true,
     },
   );
-  post.associate = (models) => {
-    post.belongsTo(models.user);
-    post.belongsTo(models.board);
-    post.hasMany(models.postread);
+  post.associate = ({ user, board, postread, hashtag }) => {
+    post.belongsTo(user);
+    post.belongsTo(board);
+    post.hasMany(postread);
     // post.hasMany(models.story);
-    post.belongsToMany(models.hashtag, {
+    post.belongsToMany(hashtag, {
       through: "PostHashtag",
       timestamps: false,
     });

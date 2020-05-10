@@ -40,8 +40,8 @@ module.exports = (sequelize, DataTypes) => {
       paranoid: true,
     },
   );
-  user.associate = (models) => {
-    user.hasMany(models.post);
+  user.associate = ({ post }) => {
+    user.hasMany(post);
   };
   return user;
 };

@@ -22,6 +22,7 @@ module.exports.getPostsByBoard = async (req, res, next) => {
       include: [
         {
           model: Models.user,
+          as: "user",
           attributes: ["id", "userName"],
         },
         {

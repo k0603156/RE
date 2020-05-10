@@ -18,8 +18,8 @@ module.exports = (sequelize, DataTypes) => {
       timestamps: false,
     },
   );
-  hashtag.associate = (models) => {
-    hashtag.belongsToMany(models.post, {
+  hashtag.associate = ({ post }) => {
+    hashtag.belongsToMany(post, {
       through: "PostHashtag",
       timestamps: false,
     });

@@ -17,8 +17,8 @@ module.exports = (sequelize, DataTypes) => {
       paranoid: true,
     },
   );
-  postread.associate = (models) => {
-    postread.belongsTo(models.post, {
+  postread.associate = ({ post }) => {
+    postread.belongsTo(post, {
       onDelete: "CASCADE",
       onUpdate: "restrict",
     });
