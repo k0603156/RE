@@ -11,7 +11,7 @@ import {
 } from "@Client/App/Routes";
 import Theme from "@Client/Styles/Theme";
 import GlobalStyles from "@Client/Styles/Global";
-import { Header } from "@Client/App/Components/organisms";
+import { Header, MessageBox } from "@Client/App/Components/organisms";
 import { RootStateType } from "@Services/Store/modules";
 import PublicLayout, { NotFound } from "./Layouts/publicLayout";
 import PrivateLayout from "./Layouts/privateLayout";
@@ -23,21 +23,7 @@ const Wrapper = styled.div`
   flex: 1;
   overflow-y: auto;
 `;
-const MSGBox = styled.div`
-  position: fixed;
-  bottom: 5px;
-  right: 3px;
-  height: 40px;
-  width: auto;
-  line-height: 30px;
-  padding: 5px 10px;
-  color: white;
-  font-weight: 800;
-  border-radius: 3px;
-  box-shadow: 1px 1px 4px gray;
-  background-color: ${(props) =>
-    props.id === "ERROR" ? "rgba(100, 0, 0, 0.5)" : "rgba(0, 100, 0, 0.5)"};
-`;
+
 interface IProps {
   auth: RootStateType["auth"];
   msg: RootStateType["msg"];
@@ -46,12 +32,10 @@ function App({ auth, msg }: IProps) {
   return (
     <ThemeProvider theme={Theme}>
       <GlobalStyles />
-      {/* <BrowserRouter> */}
       <Header auth={auth} />
       <Wrapper>
         <Switch>
-          {_.map(PublicRoutes, (route, key) => {
-            const { component, path } = route;
+          {_.map(PublicRoutes, ({ component, path }, key) => {
             return (
               <Route
                 exact
@@ -67,8 +51,7 @@ function App({ auth, msg }: IProps) {
               />
             );
           })}
-          {_.map(PrivateRoutes, (route, key) => {
-            const { component, path } = route;
+          {_.map(PrivateRoutes, ({ component, path }, key) => {
             return (
               <Route
                 exact
@@ -85,8 +68,7 @@ function App({ auth, msg }: IProps) {
             );
           })}
 
-          {_.map(SessionRoutes, (route, key) => {
-            const { component, path } = route;
+          {_.map(SessionRoutes, ({ component, path }, key) => {
             return (
               <Route
                 exact
@@ -103,8 +85,7 @@ function App({ auth, msg }: IProps) {
             );
           })}
 
-          {_.map(AdminRoutes, (route, key) => {
-            const { component, path } = route;
+          {_.map(AdminRoutes, ({ component, path }, key) => {
             return (
               <Route
                 exact
@@ -122,9 +103,8 @@ function App({ auth, msg }: IProps) {
           })}
           <Route component={NotFound} />
         </Switch>
-        {msg.isAlert && <MSGBox id={msg.msgType}>{msg.message}</MSGBox>}
+        {msg.isAlert && <MessageBox id={msg.msgType} message={msg.message} />}
       </Wrapper>
-      {/* </BrowserRouter> */}
     </ThemeProvider>
   );
 }

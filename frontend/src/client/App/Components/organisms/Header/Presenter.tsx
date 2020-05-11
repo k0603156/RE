@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
@@ -24,7 +22,12 @@ export default styled(
     },
   }: IProps) => {
     const UserMenu = isLogged ? (
-      <div onClick={toggleVisible}>
+      <div
+        onClick={toggleVisible}
+        onKeyUp={() => {}}
+        role="button"
+        tabIndex={0}
+      >
         {userName}
         <UMenu toggle={visible} />
       </div>
@@ -34,27 +37,27 @@ export default styled(
 
     return (
       <>
-        <div className={`${className} title`}>
+        <div className={`${className} left`}>
           <Link to="/">RE:* log</Link>
         </div>
 
-        <div className={`${className} userBox`}>{UserMenu}</div>
+        <div className={`${className} right`}>{UserMenu}</div>
       </>
     );
   },
 )`
-  &.title {
+  &.left {
     left: 0;
-    margin-left: ${(props) => props.theme.rootSideOffset};
+    margin-left: ${(props) => props.theme.ROOT_SIDE_OFFSET};
     ${(props) => props.theme.headerAttr}
     font-family: Montserrat Alternates;
     font-weight: 300;
     letter-spacing: 7px;
     border-bottom: 1px solid #000;
   }
-  &.userBox {
+  &.right {
     right: 0;
-    margin-right: ${(props) => props.theme.rootSideOffset};
+    margin-right: ${(props) => props.theme.ROOT_SIDE_OFFSET};
     ${(props) => props.theme.headerAttr}
     min-width: 100px;
     text-align: right;

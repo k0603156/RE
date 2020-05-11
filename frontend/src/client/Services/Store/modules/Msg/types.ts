@@ -3,5 +3,5 @@ export interface InitialState {
   msgType: string;
   actionType: any;
   status: any;
-  message: any;
+  message: string;
 }
