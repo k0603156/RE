@@ -1,9 +1,107 @@
+interface IFontStyles {
+  [key: string]: any;
+}
 const Theme = () => {
-  // const LAYOUT_PADDING = "padding: 250px 0 0 0";
-  const rootSideOffset = "5vw";
-  const theme = {
-    rootSideOffset,
+  const ROOT_SIDE_OFFSET = "5vw";
+  const COLOR = {
+    BACKGROUND_COLOR: "#FFFFFF",
+    GRAY: "#52575C",
+    BLACK: "#000000",
+    BLUE: "#3897f0",
+    RED: "#ED4956",
+    LIGHT: {
+      GRAY: "#A0A4A8",
+    },
+    DARK: {
+      BLUE: "#003569",
+      GRAY: "#999",
+    },
+    TRENDY: {
+      BEIGE: "#F2BC79",
+      PINK: "#BF545D",
+      RED: "#8C0303",
+      BLUE: "#0F1926",
+    },
+  };
+  const FONT = {
+    FAMILY: {
+      MONTSERRAT: "-apple-system,'Montserrat', 'Helvetica Neue', sans-serif",
+    },
+    SIZE: {
+      SMALL: "0.8rem",
+      MEDIUM: "1rem",
+      LARGE: "1.2rem",
+    },
+    COLOR,
+  };
 
+  const DEVICE_BREAKPOINT = {
+    mobileS: "320px",
+    mobileM: "375px",
+    mobileL: "425px",
+    tablet: "768px",
+    laptop: "1024px",
+    laptopL: "1440px",
+    desktop: "2560px",
+  };
+
+  // todo: const createStyles =()=>{}
+
+  const FONT_STYLES: any = Object.entries(FONT.FAMILY)
+    .map(([familyKey, falmilyValue]) => {
+      return {
+        [familyKey]: Object.entries(FONT.SIZE)
+          .map(([sizeKey, sizeValue]) => {
+            return {
+              [sizeKey]: Object.entries(FONT.COLOR)
+                .map(([colorKey, colorValue]) => {
+                  if (typeof colorValue === "string") {
+                    return {
+                      [colorKey]: `font-family:${falmilyValue};font-size:${sizeValue}';color:${colorValue};
+                `,
+                    };
+                  }
+                  return Object.entries(colorValue).map(
+                    ([subColorKey, subColorValue]) => ({
+                      [`${colorKey}_${subColorKey}`]: `font-family:${falmilyValue};font-size:${sizeValue}';color:${subColorValue};
+                  `,
+                    }),
+                  );
+                })
+                .flat()
+                .reduce((obj, item) => Object.assign(obj, item), {}),
+            };
+          })
+          .reduce((obj, item) => Object.assign(obj, item), {}),
+      };
+    })
+    .flat()
+    .reduce((obj, item) => Object.assign(obj, item), {});
+
+  console.log(FONT_STYLES, FONT_STYLES.MONTSERRAT.LARGE.RED);
+
+  const theme = {
+    ROOT_SIDE_OFFSET,
+    DEVICE_BREAKPOINT,
+    COLOR,
+    FONT,
+    FONT_STYLES,
+
+    MONTSERRAT_SMALL_BLACK: `
+      color:${COLOR.BLACK};
+      font-size:${FONT.SIZE.MEDIUM};
+      font-family:${FONT.FAMILY.MONTSERRAT};
+    `,
+    MONTSERRAT_MEDIUM_BLACK: `
+      color:${COLOR.BLACK};
+      font-size:${FONT.SIZE.MEDIUM};
+      font-family:${FONT.FAMILY.MONTSERRAT};
+    `,
+    MONTSERRAT_LARGE_BLACK: `
+      color:${COLOR.BLACK};
+      font-size:${FONT.SIZE.MEDIUM};
+      font-family:${FONT.FAMILY.MONTSERRAT};
+    `,
     headerAttr: `
       position: absolute;
       top: 30px;
@@ -15,31 +113,8 @@ const Theme = () => {
     layoutAttr: `
     padding: 150px 0 0 0;
   `,
-    DW: {
-      mobileS: "320px",
-      mobileM: "375px",
-      mobileL: "425px",
-      tablet: "768px",
-      laptop: "1024px",
-      laptopL: "1440px",
-      desktop: "2560px",
-    },
     minWidth: "320px",
-    bgColor: "#ffffff",
-    blackColor: "#000000",
-    blueColor: "#3897f0",
-    redColor: "#ED4956",
-    lightGreyColor: "#A0A4A8",
-    normalGreyColor: "#52575C",
-    darkGreyColor: "#999",
-    darkBlueColor: "#003569",
-    rootMaxWidth: `calc(100vw - ${rootSideOffset} * 2)`,
-
-    trendBgColor: "#F2F2F2",
-    trendPink: "#BF545D",
-    trendDarkBlue: "#0F1926",
-    trendBeige: "#F2BC79",
-    trendRed: "#8C0303",
+    rootMaxWidth: `calc(100vw - ${ROOT_SIDE_OFFSET} * 2)`,
   };
   return theme;
 };
