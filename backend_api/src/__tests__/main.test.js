@@ -56,12 +56,11 @@ describe("Test Start::", () => {
         .post("/api/v1/user")
         .set("Accept", "application/json")
         .send({
-          userName: "john",
           email: "test@test.com",
+          userName: "john",
           password: "test123",
           confirmPassword: "test123",
         });
-
       expect(status).toEqual(201);
       expect(created).toEqual(true);
       expect(success).toEqual(true);

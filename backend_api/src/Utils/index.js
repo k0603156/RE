@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable no-undef */
 /* eslint-disable no-prototype-builtins */
 /* eslint-disable no-unused-expressions */
@@ -62,6 +63,7 @@ module.exports.setDefQueryParams = (defParams) => (req, res, next) => {
 
 module.exports.hasBodyParams = (...checkList) => (req, res, next) => {
   const data = req.body;
+
   checkList.reduce((object, key) => {
     if (
       !data.hasOwnProperty(key) ||
@@ -71,8 +73,8 @@ module.exports.hasBodyParams = (...checkList) => (req, res, next) => {
     ) {
       throw new ValidationError(`요청 된 값에 ${key}가 없습니다.`);
     } else {
-      obj[key] = data[key];
-      return obj;
+      object[key] = data[key];
+      return object;
     }
   }, {});
   next();
