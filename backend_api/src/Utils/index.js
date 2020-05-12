@@ -1,3 +1,6 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-prototype-builtins */
+/* eslint-disable no-unused-expressions */
 const jwt = require("jsonwebtoken");
 const { promisify } = require("util");
 const { randomBytes, scrypt } = require("crypto");
@@ -51,7 +54,7 @@ module.exports.isAuthenticated = (req, res, next) => {
 };
 
 module.exports.setDefQueryParams = (defParams) => (req, res, next) => {
-  Object.keys(defParams).map((key) => {
+  Object.keys(defParams).forEach((key) => {
     req.query[key] ? null : (req.query[key] = defParams[key]);
   });
   next();
@@ -59,7 +62,7 @@ module.exports.setDefQueryParams = (defParams) => (req, res, next) => {
 
 module.exports.hasBodyParams = (...checkList) => (req, res, next) => {
   const data = req.body;
-  checkList.reduce((obj, key) => {
+  checkList.reduce((object, key) => {
     if (
       !data.hasOwnProperty(key) ||
       data[key] === null ||

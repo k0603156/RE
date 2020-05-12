@@ -1,7 +1,9 @@
 import styled from "styled-components";
 
 export default styled.div`
-  border-radius: 10px;
-  box-shadow: 2px 3px 2px gray;
+  ${({ theme }) => `
+    ${theme.DEFAULT.BOX_SHADOW}
+    ${theme.DEFAULT.BORDER_RADIUS}
+  `};
   padding: 25px 12px;
 `;

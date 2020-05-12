@@ -20,8 +20,9 @@ function handleValidateError(error, req, res, next) {
       type: "ValidationError",
       message: error.message,
     });
+  } else {
+    next(error);
   }
-  next(error);
 }
 /**
  * @AuthenticationError
@@ -34,8 +35,9 @@ function handleAuthenticateError(error, req, res, next) {
       type: "AuthenticationError",
       message: error.message,
     });
+  } else {
+    next(error);
   }
-  next(error);
 }
 
 /**
@@ -48,8 +50,9 @@ function handleAuthorizationError(error, req, res, next) {
       type: "AuthorizationError",
       message: error.message,
     });
+  } else {
+    next(error);
   }
-  next(error);
 }
 
 /**
@@ -62,8 +65,9 @@ function handleNotFoundError(error, req, res, next) {
       type: "NotFoundError",
       message: error.message,
     });
+  } else {
+    next(error);
   }
-  next(error);
 }
 
 /**

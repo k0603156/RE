@@ -8,12 +8,11 @@ export default createGlobalStyle`
         box-sizing:border-box;
     }
     body {
-        min-width: ${(props: any) => props.theme.minWidth};
-        background-color:${(props) => props.theme.bgColor};}
-        color:${(props) => props.theme.blackColor};
+        min-width: ${(props: any) => props.theme.MIN_WIDTH};
+        background-color:${(props) => props.theme.COLORS.BACKGROUND_COLOR};
         font-size:15px;
         font-family:-apple-system,'Montserrat', 'Helvetica Neue', sans-serif;
-
+    }
     #root{
         position: relative;
         overflow:hidden;
@@ -22,7 +21,7 @@ export default createGlobalStyle`
         -ms-overflow-style: none;
     }::-webkit-scrollbar {display:none;}
     a {
-        color:${(props) => props.theme.blackColor};
+        color:${(props) => props.theme.COLORS.BLACK};
         text-decoration:none;
     }
     input:focus{

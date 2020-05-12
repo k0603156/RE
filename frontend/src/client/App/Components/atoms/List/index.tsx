@@ -20,16 +20,3 @@ export default <T extends Array<any>>({
     </Wrapper>
   );
 };
-
-/** @props
- *  wrapper
- *  dataList
- *  temp
- *  footer
- * example>>
- *  <List<RootStateType["main"]["boardlist"]>
- *       wrapper={"ul"}
- *       dataList={props.boardlist}
- *       temp={(data) => <li>{data.name}</li>}
- *  />
- */

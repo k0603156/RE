@@ -1,7 +1,6 @@
 /** @tsx tsx */
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
-import { action } from "@storybook/addon-actions";
 import { Carousel as Component, CarouselItem as ComponentItem } from "./index";
 
 export default {

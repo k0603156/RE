@@ -1,4 +1,4 @@
-import * as AuthPage from "@Client/App/Pages/session";
+import { AuthPage } from "@Client/App/Pages/session";
 
 export default {
   Auth: {

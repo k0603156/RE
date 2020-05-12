@@ -2,10 +2,10 @@ import React from "react";
 import styled from "styled-components";
 
 const Layout = styled.div`
-  ${(props) => props.theme.layoutAttr};
+  ${(props) => props.theme.LAYOUT_PADDING};
 `;
 
-const NotFound: React.FC = () => {
+const NotFound = () => {
   return <Layout>Not found</Layout>;
 };
 

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { maxWidth } from "@Client/Styles/Device";
+import { maxWidth } from "@Client/Styles/DeviceBreakpoints";
 
 interface IProps {
   size: "lg" | "md" | "sm";

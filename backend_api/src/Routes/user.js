@@ -8,7 +8,7 @@ Router.get("/:userName", UserService.getUser);
 // 회원가입
 Router.post(
   "/",
-  hasBodyParams("userName", "email", "password", "confirmPassword"),
+  hasBodyParams("email", "userName", "password", "confirmPassword"),
   UserService.signup,
 );
 

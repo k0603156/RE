@@ -51,11 +51,11 @@ export default styled(PostBox)`
     text-align: right;
     font-size: 0.7rem;
     font-weight: 400;
-    color: ${(props) => props.theme.lightGreyColor};
+    color: ${(props) => props.theme.COLORS.LIGHT.GRAY};
   }
   div.hash {
     width: 100%;
     font-size: 0.7rem;
-    color: ${(props) => props.theme.normalGreyColor};
+    color: ${(props) => props.theme.COLORS.GRAY};
   }
 `;

@@ -2,24 +2,30 @@ import React from "react";
 import styled from "styled-components";
 
 interface IProps {
-  id: string;
+  className?: string;
+  type: string;
   message: string;
 }
-const MessageBox = styled((props: IProps) => {
-  return <div>{props.message}</div>;
+const MessageBox = styled(({ className, type, message }: IProps) => {
+  const classNames = `${className} ${type === "ERROR" ? "red" : "green"}`;
+  return <div className={classNames}>{message}</div>;
 })`
   position: fixed;
-  bottom: 5px;
-  right: 3px;
+  bottom: ${({ theme }) => theme.DEFAULT.OFFSET};
+  right: ${({ theme }) => theme.DEFAULT.OFFSET};
   height: 40px;
   width: auto;
   line-height: 30px;
   padding: 5px 10px;
-  color: white;
-  font-weight: 800;
-  border-radius: 3px;
-  box-shadow: 1px 1px 4px gray;
-  background-color: ${(props) =>
-    props.id === "ERROR" ? "rgba(100, 0, 0, 0.5)" : "rgba(0, 100, 0, 0.5)"};
+  ${({ theme }) => `
+  ${theme.FONT_STYLES.MONTSERRAT.MEDIUM.BOLD.WHITE}
+  ${theme.DEFAULT.BORDER_RADIUS}
+  ${theme.DEFAULT.BOX_SHADOW}`}
+  &.green {
+    background-color: rgba(0, 100, 0, 0.5);
+  }
+  &.red {
+    background-color: rgba(100, 0, 0, 0.5);
+  }
 `;
 export default MessageBox;

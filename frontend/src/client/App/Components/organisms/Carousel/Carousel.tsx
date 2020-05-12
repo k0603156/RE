@@ -33,18 +33,18 @@ const Footer = styled(
   width: auto;
   margin: auto;
   li {
+    ${({ theme }) => theme.DEFAULT.LIST.BASE}
     flex: 1;
-    list-style: none;
     text-align: center;
     line-height: 50px;
     cursor: pointer;
     transition: transform 0.3s ease 0s;
-    &.active {
+    &.active a{
       font-weight: 600;
     }
     a {
       padding: 5px 10px;
-      color: rgb(21, 18, 31);
+      ${({ theme }) => theme.FONT_STYLES.MONTSERRAT.SMALL.REGULAR.TRENDY_BLUE}
     }
   }
 `;

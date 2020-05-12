@@ -3,9 +3,12 @@ import styled from "styled-components";
 
 const Layout = styled.div`
   width: 100%;
-  ${(props) => props.theme.layoutAttr};
+  ${(props) => props.theme.LAYOUT_PADDING};
 `;
-function PublicLayout({ component }: { component: any }) {
+interface IProps {
+  component: any;
+}
+function PublicLayout({ component }: IProps) {
   const Component = component;
   return (
     <Layout>

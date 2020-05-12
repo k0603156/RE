@@ -18,7 +18,7 @@ import PrivateLayout from "./Layouts/privateLayout";
 
 const Wrapper = styled.div`
   position: relative;
-  padding: ${(props) => `0 ${props.theme.rootSideOffset}`};
+  padding: ${(props) => `0 ${props.theme.ROOT_OFFSET}`};
   width: 100%;
   flex: 1;
   overflow-y: auto;
@@ -103,7 +103,7 @@ function App({ auth, msg }: IProps) {
           })}
           <Route component={NotFound} />
         </Switch>
-        {msg.isAlert && <MessageBox id={msg.msgType} message={msg.message} />}
+        {msg.isAlert && <MessageBox type={msg.msgType} message={msg.message} />}
       </Wrapper>
     </ThemeProvider>
   );

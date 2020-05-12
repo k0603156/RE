@@ -126,44 +126,6 @@ export default ({
           </Jumbo>
         </VT>
       </Container>
-      {/*
-      <Container>
-        <VT>
-          <Jumbo size="sm" verticalFrom={"tablet"}>
-            블로그 서비스
-          </Jumbo>
-          <Article>
-            <Title>
-              디자이너 게시글
-              <Link to="/board/1">
-                <Icon.Fi.FiList />
-              </Link>
-            </Title>
-
-            {new Array(2).fill("").map((_, index) => (
-              <PostBox key={index} />
-            ))}
-          </Article>
-        </VT>
-        <VT>
-          <Article>
-            <Title>
-              게시글
-              <Link to="/board/2">
-                <Icon.Fi.FiList />
-              </Link>
-            </Title>
-
-            {new Array(7).fill("").map((_, index) => (
-              <PostBox key={index} />
-            ))}
-          </Article>
-          <Jumbo size="sm">
-            하루를
-            <br /> 기록하세요
-          </Jumbo>
-        </VT>
-      </Container> */}
     </>
   );
 };

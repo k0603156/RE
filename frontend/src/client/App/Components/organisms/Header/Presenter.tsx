@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { maxWidth } from "@Client/Styles/Device";
+import { maxWidth } from "@Client/Styles/DeviceBreakpoints";
 import { RootStateType } from "@Services/Store/modules";
 import UMenu from "./UserMenu";
 
@@ -48,8 +48,8 @@ export default styled(
 )`
   &.left {
     left: 0;
-    margin-left: ${(props) => props.theme.ROOT_SIDE_OFFSET};
-    ${(props) => props.theme.headerAttr}
+    margin-left: ${(props) => props.theme.ROOT_OFFSET};
+    ${(props) => props.theme.HEADER_STYLES}
     font-family: Montserrat Alternates;
     font-weight: 300;
     letter-spacing: 7px;
@@ -57,8 +57,8 @@ export default styled(
   }
   &.right {
     right: 0;
-    margin-right: ${(props) => props.theme.ROOT_SIDE_OFFSET};
-    ${(props) => props.theme.headerAttr}
+    margin-right: ${(props) => props.theme.ROOT_OFFSET};
+    ${(props) => props.theme.HEADER_STYLES}
     min-width: 100px;
     text-align: right;
     ${maxWidth(`{
