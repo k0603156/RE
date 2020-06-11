@@ -2,7 +2,7 @@ import React from "react";
 // import { createSelector } from "reselect";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { connect } from "react-redux";
-import { RootStateType } from "client/services/Store/modules";
+import { RootStateType } from "client/services/store";
 import { boardlistBrowseAction } from "client/containers/Pages/public/Main/actions";
 import { boardSetPageAction, boardBrowseAction } from "./actions";
 import BoardPresenter from "./BoardPresenter";

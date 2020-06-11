@@ -8,8 +8,8 @@ import createPage from "./createPage";
 
 import { END } from "redux-saga";
 import createPreloadRedux from "./createPreloadRedux";
-import PreloadContext from "client/services/Store/lib/preloadContext";
-import { store, sagaPromise } from "client/services/Store/configStore";
+import PreloadContext from "client/services/lib/preloadContext";
+import { store, sagaPromise } from "client/services/store/configStore";
 
 const serverRender = async (req: any, res: any, next: any) => {
   const context = {};

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Node } from "slate";
 import { connect } from "react-redux";
-import { RootStateType } from "client/services/Store/modules";
+import { RootStateType } from "client/services/store";
 import { postCreateAction } from "client/containers/Pages/public/Post/actions";
 import { IPostCreatePayload } from "client/containers/Pages/public/Post/types";
 import { boardlistBrowseAction } from "client/containers/Pages/public/Main/actions";

@@ -12,7 +12,7 @@ import {
 import Theme from "client/styles/Theme";
 import GlobalStyles from "client/styles/Global";
 import { Header, MessageBox } from "client/components/organisms";
-import { RootStateType } from "client/services/Store/modules";
+import { RootStateType } from "client/services/store";
 import PublicLayout, {
   NotFound,
 } from "client/components/layouts/publicLayouts";

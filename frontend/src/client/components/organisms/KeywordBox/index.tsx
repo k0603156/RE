@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import List from "client/components/atoms/List";
-import { RootStateType } from "client/services/Store/modules";
+import { RootStateType } from "client/services/store";
 import { boardSelectAction } from "client/containers/Pages/public/Main/actions";
 
 const Box = styled.div`

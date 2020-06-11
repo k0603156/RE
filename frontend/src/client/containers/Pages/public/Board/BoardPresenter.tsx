@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { RootStateType } from "client/services/Store/modules";
+import { RootStateType } from "client/services/store";
 import { Pagination, BoardItem } from "client/components/organisms";
 
 interface IProps {

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { RootStateType } from "client/services/Store/modules/index";
+import { RootStateType } from "client/services/store";
 import {
   boardSelectAction,
   boardlistBrowseAction,

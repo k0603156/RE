@@ -1,6 +1,6 @@
 import { all, fork, takeLatest } from "redux-saga/effects";
-import createRequestSaga from "client/services/Store/lib/createRequestSaga";
-import Api from "client/services/Api";
+import createRequestSaga from "client/services/lib/createRequestSaga";
+import Api from "client/services/api";
 import { PROFILE_SELECT_REQUEST, PROFILE_UPDATE_REQUEST } from "./types";
 
 // 사용자 정보 요청

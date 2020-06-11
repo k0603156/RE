@@ -6,7 +6,7 @@ import {
   call,
   getContext,
 } from "redux-saga/effects";
-import Api from "client/services/Api";
+import Api from "client/services/api";
 import {
   POST_BROWSE_REQUEST,
   POST_CREATE_REQUEST,
@@ -18,7 +18,7 @@ import {
   loadingStart,
   loadingFinish,
 } from "client/containers/Providers/Loading";
-import { msgCreate } from "client/containers/Providers/Msg";
+import { msgCreate } from "client/containers/Providers/Msg/actions";
 
 function createSaga(type: string, request: AxiosPromiseType) {
   const SUCCESS = type.replace("REQUEST", "SUCCESS");

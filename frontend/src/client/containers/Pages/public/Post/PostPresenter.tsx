@@ -2,7 +2,7 @@ import React, { useMemo, useState } from "react";
 import styled from "styled-components";
 import { createEditor, Node } from "slate";
 import { Slate, Editable, withReact } from "slate-react";
-import { RootStateType } from "client/services/Store/modules";
+import { RootStateType } from "client/services/store";
 
 const Hashtags = styled.div`
   font-size: 0.8rem;

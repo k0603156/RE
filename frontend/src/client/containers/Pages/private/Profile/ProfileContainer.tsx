@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { connect } from "react-redux";
-import { RootStateType } from "client/services/Store/modules";
+import { RootStateType } from "client/services/store";
 import { profileSelectAction } from "./actions";
 import ProfilePresenter from "./ProfilePresenter";
 
