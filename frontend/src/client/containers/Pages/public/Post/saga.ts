@@ -14,10 +14,7 @@ import {
   POST_DELETE_REQUEST,
   POST_UPDATE_REQUEST,
 } from "./types";
-import {
-  loadingStart,
-  loadingFinish,
-} from "client/containers/Providers/Loading";
+import { loadingStart, loadingFinish } from "client/containers/Loading/actions";
 import { msgCreate } from "client/containers/Message/actions";
 
 function createSaga(type: string, request: AxiosPromiseType) {

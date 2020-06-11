@@ -21,7 +21,7 @@ import authSaga from "client/containers/Pages/session/Auth/saga";
 import profile from "client/containers/Pages/private/Profile/reducers";
 import profileSaga from "client/containers/Pages/private/Profile/saga";
 
-import loading from "client/containers/Providers/Loading";
+import loading from "client/containers/Loading/reducers";
 import msg from "client/containers/Message/reducers";
 import msgSaga from "client/containers/Message/saga";
 
