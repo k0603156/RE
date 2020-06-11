@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import useInput from "client/components/hooks/useInput";
+import useInput from "client/lib/hooks/useInput";
 import { connect } from "react-redux";
 import { authSignupAction, authSigninAction } from "./actions";
 import AuthTemplate, {
