@@ -7,7 +7,7 @@ import {
   ImageDndZone,
 } from "client/components/organisms";
 import { RootStateType } from "client/services/Store/modules";
-import { IPostCreatePayload } from "client/services/Store/modules/Post/types";
+import { IPostCreatePayload } from "client/containers/Pages/public/Post/types";
 
 interface IProps {
   className?: string;

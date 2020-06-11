@@ -5,7 +5,7 @@ import {
   boardSelectAction,
   boardlistBrowseAction,
   postlistBrowseAction,
-} from "client/services/Store/modules/Main/actions";
+} from "./actions";
 import MainPresenter from "./MainPresenter";
 
 export interface IProps {

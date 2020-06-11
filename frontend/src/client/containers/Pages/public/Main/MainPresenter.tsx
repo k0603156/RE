@@ -10,7 +10,7 @@ import {
   Jumbo,
 } from "client/components/organisms";
 
-import { boardSelectAction } from "client/services/Store/modules/Main/actions";
+import { boardSelectAction } from "client/containers/Pages/public/Main/actions";
 
 const Container = styled.div`
   display: flex;

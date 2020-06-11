@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import { RootStateType } from "client/services/Store/modules";
-import { authSignoutAction } from "client/services/Store/modules/Auth/actions";
+import { authSignoutAction } from "client/containers/Pages/session/Auth/actions";
 
 const Item = styled.li`
   margin: 10px 0;

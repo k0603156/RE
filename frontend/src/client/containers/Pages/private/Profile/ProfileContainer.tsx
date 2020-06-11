@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { connect } from "react-redux";
 import { RootStateType } from "client/services/Store/modules";
-import { profileSelectAction } from "client/services/Store/modules/Profile/actions";
+import { profileSelectAction } from "./actions";
 import ProfilePresenter from "./ProfilePresenter";
 
 export interface IProps

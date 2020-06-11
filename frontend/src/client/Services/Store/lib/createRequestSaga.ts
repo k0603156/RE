@@ -1,9 +1,9 @@
 import { call, put } from "redux-saga/effects";
-import { msgCreate, msgClear } from "client/services/Store/modules/Msg";
+import { msgCreate, msgClear } from "client/containers/Providers/Msg";
 import {
   loadingStart,
   loadingFinish,
-} from "client/services/Store/modules/Loading";
+} from "client/containers/Providers/Loading";
 
 export default function createRequestSaga(type: any, request: any) {
   const SUCCESS = String(type).replace("REQUEST", "SUCCESS");

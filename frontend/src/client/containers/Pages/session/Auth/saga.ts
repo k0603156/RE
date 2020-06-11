@@ -14,8 +14,11 @@ import {
   IAuthSigninAction,
   IAuthSignoutAction,
 } from "./types";
-import { msgCreate } from "../Msg";
-import { loadingStart, loadingFinish } from "../Loading";
+import { msgCreate } from "client/containers/Providers/Msg";
+import {
+  loadingStart,
+  loadingFinish,
+} from "client/containers/Providers/Loading";
 
 export function* authSigninSaga(data: IAuthSigninAction): Generator {
   yield put(loadingStart(data.type));

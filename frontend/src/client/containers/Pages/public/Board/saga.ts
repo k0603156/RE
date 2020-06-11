@@ -1,6 +1,6 @@
 import { all, fork, takeLatest } from "redux-saga/effects";
 import { BOARD_BROWSE_REQUEST } from "./types";
-import createRequestSaga from "../../lib/createRequestSaga";
+import createRequestSaga from "client/services/Store/lib/createRequestSaga";
 import Api from "client/services/Api";
 
 // 포스트 리스트 읽기

@@ -15,8 +15,8 @@ import { Header, MessageBox } from "client/components/organisms";
 import { RootStateType } from "client/services/Store/modules";
 import PublicLayout, {
   NotFound,
-} from "client/components/templates/publicTemplate";
-import PrivateLayout from "client/components/templates/privateTemplate";
+} from "client/components/layouts/publicLayouts";
+import PrivateLayout from "client/components/layouts/privateLayouts";
 
 const Wrapper = styled.div`
   position: relative;

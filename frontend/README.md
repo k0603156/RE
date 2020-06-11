@@ -3,7 +3,7 @@
 ###### Definition
 
 `블로그 서비스`
-`RE:* log Client + `~~SSR Server~~
+`RE:* log Client +`~~SSR Server~~
 
 ###### Preview
 

@@ -14,8 +14,11 @@ import {
   POST_DELETE_REQUEST,
   POST_UPDATE_REQUEST,
 } from "./types";
-import { loadingStart, loadingFinish } from "../Loading";
-import { msgCreate } from "../Msg";
+import {
+  loadingStart,
+  loadingFinish,
+} from "client/containers/Providers/Loading";
+import { msgCreate } from "client/containers/Providers/Msg";
 
 function createSaga(type: string, request: AxiosPromiseType) {
   const SUCCESS = type.replace("REQUEST", "SUCCESS");

@@ -2,7 +2,6 @@ import React, { useMemo } from "react";
 import styled from "styled-components";
 import { createEditor, Node } from "slate";
 import { Slate, Editable, withReact } from "slate-react";
-// import { maxWidth } from "@Client/Styles/Device";
 
 interface IProps {
   onChange: (value: Node[]) => void;

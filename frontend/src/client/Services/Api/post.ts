@@ -1,4 +1,4 @@
-import { IPostCreatePayload } from "client/services/Store/modules/Post/types";
+import { IPostCreatePayload } from "client/containers/Pages/public/Post/types";
 import request from "./config";
 
 export interface IpostBrowse {

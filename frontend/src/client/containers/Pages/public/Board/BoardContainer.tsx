@@ -3,11 +3,8 @@ import React from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { connect } from "react-redux";
 import { RootStateType } from "client/services/Store/modules";
-import { boardlistBrowseAction } from "client/services/Store/modules/Main/actions";
-import {
-  boardSetPageAction,
-  boardBrowseAction,
-} from "client/services/Store/modules/Board/actions";
+import { boardlistBrowseAction } from "client/containers/Pages/public/Main/actions";
+import { boardSetPageAction, boardBrowseAction } from "./actions";
 import BoardPresenter from "./BoardPresenter";
 
 export interface IProps extends RouteComponentProps<{ boardName: string }> {

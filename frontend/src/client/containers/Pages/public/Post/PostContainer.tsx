@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { connect } from "react-redux";
 import { RootStateType } from "client/services/Store/modules";
-import { postBrowseAction } from "client/services/Store/modules/Post/actions";
+import { postBrowseAction } from "./actions";
 import PostPresenter from "./PostPresenter";
 
 export interface IProps extends RouteComponentProps<{ postId: string }> {

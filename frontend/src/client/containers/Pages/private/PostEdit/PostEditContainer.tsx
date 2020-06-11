@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Node } from "slate";
 import { connect } from "react-redux";
 import { RootStateType } from "client/services/Store/modules";
-import { postCreateAction } from "client/services/Store/modules/Post/actions";
-import { IPostCreatePayload } from "client/services/Store/modules/Post/types";
-import { boardlistBrowseAction } from "client/services/Store/modules/Main/actions";
+import { postCreateAction } from "client/containers/Pages/public/Post/actions";
+import { IPostCreatePayload } from "client/containers/Pages/public/Post/types";
+import { boardlistBrowseAction } from "client/containers/Pages/public/Main/actions";
 import Presenter from "./PostEditPresenter";
 
 export interface IProps {
