@@ -8,7 +8,7 @@ import {
   PublicRoutes,
   SessionRoutes,
   AdminRoutes,
-} from "client/components/routes";
+} from "client/containers/App/routes";
 import Theme from "client/styles/Theme";
 import GlobalStyles from "client/styles/Global";
 import { Header } from "client/components/organisms";
