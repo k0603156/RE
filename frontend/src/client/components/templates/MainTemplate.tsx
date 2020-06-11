@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { RootStateType } from "client/services/store";
+import { RootStateType } from "client/configureStore";
 import { Icon } from "client/components/atoms";
 import {
   KeywordBox,

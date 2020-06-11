@@ -6,7 +6,7 @@ import {
   HashtagInput,
   ImageDndZone,
 } from "client/components/organisms";
-import { RootStateType } from "client/services/store";
+import { RootStateType } from "client/configureStore";
 import { IPostCreatePayload } from "client/containers/Pages/public/Post/types";
 
 interface IProps {

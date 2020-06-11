@@ -3,7 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import { RootStateType } from "client/services/store";
+import { RootStateType } from "client/configureStore";
 import { authSignoutAction } from "client/containers/Pages/session/Auth/actions";
 
 const Item = styled.li`

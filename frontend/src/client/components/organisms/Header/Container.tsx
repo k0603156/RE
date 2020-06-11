@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { RootStateType } from "client/services/store";
+import { RootStateType } from "client/configureStore";
 import Presenter from "./Presenter";
 
 interface IProps {

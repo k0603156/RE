@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { RootStateType } from "client/services/store";
+import { RootStateType } from "client/configureStore";
 import { MessageBox } from "client/components/organisms";
 
 export interface IProps {

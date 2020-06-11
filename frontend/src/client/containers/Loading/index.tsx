@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { RootStateType } from "client/services/store";
+import { RootStateType } from "client/configureStore";
 
 //todo 나중에 사용 할 때 수정
 
