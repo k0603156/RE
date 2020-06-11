@@ -11,12 +11,13 @@ import {
 } from "client/components/routes";
 import Theme from "client/styles/Theme";
 import GlobalStyles from "client/styles/Global";
-import { Header, MessageBox } from "client/components/organisms";
+import { Header } from "client/components/organisms";
 import { RootStateType } from "client/services/store";
 import PublicLayout, {
   NotFound,
 } from "client/components/layouts/publicLayouts";
 import PrivateLayout from "client/components/layouts/privateLayouts";
+import Message from "client/containers/Message";
 
 const Wrapper = styled.div`
   position: relative;
@@ -28,9 +29,8 @@ const Wrapper = styled.div`
 
 interface IProps {
   auth: RootStateType["auth"];
-  msg: RootStateType["msg"];
 }
-function App({ auth, msg }: IProps) {
+function App({ auth }: IProps) {
   return (
     <ThemeProvider theme={Theme}>
       <GlobalStyles />
@@ -105,13 +105,12 @@ function App({ auth, msg }: IProps) {
           })}
           <Route component={NotFound} />
         </Switch>
-        {msg.isAlert && <MessageBox type={msg.msgType} message={msg.message} />}
+        <Message />
       </Wrapper>
     </ThemeProvider>
   );
 }
 
-export default connect(({ auth, msg }: RootStateType) => ({
+export default connect(({ auth }: RootStateType) => ({
   auth,
-  msg,
 }))(App);

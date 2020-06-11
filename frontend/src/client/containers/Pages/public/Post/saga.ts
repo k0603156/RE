@@ -18,7 +18,7 @@ import {
   loadingStart,
   loadingFinish,
 } from "client/containers/Providers/Loading";
-import { msgCreate } from "client/containers/Providers/Msg/actions";
+import { msgCreate } from "client/containers/Message/actions";
 
 function createSaga(type: string, request: AxiosPromiseType) {
   const SUCCESS = type.replace("REQUEST", "SUCCESS");

@@ -14,7 +14,7 @@ import {
   IAuthSigninAction,
   IAuthSignoutAction,
 } from "./types";
-import { msgCreate } from "client/containers/Providers/Msg/actions";
+import { msgCreate } from "client/containers/Message/actions";
 import {
   loadingStart,
   loadingFinish,

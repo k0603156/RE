@@ -1,5 +1,5 @@
 import { call, put } from "redux-saga/effects";
-import { msgCreate, msgClear } from "client/containers/Providers/Msg/actions";
+import { msgCreate, msgClear } from "client/containers/Message/actions";
 import {
   loadingStart,
   loadingFinish,
