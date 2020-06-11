@@ -64,4 +64,5 @@ module.exports = {
     // quotes: ["error", "double"],
     // camelcase: "off",
   },
+  ignorePatterns: ["**/config/*.js", "**/scripts/*.js"],
 };

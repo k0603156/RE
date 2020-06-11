@@ -3,13 +3,13 @@ import ReactDOMServer from "react-dom/server";
 import { StaticRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 
-import App from "@Client/App";
+import App from "client/containers/App";
 import createPage from "./createPage";
 
 import { END } from "redux-saga";
 import createPreloadRedux from "./createPreloadRedux";
-import PreloadContext from "@Services/Store/lib/preloadContext";
-import { store, sagaPromise } from "@Services/Store/configStore";
+import PreloadContext from "client/services/Store/lib/preloadContext";
+import { store, sagaPromise } from "client/services/Store/configStore";
 
 const serverRender = async (req: any, res: any, next: any) => {
   const context = {};

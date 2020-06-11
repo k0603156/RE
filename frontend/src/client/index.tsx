@@ -3,9 +3,9 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { Router } from "react-router-dom";
 import { createBrowserHistory } from "history";
-import configStore from "@Services/Store";
+import configStore from "client/services/Store";
 import * as serviceWorker from "./serviceWorker";
-import App from "./App";
+import App from "client/containers/App";
 
 const history = createBrowserHistory();
 

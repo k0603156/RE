@@ -1,7 +1,7 @@
-import { all, fork, takeLatest } from "redux-saga/effects";
-import createRequestSaga from "@Services/Store/lib/createRequestSaga";
-import Api from "@Services/Api";
 import { BOARDLIST_BROWSE_REQUEST, POSTLIST_BROWSE_REQUEST } from "./types";
+import { all, fork, takeLatest } from "redux-saga/effects";
+import createRequestSaga from "client/services/Store/lib/createRequestSaga";
+import Api from "client/services/Api";
 
 // 게시글 분류 리스트 요청
 const boardlistBrowseSaga = createRequestSaga(

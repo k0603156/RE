@@ -1,4 +1,3 @@
-/* eslint-disable strict */
 "use strict";
 
 const { resolveModuleName } = require('ts-pnp');

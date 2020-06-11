@@ -1,6 +1,6 @@
 import { all, fork, takeLatest, put, call } from "redux-saga/effects";
-import createRequestSaga from "@Services/Store/lib/createRequestSaga";
-import Api from "@Services/Api";
+import createRequestSaga from "client/services/Store/lib/createRequestSaga";
+import Api from "client/services/Api";
 import {
   AUTH_SIGNUP_REQUEST,
   AUTH_SIGNIN_REQUEST,

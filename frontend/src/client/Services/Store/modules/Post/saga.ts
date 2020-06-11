@@ -6,7 +6,7 @@ import {
   call,
   getContext,
 } from "redux-saga/effects";
-import Api from "@Services/Api";
+import Api from "client/services/Api";
 import {
   POST_BROWSE_REQUEST,
   POST_CREATE_REQUEST,

@@ -1,11 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": "./src",
-    "paths": {
-      "@Client/*": ["client/*"],
-      "@Services/*": ["client/Services/*"],
-      "@Server/*": ["server/*"]
-    },
+    "baseUrl": "src",
     "target": "es5",
     "jsx": "react",
     "lib": [
@@ -38,7 +33,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "typeRoots": ["node_modules/@types", "src/client/Types"],
+    "typeRoots": ["node_modules/@types", "src/client/types"],
     "types": ["node", "jest", "lodash"]
   },
   "exclude": ["**/*.stories.tsx"]
