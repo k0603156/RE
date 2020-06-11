@@ -5,7 +5,7 @@ import serverRender from "./serverRender";
 const app = express();
 
 const serve = express.static(path.resolve("./build"), {
-  index: false
+  index: false,
 });
 
 app.use(serve);

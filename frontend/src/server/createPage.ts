@@ -2,11 +2,11 @@ import fs from "fs";
 import path from "path";
 
 const manifest = JSON.parse(
-  fs.readFileSync(path.resolve("./build/asset-manifest.json"), "utf8")
+  fs.readFileSync(path.resolve("./build/asset-manifest.json"), "utf8"),
 );
 const chunks = Object.keys(manifest.files)
-  .filter(key => /chunk\.js$/.exec(key))
-  .map(key => `<script src="${manifest.files[key]}"></script>`)
+  .filter((key) => /chunk\.js$/.exec(key))
+  .map((key) => `<script src="${manifest.files[key]}"></script>`)
   .join("");
 function createPage(root: any, preloadReduxState: any) {
   return `<!DOCTYPE html> 

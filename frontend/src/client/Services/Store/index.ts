@@ -25,7 +25,7 @@ import loading from "client/containers/Loading/reducers";
 import msg from "client/containers/Message/reducers";
 import msgSaga from "client/containers/Message/saga";
 
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
   main,
   auth,
   profile,

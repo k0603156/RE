@@ -39,7 +39,7 @@ const Footer = styled(
     line-height: 50px;
     cursor: pointer;
     transition: transform 0.3s ease 0s;
-    &.active a{
+    &.active a {
       font-weight: 600;
     }
     a {
