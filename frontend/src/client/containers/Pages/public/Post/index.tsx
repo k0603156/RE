@@ -3,7 +3,7 @@ import { withRouter, RouteComponentProps } from "react-router-dom";
 import { connect } from "react-redux";
 import { RootStateType } from "client/services/store";
 import { postBrowseAction } from "./actions";
-import PostPresenter from "./PostPresenter";
+import PostTemplate from "client/components/templates/PostTemplate";
 
 export interface IProps extends RouteComponentProps<{ postId: string }> {
   title: RootStateType["post"]["title"];
@@ -32,7 +32,7 @@ const PostContainer = withRouter(
     }, [postId]);
 
     return (
-      <PostPresenter
+      <PostTemplate
         title={title}
         content={content}
         hashtags={hashtags}

@@ -6,7 +6,7 @@ import {
   boardlistBrowseAction,
   postlistBrowseAction,
 } from "./actions";
-import MainPresenter from "./MainPresenter";
+import MainTemplate from "client/components/templates/MainTemplate";
 
 export interface IProps {
   selectedBoard: RootStateType["main"]["selectedBoard"];
@@ -30,7 +30,7 @@ const MainContainer = ({
     return () => {};
   }, [selectedBoard]);
   return (
-    <MainPresenter
+    <MainTemplate
       boardSelectAction={boardSelectAction}
       currentBId={selectedBoard}
       boardlist={boardlist}

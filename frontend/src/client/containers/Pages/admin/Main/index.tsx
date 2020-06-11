@@ -1,5 +1,7 @@
 import React from "react";
 
-export default () => {
+const Container = () => {
   return <div>Admin Main</div>;
 };
+
+export default Container;

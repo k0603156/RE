@@ -2,7 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import { Input, Button } from "client/components/atoms";
 
-import AuthState from "./AuthState";
+export enum AuthState {
+  STATE_LOGIN = "STATE_LOGIN",
+  STATE_SIGNUP = "STATE_SIGNUP",
+  STATE_CONFIRM = "STATE_CONFIRM",
+}
 
 export interface IProps {
   className?: string;
@@ -15,7 +19,7 @@ export interface IProps {
   setAction: React.Dispatch<React.SetStateAction<AuthState>>;
 }
 
-const AuthPresenter = styled(
+const AuthTemplate = styled(
   ({
     className,
     email,
@@ -134,4 +138,4 @@ const AuthPresenter = styled(
   }
 `;
 
-export default AuthPresenter;
+export default AuthTemplate;

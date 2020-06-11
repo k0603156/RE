@@ -3,7 +3,7 @@ import { withRouter, RouteComponentProps } from "react-router-dom";
 import { connect } from "react-redux";
 import { RootStateType } from "client/services/store";
 import { profileSelectAction } from "./actions";
-import ProfilePresenter from "./ProfilePresenter";
+import ProfileTemplate from "client/components/templates/ProfileTemplate";
 
 export interface IProps
   extends RouteComponentProps<{ searchUserName: string }> {
@@ -16,7 +16,7 @@ const ProfileContainer = withRouter((props: IProps) => {
     props.profileSelectAction(searchUserName);
   }, [props.match.params.searchUserName]);
 
-  return <ProfilePresenter profile={props.profile} />;
+  return <ProfileTemplate profile={props.profile} />;
 });
 export default connect(
   ({ profile, loading }: RootStateType) => ({

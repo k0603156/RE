@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import useInput from "client/components/hooks/useInput";
 import { connect } from "react-redux";
 import { authSignupAction, authSigninAction } from "./actions";
-import AuthState from "./AuthState";
-import AuthPresenter from "./AuthPresenter";
+import AuthTemplate, {
+  AuthState,
+} from "client/components/templates/AuthTemplate";
 
 interface IProps {
   authSigninAction: typeof authSigninAction;
@@ -51,7 +52,7 @@ const AuthContainer = ({ authSigninAction, authSignupAction }: IProps) => {
   };
 
   return (
-    <AuthPresenter
+    <AuthTemplate
       email={email}
       username={userName}
       password={password}

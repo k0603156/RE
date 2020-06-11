@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { RootStateType } from "client/services/store";
 import { boardlistBrowseAction } from "client/containers/Pages/public/Main/actions";
 import { boardSetPageAction, boardBrowseAction } from "./actions";
-import BoardPresenter from "./BoardPresenter";
+import BoardTemplate from "client/components/templates/BoardTemplate";
 
 export interface IProps extends RouteComponentProps<{ boardName: string }> {
   boardList: RootStateType["main"]["boardlist"];
@@ -36,7 +36,7 @@ const BoardContainer = withRouter(
     };
 
     return (
-      <BoardPresenter
+      <BoardTemplate
         title={
           boardList.filter(
             ({ id }) => Number(id) === Number(match.params.boardName),

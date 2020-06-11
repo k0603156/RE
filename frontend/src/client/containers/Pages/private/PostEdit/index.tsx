@@ -5,7 +5,7 @@ import { RootStateType } from "client/services/store";
 import { postCreateAction } from "client/containers/Pages/public/Post/actions";
 import { IPostCreatePayload } from "client/containers/Pages/public/Post/types";
 import { boardlistBrowseAction } from "client/containers/Pages/public/Main/actions";
-import Presenter from "./PostEditPresenter";
+import PostEditTemplate from "client/components/templates/PostEditTemplate";
 
 export interface IProps {
   main: RootStateType["main"];
@@ -58,7 +58,7 @@ const Container = ({
     }
   };
   return (
-    <Presenter
+    <PostEditTemplate
       onSubmit={onSubmit}
       onChange={onChange}
       postData={postState}
