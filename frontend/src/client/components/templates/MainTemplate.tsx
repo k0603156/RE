@@ -92,9 +92,7 @@ export default ({
         <Article>
           <Carousel
             items={postlist}
-            render={(item, index) => (
-              <CarouselItem key={index} length={postlist.length} item={item} />
-            )}
+            render={(item, index) => <CarouselItem key={index} item={item} />}
           />
         </Article>
       </SlideBox>

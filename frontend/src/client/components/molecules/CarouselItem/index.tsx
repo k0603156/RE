@@ -5,7 +5,6 @@ import { RootStateType } from "client/configureStore";
 
 interface IProps {
   className?: string;
-  length: number;
   item: RootStateType["main"]["postlist"][0];
 }
 

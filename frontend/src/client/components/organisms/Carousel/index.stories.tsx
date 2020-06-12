@@ -1,7 +1,8 @@
 /** @tsx tsx */
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
-import { Carousel as Component, CarouselItem as ComponentItem } from "./index";
+import Component from "./index";
+import { CarouselItem as ComponentItem } from "client/components/molecules";
 
 export default {
   title: "Carousel",
@@ -11,7 +12,7 @@ export default {
 };
 
 export const Carousel = () => {
-  const dataList = [
+  const items = [
     {
       id: 1,
       title: "Title1",
@@ -48,10 +49,8 @@ export const Carousel = () => {
   return (
     <BrowserRouter>
       <Component
-        pageDataList={dataList}
-        CarouselItem={(data, index) => (
-          <ComponentItem key={index} length={dataList.length} data={data} />
-        )}
+        items={items}
+        render={(item, index) => <ComponentItem key={index} item={item} />}
       />
     </BrowserRouter>
   );

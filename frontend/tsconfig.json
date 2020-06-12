@@ -35,8 +35,8 @@
     "noEmit": true,
     "typeRoots": ["node_modules/@types", "src/client/types"],
     "types": ["node", "jest", "lodash"]
-  },
-  "exclude": ["**/*.stories.tsx"]
+  }
+  // "exclude": ["**/*.stories.tsx"]
   // "include": ["src/**/*"]
   // "exclude": [
   //   "node_modules",
