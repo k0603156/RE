@@ -3,12 +3,8 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { RootStateType } from "client/configureStore";
 import { Icon } from "client/components/atoms";
-import { Jumbo } from "client/components/molecules";
-import {
-  KeywordBox,
-  Carousel,
-  CarouselItem,
-} from "client/components/organisms";
+import { Jumbo, CarouselItem } from "client/components/molecules";
+import { KeywordBox, Carousel } from "client/components/organisms";
 
 import { boardSelectAction } from "client/containers/Pages/public/Main/actions";
 
@@ -95,38 +91,14 @@ export default ({
         />
         <Article>
           <Carousel
-            pageDataList={postlist}
-            CarouselItem={(data, index) => (
-              <CarouselItem key={index} length={postlist.length} data={data} />
+            items={postlist}
+            render={(item, index) => (
+              <CarouselItem key={index} length={postlist.length} item={item} />
             )}
           />
         </Article>
       </SlideBox>
       <KeywordBox boardlist={boardlist} boardSelectAction={boardSelectAction} />
-
-      {/* <Container>
-        <VT>
-          <Jumbo size="md" verticalFrom="tablet">
-            RE:* log
-          </Jumbo>
-          <Article>
-            <Title>
-              {selectedBoard().name}
-              <Link to={`/board/${selectedBoard().id}`}>
-                <Icon.Fi.FiList />
-              </Link>
-            </Title>
-          </Article>
-        </VT>
-        <VT>
-          <Article>
-            <Title>베스트 게시글</Title>
-          </Article>
-          <Jumbo size="sm" verticalFrom="tablet">
-            RECOMMENDED ARTICLES
-          </Jumbo>
-        </VT>
-      </Container> */}
     </>
   );
 };

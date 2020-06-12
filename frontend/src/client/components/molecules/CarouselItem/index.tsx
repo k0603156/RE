@@ -6,28 +6,29 @@ import { RootStateType } from "client/configureStore";
 interface IProps {
   className?: string;
   length: number;
-  data: RootStateType["main"]["postlist"][0];
+  item: RootStateType["main"]["postlist"][0];
 }
 
-export default styled(({ className, data }: IProps) => {
+export default styled(({ className, item }: IProps) => {
   return (
-    <div className={className} key={data.id}>
+    <div className={className} key={item.id}>
       <h2 className="title">
-        <Link to={`board/post/${data.id}`}>{data.title}</Link>
+        <Link to={`board/post/${item.id}`}>{item.title}</Link>
       </h2>
-      <div className="username">@{data.user.userName}</div>
-      <div className="updatedat">{data.updatedAt}</div>
+      <div className="username">@{item.user.userName}</div>
+      <div className="updatedat">{item.updatedAt}</div>
       <div className="tags">
-        {data.hashtags.map((hashtag) => (
+        {item.hashtags.map((hashtag) => (
           <span key={hashtag.name}>#{hashtag.name}</span>
         ))}
       </div>
-      <div className="views">views {data.readcount}</div>
+      <div className="views">views {item.readcount}</div>
     </div>
   );
 })`
   height: 100%;
-  width: ${({ length }) => 100 / length}%;
+  width: 85%;
+  margin-right: 5%;
   background: ${({ theme }) => theme.COLORS.TRENDY.BLUE};
   ${({ theme }) => `
   ${theme.DEFAULT.BOX.BASE}
