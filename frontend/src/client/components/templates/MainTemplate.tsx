@@ -3,11 +3,11 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { RootStateType } from "client/configureStore";
 import { Icon } from "client/components/atoms";
+import { Jumbo } from "client/components/molecules";
 import {
   KeywordBox,
   Carousel,
   CarouselItem,
-  Jumbo,
 } from "client/components/organisms";
 
 import { boardSelectAction } from "client/containers/Pages/public/Main/actions";
@@ -30,8 +30,7 @@ const Title = styled.h3`
 const Article = styled.div`
   display: flex;
   flex-direction: column;
-  flex-basis: 500px;
-  flex-grow: 1;
+  flex: 1;
   ${Title} {
     padding: 20px 0;
   }
@@ -89,9 +88,11 @@ export default ({
   return (
     <>
       <SlideBox>
-        <Jumbo size="md" verticalFrom="tablet">
-          {selectedBoard().name}
-        </Jumbo>
+        <Jumbo
+          size="XXLARGE"
+          title={selectedBoard().name}
+          verticalFrom="tablet"
+        />
         <Article>
           <Carousel
             pageDataList={postlist}
@@ -103,7 +104,7 @@ export default ({
       </SlideBox>
       <KeywordBox boardlist={boardlist} boardSelectAction={boardSelectAction} />
 
-      <Container>
+      {/* <Container>
         <VT>
           <Jumbo size="md" verticalFrom="tablet">
             RE:* log
@@ -125,7 +126,7 @@ export default ({
             RECOMMENDED ARTICLES
           </Jumbo>
         </VT>
-      </Container>
+      </Container> */}
     </>
   );
 };

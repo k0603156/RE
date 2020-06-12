@@ -10,6 +10,7 @@ export const FONTS = {
     MEDIUM: "1rem",
     LARGE: "1.2rem",
     XLARGE: "1.4rem",
+    XXLARGE: "1.8rem",
   },
   WEIGHT: {
     THIN: 400,
