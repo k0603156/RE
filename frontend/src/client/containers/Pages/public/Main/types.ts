@@ -30,9 +30,9 @@ export type IMainAction =
   | IPostlistBrowseRequest;
 
 export interface InitialState {
-  selectedBoard: number;
-  boardlist: Array<{ id: string; name: string }>;
-  postlist: Array<{
+  boardId: number;
+  boards: Array<{ id: number; name: string }>;
+  posts: Array<{
     id: number;
     title: string;
     readcount: number;

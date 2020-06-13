@@ -1,11 +1,8 @@
 import React from "react";
 import { Node } from "slate";
 import styled from "styled-components";
-import {
-  Editor,
-  HashtagInput,
-  ImageDndZone,
-} from "client/components/organisms";
+import { HashtagInput } from "client/components/molecules";
+import { Editor, ImageDndZone } from "client/components/organisms";
 import { RootStateType } from "client/configureStore";
 import { IPostCreatePayload } from "client/containers/Pages/public/Post/types";
 
@@ -18,7 +15,7 @@ interface IProps {
   ) => void;
   postData: IPostCreatePayload;
   initData: {
-    boardlist: RootStateType["main"]["boardlist"];
+    boardlist: RootStateType["main"]["boards"];
   };
 }
 const BoardSelect = styled(
@@ -32,7 +29,7 @@ const BoardSelect = styled(
             value={postData.boardId}
             onChange={(e) => onChange("boardId", e.target.value)}
           >
-            {initData.boardlist.map((board: { id: string; name: string }) => (
+            {initData.boardlist.map((board: { id: number; name: string }) => (
               <option key={board.id} value={board.id}>
                 {board.name}
               </option>

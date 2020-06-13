@@ -1,7 +1,8 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import styled from "styled-components";
 import { createEditor, Node } from "slate";
 import { Slate, Editable, withReact } from "slate-react";
+import { withHistory } from "slate-history";
 import { RootStateType } from "client/configureStore";
 
 const Hashtags = styled.div`
@@ -25,10 +26,13 @@ interface IProps {
   userName: RootStateType["post"]["user"]["userName"];
   content: RootStateType["post"]["content"];
 }
-export default (props: IProps) => {
-  const { title, content, hashtags, updatedAt, userName } = props;
-  const [value, setValue] = useState<Array<Node>>(content);
-  const editor = useMemo(() => withReact(createEditor()), []);
+export default ({ title, content, hashtags, updatedAt, userName }: IProps) => {
+  const [value, setValue] = useState<Array<Node>>([]);
+  const editor = useMemo(() => withHistory(withReact(createEditor())), [value]);
+  useEffect(() => {
+    setValue(content);
+    return () => {};
+  }, [content]);
   return (
     <div>
       <Hashtags>{hashtags.map((hashtag: any) => `#${hashtag.name}`)}</Hashtags>

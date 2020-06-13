@@ -6,44 +6,55 @@ import {
   boardlistBrowseAction,
   postlistBrowseAction,
 } from "./actions";
+import {
+  boardIdSelector,
+  boardNameSelector,
+  boardlistSelector,
+  postlistSelector,
+} from "./selectors";
 import MainTemplate from "client/components/templates/MainTemplate";
 
 export interface IProps {
-  selectedBoard: RootStateType["main"]["selectedBoard"];
-  boardlist: RootStateType["main"]["boardlist"];
-  postlist: RootStateType["main"]["postlist"];
+  boardId: RootStateType["main"]["boardId"];
+  boardName: string;
+  boards: RootStateType["main"]["boards"];
+  posts: RootStateType["main"]["posts"];
   boardSelectAction: typeof boardSelectAction;
   boardlistBrowseAction: typeof boardlistBrowseAction;
   postlistBrowseAction: typeof postlistBrowseAction;
 }
 const MainContainer = ({
-  selectedBoard,
-  boardlist,
-  postlist,
+  boardId,
+  boardName,
+  boards,
+  posts,
   boardSelectAction,
   boardlistBrowseAction,
   postlistBrowseAction,
 }: IProps) => {
   useEffect(() => {
-    boardlist.length === 0 && boardlistBrowseAction();
-    postlistBrowseAction(selectedBoard);
+    boards.length === 0 && boardlistBrowseAction();
+    postlistBrowseAction(boardId);
     return () => {};
-  }, [selectedBoard]);
+  }, [boardId]);
+
   return (
     <MainTemplate
+      boardId={boardId}
+      boardName={boardName}
+      boards={boards}
+      posts={posts}
       boardSelectAction={boardSelectAction}
-      currentBId={selectedBoard}
-      boardlist={boardlist}
-      postlist={postlist}
     />
   );
 };
 
 export default connect(
-  ({ main }: RootStateType) => ({
-    selectedBoard: main.selectedBoard,
-    boardlist: main.boardlist,
-    postlist: main.postlist,
+  (state: RootStateType) => ({
+    boardId: boardIdSelector(state),
+    boardName: boardNameSelector(state),
+    boards: boardlistSelector(state),
+    posts: postlistSelector(state),
   }),
   {
     boardSelectAction,

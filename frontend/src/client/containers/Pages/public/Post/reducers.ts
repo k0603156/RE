@@ -11,12 +11,7 @@ const initialState: InitialState = {
   id: "",
   title: "",
   boardId: "",
-  content: [
-    {
-      type: "paragraph",
-      children: [{ text: "test" }],
-    },
-  ],
+  content: [],
   hashtags: [],
   updatedAt: "",
   user: { userName: "" },
@@ -25,7 +20,7 @@ const initialState: InitialState = {
 export default createReducer(initialState, {
   // 게시글 읽기 성공
   [POST_BROWSE_SUCCESS]: (state, action) => {
-    return { ...initialState, ...action.payload.response };
+    return { ...action.payload.response };
   },
   // 게시글 생성 성공
   [POST_CREATE_SUCCESS]: () => {

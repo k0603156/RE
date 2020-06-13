@@ -30,7 +30,7 @@ const Container = ({
   });
 
   useEffect(() => {
-    main.boardlist.length === 0 && boardlistBrowseAction();
+    main.boards.length === 0 && boardlistBrowseAction();
     return () => {};
   }, []);
 
@@ -62,7 +62,7 @@ const Container = ({
       onSubmit={onSubmit}
       onChange={onChange}
       postData={postState}
-      initData={{ boardlist: main.boardlist }}
+      initData={{ boardlist: main.boards }}
     />
   );
 };

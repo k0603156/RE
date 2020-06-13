@@ -11,7 +11,7 @@ export default {
 
 export const HashtagInput = () => {
   const [tags, setTags] = useState([{ name: "tag" }]);
-  const setTagFunc = (value) => {
+  const setTagFunc = (value: any) => {
     setTags([...tags, value]);
   };
   return <Component tags={tags} setTags={setTagFunc} maxTags={5} />;

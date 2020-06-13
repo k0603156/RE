@@ -19,6 +19,7 @@ export interface IBoardBrowseRequest {
 export type IBoardAction = IBoardsetPage | IBoardBrowseRequest;
 
 export interface InitialState {
+  perPage: number;
   page: number;
   count: number;
   rows: Array<any>;

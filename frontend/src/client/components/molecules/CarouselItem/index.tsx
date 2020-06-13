@@ -5,7 +5,7 @@ import { RootStateType } from "client/configureStore";
 
 interface IProps {
   className?: string;
-  item: RootStateType["main"]["postlist"][0];
+  item: RootStateType["main"]["posts"][0];
 }
 
 export default styled(({ className, item }: IProps) => {

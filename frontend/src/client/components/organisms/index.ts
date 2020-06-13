@@ -1,11 +1,6 @@
-export { default as Carousel } from "./Carousel";
-export { default as KeywordBox } from "./KeywordBox";
-export { default as HashtagInput } from "./HashtagInput";
+export { default as MainCarousel } from "./MainCarousel";
+export { default as BoardPostList } from "./BoardPostList";
 export { default as ImageUploader } from "./ImageUploader";
 export { default as ImageDndZone } from "./ImageDndZone";
 export { default as Editor } from "./Editor";
-export { default as Pagination } from "./Pagination";
 export { default as Header } from "./Header";
-export { default as BoardItem } from "./BoardItem";
-export { default as Slider } from "./Slider";
-export { default as MessageBox } from "./MessageBox";

@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { RootStateType } from "client/configureStore";
-import { Pagination, BoardItem } from "client/components/organisms";
+
+import { BoardPostList } from "client/components/organisms";
 
 interface IProps {
   className?: string;
@@ -25,18 +26,13 @@ export default styled(
     return (
       <div className={className}>
         <h3 className="title">{title}</h3>
-        <ul>
-          {postlist.map((post: any) => (
-            <BoardItem key={post.id} post={post} />
-          ))}
-
-          <Pagination
-            handlePage={handlePage}
-            totalCount={totalCount}
-            currentPage={currentPage}
-            postPerPage={postPerPage}
-          />
-        </ul>
+        <BoardPostList
+          totalCount={totalCount}
+          currentPage={currentPage}
+          postlist={postlist}
+          postPerPage={postPerPage}
+          handlePage={handlePage}
+        />
       </div>
     );
   },

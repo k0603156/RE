@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import List from "client/components/atoms/List";
 import { RootStateType } from "client/configureStore";
-import { boardSelectAction } from "client/containers/Pages/public/Main/actions";
 
 const Box = styled.div`
   margin: 1rem auto;
@@ -30,22 +29,18 @@ const Li = styled.li`
   }
 `;
 interface IProps {
-  boardSelectAction: typeof boardSelectAction;
-  boardlist: RootStateType["main"]["boardlist"];
+  boards: RootStateType["main"]["boards"];
+  onSelect: (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => void;
 }
 
-export default ({ boardSelectAction, boardlist }: IProps) => {
-  const onClick = (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
-    boardSelectAction(Number(e.currentTarget.dataset.keyid!));
-  };
-
+export default ({ boards, onSelect }: IProps) => {
   return (
     <Box>
-      <List<RootStateType["main"]["boardlist"]>
+      <List<RootStateType["main"]["boards"]>
         wrapper={Ul}
-        dataList={boardlist}
+        dataList={boards}
         temp={(data) => (
-          <Li key={data.id} data-keyid={data.id} onClick={onClick}>
+          <Li key={data.id} data-keyid={data.id} onClick={onSelect}>
             {data.name}
           </Li>
         )}

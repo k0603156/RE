@@ -11,7 +11,7 @@ export default {
   },
   Board: {
     component: PublicBoard,
-    path: "/board/:boardName",
+    path: "/board/:boardId",
   },
   Post: {
     component: PublicPost,
