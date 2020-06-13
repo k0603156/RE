@@ -8,7 +8,7 @@
 
 ###### Structure
 
-<img width="100%" src="https://github.com/k0603156/RE/blob/master/resources/Structure.jpg?raw=true">
+<img width="100%" src="https://github.com/k0603156/RE/blob/master/resources/Structure.drawio.png?raw=true">
 
 ###### Definition
 

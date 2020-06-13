@@ -6,7 +6,7 @@ import AuthTemplate, {
   AuthState,
 } from "client/components/templates/AuthTemplate";
 
-interface IProps {
+export interface IProps {
   authSigninAction: typeof authSigninAction;
   authSignupAction: typeof authSignupAction;
 }
