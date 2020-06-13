@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { RootStateType } from "client/configureStore";
 import {
@@ -38,7 +38,10 @@ export default function MainCarousel({
   boards,
   posts,
 }: IProps) {
-  const onSelect = (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
+  const [current, setCurrent] = useState(0);
+  const onClickIdx = (index: number) => setCurrent(index);
+
+  const onClickKeyword = (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
     boardSelectAction(Number(e.currentTarget.dataset.keyid!));
   };
   return (
@@ -48,11 +51,13 @@ export default function MainCarousel({
         <Article>
           <Carousel
             items={posts}
+            current={current}
             render={(item, index) => <CarouselItem key={index} item={item} />}
+            onClickIdx={onClickIdx}
           />
         </Article>
       </SlideBox>
-      <KeywordBox boards={boards} onSelect={onSelect} />
+      <KeywordBox boards={boards} onClickKeyword={onClickKeyword} />
     </>
   );
 }

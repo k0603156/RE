@@ -30,17 +30,17 @@ const Li = styled.li`
 `;
 interface IProps {
   boards: RootStateType["main"]["boards"];
-  onSelect: (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => void;
+  onClickKeyword: (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => void;
 }
 
-export default ({ boards, onSelect }: IProps) => {
+export default ({ boards, onClickKeyword }: IProps) => {
   return (
     <Box>
       <List<RootStateType["main"]["boards"]>
         wrapper={Ul}
         dataList={boards}
         temp={(data) => (
-          <Li key={data.id} data-keyid={data.id} onClick={onSelect}>
+          <Li key={data.id} data-keyid={data.id} onClick={onClickKeyword}>
             {data.name}
           </Li>
         )}

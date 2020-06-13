@@ -18,12 +18,14 @@ export default ({
   boardSelectAction,
 }: IProps) => {
   return (
-    <MainCarousel
-      boardSelectAction={boardSelectAction}
-      boardId={boardId}
-      boardName={boardName}
-      boards={boards}
-      posts={posts}
-    />
+    <div>
+      <MainCarousel
+        boardSelectAction={boardSelectAction}
+        boardId={boardId}
+        boardName={boardName}
+        boards={boards}
+        posts={posts}
+      />
+    </div>
   );
 };

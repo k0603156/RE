@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 
 interface IProps<T extends Array<any>> {
   className?: string;
   items: T;
+  current: number;
   render: (data: IProps<T>["items"][0], index: number) => React.ReactNode;
+  onClickIdx: (idx: number) => void;
 }
 
 const Body = styled.ul<{ current: number }>`
@@ -40,17 +42,23 @@ const Footer = styled.ul`
 `;
 
 const Carousel = styled(
-  <T extends Array<any>>({ className, ...props }: IProps<T>) => {
-    const [current, setCurrent] = useState(0);
+  <T extends Array<any>>({
+    className,
+    items,
+    current,
+    render,
+    onClickIdx,
+  }: IProps<T>) => {
+    const padZero = (idx: number) => String(idx).padStart(2, "0");
+    const isActive = (idx: number) => (current === idx ? "active" : "");
+    const onClick = (idx: number) => () => onClickIdx(idx);
     return (
       <div className={className}>
-        <Body current={current}>{props.items.map(props.render)}</Body>
+        <Body current={current}>{items.map(render)}</Body>
         <Footer>
-          {props.items.map((data, index) => (
-            <li className={current === index ? "active" : ""} key={index}>
-              <a onClick={(e) => setCurrent(index)}>
-                {String(index).padStart(2, "0")}
-              </a>
+          {items.map((_, index) => (
+            <li className={isActive(index)} key={index}>
+              <a onClick={onClick(index)}>{padZero(index)}</a>
             </li>
           ))}
         </Footer>
