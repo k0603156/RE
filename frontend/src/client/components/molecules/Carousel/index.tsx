@@ -1,77 +1,59 @@
 import React from "react";
 import styled from "styled-components";
+import { useCarousel } from "client/lib/hooks/useCarousel";
 
-interface IProps<T extends Array<any>> {
-  className?: string;
-  items: T;
-  current: number;
-  render: (data: IProps<T>["items"][0], index: number) => React.ReactNode;
-  onClickIdx: (idx: number) => void;
+export interface IProps {
+  slides: Array<any>;
+  interval?: number;
 }
-
-const Body = styled.ul<{ current: number }>`
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  flex-wrap: wrap;
-  height: 200px;
-  padding: 0;
-  transition: transform 0.3s ease 0s;
-  ${({ current }) => `transform: translateX(${-90 * current}%);`}
-`;
-const Footer = styled.ul`
-  height: 50px;
-  display: flex;
-  width: auto;
-  margin: auto;
-  li {
-    flex: 1;
-    text-align: center;
-    line-height: 50px;
-    cursor: pointer;
-    transition: transform 0.3s ease 0s;
-    ${({ theme }) => theme.DEFAULT.LIST.BASE};
-    &.active a {
-      font-weight: 600;
-    }
-    a {
-      padding: 5px 10px;
-      ${({ theme }) => theme.FONT_STYLES.MONTSERRAT.SMALL.REGULAR.TRENDY_BLUE};
-    }
-  }
-`;
-
-const Carousel = styled(
-  <T extends Array<any>>({
-    className,
-    items,
-    current,
-    render,
-    onClickIdx,
-  }: IProps<T>) => {
-    const padZero = (idx: number) => String(idx).padStart(2, "0");
-    const isActive = (idx: number) => (current === idx ? "active" : "");
-    const onClick = (idx: number) => () => onClickIdx(idx);
-    return (
-      <div className={className}>
-        <Body current={current}>{items.map(render)}</Body>
-        <Footer>
-          {items.map((_, index) => (
-            <li className={isActive(index)} key={index}>
-              <a onClick={onClick(index)}>{padZero(index)}</a>
-            </li>
-          ))}
-        </Footer>
-      </div>
-    );
-  },
-)`
+const Carousel = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
-  width: 100%;
-  overflow-x: hidden;
+  overflow: hidden;
 `;
-export default <T extends Array<any>>(props: IProps<T>) => {
-  return <Carousel {...props} />;
+const CarouselContent = styled.div`
+  flex: 1;
+`;
+const CarouselItem = styled.div`
+  flex: 1;
+`;
+const CarouselIndicators = styled.ol`
+  display: flex;
+  justify-content: center;
+  padding: 5px 0;
+  li {
+    padding: 0 5px;
+    cursor: pointer;
+    &.active {
+      font-weight: 600;
+    }
+  }
+`;
+export default ({ slides, interval = 5000 }: IProps) => {
+  const length = slides.length;
+  const [active, setActive, handlers, style] = useCarousel(length, interval);
+
+  return length > 0 ? (
+    <Carousel>
+      <CarouselContent {...handlers} style={style}>
+        <CarouselItem>{slides[slides.length - 1]}</CarouselItem>
+        {slides.map((slide, index) => (
+          <CarouselItem key={index}>{slide}</CarouselItem>
+        ))}
+        <CarouselItem>{slides[0]}</CarouselItem>
+      </CarouselContent>
+      <CarouselIndicators>
+        {slides.map((_, index) => (
+          <li
+            onClick={() => setActive(index)}
+            key={index}
+            className={`${active === index ? "active" : ""}`}
+          >
+            {String(index).padStart(2, "0")}
+          </li>
+        ))}
+      </CarouselIndicators>
+    </Carousel>
+  ) : null;
 };

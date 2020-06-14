@@ -26,8 +26,7 @@ export default styled(({ className, item }: IProps) => {
   );
 })`
   height: 100%;
-  width: 85%;
-  margin-right: 5%;
+  width: 100%;
   background: ${({ theme }) => theme.COLORS.TRENDY.BLUE};
   ${({ theme }) => `
   ${theme.DEFAULT.BOX.BASE}

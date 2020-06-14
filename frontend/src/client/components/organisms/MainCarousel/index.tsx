@@ -1,15 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { RootStateType } from "client/configureStore";
-import {
-  Jumbo,
-  Carousel,
-  CarouselItem,
-  KeywordBox,
-} from "client/components/molecules";
+import { Jumbo, KeywordBox, Carousel } from "client/components/molecules";
 
 import { boardSelectAction } from "client/containers/Pages/public/Main/actions";
 
+import Item from "../MainCarouselItem";
 interface IProps {
   boardSelectAction: typeof boardSelectAction;
   boardId: number;
@@ -31,6 +27,7 @@ const SlideBox = styled.div`
     flex-direction: column;
   }
 `;
+
 export default function MainCarousel({
   boardSelectAction,
   boardId,
@@ -38,22 +35,19 @@ export default function MainCarousel({
   boards,
   posts,
 }: IProps) {
-  const [current, setCurrent] = useState(0);
-  const onClickIdx = (index: number) => setCurrent(index);
-
   const onClickKeyword = (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
     boardSelectAction(Number(e.currentTarget.dataset.keyid!));
   };
+
   return (
     <>
       <SlideBox>
         <Jumbo size="XXLARGE" title={boardName} verticalFrom="tablet" />
         <Article>
           <Carousel
-            items={posts}
-            current={current}
-            render={(item, index) => <CarouselItem key={index} item={item} />}
-            onClickIdx={onClickIdx}
+            slides={posts.map((post) => (
+              <Item item={post} />
+            ))}
           />
         </Article>
       </SlideBox>
