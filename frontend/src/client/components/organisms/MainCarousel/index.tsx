@@ -1,16 +1,23 @@
 import React from "react";
 import styled from "styled-components";
 import { RootStateType } from "client/configureStore";
-import { Jumbo, KeywordBox, Carousel } from "client/components/molecules";
-import { MainCarouselItem } from "client/components/organisms";
+import {
+  Jumbo,
+  KeywordBox,
+  Carousel,
+  MainCarouselItem,
+} from "client/components/molecules";
 
-interface IProps {
-  onSelectBoard: (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => void;
-  boardId: number;
-  boardName: string;
+export interface IProps {
   boards: RootStateType["main"]["boards"];
-  posts: RootStateType["main"]["posts"];
+  pickedBoard: {
+    id: number;
+    name: string;
+    rows: RootStateType["main"]["posts"];
+  };
+  onSelectBoard: (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => void;
 }
+
 const Article = styled.div`
   display: flex;
   flex-direction: column;
@@ -27,19 +34,17 @@ const SlideBox = styled.div`
 `;
 
 export default function MainCarousel({
-  onSelectBoard,
-  boardId,
-  boardName,
   boards,
-  posts,
+  pickedBoard: { id, name, rows },
+  onSelectBoard,
 }: IProps) {
   return (
     <>
       <SlideBox>
-        <Jumbo size="XXLARGE" title={boardName} verticalFrom="tablet" />
+        <Jumbo size="XXLARGE" title={name} verticalFrom="tablet" />
         <Article>
           <Carousel
-            slides={posts.map((post) => (
+            slides={rows.map((post) => (
               <MainCarouselItem item={post} />
             ))}
           />

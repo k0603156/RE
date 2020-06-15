@@ -1,7 +1,7 @@
 const Router = require("express").Router();
-const { setDefQueryParams } = require("../Utils");
 const PostService = require("../Services/postService");
 const Models = require("../Models/tables");
+const { setDefQueryParams } = require("../Utils");
 
 Router.get("/boardlist", async (req, res, next) => {
   try {

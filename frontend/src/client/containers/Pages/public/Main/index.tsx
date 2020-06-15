@@ -6,44 +6,37 @@ import {
   boardlistBrowseAction,
   postlistBrowseAction,
 } from "./actions";
-import {
-  boardIdSelector,
-  boardNameSelector,
-  boardlistSelector,
-  postlistSelector,
-} from "./selectors";
+import { pickBoardSelector, boardlistSelector } from "./selectors";
 import MainTemplate from "client/components/templates/MainTemplate";
 
 export interface IProps {
-  boardId: RootStateType["main"]["boardId"];
-  boardName: string;
   boards: RootStateType["main"]["boards"];
-  posts: RootStateType["main"]["posts"];
+  pickedBoard: {
+    id: number;
+    name: string;
+    rows: RootStateType["main"]["posts"];
+  };
   boardSelectAction: typeof boardSelectAction;
   boardlistBrowseAction: typeof boardlistBrowseAction;
   postlistBrowseAction: typeof postlistBrowseAction;
 }
 const MainContainer = ({
-  boardId,
-  boardName,
   boards,
-  posts,
+  pickedBoard,
   boardSelectAction,
   boardlistBrowseAction,
   postlistBrowseAction,
 }: IProps) => {
-  useEffect(() => {
-    boards.length === 0 && boardlistBrowseAction();
-    postlistBrowseAction(boardId);
-    return () => {};
-  }, [boardId]);
+  const fetchCarouselData = () => {
+    !boards.length && boardlistBrowseAction();
+    postlistBrowseAction(pickedBoard.id);
+  };
+  useEffect(() => fetchCarouselData(), [pickedBoard.id]);
 
   return (
     <MainTemplate
-      boardId={boardId}
-      boardName={boardName}
       boards={boards}
-      posts={posts}
+      pickedBoard={pickedBoard}
       boardSelectAction={boardSelectAction}
     />
   );
@@ -51,10 +44,8 @@ const MainContainer = ({
 
 export default connect(
   (state: RootStateType) => ({
-    boardId: boardIdSelector(state),
-    boardName: boardNameSelector(state),
     boards: boardlistSelector(state),
-    posts: postlistSelector(state),
+    pickedBoard: pickBoardSelector(state),
   }),
   {
     boardSelectAction,

@@ -6,3 +6,4 @@ export { default as HeaderMenu } from "./HeaderMenu";
 export { default as MessageBox } from "./MessageBox";
 export { default as HashtagInput } from "./HashtagInput";
 export { default as KeywordBox } from "./KeywordBox";
+export { default as MainCarouselItem } from "./MainCarouselItem";
