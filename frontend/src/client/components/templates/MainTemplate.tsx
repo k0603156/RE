@@ -17,10 +17,13 @@ export default ({
   posts,
   boardSelectAction,
 }: IProps) => {
+  const onSelectBoard = (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
+    boardSelectAction(Number(e.currentTarget.dataset.keyid!));
+  };
   return (
     <div>
       <MainCarousel
-        boardSelectAction={boardSelectAction}
+        onSelectBoard={onSelectBoard}
         boardId={boardId}
         boardName={boardName}
         boards={boards}

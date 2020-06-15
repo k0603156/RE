@@ -1,4 +1,5 @@
 export { default as MainCarousel } from "./MainCarousel";
+export { default as MainCarouselItem } from "./MainCarouselItem";
 
 export { default as BoardPostList } from "./BoardPostList";
 export { default as ImageUploader } from "./ImageUploader";

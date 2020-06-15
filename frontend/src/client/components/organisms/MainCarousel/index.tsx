@@ -2,12 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import { RootStateType } from "client/configureStore";
 import { Jumbo, KeywordBox, Carousel } from "client/components/molecules";
+import { MainCarouselItem } from "client/components/organisms";
 
-import { boardSelectAction } from "client/containers/Pages/public/Main/actions";
-
-import Item from "../MainCarouselItem";
 interface IProps {
-  boardSelectAction: typeof boardSelectAction;
+  onSelectBoard: (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => void;
   boardId: number;
   boardName: string;
   boards: RootStateType["main"]["boards"];
@@ -29,16 +27,12 @@ const SlideBox = styled.div`
 `;
 
 export default function MainCarousel({
-  boardSelectAction,
+  onSelectBoard,
   boardId,
   boardName,
   boards,
   posts,
 }: IProps) {
-  const onClickKeyword = (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
-    boardSelectAction(Number(e.currentTarget.dataset.keyid!));
-  };
-
   return (
     <>
       <SlideBox>
@@ -46,12 +40,12 @@ export default function MainCarousel({
         <Article>
           <Carousel
             slides={posts.map((post) => (
-              <Item item={post} />
+              <MainCarouselItem item={post} />
             ))}
           />
         </Article>
       </SlideBox>
-      <KeywordBox boards={boards} onClickKeyword={onClickKeyword} />
+      <KeywordBox boards={boards} onClickKeyword={onSelectBoard} />
     </>
   );
 }

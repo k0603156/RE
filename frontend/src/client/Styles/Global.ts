@@ -7,7 +7,7 @@ export default createGlobalStyle`
     * {
         box-sizing:border-box;
     }
-    .carousel-item{color:black}
+
     body {
         min-width: ${(props: any) => props.theme.MIN_WIDTH};
         background-color:${(props) => props.theme.COLORS.BACKGROUND_COLOR};
@@ -27,5 +27,8 @@ export default createGlobalStyle`
     }
     input:focus{
         outline:none;
+    }
+    div[role=button]{
+      outline:none;
     }
 `;
