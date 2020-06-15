@@ -69,7 +69,7 @@ const resolveModule = (resolveFn, filePath) => {
 module.exports = {
   dotenv: resolveApp(".env"),
   appPath: resolveApp("."),
-  appBuild: resolveApp("../backend_api/build"), //클라이언트 빌드=> 경로
+  appBuild: resolveApp("../backend/build"), //클라이언트 빌드=> 경로
   appPublic: resolveApp("src/public"),
   appHtml: resolveApp("src/public/index.html"),
   appIndexJs: resolveModule(resolveApp, "src/client/index"),
